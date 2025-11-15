@@ -6,6 +6,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
+import { typography } from '@/fields/typography'
 
 export const RichTextSection: Block = {
   slug: 'richTextSection',
@@ -53,6 +54,10 @@ export const RichTextSection: Block = {
         description: 'Maximum width of the content',
       },
     },
+    typography({
+      fontFamily: true,
+      alignment: true,
+    }),
     blockAppearance(),
   ],
 }

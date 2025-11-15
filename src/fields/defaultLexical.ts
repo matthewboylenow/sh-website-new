@@ -76,8 +76,10 @@ export const defaultLexical = lexicalEditor({
     }),
     TextFontFamilyFeature({
       fontFamilies: [
-        { label: 'Default (Sans)', value: 'var(--font-geist-sans)' },
-        { label: 'Mono', value: 'var(--font-geist-mono)' },
+        { label: 'Default', value: 'inherit' },
+        { label: 'Heading (Libre Baskerville)', value: 'var(--font-heading)' },
+        { label: 'Body (Libre Franklin)', value: 'var(--font-body)' },
+        { label: 'Mono (Geist Mono)', value: 'var(--font-mono)' },
       ],
     }),
   ],

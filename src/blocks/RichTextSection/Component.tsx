@@ -3,11 +3,13 @@ import type { RichTextSectionBlock as RichTextSectionProps } from '@/payload-typ
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+import { typographyToClasses } from '@/utilities/typographyToClasses'
 
 export const RichTextSectionBlock: React.FC<RichTextSectionProps> = ({
   title,
   body,
   maxWidth = 'prose',
+  typography,
   appearance,
 }) => {
   const maxWidthClasses = cn(
@@ -25,6 +27,7 @@ export const RichTextSectionBlock: React.FC<RichTextSectionProps> = ({
             maxWidthClasses,
             appearance?.alignment === 'center' && 'mx-auto',
             appearance?.alignment === 'right' && 'ml-auto',
+            typographyToClasses(typography),
           )}
         >
           {title && (

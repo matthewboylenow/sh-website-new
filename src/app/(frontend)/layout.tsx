@@ -1,9 +1,30 @@
 import type { Metadata } from 'next'
 
 import { cn } from '@/utilities/ui'
+import { Libre_Baskerville, Libre_Franklin } from 'next/font/google'
 import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
 import React from 'react'
+
+// Heading font - Libre Baskerville
+const libreBaskerville = Libre_Baskerville({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-heading',
+  display: 'swap',
+})
+
+// Body font - Libre Franklin
+const libreFranklin = Libre_Franklin({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-body',
+  display: 'swap',
+})
+
+// Mono font - Keep Geist Mono for code
+const geistMono = GeistMono({
+  variable: '--font-mono',
+})
 
 import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/Footer/Component'
@@ -21,7 +42,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { isEnabled } = await draftMode()
 
   return (
-    <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
+    <html
+      className={cn(libreBaskerville.variable, libreFranklin.variable, geistMono.variable)}
+      lang="en"
+      suppressHydrationWarning
+    >
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />

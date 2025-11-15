@@ -7,6 +7,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
 import { linkGroup } from '@/fields/linkGroup'
+import { typography } from '@/fields/typography'
 
 export const HeroBasic: Block = {
   slug: 'heroBasic',
@@ -215,6 +216,10 @@ export const HeroBasic: Block = {
         }),
       ],
     },
+    typography({
+      fontFamily: true,
+      alignment: true,
+    }),
     blockAppearance({
       backgroundVariant: true,
       alignment: true,

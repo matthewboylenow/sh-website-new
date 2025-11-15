@@ -5,6 +5,7 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+import { typographyToClasses } from '@/utilities/typographyToClasses'
 import { MissionStatement } from './MissionStatement'
 import { WelcomeCard } from './WelcomeCard'
 
@@ -25,6 +26,7 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
   welcomeTitle,
   welcomeSubtitle,
   welcomeButtons,
+  typography,
   appearance,
 }) => {
   const hasBackground = backgroundType && backgroundType !== 'none'
@@ -86,7 +88,12 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
       {/* Content */}
       <div className={cn(getContainerClasses(false), 'relative z-10')}>
         {/* Hero Content Area - Centered with proper spacing */}
-        <div className="min-h-[60vh] md:min-h-[70vh] flex flex-col justify-center items-center text-center py-16 md:py-24">
+        <div
+          className={cn(
+            'min-h-[60vh] md:min-h-[70vh] flex flex-col justify-center items-center text-center py-16 md:py-24',
+            typographyToClasses(typography),
+          )}
+        >
           {/* Legacy content: eyebrow, title, subtitle (kept for backward compatibility) */}
           {(eyebrow || title || subtitle) && (
             <div className="max-w-4xl mx-auto mb-12 md:mb-16">

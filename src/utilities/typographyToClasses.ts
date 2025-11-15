@@ -1,0 +1,44 @@
+type TypographyData = {
+  fontFamily?: 'default' | 'heading' | 'body' | 'mono'
+  alignment?: 'left' | 'center' | 'right'
+  textSize?: 'default' | 'sm' | 'base' | 'lg' | 'xl'
+}
+
+/**
+ * Converts typography field data to Tailwind CSS classes
+ *
+ * @param typography - Typography field data from Payload CMS
+ * @returns Space-separated string of Tailwind classes
+ *
+ * @example
+ * typographyToClasses({ fontFamily: 'heading', alignment: 'center' })
+ * // Returns: "font-heading text-center"
+ */
+export function typographyToClasses(typography?: TypographyData | null): string {
+  if (!typography) return ''
+
+  const classes: string[] = []
+
+  // Font family classes
+  if (typography.fontFamily && typography.fontFamily !== 'default') {
+    classes.push(`font-${typography.fontFamily}`)
+  }
+
+  // Text alignment classes
+  if (typography.alignment) {
+    classes.push(`text-${typography.alignment}`)
+  }
+
+  // Text size classes
+  if (typography.textSize && typography.textSize !== 'default') {
+    const sizeMap = {
+      sm: 'text-sm',
+      base: 'text-base',
+      lg: 'text-lg',
+      xl: 'text-xl',
+    }
+    classes.push(sizeMap[typography.textSize])
+  }
+
+  return classes.join(' ')
+}

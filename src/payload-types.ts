@@ -624,6 +624,19 @@ export interface HeroBasicBlock {
       }[]
     | null;
   /**
+   * Customize typography settings for this element
+   */
+  typography?: {
+    /**
+     * Override the font family for this element
+     */
+    fontFamily?: ('default' | 'heading' | 'body' | 'mono') | null;
+    /**
+     * Horizontal text alignment
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+  };
+  /**
    * Control the visual appearance of this block
    */
   appearance?: {
@@ -796,6 +809,19 @@ export interface RichTextSectionBlock {
    * Maximum width of the content
    */
   maxWidth?: ('prose' | 'medium' | 'wide' | 'full') | null;
+  /**
+   * Customize typography settings for this element
+   */
+  typography?: {
+    /**
+     * Override the font family for this element
+     */
+    fontFamily?: ('default' | 'heading' | 'body' | 'mono') | null;
+    /**
+     * Horizontal text alignment
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+  };
   /**
    * Control the visual appearance of this block
    */
@@ -3343,6 +3369,12 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  typography?:
+    | T
+    | {
+        fontFamily?: T;
+        alignment?: T;
+      };
   appearance?:
     | T
     | {
@@ -3409,6 +3441,12 @@ export interface RichTextSectionBlockSelect<T extends boolean = true> {
   title?: T;
   body?: T;
   maxWidth?: T;
+  typography?:
+    | T
+    | {
+        fontFamily?: T;
+        alignment?: T;
+      };
   appearance?:
     | T
     | {

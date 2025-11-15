@@ -118,13 +118,15 @@ const config = {
         },
       },
       fontFamily: {
-        // Default fonts (Geist)
-        mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
+        // Mono font for code
+        mono: ['var(--font-mono)', 'monospace'],
 
-        // Saint Helen semantic font tokens
-        heading: ['var(--font-geist-sans)'], // Can be customized later
-        body: ['var(--font-geist-sans)'],
+        // Saint Helen brand fonts
+        heading: ['var(--font-heading)', 'serif'], // Libre Baskerville
+        body: ['var(--font-body)', 'sans-serif'], // Libre Franklin
+
+        // Default sans (uses body font)
+        sans: ['var(--font-body)', 'sans-serif'],
       },
       fontSize: {
         // Saint Helen type scale
@@ -167,29 +169,33 @@ const config = {
             lineHeight: '1.6',
             maxWidth: 'none',
             h1: {
+              fontFamily: 'var(--font-heading), serif',
               fontSize: 'clamp(2.1rem, 3.2vw, 2.75rem)',
-              fontWeight: '600',
+              fontWeight: '700',
               lineHeight: '1.2',
               marginTop: '0',
               marginBottom: '1rem',
             },
             h2: {
+              fontFamily: 'var(--font-heading), serif',
               fontSize: 'clamp(1.8rem, 2.7vw, 2.1rem)',
-              fontWeight: '600',
+              fontWeight: '700',
               lineHeight: '1.25',
               marginTop: '2rem',
               marginBottom: '1rem',
             },
             h3: {
+              fontFamily: 'var(--font-heading), serif',
               fontSize: '1.5rem',
-              fontWeight: '600',
+              fontWeight: '700',
               lineHeight: '1.3',
               marginTop: '1.5rem',
               marginBottom: '0.75rem',
             },
             h4: {
+              fontFamily: 'var(--font-heading), serif',
               fontSize: '1.25rem',
-              fontWeight: '600',
+              fontWeight: '700',
               lineHeight: '1.3',
               marginTop: '1.5rem',
               marginBottom: '0.75rem',
