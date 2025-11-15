@@ -60,7 +60,7 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
       )}
 
       {/* Background Video */}
-      {backgroundType === 'video' && typeof backgroundVideo === 'object' && backgroundVideo.url && (
+      {backgroundType === 'video' && backgroundVideo && typeof backgroundVideo === 'object' && backgroundVideo.url && (
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
@@ -151,10 +151,10 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
         {/* Welcome Card - Floats at bottom */}
         {showWelcomeCard && (
           <WelcomeCard
-            eyebrow={welcomeEyebrow}
-            title={welcomeTitle}
-            subtitle={welcomeSubtitle}
-            buttons={welcomeButtons}
+            eyebrow={welcomeEyebrow ?? undefined}
+            title={welcomeTitle ?? undefined}
+            subtitle={welcomeSubtitle ?? undefined}
+            buttons={welcomeButtons ?? undefined}
           />
         )}
       </div>

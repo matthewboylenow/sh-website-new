@@ -1,15 +1,13 @@
 import React from 'react'
 import { cn } from '@/utilities/ui'
 import { CMSLink } from '@/components/Link'
-import type { Page } from '@/payload-types'
+import type { HeroBasicBlock } from '@/payload-types'
 
 interface WelcomeCardProps {
   eyebrow?: string
   title?: string
   subtitle?: string
-  buttons?: {
-    link: Page['hero']['links'][0]['link']
-  }[]
+  buttons?: HeroBasicBlock['welcomeButtons']
   className?: string
 }
 

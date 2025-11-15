@@ -48,7 +48,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
       )}
 
       {/* Background Video */}
-      {backgroundType === 'video' && typeof backgroundVideo === 'object' && backgroundVideo.url && (
+      {backgroundType === 'video' && backgroundVideo && typeof backgroundVideo === 'object' && backgroundVideo.url && (
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
