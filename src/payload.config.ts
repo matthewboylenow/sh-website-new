@@ -11,8 +11,19 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
+
+// Saint Helen collections
+import { Events } from './collections/Events'
+import { Podcasts } from './collections/Podcasts'
+import { Bulletins } from './collections/Bulletins'
+import { Ministries } from './collections/Ministries'
+import { LifeLines } from './collections/LifeLines'
+import { Staff } from './collections/Staff'
+import { SearchItems } from './collections/SearchItems'
+
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
+import { GlobalSettings } from './globals/GlobalSettings'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -64,9 +75,24 @@ export default buildConfig({
       connectionString: process.env.POSTGRES_URL || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [
+    // Core collections
+    Pages,
+    Posts,
+    Media,
+    Categories,
+    Users,
+    // Saint Helen collections
+    Events,
+    Podcasts,
+    Bulletins,
+    Ministries,
+    LifeLines,
+    Staff,
+    SearchItems,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, GlobalSettings],
   plugins: [
     ...plugins,
     vercelBlobStorage({

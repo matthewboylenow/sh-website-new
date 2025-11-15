@@ -72,6 +72,13 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    events: Event;
+    podcasts: Podcast;
+    bulletins: Bulletin;
+    ministries: Ministry;
+    lifelines: Lifeline;
+    staff: Staff;
+    'search-items': SearchItem;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -94,6 +101,13 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    podcasts: PodcastsSelect<false> | PodcastsSelect<true>;
+    bulletins: BulletinsSelect<false> | BulletinsSelect<true>;
+    ministries: MinistriesSelect<false> | MinistriesSelect<true>;
+    lifelines: LifelinesSelect<false> | LifelinesSelect<true>;
+    staff: StaffSelect<false> | StaffSelect<true>;
+    'search-items': SearchItemsSelect<false> | SearchItemsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -111,10 +125,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    'global-settings': GlobalSetting;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'global-settings': GlobalSettingsSelect<false> | GlobalSettingsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -199,7 +215,32 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | HeroBasicBlock
+    | HeroWithStatsBlock
+    | RichTextSectionBlock
+    | ColumnsBlock
+    | CTAFullWidthBlock
+    | AlertBannerBlock
+    | CardGridBlock
+    | BentoGridBlock
+    | EventListBlock
+    | PostListBlock
+    | BulletinListBlock
+    | MediaListBlock
+    | TestimonialBlock
+    | StoryHighlightBlock
+    | FAQAccordionBlock
+    | VideoEmbedBlock
+    | FormEmbedBlock
+    | SpacerBlock
+    | DividerBlock
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -209,6 +250,14 @@ export interface Page {
     description?: string | null;
   };
   publishedAt?: string | null;
+  /**
+   * Target audience for this page (used by assistant widget)
+   */
+  audience?: ('visitor' | 'parishioner' | 'both') | null;
+  /**
+   * Tags for categorization and search
+   */
+  tags?: string[] | null;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
@@ -243,6 +292,14 @@ export interface Post {
   };
   relatedPosts?: (number | Post)[] | null;
   categories?: (number | Category)[] | null;
+  /**
+   * Target audience for this post
+   */
+  audience?: ('visitor' | 'parishioner' | 'both') | null;
+  /**
+   * Tags for categorization and search
+   */
+  tags?: string[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -435,6 +492,1357 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBasicBlock".
+ */
+export interface HeroBasicBlock {
+  /**
+   * Optional small text above the title (e.g., "Welcome" or "Join Us")
+   */
+  eyebrow?: string | null;
+  /**
+   * Main hero heading (e.g., "We're glad you're here.")
+   */
+  title: string;
+  /**
+   * 1-2 sentences of welcoming text
+   */
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Optional background image for the hero
+   */
+  backgroundImage?: (number | null) | Media;
+  /**
+   * Overlay darkness for better text readability
+   */
+  backgroundOverlay?: ('none' | 'light' | 'medium' | 'dark') | null;
+  /**
+   * Primary and secondary call-to-action buttons
+   */
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'heroBasic';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroWithStatsBlock".
+ */
+export interface HeroWithStatsBlock {
+  /**
+   * Optional small text above the title
+   */
+  eyebrow?: string | null;
+  /**
+   * Main hero heading
+   */
+  title: string;
+  /**
+   * Brief description or introduction
+   */
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Optional background image
+   */
+  backgroundImage?: (number | null) | Media;
+  /**
+   * Overlay darkness for better text readability
+   */
+  backgroundOverlay?: ('none' | 'light' | 'medium' | 'dark') | null;
+  buttons?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Key statistics to display below the hero
+   */
+  stats?:
+    | {
+        /**
+         * e.g., "2,500+", "35", "50 Years"
+         */
+        value: string;
+        /**
+         * e.g., "Parishioners", "LifeLine Groups", "Serving the Community"
+         */
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'heroWithStats';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextSectionBlock".
+ */
+export interface RichTextSectionBlock {
+  /**
+   * Optional heading for this section
+   */
+  title?: string | null;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Maximum width of the content
+   */
+  maxWidth?: ('prose' | 'medium' | 'wide' | 'full') | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richTextSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ColumnsBlock".
+ */
+export interface ColumnsBlock {
+  /**
+   * Optional title above the columns
+   */
+  sectionTitle?: string | null;
+  /**
+   * Column width distribution
+   */
+  layout?: ('equal' | 'oneThirdLeft' | 'oneThirdRight') | null;
+  columns?:
+    | {
+        title?: string | null;
+        body?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Optional icon or image for this column
+         */
+        icon?: (number | null) | Media;
+        /**
+         * Optional links for this column
+         */
+        links?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: number | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: number | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+                /**
+                 * Choose how the link should be rendered.
+                 */
+                appearance?: ('default' | 'outline') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Space between columns
+   */
+  columnGap?: ('small' | 'default' | 'large') | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'columns';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTAFullWidthBlock".
+ */
+export interface CTAFullWidthBlock {
+  /**
+   * Optional small text above the title
+   */
+  eyebrow?: string | null;
+  /**
+   * Main heading for this call-to-action
+   */
+  title: string;
+  /**
+   * Supporting text for the CTA
+   */
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Optional background image
+   */
+  backgroundImage?: (number | null) | Media;
+  /**
+   * Overlay darkness for better text readability
+   */
+  backgroundOverlay?: ('none' | 'light' | 'medium' | 'dark') | null;
+  /**
+   * Call-to-action buttons
+   */
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ctaFullWidth';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AlertBannerBlock".
+ */
+export interface AlertBannerBlock {
+  /**
+   * The alert message to display
+   */
+  message: string;
+  /**
+   * Type of alert determines color and icon
+   */
+  type: 'info' | 'warning' | 'urgent' | 'success';
+  /**
+   * Optional: Text for a link button
+   */
+  linkLabel?: string | null;
+  /**
+   * URL for the link button
+   */
+  linkUrl?: string | null;
+  /**
+   * Can users close/dismiss this alert?
+   */
+  dismissible?: boolean | null;
+  icon?: ('auto' | 'megaphone' | 'bell' | 'exclamation' | 'check' | 'none') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'alertBanner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardGridBlock".
+ */
+export interface CardGridBlock {
+  title?: string | null;
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Choose whether to manually create cards or pull from a collection
+   */
+  sourceType: 'manual' | 'collection';
+  cards?:
+    | {
+        title: string;
+        body?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        image?: (number | null) | Media;
+        /**
+         * Where should this card link to?
+         */
+        url?: string | null;
+        /**
+         * Optional badge label (e.g., "New", "Featured")
+         */
+        badge?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  collectionSlug?: ('posts' | 'events' | 'ministries' | 'lifelines') | null;
+  /**
+   * Optional: Filter collection items by these tags
+   */
+  filterByTags?: string[] | null;
+  /**
+   * Number of items to display
+   */
+  limit?: number | null;
+  orderBy?: ('createdAt_desc' | 'createdAt_asc' | 'title_asc' | 'title_desc') | null;
+  /**
+   * Number of columns on desktop
+   */
+  columns?: ('2' | '3' | '4') | null;
+  cardStyle?: ('bordered' | 'elevated' | 'minimal') | null;
+  showViewAllLink?: boolean | null;
+  viewAllUrl?: string | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cardGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BentoGridBlock".
+ */
+export interface BentoGridBlock {
+  title?: string | null;
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Create 3-6 tiles for your bento grid
+   */
+  items?:
+    | {
+        title: string;
+        /**
+         * 1-2 sentences describing this journey or feature
+         */
+        description: string;
+        /**
+         * Icon or background image for this tile
+         */
+        image?: (number | null) | Media;
+        url: string;
+        /**
+         * Optional tag label (e.g., "New", "Popular")
+         */
+        tag?: string | null;
+        /**
+         * Controls how much space this tile takes up in the grid
+         */
+        size?: ('small' | 'medium' | 'large' | 'xlarge') | null;
+        imageStyle?: ('icon' | 'background') | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'bentoGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventListBlock".
+ */
+export interface EventListBlock {
+  title?: string | null;
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * How to filter and display events
+   */
+  mode: 'upcoming' | 'dateRange' | 'featured';
+  startDate?: string | null;
+  endDate?: string | null;
+  /**
+   * Optional: Only show events from these categories
+   */
+  categoryFilter?:
+    | (
+        | 'mass_worship'
+        | 'lifelines_community'
+        | 'kids_teens'
+        | 'formation_learning'
+        | 'service_outreach'
+        | 'social_fellowship'
+        | 'sacraments'
+        | 'special_events'
+      )[]
+    | null;
+  /**
+   * Maximum number of events to display
+   */
+  limit?: number | null;
+  layout?: ('cards' | 'list' | 'compact') | null;
+  showViewAllLink?: boolean | null;
+  viewAllUrl?: string | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'eventList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PostListBlock".
+ */
+export interface PostListBlock {
+  title?: string | null;
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Optional: Only show posts from these categories
+   */
+  categoryFilter?: (number | Category)[] | null;
+  /**
+   * Maximum number of posts to display
+   */
+  limit?: number | null;
+  layout?: ('cards' | 'list' | 'featured') | null;
+  /**
+   * Display post excerpt/preview text
+   */
+  showExcerpt?: boolean | null;
+  /**
+   * Display post author
+   */
+  showAuthor?: boolean | null;
+  /**
+   * Display publication date
+   */
+  showDate?: boolean | null;
+  showViewAllLink?: boolean | null;
+  viewAllUrl?: string | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'postList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BulletinListBlock".
+ */
+export interface BulletinListBlock {
+  title?: string | null;
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  displayMode: 'recent' | 'current';
+  /**
+   * Maximum number of bulletins to display
+   */
+  limit?: number | null;
+  /**
+   * Display bulletin highlights/summary if available
+   */
+  showHighlights?: boolean | null;
+  layout?: ('grid' | 'list' | 'compact') | null;
+  showViewAllLink?: boolean | null;
+  viewAllUrl?: string | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'bulletinList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaListBlock".
+ */
+export interface MediaListBlock {
+  /**
+   * Optional: Heading for this media section
+   */
+  title?: string | null;
+  /**
+   * Optional: Description or introduction
+   */
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Type of media to display
+   */
+  mediaType?: ('podcast' | 'sermon' | 'all') | null;
+  /**
+   * Number of items to show
+   */
+  limit?: number | null;
+  /**
+   * Visual layout style
+   */
+  layout?: ('grid' | 'list' | 'featured') | null;
+  showDate?: boolean | null;
+  showDuration?: boolean | null;
+  /**
+   * Optional: URL for a "View All Media" link
+   */
+  viewAllUrl?: string | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock".
+ */
+export interface TestimonialBlock {
+  /**
+   * The testimonial quote text
+   */
+  quote: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  name: string;
+  /**
+   * Optional: e.g., "Parishioner", "LifeLine Leader", "Parent"
+   */
+  role?: string | null;
+  /**
+   * Optional: Photo of the person
+   */
+  image?: (number | null) | Media;
+  /**
+   * Visual style of the testimonial
+   */
+  layout?: ('card' | 'inline' | 'featured') | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonial';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoryHighlightBlock".
+ */
+export interface StoryHighlightBlock {
+  title: string;
+  /**
+   * Main content of the story
+   */
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  image: number | Media;
+  /**
+   * Optional: Link to full story or related page
+   */
+  url?: string | null;
+  /**
+   * Text for the link button
+   */
+  linkLabel?: string | null;
+  /**
+   * Optional: Category or tag badge (e.g., "Testimony", "Community", "Ministry")
+   */
+  tag?: string | null;
+  /**
+   * Position of the image relative to content
+   */
+  imagePosition?: ('left' | 'right') | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'storyHighlight';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQAccordionBlock".
+ */
+export interface FAQAccordionBlock {
+  /**
+   * Optional: Main heading for this FAQ section
+   */
+  title?: string | null;
+  /**
+   * Add questions and answers
+   */
+  items: {
+    question: string;
+    answer: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    /**
+     * Optional: Tags for filtering/categorization
+     */
+    tags?:
+      | {
+          tag?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  /**
+   * Which items should be open by default
+   */
+  defaultOpen?: ('none' | 'first' | 'all') | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqAccordion';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoEmbedBlock".
+ */
+export interface VideoEmbedBlock {
+  /**
+   * Optional: Title displayed above the video
+   */
+  title?: string | null;
+  /**
+   * YouTube, Vimeo, or embed URL
+   */
+  embedUrl: string;
+  /**
+   * Optional: Custom thumbnail/poster image
+   */
+  posterImage?: (number | null) | Media;
+  /**
+   * Optional: Description shown below the video
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Aspect ratio of the video player
+   */
+  aspectRatio?: ('16/9' | '4/3' | '21/9' | '1/1') | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'videoEmbed';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormEmbedBlock".
+ */
+export interface FormEmbedBlock {
+  /**
+   * Optional: Title displayed above the form
+   */
+  title?: string | null;
+  /**
+   * Optional: Description or instructions above the form
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * How to embed the form
+   */
+  embedType: 'html' | 'url';
+  /**
+   * Paste the HTML embed code from your form provider
+   */
+  embedCode?: string | null;
+  /**
+   * URL to the form (will be embedded in an iframe)
+   */
+  formUrl?: string | null;
+  /**
+   * Height of the form embed in pixels
+   */
+  height?: number | null;
+  /**
+   * Width constraints for the form
+   */
+  widthMode?: ('full' | 'centered') | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'formEmbed';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SpacerBlock".
+ */
+export interface SpacerBlock {
+  /**
+   * Amount of vertical space to add
+   */
+  size: 'small' | 'medium' | 'large' | 'xlarge';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'spacer';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DividerBlock".
+ */
+export interface DividerBlock {
+  /**
+   * Style of divider to display
+   */
+  style: 'line' | 'space' | 'decorative';
+  /**
+   * Thickness of the line
+   */
+  thickness?: ('thin' | 'normal' | 'thick') | null;
+  /**
+   * Width of the divider
+   */
+  width?: ('full' | 'narrow' | 'short') | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'divider';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -780,6 +2188,627 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  /**
+   * Event start date and time
+   */
+  startDate: string;
+  /**
+   * Event end date and time (optional)
+   */
+  endDate?: string | null;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * e.g., Parish Hall, Church, Online, etc.
+   */
+  location?: string | null;
+  /**
+   * Main image for the event
+   */
+  featuredImage?: (number | null) | Media;
+  category:
+    | 'mass_worship'
+    | 'lifelines_community'
+    | 'kids_teens'
+    | 'formation_learning'
+    | 'service_outreach'
+    | 'social_fellowship'
+    | 'sacraments'
+    | 'special_events'
+    | 'other';
+  /**
+   * Target audience for this event
+   */
+  audience?: ('visitor' | 'parishioner' | 'both') | null;
+  /**
+   * Tags for categorization and search
+   */
+  tags?: string[] | null;
+  /**
+   * Does this event require registration?
+   */
+  registrationRequired?: boolean | null;
+  /**
+   * URL to registration form or page
+   */
+  registrationUrl?: string | null;
+  /**
+   * Contact person for this event
+   */
+  contactPerson?: (number | null) | User;
+  /**
+   * Feature this event on homepage?
+   */
+  isFeatured?: boolean | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "podcasts".
+ */
+export interface Podcast {
+  id: number;
+  title: string;
+  type: 'homily' | 'podcast' | 'teaching' | 'testimony' | 'special';
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * e.g., Fr. [Name], [Speaker Name]
+   */
+  speaker: string;
+  /**
+   * Optional short bio of the speaker
+   */
+  speakerBio?: string | null;
+  /**
+   * Thumbnail or cover art
+   */
+  featuredImage?: (number | null) | Media;
+  /**
+   * URL to audio file (e.g., from YouTube, Buzzsprout, etc.)
+   */
+  audioUrl?: string | null;
+  /**
+   * URL to video (e.g., YouTube embed URL)
+   */
+  videoUrl?: string | null;
+  /**
+   * e.g., "25:30" or "1:15:00"
+   */
+  duration?: string | null;
+  /**
+   * Optional series name (e.g., "Advent 2025", "Faith Foundations")
+   */
+  series?: string | null;
+  /**
+   * Scripture references (e.g., "John 3:16-21, Romans 8:1-11")
+   */
+  scripture?: string | null;
+  /**
+   * Date this media was originally published/recorded
+   */
+  publishedAt: string;
+  /**
+   * Target audience
+   */
+  audience?: ('visitor' | 'parishioner' | 'both') | null;
+  /**
+   * Tags for categorization and search
+   */
+  tags?: string[] | null;
+  /**
+   * Feature this on homepage?
+   */
+  isFeatured?: boolean | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bulletins".
+ */
+export interface Bulletin {
+  id: number;
+  /**
+   * e.g., "Weekly Bulletin - November 15, 2025"
+   */
+  title: string;
+  /**
+   * Date of the bulletin (typically the Sunday it covers)
+   */
+  date: string;
+  /**
+   * PDF file of the bulletin
+   */
+  file: number | Media;
+  /**
+   * Optional brief summary or key highlights from this bulletin
+   */
+  highlights?: string | null;
+  /**
+   * Current liturgical season
+   */
+  liturgicalSeason?: ('ordinary' | 'advent' | 'christmas' | 'lent' | 'easter' | 'special') | null;
+  /**
+   * Is this the current week's bulletin?
+   */
+  isCurrent?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ministries".
+ */
+export interface Ministry {
+  id: number;
+  /**
+   * Name of the ministry (e.g., "Altar Servers", "St. Vincent de Paul")
+   */
+  title: string;
+  /**
+   * Brief description (200 chars max) for cards and listings
+   */
+  shortDescription: string;
+  /**
+   * Full description of the ministry
+   */
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  category:
+    | 'worship_liturgy'
+    | 'care_support'
+    | 'service_outreach'
+    | 'formation_learning'
+    | 'kids_teens'
+    | 'community_fellowship'
+    | 'music_arts'
+    | 'administration';
+  /**
+   * Main image for the ministry
+   */
+  featuredImage?: (number | null) | Media;
+  /**
+   * Primary contact person for this ministry
+   */
+  contactPerson?: (number | null) | User;
+  /**
+   * Public contact email for this ministry
+   */
+  contactEmail?: string | null;
+  /**
+   * Public contact phone number
+   */
+  contactPhone?: string | null;
+  /**
+   * e.g., "Meets every Tuesday at 7pm in the Parish Hall"
+   */
+  meetingSchedule?: string | null;
+  /**
+   * Instructions on how to get involved
+   */
+  howToJoin?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Any requirements or qualifications (e.g., training, background check)
+   */
+  requirements?: string | null;
+  /**
+   * Link to a dedicated page for this ministry
+   */
+  relatedPage?: (number | null) | Page;
+  /**
+   * Target audience
+   */
+  audience?: ('visitor' | 'parishioner' | 'both') | null;
+  /**
+   * Tags for categorization and search
+   */
+  tags?: string[] | null;
+  /**
+   * Is this ministry currently active?
+   */
+  isActive?: boolean | null;
+  /**
+   * Feature this ministry prominently?
+   */
+  isFeatured?: boolean | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lifelines".
+ */
+export interface Lifeline {
+  id: number;
+  /**
+   * Name of the LifeLine group (e.g., "Young Professionals", "Moms Connect")
+   */
+  title: string;
+  /**
+   * Brief description (200 chars max) for cards and listings
+   */
+  shortDescription: string;
+  /**
+   * Full description of the group
+   */
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  type:
+    | 'mens'
+    | 'womens'
+    | 'couples'
+    | 'young_adults'
+    | 'parents_families'
+    | 'seniors'
+    | 'bible_study'
+    | 'prayer'
+    | 'support'
+    | 'mixed';
+  /**
+   * Image representing this group
+   */
+  featuredImage?: (number | null) | Media;
+  /**
+   * Primary meeting day
+   */
+  meetingDay?: ('monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday' | 'varies') | null;
+  /**
+   * e.g., "7:00 PM - 8:30 PM"
+   */
+  meetingTime?: string | null;
+  /**
+   * How often does this group meet?
+   */
+  meetingFrequency?: ('weekly' | 'biweekly' | 'monthly' | 'seasonal' | 'varies') | null;
+  /**
+   * e.g., "Parish Hall", "Member homes", "Online via Zoom"
+   */
+  meetingLocation?: string | null;
+  /**
+   * Name of the group leader/facilitator
+   */
+  leader: string;
+  /**
+   * Contact email for inquiries about this group
+   */
+  contactEmail: string;
+  /**
+   * Optional contact phone number
+   */
+  contactPhone?: string | null;
+  /**
+   * Is this group currently accepting new members?
+   */
+  isAcceptingMembers?: boolean | null;
+  /**
+   * Maximum group size (optional)
+   */
+  maxSize?: number | null;
+  /**
+   * Current number of active members
+   */
+  currentSize?: number | null;
+  /**
+   * When does this group start/started?
+   */
+  startDate?: string | null;
+  /**
+   * For seasonal groups, when does it end?
+   */
+  endDate?: string | null;
+  /**
+   * Is childcare provided?
+   */
+  childcare?: boolean | null;
+  /**
+   * Who can join this group?
+   */
+  audience?: ('visitor' | 'parishioner' | 'both') | null;
+  /**
+   * Tags for categorization and search
+   */
+  tags?: string[] | null;
+  /**
+   * Feature this group prominently?
+   */
+  isFeatured?: boolean | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staff".
+ */
+export interface Staff {
+  id: number;
+  /**
+   * Full name (e.g., "Fr. John Smith", "Jane Doe")
+   */
+  name: string;
+  /**
+   * Job title or role (e.g., "Pastor", "Director of Religious Education")
+   */
+  role: string;
+  department:
+    | 'clergy'
+    | 'administration'
+    | 'religious_education'
+    | 'youth_ministry'
+    | 'music_liturgy'
+    | 'facilities'
+    | 'care_counseling'
+    | 'communications'
+    | 'other';
+  /**
+   * Professional headshot or photo
+   */
+  photo?: (number | null) | Media;
+  /**
+   * Biography or description of this person
+   */
+  bio?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Public contact email (leave empty if you don't want to display)
+   */
+  email?: string | null;
+  /**
+   * Public contact phone (optional)
+   */
+  phone?: string | null;
+  /**
+   * e.g., "Parish Office, Room 101"
+   */
+  officeLocation?: string | null;
+  /**
+   * e.g., "Monday-Friday, 9am-5pm" or "By appointment"
+   */
+  officeHours?: string | null;
+  /**
+   * Order in which this person appears in listings (lower numbers first)
+   */
+  order: number;
+  /**
+   * Is this person currently active staff?
+   */
+  isActive?: boolean | null;
+  /**
+   * Display this person on the public website?
+   */
+  showOnWebsite?: boolean | null;
+  /**
+   * Ministries this person leads or is involved with
+   */
+  ministries?: (number | Ministry)[] | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Searchable items for the assistant widget. These are auto-populated from other collections.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "search-items".
+ */
+export interface SearchItem {
+  id: number;
+  /**
+   * Title of the searchable item
+   */
+  title: string;
+  /**
+   * Full URL path to this item
+   */
+  url: string;
+  /**
+   * Type of content this search item represents
+   */
+  kind: 'page' | 'ministry' | 'event' | 'article' | 'lifeline' | 'resource' | 'external';
+  /**
+   * Target audience(s) for this item
+   */
+  audience?: ('visitor' | 'parishioner' | 'both')[] | null;
+  /**
+   * Topics this item relates to (used for intent matching)
+   */
+  topics?:
+    | (
+        | 'mass_times'
+        | 'online_mass'
+        | 'volunteer'
+        | 'mental_health'
+        | 'counseling'
+        | 'kids'
+        | 'teens'
+        | 'family'
+        | 'marriage'
+        | 'grief'
+        | 'support_groups'
+        | 'sacraments'
+        | 'baptism'
+        | 'confession'
+        | 'confirmation'
+        | 'marriage_prep'
+        | 'giving'
+        | 'lifelines'
+        | 'community'
+        | 'events'
+        | 'social'
+        | 'adult_formation'
+        | 'bible_study'
+        | 'prayer'
+        | 'adoration'
+        | 'service'
+        | 'outreach'
+        | 'music'
+        | 'liturgy'
+        | 'care'
+        | 'help'
+      )[]
+    | null;
+  /**
+   * Brief description (200 chars max) shown in search results
+   */
+  shortDescription: string;
+  /**
+   * Priority for search ranking (0-10, higher is more important)
+   */
+  priority: number;
+  /**
+   * Source collection slug (e.g., "pages", "events", "ministries")
+   */
+  sourceCollection: string;
+  /**
+   * ID of the source document
+   */
+  sourceId: string;
+  /**
+   * When this item was last synced from its source
+   */
+  lastSyncedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -989,6 +3018,34 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'podcasts';
+        value: number | Podcast;
+      } | null)
+    | ({
+        relationTo: 'bulletins';
+        value: number | Bulletin;
+      } | null)
+    | ({
+        relationTo: 'ministries';
+        value: number | Ministry;
+      } | null)
+    | ({
+        relationTo: 'lifelines';
+        value: number | Lifeline;
+      } | null)
+    | ({
+        relationTo: 'staff';
+        value: number | Staff;
+      } | null)
+    | ({
+        relationTo: 'search-items';
+        value: number | SearchItem;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -1081,6 +3138,25 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
+        heroBasic?: T | HeroBasicBlockSelect<T>;
+        heroWithStats?: T | HeroWithStatsBlockSelect<T>;
+        richTextSection?: T | RichTextSectionBlockSelect<T>;
+        columns?: T | ColumnsBlockSelect<T>;
+        ctaFullWidth?: T | CTAFullWidthBlockSelect<T>;
+        alertBanner?: T | AlertBannerBlockSelect<T>;
+        cardGrid?: T | CardGridBlockSelect<T>;
+        bentoGrid?: T | BentoGridBlockSelect<T>;
+        eventList?: T | EventListBlockSelect<T>;
+        postList?: T | PostListBlockSelect<T>;
+        bulletinList?: T | BulletinListBlockSelect<T>;
+        mediaList?: T | MediaListBlockSelect<T>;
+        testimonial?: T | TestimonialBlockSelect<T>;
+        storyHighlight?: T | StoryHighlightBlockSelect<T>;
+        faqAccordion?: T | FAQAccordionBlockSelect<T>;
+        videoEmbed?: T | VideoEmbedBlockSelect<T>;
+        formEmbed?: T | FormEmbedBlockSelect<T>;
+        spacer?: T | SpacerBlockSelect<T>;
+        divider?: T | DividerBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
@@ -1095,11 +3171,532 @@ export interface PagesSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
+  audience?: T;
+  tags?: T;
   generateSlug?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBasicBlock_select".
+ */
+export interface HeroBasicBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  subtitle?: T;
+  backgroundImage?: T;
+  backgroundOverlay?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroWithStatsBlock_select".
+ */
+export interface HeroWithStatsBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  subtitle?: T;
+  backgroundImage?: T;
+  backgroundOverlay?: T;
+  buttons?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextSectionBlock_select".
+ */
+export interface RichTextSectionBlockSelect<T extends boolean = true> {
+  title?: T;
+  body?: T;
+  maxWidth?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ColumnsBlock_select".
+ */
+export interface ColumnsBlockSelect<T extends boolean = true> {
+  sectionTitle?: T;
+  layout?: T;
+  columns?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        icon?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  columnGap?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTAFullWidthBlock_select".
+ */
+export interface CTAFullWidthBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  body?: T;
+  backgroundImage?: T;
+  backgroundOverlay?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AlertBannerBlock_select".
+ */
+export interface AlertBannerBlockSelect<T extends boolean = true> {
+  message?: T;
+  type?: T;
+  linkLabel?: T;
+  linkUrl?: T;
+  dismissible?: T;
+  icon?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardGridBlock_select".
+ */
+export interface CardGridBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  sourceType?: T;
+  cards?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        image?: T;
+        url?: T;
+        badge?: T;
+        id?: T;
+      };
+  collectionSlug?: T;
+  filterByTags?: T;
+  limit?: T;
+  orderBy?: T;
+  columns?: T;
+  cardStyle?: T;
+  showViewAllLink?: T;
+  viewAllUrl?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BentoGridBlock_select".
+ */
+export interface BentoGridBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        url?: T;
+        tag?: T;
+        size?: T;
+        imageStyle?: T;
+        id?: T;
+      };
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventListBlock_select".
+ */
+export interface EventListBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  mode?: T;
+  startDate?: T;
+  endDate?: T;
+  categoryFilter?: T;
+  limit?: T;
+  layout?: T;
+  showViewAllLink?: T;
+  viewAllUrl?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PostListBlock_select".
+ */
+export interface PostListBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  categoryFilter?: T;
+  limit?: T;
+  layout?: T;
+  showExcerpt?: T;
+  showAuthor?: T;
+  showDate?: T;
+  showViewAllLink?: T;
+  viewAllUrl?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BulletinListBlock_select".
+ */
+export interface BulletinListBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  displayMode?: T;
+  limit?: T;
+  showHighlights?: T;
+  layout?: T;
+  showViewAllLink?: T;
+  viewAllUrl?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaListBlock_select".
+ */
+export interface MediaListBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  mediaType?: T;
+  limit?: T;
+  layout?: T;
+  showDate?: T;
+  showDuration?: T;
+  viewAllUrl?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock_select".
+ */
+export interface TestimonialBlockSelect<T extends boolean = true> {
+  quote?: T;
+  name?: T;
+  role?: T;
+  image?: T;
+  layout?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoryHighlightBlock_select".
+ */
+export interface StoryHighlightBlockSelect<T extends boolean = true> {
+  title?: T;
+  body?: T;
+  image?: T;
+  url?: T;
+  linkLabel?: T;
+  tag?: T;
+  imagePosition?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQAccordionBlock_select".
+ */
+export interface FAQAccordionBlockSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        tags?:
+          | T
+          | {
+              tag?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  defaultOpen?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoEmbedBlock_select".
+ */
+export interface VideoEmbedBlockSelect<T extends boolean = true> {
+  title?: T;
+  embedUrl?: T;
+  posterImage?: T;
+  description?: T;
+  aspectRatio?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormEmbedBlock_select".
+ */
+export interface FormEmbedBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  embedType?: T;
+  embedCode?: T;
+  formUrl?: T;
+  height?: T;
+  widthMode?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SpacerBlock_select".
+ */
+export interface SpacerBlockSelect<T extends boolean = true> {
+  size?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DividerBlock_select".
+ */
+export interface DividerBlockSelect<T extends boolean = true> {
+  style?: T;
+  thickness?: T;
+  width?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
+        alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1195,6 +3792,8 @@ export interface PostsSelect<T extends boolean = true> {
   content?: T;
   relatedPosts?: T;
   categories?: T;
+  audience?: T;
+  tags?: T;
   meta?:
     | T
     | {
@@ -1352,6 +3951,191 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  startDate?: T;
+  endDate?: T;
+  description?: T;
+  location?: T;
+  featuredImage?: T;
+  category?: T;
+  audience?: T;
+  tags?: T;
+  registrationRequired?: T;
+  registrationUrl?: T;
+  contactPerson?: T;
+  isFeatured?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "podcasts_select".
+ */
+export interface PodcastsSelect<T extends boolean = true> {
+  title?: T;
+  type?: T;
+  description?: T;
+  speaker?: T;
+  speakerBio?: T;
+  featuredImage?: T;
+  audioUrl?: T;
+  videoUrl?: T;
+  duration?: T;
+  series?: T;
+  scripture?: T;
+  publishedAt?: T;
+  audience?: T;
+  tags?: T;
+  isFeatured?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bulletins_select".
+ */
+export interface BulletinsSelect<T extends boolean = true> {
+  title?: T;
+  date?: T;
+  file?: T;
+  highlights?: T;
+  liturgicalSeason?: T;
+  isCurrent?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ministries_select".
+ */
+export interface MinistriesSelect<T extends boolean = true> {
+  title?: T;
+  shortDescription?: T;
+  description?: T;
+  category?: T;
+  featuredImage?: T;
+  contactPerson?: T;
+  contactEmail?: T;
+  contactPhone?: T;
+  meetingSchedule?: T;
+  howToJoin?: T;
+  requirements?: T;
+  relatedPage?: T;
+  audience?: T;
+  tags?: T;
+  isActive?: T;
+  isFeatured?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lifelines_select".
+ */
+export interface LifelinesSelect<T extends boolean = true> {
+  title?: T;
+  shortDescription?: T;
+  description?: T;
+  type?: T;
+  featuredImage?: T;
+  meetingDay?: T;
+  meetingTime?: T;
+  meetingFrequency?: T;
+  meetingLocation?: T;
+  leader?: T;
+  contactEmail?: T;
+  contactPhone?: T;
+  isAcceptingMembers?: T;
+  maxSize?: T;
+  currentSize?: T;
+  startDate?: T;
+  endDate?: T;
+  childcare?: T;
+  audience?: T;
+  tags?: T;
+  isFeatured?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staff_select".
+ */
+export interface StaffSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  department?: T;
+  photo?: T;
+  bio?: T;
+  email?: T;
+  phone?: T;
+  officeLocation?: T;
+  officeHours?: T;
+  order?: T;
+  isActive?: T;
+  showOnWebsite?: T;
+  ministries?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "search-items_select".
+ */
+export interface SearchItemsSelect<T extends boolean = true> {
+  title?: T;
+  url?: T;
+  kind?: T;
+  audience?: T;
+  topics?: T;
+  shortDescription?: T;
+  priority?: T;
+  sourceCollection?: T;
+  sourceId?: T;
+  lastSyncedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1688,6 +4472,133 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-settings".
+ */
+export interface GlobalSetting {
+  id: number;
+  /**
+   * Full name of the parish
+   */
+  parishName: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+  };
+  /**
+   * Main office phone number
+   */
+  phone: string;
+  fax?: string | null;
+  /**
+   * Main office email
+   */
+  email: string;
+  /**
+   * e.g., "Monday-Friday, 9:00 AM - 5:00 PM"
+   */
+  officeHours: string;
+  weekendMasses: {
+    day: 'saturday' | 'sunday';
+    /**
+     * e.g., "5:00 PM" or "8:00 AM"
+     */
+    time: string;
+    language?: ('english' | 'spanish' | 'latin' | 'bilingual') | null;
+    /**
+     * e.g., "Family Mass" or "Youth Choir"
+     */
+    notes?: string | null;
+    id?: string | null;
+  }[];
+  dailyMasses?:
+    | {
+        /**
+         * e.g., "Monday-Friday" or "Tuesday & Thursday"
+         */
+        days: string;
+        time: string;
+        notes?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * General information about Holy Day Mass schedules
+   */
+  holyDaySchedule?: string | null;
+  confessionTimes?:
+    | {
+        day: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+        time: string;
+        /**
+         * e.g., "Or by appointment"
+         */
+        notes?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Details about Eucharistic Adoration times
+   */
+  adorationSchedule?: string | null;
+  socialMedia?: {
+    /**
+     * Full Facebook URL
+     */
+    facebook?: string | null;
+    /**
+     * Full Instagram URL
+     */
+    instagram?: string | null;
+    /**
+     * Full YouTube channel URL
+     */
+    youtube?: string | null;
+    /**
+     * Full Twitter/X URL
+     */
+    twitter?: string | null;
+  };
+  globalAlert?: {
+    /**
+     * Show alert banner at top of site?
+     */
+    enabled?: boolean | null;
+    /**
+     * Alert message to display
+     */
+    message?: string | null;
+    type?: ('info' | 'warning' | 'urgent') | null;
+    /**
+     * Optional link text (e.g., "Learn More")
+     */
+    linkText?: string | null;
+    /**
+     * URL for the link
+     */
+    linkUrl?: string | null;
+  };
+  /**
+   * Links to external resources like Formed, Daily Readings, etc.
+   */
+  externalResources?:
+    | {
+        title: string;
+        url: string;
+        description?: string | null;
+        /**
+         * Optional icon name or emoji
+         */
+        icon?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1734,6 +4645,81 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-settings_select".
+ */
+export interface GlobalSettingsSelect<T extends boolean = true> {
+  parishName?: T;
+  address?:
+    | T
+    | {
+        street?: T;
+        city?: T;
+        state?: T;
+        zip?: T;
+      };
+  phone?: T;
+  fax?: T;
+  email?: T;
+  officeHours?: T;
+  weekendMasses?:
+    | T
+    | {
+        day?: T;
+        time?: T;
+        language?: T;
+        notes?: T;
+        id?: T;
+      };
+  dailyMasses?:
+    | T
+    | {
+        days?: T;
+        time?: T;
+        notes?: T;
+        id?: T;
+      };
+  holyDaySchedule?: T;
+  confessionTimes?:
+    | T
+    | {
+        day?: T;
+        time?: T;
+        notes?: T;
+        id?: T;
+      };
+  adorationSchedule?: T;
+  socialMedia?:
+    | T
+    | {
+        facebook?: T;
+        instagram?: T;
+        youtube?: T;
+        twitter?: T;
+      };
+  globalAlert?:
+    | T
+    | {
+        enabled?: T;
+        message?: T;
+        type?: T;
+        linkText?: T;
+        linkUrl?: T;
+      };
+  externalResources?:
+    | T
+    | {
+        title?: T;
+        url?: T;
+        description?: T;
+        icon?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TaskSchedulePublish".
  */
 export interface TaskSchedulePublish {
@@ -1748,6 +4734,22 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: number | Post;
+        } | null)
+      | ({
+          relationTo: 'events';
+          value: number | Event;
+        } | null)
+      | ({
+          relationTo: 'podcasts';
+          value: number | Podcast;
+        } | null)
+      | ({
+          relationTo: 'ministries';
+          value: number | Ministry;
+        } | null)
+      | ({
+          relationTo: 'lifelines';
+          value: number | Lifeline;
         } | null);
     global?: string | null;
     user?: (number | null) | User;

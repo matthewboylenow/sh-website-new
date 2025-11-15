@@ -1,0 +1,158 @@
+import React from 'react'
+import type { HeroWithStatsBlock as HeroWithStatsProps } from '@/payload-types'
+import RichText from '@/components/RichText'
+import { CMSLink } from '@/components/Link'
+import { Media } from '@/components/Media'
+import { cn } from '@/utilities/ui'
+import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+
+export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
+  eyebrow,
+  title,
+  subtitle,
+  backgroundImage,
+  backgroundOverlay,
+  buttons,
+  stats,
+  appearance,
+}) => {
+  const hasBackgroundImage = Boolean(backgroundImage)
+
+  const overlayClasses = cn(
+    'absolute inset-0',
+    backgroundOverlay === 'light' && 'bg-black/20',
+    backgroundOverlay === 'medium' && 'bg-black/40',
+    backgroundOverlay === 'dark' && 'bg-black/60',
+  )
+
+  return (
+    <section
+      className={cn(
+        'relative',
+        blockAppearanceToClasses(appearance),
+        hasBackgroundImage && 'text-white',
+      )}
+    >
+      {/* Background Image */}
+      {hasBackgroundImage && typeof backgroundImage === 'object' && (
+        <>
+          <div className="absolute inset-0 z-0">
+            <Media
+              resource={backgroundImage}
+              className="w-full h-full object-cover"
+              imgClassName="w-full h-full object-cover"
+            />
+          </div>
+          {backgroundOverlay && backgroundOverlay !== 'none' && (
+            <div className={overlayClasses} />
+          )}
+        </>
+      )}
+
+      {/* Content */}
+      <div className={cn(getContainerClasses(appearance?.fullWidth), 'relative z-10')}>
+        <div
+          className={cn(
+            'max-w-4xl',
+            appearance?.alignment === 'center' && 'mx-auto text-center',
+            appearance?.alignment === 'right' && 'ml-auto text-right',
+          )}
+        >
+          {/* Eyebrow */}
+          {eyebrow && (
+            <p
+              className={cn(
+                'text-sm font-medium uppercase tracking-wider mb-4',
+                hasBackgroundImage ? 'text-white/90' : 'text-sh-gold',
+              )}
+            >
+              {eyebrow}
+            </p>
+          )}
+
+          {/* Title */}
+          <h1 className="text-hero font-heading font-bold mb-6">{title}</h1>
+
+          {/* Subtitle */}
+          {subtitle && (
+            <div className="mb-8">
+              <RichText
+                data={subtitle}
+                enableGutter={false}
+                className={cn(
+                  'prose prose-lg',
+                  hasBackgroundImage && 'prose-invert',
+                  appearance?.backgroundVariant === 'dark' && 'prose-invert',
+                  appearance?.backgroundVariant === 'brand' && 'prose-invert',
+                )}
+              />
+            </div>
+          )}
+
+          {/* Buttons */}
+          {buttons && buttons.length > 0 && (
+            <div
+              className={cn(
+                'flex flex-wrap gap-4 mb-12',
+                appearance?.alignment === 'center' && 'justify-center',
+                appearance?.alignment === 'right' && 'justify-end',
+              )}
+            >
+              {buttons.map(({ link }, index) => (
+                <CMSLink key={index} {...link} size="lg" />
+              ))}
+            </div>
+          )}
+
+          {/* Statistics */}
+          {stats && stats.length > 0 && (
+            <div
+              className={cn(
+                'grid gap-8 pt-8 border-t',
+                stats.length === 2 && 'grid-cols-2',
+                stats.length === 3 && 'grid-cols-3',
+                stats.length === 4 && 'sm:grid-cols-2 lg:grid-cols-4',
+                hasBackgroundImage || appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
+                  ? 'border-white/30'
+                  : 'border-sh-border-subtle',
+              )}
+            >
+              {stats.map((stat, index) => (
+                <div
+                  key={index}
+                  className={cn(
+                    appearance?.alignment === 'center' && 'text-center',
+                    appearance?.alignment === 'right' && 'text-right',
+                  )}
+                >
+                  <div
+                    className={cn(
+                      'text-4xl font-bold font-heading mb-2',
+                      hasBackgroundImage && 'text-white',
+                      appearance?.backgroundVariant === 'brand' && 'text-white',
+                      appearance?.backgroundVariant === 'dark' && 'text-white',
+                      (!hasBackgroundImage && !appearance?.backgroundVariant || appearance?.backgroundVariant === 'light' || appearance?.backgroundVariant === 'transparent') && 'text-sh-primary',
+                    )}
+                  >
+                    {stat.value}
+                  </div>
+                  <div
+                    className={cn(
+                      'text-base',
+                      hasBackgroundImage && 'text-white/80',
+                      appearance?.backgroundVariant === 'dark' && 'text-white/80',
+                      appearance?.backgroundVariant === 'brand' && 'text-white/80',
+                      (!hasBackgroundImage && !appearance?.backgroundVariant || appearance?.backgroundVariant === 'light' || appearance?.backgroundVariant === 'transparent') && 'text-sh-text-muted',
+                    )}
+                  >
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

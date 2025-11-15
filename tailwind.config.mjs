@@ -30,19 +30,17 @@ const config = {
     container: {
       center: true,
       padding: {
-        '2xl': '2rem',
-        DEFAULT: '1rem',
-        lg: '2rem',
-        md: '2rem',
-        sm: '1rem',
-        xl: '2rem',
+        DEFAULT: '1.5rem', // 24px mobile
+        md: '2rem', // 32px tablet
+        lg: '3rem', // 48px desktop
+        xl: '4rem', // 64px large desktop
       },
       screens: {
-        '2xl': '86rem',
-        lg: '64rem',
-        md: '48rem',
-        sm: '40rem',
-        xl: '80rem',
+        sm: '40rem', // 640px
+        md: '48rem', // 768px
+        lg: '64rem', // 1024px
+        xl: '80rem', // 1280px - max content width per spec
+        '2xl': '80rem', // cap at 1280px
       },
     },
     extend: {
@@ -56,6 +54,7 @@ const config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        // Standard UI colors
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
@@ -92,10 +91,58 @@ const config = {
         success: 'hsl(var(--success))',
         error: 'hsl(var(--error))',
         warning: 'hsl(var(--warning))',
+
+        // Saint Helen brand colors
+        sh: {
+          primary: 'hsl(var(--sh-color-primary))',
+          'primary-soft': 'hsl(var(--sh-color-primary-soft))',
+          bg: 'hsl(var(--sh-color-bg))',
+          'bg-light': 'hsl(var(--sh-color-bg-light))',
+          'bg-alt': 'hsl(var(--sh-color-bg-alt))',
+          'bg-dark': 'hsl(var(--sh-color-bg-dark))',
+          surface: 'hsl(var(--sh-color-surface))',
+          text: 'hsl(var(--sh-color-text-main))',
+          'text-muted': 'hsl(var(--sh-color-text-muted))',
+          'text-on-primary': 'hsl(var(--sh-color-text-on-primary))',
+          'text-on-dark': 'hsl(var(--sh-color-text-on-dark))',
+          gold: 'hsl(var(--sh-color-accent-gold))',
+          teal: 'hsl(var(--sh-color-accent-teal))',
+          gray: {
+            100: 'hsl(var(--sh-color-gray-100))',
+            300: 'hsl(var(--sh-color-gray-300))',
+            600: 'hsl(var(--sh-color-gray-600))',
+            800: 'hsl(var(--sh-color-gray-800))',
+          },
+          'border-subtle': 'hsl(var(--sh-color-border-subtle))',
+          'border-strong': 'hsl(var(--sh-color-border-strong))',
+        },
       },
       fontFamily: {
+        // Default fonts (Geist)
         mono: ['var(--font-geist-mono)'],
         sans: ['var(--font-geist-sans)'],
+
+        // Saint Helen semantic font tokens
+        heading: ['var(--font-geist-sans)'], // Can be customized later
+        body: ['var(--font-geist-sans)'],
+      },
+      fontSize: {
+        // Saint Helen type scale
+        'hero': ['clamp(2.5rem, 4vw, 3.5rem)', { lineHeight: '1.1' }],
+        'h1': ['clamp(2.1rem, 3.2vw, 2.75rem)', { lineHeight: '1.2' }],
+        'h2': ['clamp(1.8rem, 2.7vw, 2.1rem)', { lineHeight: '1.25' }],
+        'h3': ['1.5rem', { lineHeight: '1.3' }],
+        'h4': ['1.25rem', { lineHeight: '1.3' }],
+        'body': ['1rem', { lineHeight: '1.6' }],
+        'body-lg': ['1.0625rem', { lineHeight: '1.6' }],
+        'small': ['0.875rem', { lineHeight: '1.5' }],
+      },
+      spacing: {
+        // Saint Helen vertical spacing tokens
+        'section-mobile': '3rem',
+        'section-desktop': '5rem',
+        'block-gap': '1.5rem',
+        'block-gap-lg': '2rem',
       },
       keyframes: {
         'accordion-down': {
@@ -109,41 +156,74 @@ const config = {
       },
       typography: () => ({
         DEFAULT: {
-          css: [
-            {
-              '--tw-prose-body': 'var(--text)',
-              '--tw-prose-headings': 'var(--text)',
-              h1: {
-                fontWeight: 'normal',
-                marginBottom: '0.25em',
+          css: {
+            '--tw-prose-body': 'hsl(var(--sh-color-text-main))',
+            '--tw-prose-headings': 'hsl(var(--sh-color-text-main))',
+            '--tw-prose-links': 'hsl(var(--sh-color-primary))',
+            '--tw-prose-bold': 'hsl(var(--sh-color-text-main))',
+            '--tw-prose-quotes': 'hsl(var(--sh-color-text-muted))',
+            color: 'hsl(var(--sh-color-text-main))',
+            fontSize: '1rem',
+            lineHeight: '1.6',
+            maxWidth: 'none',
+            h1: {
+              fontSize: 'clamp(2.1rem, 3.2vw, 2.75rem)',
+              fontWeight: '600',
+              lineHeight: '1.2',
+              marginTop: '0',
+              marginBottom: '1rem',
+            },
+            h2: {
+              fontSize: 'clamp(1.8rem, 2.7vw, 2.1rem)',
+              fontWeight: '600',
+              lineHeight: '1.25',
+              marginTop: '2rem',
+              marginBottom: '1rem',
+            },
+            h3: {
+              fontSize: '1.5rem',
+              fontWeight: '600',
+              lineHeight: '1.3',
+              marginTop: '1.5rem',
+              marginBottom: '0.75rem',
+            },
+            h4: {
+              fontSize: '1.25rem',
+              fontWeight: '600',
+              lineHeight: '1.3',
+              marginTop: '1.5rem',
+              marginBottom: '0.75rem',
+            },
+            p: {
+              marginTop: '0',
+              marginBottom: '1rem',
+            },
+            a: {
+              color: 'hsl(var(--sh-color-primary))',
+              textDecoration: 'underline',
+              '&:hover': {
+                color: 'hsl(var(--sh-color-primary-soft))',
               },
             },
-          ],
-        },
-        base: {
-          css: [
-            {
-              h1: {
-                fontSize: '2.5rem',
-              },
-              h2: {
-                fontSize: '1.25rem',
-                fontWeight: 600,
-              },
+            strong: {
+              fontWeight: '600',
             },
-          ],
-        },
-        md: {
-          css: [
-            {
-              h1: {
-                fontSize: '3.5rem',
-              },
-              h2: {
-                fontSize: '1.5rem',
-              },
+            ul: {
+              marginTop: '1rem',
+              marginBottom: '1rem',
             },
-          ],
+            ol: {
+              marginTop: '1rem',
+              marginBottom: '1rem',
+            },
+            blockquote: {
+              borderLeftColor: 'hsl(var(--sh-color-primary))',
+              borderLeftWidth: '4px',
+              paddingLeft: '1.5rem',
+              fontStyle: 'italic',
+              color: 'hsl(var(--sh-color-text-muted))',
+            },
+          },
         },
       }),
     },

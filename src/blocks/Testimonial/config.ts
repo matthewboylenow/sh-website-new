@@ -1,0 +1,73 @@
+import type { Block } from 'payload'
+import { blockAppearance } from '@/fields/blockAppearance'
+
+export const Testimonial: Block = {
+  slug: 'testimonial',
+  interfaceName: 'TestimonialBlock',
+  labels: {
+    singular: 'Testimonial',
+    plural: 'Testimonials',
+  },
+  fields: [
+    {
+      name: 'quote',
+      type: 'richText',
+      required: true,
+      label: 'Quote',
+      admin: {
+        description: 'The testimonial quote text',
+      },
+    },
+    {
+      name: 'name',
+      type: 'text',
+      required: true,
+      label: 'Person Name',
+    },
+    {
+      name: 'role',
+      type: 'text',
+      label: 'Role / Title',
+      admin: {
+        description: 'Optional: e.g., "Parishioner", "LifeLine Leader", "Parent"',
+      },
+    },
+    {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Photo',
+      admin: {
+        description: 'Optional: Photo of the person',
+      },
+    },
+    {
+      name: 'layout',
+      type: 'select',
+      defaultValue: 'card',
+      options: [
+        {
+          label: 'Card (Boxed)',
+          value: 'card',
+        },
+        {
+          label: 'Inline Quote',
+          value: 'inline',
+        },
+        {
+          label: 'Featured (Large)',
+          value: 'featured',
+        },
+      ],
+      admin: {
+        description: 'Visual style of the testimonial',
+      },
+    },
+    blockAppearance({
+      backgroundVariant: true,
+      alignment: true,
+      fullWidth: true,
+      padding: true,
+    }),
+  ],
+}

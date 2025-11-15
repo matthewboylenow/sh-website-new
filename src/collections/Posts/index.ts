@@ -129,6 +129,38 @@ export const Posts: CollectionConfig<'posts'> = {
               hasMany: true,
               relationTo: 'categories',
             },
+            {
+              name: 'audience',
+              type: 'select',
+              options: [
+                {
+                  label: 'Visitors',
+                  value: 'visitor',
+                },
+                {
+                  label: 'Parishioners',
+                  value: 'parishioner',
+                },
+                {
+                  label: 'Both',
+                  value: 'both',
+                },
+              ],
+              defaultValue: 'both',
+              admin: {
+                position: 'sidebar',
+                description: 'Target audience for this post',
+              },
+            },
+            {
+              name: 'tags',
+              type: 'text',
+              hasMany: true,
+              admin: {
+                position: 'sidebar',
+                description: 'Tags for categorization and search',
+              },
+            },
           ],
           label: 'Meta',
         },

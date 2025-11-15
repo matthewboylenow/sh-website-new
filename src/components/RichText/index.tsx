@@ -10,6 +10,7 @@ import {
   LinkJSXConverter,
   RichText as ConvertRichText,
 } from '@payloadcms/richtext-lexical/react'
+import type { SerializedLexicalNode } from 'lexical'
 
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 
@@ -20,11 +21,22 @@ import type {
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
+import { CTAButton } from './CTAButton'
+import type { CTAButtonAppearance } from './CTAButton'
 import { cn } from '@/utilities/ui'
+
+type SerializedCTAButtonNode = SerializedLexicalNode & {
+  type: 'ctaButton'
+  label: string
+  href: string
+  appearance: CTAButtonAppearance
+  openInNewTab?: boolean
+}
 
 type NodeTypes =
   | DefaultNodeTypes
   | SerializedBlockNode<CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps>
+  | SerializedCTAButtonNode
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!
@@ -38,6 +50,19 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
+  ctaButton: ({ node }) => {
+    if (node.type === 'ctaButton') {
+      return (
+        <CTAButton
+          label={node.label}
+          href={node.href}
+          appearance={node.appearance}
+          openInNewTab={node.openInNewTab}
+        />
+      )
+    }
+    return null
+  },
   blocks: {
     banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
     mediaBlock: ({ node }) => (
