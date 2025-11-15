@@ -235,6 +235,7 @@ export interface Page {
     | FormEmbedBlock
     | SpacerBlock
     | DividerBlock
+    | CustomCodeBlock
     | CallToActionBlock
     | ContentBlock
     | MediaBlock
@@ -525,9 +526,21 @@ export interface HeroBasicBlock {
     [k: string]: unknown;
   } | null;
   /**
-   * Optional background image for the hero
+   * Choose background type for the hero
+   */
+  backgroundType?: ('none' | 'image' | 'video') | null;
+  /**
+   * Background image for the hero
    */
   backgroundImage?: (number | null) | Media;
+  /**
+   * Background video for the hero (MP4 format recommended)
+   */
+  backgroundVideo?: (number | null) | Media;
+  /**
+   * Fallback image shown while video loads
+   */
+  posterImage?: (number | null) | Media;
   /**
    * Overlay darkness for better text readability
    */
@@ -536,6 +549,57 @@ export interface HeroBasicBlock {
    * Primary and secondary call-to-action buttons
    */
   links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Display the animated mission statement in the hero
+   */
+  showMissionStatement?: boolean | null;
+  /**
+   * Rotating: "We are a community" + cycling phrases. Line by Line: All three phrases appear sequentially.
+   */
+  missionAnimationMode?: ('rotating' | 'lineByLine') | null;
+  /**
+   * Display the frosted glass welcome card
+   */
+  showWelcomeCard?: boolean | null;
+  /**
+   * Small text above the welcome title (e.g., "WELCOME")
+   */
+  welcomeEyebrow?: string | null;
+  /**
+   * Main welcome heading
+   */
+  welcomeTitle?: string | null;
+  /**
+   * Optional one-sentence supporting copy
+   */
+  welcomeSubtitle?: string | null;
+  /**
+   * CTAs for the welcome card (e.g., "Plan Your Visit", "This Sunday")
+   */
+  welcomeButtons?:
     | {
         link: {
           type?: ('reference' | 'custom') | null;
@@ -616,9 +680,21 @@ export interface HeroWithStatsBlock {
     [k: string]: unknown;
   } | null;
   /**
-   * Optional background image
+   * Choose background type for the hero
+   */
+  backgroundType?: ('none' | 'image' | 'video') | null;
+  /**
+   * Background image for the hero
    */
   backgroundImage?: (number | null) | Media;
+  /**
+   * Background video for the hero (MP4 format recommended)
+   */
+  backgroundVideo?: (number | null) | Media;
+  /**
+   * Fallback image shown while video loads
+   */
+  posterImage?: (number | null) | Media;
   /**
    * Overlay darkness for better text readability
    */
@@ -1843,6 +1919,44 @@ export interface DividerBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'divider';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CustomCodeBlock".
+ */
+export interface CustomCodeBlock {
+  /**
+   * Add custom HTML, CSS, or JavaScript. WARNING: Code is rendered as-is. Only use trusted code to avoid security issues.
+   */
+  code: string;
+  /**
+   * Select how the code should be rendered
+   */
+  language?: ('html' | 'css' | 'javascript') | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Choose the background color for this block
+     */
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'customCode';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3157,6 +3271,7 @@ export interface PagesSelect<T extends boolean = true> {
         formEmbed?: T | FormEmbedBlockSelect<T>;
         spacer?: T | SpacerBlockSelect<T>;
         divider?: T | DividerBlockSelect<T>;
+        customCode?: T | CustomCodeBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
@@ -3187,9 +3302,33 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
   subtitle?: T;
+  backgroundType?: T;
   backgroundImage?: T;
+  backgroundVideo?: T;
+  posterImage?: T;
   backgroundOverlay?: T;
   links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  showMissionStatement?: T;
+  missionAnimationMode?: T;
+  showWelcomeCard?: T;
+  welcomeEyebrow?: T;
+  welcomeTitle?: T;
+  welcomeSubtitle?: T;
+  welcomeButtons?:
     | T
     | {
         link?:
@@ -3223,7 +3362,10 @@ export interface HeroWithStatsBlockSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
   subtitle?: T;
+  backgroundType?: T;
   backgroundImage?: T;
+  backgroundVideo?: T;
+  posterImage?: T;
   backgroundOverlay?: T;
   buttons?:
     | T
@@ -3691,6 +3833,24 @@ export interface DividerBlockSelect<T extends boolean = true> {
     | {
         backgroundVariant?: T;
         alignment?: T;
+        fullWidth?: T;
+        paddingTop?: T;
+        paddingBottom?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CustomCodeBlock_select".
+ */
+export interface CustomCodeBlockSelect<T extends boolean = true> {
+  code?: T;
+  language?: T;
+  appearance?:
+    | T
+    | {
+        backgroundVariant?: T;
         fullWidth?: T;
         paddingTop?: T;
         paddingBottom?: T;

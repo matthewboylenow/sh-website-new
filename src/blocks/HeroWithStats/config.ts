@@ -51,12 +51,47 @@ export const HeroWithStats: Block = {
       },
     },
     {
+      name: 'backgroundType',
+      type: 'radio',
+      defaultValue: 'none',
+      options: [
+        { label: 'None', value: 'none' },
+        { label: 'Image', value: 'image' },
+        { label: 'Video', value: 'video' },
+      ],
+      admin: {
+        description: 'Choose background type for the hero',
+        layout: 'horizontal',
+      },
+    },
+    {
       name: 'backgroundImage',
       type: 'upload',
       relationTo: 'media',
       label: 'Background Image',
       admin: {
-        description: 'Optional background image',
+        condition: (data, siblingData) => siblingData?.backgroundType === 'image',
+        description: 'Background image for the hero',
+      },
+    },
+    {
+      name: 'backgroundVideo',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Background Video',
+      admin: {
+        condition: (data, siblingData) => siblingData?.backgroundType === 'video',
+        description: 'Background video for the hero (MP4 format recommended)',
+      },
+    },
+    {
+      name: 'posterImage',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Video Poster Image',
+      admin: {
+        condition: (data, siblingData) => siblingData?.backgroundType === 'video',
+        description: 'Fallback image shown while video loads',
       },
     },
     {
@@ -70,7 +105,7 @@ export const HeroWithStats: Block = {
         { label: 'Dark', value: 'dark' },
       ],
       admin: {
-        condition: (data, siblingData) => Boolean(siblingData?.backgroundImage),
+        condition: (data, siblingData) => siblingData?.backgroundType !== 'none',
         description: 'Overlay darkness for better text readability',
       },
     },

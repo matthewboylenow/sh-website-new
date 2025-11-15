@@ -51,12 +51,47 @@ export const HeroBasic: Block = {
       },
     },
     {
+      name: 'backgroundType',
+      type: 'radio',
+      defaultValue: 'none',
+      options: [
+        { label: 'None', value: 'none' },
+        { label: 'Image', value: 'image' },
+        { label: 'Video', value: 'video' },
+      ],
+      admin: {
+        description: 'Choose background type for the hero',
+        layout: 'horizontal',
+      },
+    },
+    {
       name: 'backgroundImage',
       type: 'upload',
       relationTo: 'media',
       label: 'Background Image',
       admin: {
-        description: 'Optional background image for the hero',
+        condition: (data, siblingData) => siblingData?.backgroundType === 'image',
+        description: 'Background image for the hero',
+      },
+    },
+    {
+      name: 'backgroundVideo',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Background Video',
+      admin: {
+        condition: (data, siblingData) => siblingData?.backgroundType === 'video',
+        description: 'Background video for the hero (MP4 format recommended)',
+      },
+    },
+    {
+      name: 'posterImage',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Video Poster Image',
+      admin: {
+        condition: (data, siblingData) => siblingData?.backgroundType === 'video',
+        description: 'Fallback image shown while video loads',
       },
     },
     {
@@ -70,7 +105,7 @@ export const HeroBasic: Block = {
         { label: 'Dark', value: 'dark' },
       ],
       admin: {
-        condition: (data, siblingData) => Boolean(siblingData?.backgroundImage),
+        condition: (data, siblingData) => siblingData?.backgroundType !== 'none',
         description: 'Overlay darkness for better text readability',
       },
     },
@@ -83,6 +118,103 @@ export const HeroBasic: Block = {
         },
       },
     }),
+    {
+      type: 'collapsible',
+      label: 'Mission Statement Animation',
+      admin: {
+        description: 'Configure the animated mission statement that appears above the welcome card',
+      },
+      fields: [
+        {
+          name: 'showMissionStatement',
+          type: 'checkbox',
+          defaultValue: true,
+          label: 'Show Mission Statement',
+          admin: {
+            description: 'Display the animated mission statement in the hero',
+          },
+        },
+        {
+          name: 'missionAnimationMode',
+          type: 'radio',
+          defaultValue: 'rotating',
+          options: [
+            {
+              label: 'Rotating Words',
+              value: 'rotating',
+            },
+            {
+              label: 'Line by Line',
+              value: 'lineByLine',
+            },
+          ],
+          admin: {
+            condition: (data, siblingData) => siblingData?.showMissionStatement,
+            description:
+              'Rotating: "We are a community" + cycling phrases. Line by Line: All three phrases appear sequentially.',
+            layout: 'horizontal',
+          },
+        },
+      ],
+    },
+    {
+      type: 'collapsible',
+      label: 'Welcome Card (Frosted Glass)',
+      admin: {
+        description: 'Configure the floating frosted-glass welcome card at the bottom of the hero',
+      },
+      fields: [
+        {
+          name: 'showWelcomeCard',
+          type: 'checkbox',
+          defaultValue: true,
+          label: 'Show Welcome Card',
+          admin: {
+            description: 'Display the frosted glass welcome card',
+          },
+        },
+        {
+          name: 'welcomeEyebrow',
+          type: 'text',
+          defaultValue: 'WELCOME',
+          label: 'Welcome Eyebrow',
+          admin: {
+            condition: (data, siblingData) => siblingData?.showWelcomeCard,
+            description: 'Small text above the welcome title (e.g., "WELCOME")',
+          },
+        },
+        {
+          name: 'welcomeTitle',
+          type: 'text',
+          defaultValue: "We're glad you're here.",
+          label: 'Welcome Title',
+          admin: {
+            condition: (data, siblingData) => siblingData?.showWelcomeCard,
+            description: 'Main welcome heading',
+          },
+        },
+        {
+          name: 'welcomeSubtitle',
+          type: 'text',
+          label: 'Welcome Subtitle',
+          admin: {
+            condition: (data, siblingData) => siblingData?.showWelcomeCard,
+            description: 'Optional one-sentence supporting copy',
+          },
+        },
+        linkGroup({
+          overrides: {
+            name: 'welcomeButtons',
+            label: 'Welcome Card Buttons',
+            maxRows: 2,
+            admin: {
+              condition: (data, siblingData) => siblingData?.showWelcomeCard,
+              description: 'CTAs for the welcome card (e.g., "Plan Your Visit", "This Sunday")',
+            },
+          },
+        }),
+      ],
+    },
     blockAppearance({
       backgroundVariant: true,
       alignment: true,

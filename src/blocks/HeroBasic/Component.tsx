@@ -5,104 +5,158 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+import { MissionStatement } from './MissionStatement'
+import { WelcomeCard } from './WelcomeCard'
 
 export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
   eyebrow,
   title,
   subtitle,
+  backgroundType,
   backgroundImage,
+  backgroundVideo,
+  posterImage,
   backgroundOverlay,
   links,
+  showMissionStatement,
+  missionAnimationMode,
+  showWelcomeCard,
+  welcomeEyebrow,
+  welcomeTitle,
+  welcomeSubtitle,
+  welcomeButtons,
   appearance,
 }) => {
-  const hasBackgroundImage = Boolean(backgroundImage)
+  const hasBackground = backgroundType && backgroundType !== 'none'
 
-  // Overlay classes
+  // Overlay classes with gradient for video/image backgrounds
   const overlayClasses = cn(
-    'absolute inset-0',
+    'absolute inset-0 z-[1]',
     backgroundOverlay === 'light' && 'bg-black/20',
     backgroundOverlay === 'medium' && 'bg-black/40',
     backgroundOverlay === 'dark' && 'bg-black/60',
   )
+
+  // Dark gradient overlay for video/image (matte black bottom to transparent top)
+  const gradientOverlayClasses = 'absolute inset-0 z-[2] bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent'
 
   return (
     <section
       className={cn(
         'relative',
         blockAppearanceToClasses(appearance),
-        hasBackgroundImage && 'text-white',
+        hasBackground && 'text-white',
       )}
     >
       {/* Background Image */}
-      {hasBackgroundImage && typeof backgroundImage === 'object' && (
-        <>
-          <div className="absolute inset-0 z-0">
-            <Media
-              resource={backgroundImage}
-              className="w-full h-full object-cover"
-              imgClassName="w-full h-full object-cover"
-            />
-          </div>
-          {backgroundOverlay && backgroundOverlay !== 'none' && (
-            <div className={overlayClasses} />
-          )}
-        </>
+      {backgroundType === 'image' && typeof backgroundImage === 'object' && (
+        <div className="absolute inset-0 z-0">
+          <Media
+            resource={backgroundImage}
+            className="w-full h-full object-cover"
+            imgClassName="w-full h-full object-cover"
+          />
+        </div>
       )}
+
+      {/* Background Video */}
+      {backgroundType === 'video' && typeof backgroundVideo === 'object' && backgroundVideo.url && (
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster={typeof posterImage === 'object' && posterImage?.url ? posterImage.url : undefined}
+            className="w-full h-full object-cover"
+          >
+            <source src={backgroundVideo.url} type="video/mp4" />
+          </video>
+        </div>
+      )}
+
+      {/* Overlay */}
+      {hasBackground && backgroundOverlay && backgroundOverlay !== 'none' && (
+        <div className={overlayClasses} />
+      )}
+
+      {/* Dark gradient overlay for enhanced video/image effect */}
+      {hasBackground && <div className={gradientOverlayClasses} />}
 
       {/* Content */}
       <div className={cn(getContainerClasses(false), 'relative z-10')}>
-        <div className="max-w-4xl mx-auto">
-          {eyebrow && (
-            <p
-              className={cn(
-                'text-sm font-medium uppercase tracking-wider mb-4',
-                hasBackgroundImage ? 'text-white/90' : 'text-sh-gold',
+        {/* Hero Content Area - Centered with proper spacing */}
+        <div className="min-h-[60vh] md:min-h-[70vh] flex flex-col justify-center items-center text-center py-16 md:py-24">
+          {/* Legacy content: eyebrow, title, subtitle (kept for backward compatibility) */}
+          {(eyebrow || title || subtitle) && (
+            <div className="max-w-4xl mx-auto mb-12 md:mb-16">
+              {eyebrow && (
+                <p
+                  className={cn(
+                    'text-sm font-medium uppercase tracking-wider mb-4',
+                    hasBackground ? 'text-white/90' : 'text-sh-gold',
+                  )}
+                >
+                  {eyebrow}
+                </p>
               )}
-            >
-              {eyebrow}
-            </p>
-          )}
 
-          {title && (
-            <h1
-              className={cn(
-                'text-hero font-heading font-semibold mb-6',
-                appearance?.alignment === 'center' && 'mx-auto',
+              {title && (
+                <h1
+                  className={cn(
+                    'text-hero font-heading font-semibold mb-6',
+                    hasBackground && 'text-white',
+                  )}
+                >
+                  {title}
+                </h1>
               )}
-            >
-              {title}
-            </h1>
-          )}
 
-          {subtitle && (
-            <div
-              className={cn(
-                'text-body-lg mb-8',
-                appearance?.alignment === 'center' && 'mx-auto',
+              {subtitle && (
+                <div className={cn('text-body-lg mb-8')}>
+                  <RichText
+                    data={subtitle}
+                    enableGutter={false}
+                    className={cn('prose-lg', hasBackground && 'prose-invert')}
+                  />
+                </div>
               )}
-            >
-              <RichText
-                data={subtitle}
-                enableGutter={false}
-                className={cn('prose-lg', hasBackgroundImage && 'prose-invert')}
-              />
+
+              {/* Legacy links (kept for backward compatibility) */}
+              {links && links.length > 0 && (
+                <div
+                  className={cn(
+                    'flex flex-wrap gap-4',
+                    appearance?.alignment === 'center' && 'justify-center',
+                    appearance?.alignment === 'right' && 'justify-end',
+                  )}
+                >
+                  {links.map(({ link }, index) => (
+                    <CMSLink key={index} {...link} size="lg" />
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
-          {links && links.length > 0 && (
-            <div
-              className={cn(
-                'flex flex-wrap gap-4',
-                appearance?.alignment === 'center' && 'justify-center',
-                appearance?.alignment === 'right' && 'justify-end',
-              )}
-            >
-              {links.map(({ link }, index) => (
-                <CMSLink key={index} {...link} size="lg" />
-              ))}
-            </div>
+          {/* Mission Statement Animation */}
+          {showMissionStatement && (
+            <MissionStatement
+              mode={missionAnimationMode as 'rotating' | 'lineByLine'}
+              className="mb-auto"
+            />
           )}
         </div>
+
+        {/* Welcome Card - Floats at bottom */}
+        {showWelcomeCard && (
+          <WelcomeCard
+            eyebrow={welcomeEyebrow}
+            title={welcomeTitle}
+            subtitle={welcomeSubtitle}
+            buttons={welcomeButtons}
+          />
+        )}
       </div>
     </section>
   )

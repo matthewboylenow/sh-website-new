@@ -10,16 +10,19 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
   eyebrow,
   title,
   subtitle,
+  backgroundType,
   backgroundImage,
+  backgroundVideo,
+  posterImage,
   backgroundOverlay,
   buttons,
   stats,
   appearance,
 }) => {
-  const hasBackgroundImage = Boolean(backgroundImage)
+  const hasBackground = backgroundType && backgroundType !== 'none'
 
   const overlayClasses = cn(
-    'absolute inset-0',
+    'absolute inset-0 z-[1]',
     backgroundOverlay === 'light' && 'bg-black/20',
     backgroundOverlay === 'medium' && 'bg-black/40',
     backgroundOverlay === 'dark' && 'bg-black/60',
@@ -30,23 +33,39 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
       className={cn(
         'relative',
         blockAppearanceToClasses(appearance),
-        hasBackgroundImage && 'text-white',
+        hasBackground && 'text-white',
       )}
     >
       {/* Background Image */}
-      {hasBackgroundImage && typeof backgroundImage === 'object' && (
-        <>
-          <div className="absolute inset-0 z-0">
-            <Media
-              resource={backgroundImage}
-              className="w-full h-full object-cover"
-              imgClassName="w-full h-full object-cover"
-            />
-          </div>
-          {backgroundOverlay && backgroundOverlay !== 'none' && (
-            <div className={overlayClasses} />
-          )}
-        </>
+      {backgroundType === 'image' && typeof backgroundImage === 'object' && (
+        <div className="absolute inset-0 z-0">
+          <Media
+            resource={backgroundImage}
+            className="w-full h-full object-cover"
+            imgClassName="w-full h-full object-cover"
+          />
+        </div>
+      )}
+
+      {/* Background Video */}
+      {backgroundType === 'video' && typeof backgroundVideo === 'object' && backgroundVideo.url && (
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster={typeof posterImage === 'object' && posterImage?.url ? posterImage.url : undefined}
+            className="w-full h-full object-cover"
+          >
+            <source src={backgroundVideo.url} type="video/mp4" />
+          </video>
+        </div>
+      )}
+
+      {/* Overlay */}
+      {hasBackground && backgroundOverlay && backgroundOverlay !== 'none' && (
+        <div className={overlayClasses} />
       )}
 
       {/* Content */}
@@ -63,7 +82,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
             <p
               className={cn(
                 'text-sm font-medium uppercase tracking-wider mb-4',
-                hasBackgroundImage ? 'text-white/90' : 'text-sh-gold',
+                hasBackground ? 'text-white/90' : 'text-sh-gold',
               )}
             >
               {eyebrow}
@@ -81,7 +100,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
                 enableGutter={false}
                 className={cn(
                   'prose prose-lg',
-                  hasBackgroundImage && 'prose-invert',
+                  hasBackground && 'prose-invert',
                   appearance?.backgroundVariant === 'dark' && 'prose-invert',
                   appearance?.backgroundVariant === 'brand' && 'prose-invert',
                 )}
@@ -112,7 +131,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
                 stats.length === 2 && 'grid-cols-2',
                 stats.length === 3 && 'grid-cols-3',
                 stats.length === 4 && 'sm:grid-cols-2 lg:grid-cols-4',
-                hasBackgroundImage || appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
+                hasBackground || appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
                   ? 'border-white/30'
                   : 'border-sh-border-subtle',
               )}
@@ -128,10 +147,10 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
                   <div
                     className={cn(
                       'text-4xl font-bold font-heading mb-2',
-                      hasBackgroundImage && 'text-white',
+                      hasBackground && 'text-white',
                       appearance?.backgroundVariant === 'brand' && 'text-white',
                       appearance?.backgroundVariant === 'dark' && 'text-white',
-                      (!hasBackgroundImage && !appearance?.backgroundVariant || appearance?.backgroundVariant === 'light' || appearance?.backgroundVariant === 'transparent') && 'text-sh-primary',
+                      (!hasBackground && !appearance?.backgroundVariant || appearance?.backgroundVariant === 'light' || appearance?.backgroundVariant === 'transparent') && 'text-sh-primary',
                     )}
                   >
                     {stat.value}
@@ -139,10 +158,10 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
                   <div
                     className={cn(
                       'text-base',
-                      hasBackgroundImage && 'text-white/80',
+                      hasBackground && 'text-white/80',
                       appearance?.backgroundVariant === 'dark' && 'text-white/80',
                       appearance?.backgroundVariant === 'brand' && 'text-white/80',
-                      (!hasBackgroundImage && !appearance?.backgroundVariant || appearance?.backgroundVariant === 'light' || appearance?.backgroundVariant === 'transparent') && 'text-sh-text-muted',
+                      (!hasBackground && !appearance?.backgroundVariant || appearance?.backgroundVariant === 'light' || appearance?.backgroundVariant === 'transparent') && 'text-sh-text-muted',
                     )}
                   >
                     {stat.label}

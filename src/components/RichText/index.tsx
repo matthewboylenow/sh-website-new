@@ -11,6 +11,11 @@ import {
   RichText as ConvertRichText,
 } from '@payloadcms/richtext-lexical/react'
 import type { SerializedLexicalNode } from 'lexical'
+import {
+  TextColorJSXConverter,
+  TextSizeJSXConverter,
+  TextFontFamilyJSXConverter,
+} from 'payload-lexical-typography/converters'
 
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 
@@ -50,6 +55,9 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
+  ...TextColorJSXConverter,
+  ...TextSizeJSXConverter,
+  ...TextFontFamilyJSXConverter,
   ctaButton: ({ node }) => {
     if (node.type === 'ctaButton') {
       return (

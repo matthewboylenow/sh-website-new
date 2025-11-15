@@ -28,6 +28,7 @@ import { VideoEmbedBlock } from '@/blocks/VideoEmbed/Component'
 import { FormEmbedBlock } from '@/blocks/FormEmbed/Component'
 import { SpacerBlock } from '@/blocks/Spacer/Component'
 import { DividerBlock } from '@/blocks/Divider/Component'
+import { CustomCodeBlock } from '@/blocks/CustomCode/Component'
 
 const blockComponents = {
   // Saint Helen blocks - Hero variants
@@ -56,6 +57,8 @@ const blockComponents = {
   // Saint Helen blocks - Layout Utilities
   spacer: SpacerBlock,
   divider: DividerBlock,
+  // Saint Helen blocks - Custom Code
+  customCode: CustomCodeBlock,
   // Original template blocks
   archive: ArchiveBlock,
   content: ContentBlock,

@@ -31,7 +31,8 @@ Here's a comprehensive homepage layout using the blocks we've built:
   - Value: "2,500+", Label: "Parishioners"
   - Value: "35", Label: "Active Ministries"
   - Value: "50 Years", Label: "Serving the Community"
-- **Appearance**: Background Variant = Transparent (let the image show)
+-
+ **Appearance**: Background Variant = Transparent (let the image show)
 
 ---
 

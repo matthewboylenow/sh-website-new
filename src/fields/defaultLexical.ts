@@ -8,6 +8,11 @@ import {
   UnderlineFeature,
   type LinkFields,
 } from '@payloadcms/richtext-lexical'
+import {
+  TextColorFeature,
+  TextSizeFeature,
+  TextFontFamilyFeature,
+} from 'payload-lexical-typography'
 
 export const defaultLexical = lexicalEditor({
   features: [
@@ -42,6 +47,38 @@ export const defaultLexical = lexicalEditor({
           },
         ]
       },
+    }),
+    // Typography features with Saint Helen color palette
+    TextColorFeature({
+      colors: [
+        '#20336B', // Primary blue
+        '#2B4585', // Primary soft
+        '#E0A63A', // Gold
+        '#2C9FAF', // Teal
+        '#111111', // Text main (near black)
+        '#585858', // Text muted
+        '#FFFFFF', // White
+        '#000000', // Black
+        '#2E7D32', // Success green
+        '#F9A825', // Warning yellow
+        '#C62828', // Danger red
+      ],
+      colorPicker: true, // Allow custom colors
+    }),
+    TextSizeFeature({
+      sizes: [
+        { label: 'Small', value: '0.875rem' },
+        { label: 'Base', value: '1rem' },
+        { label: 'Large', value: '1.0625rem' },
+        { label: 'XL', value: '1.25rem' },
+        { label: '2XL', value: '1.5rem' },
+      ],
+    }),
+    TextFontFamilyFeature({
+      fontFamilies: [
+        { label: 'Default (Sans)', value: 'var(--font-geist-sans)' },
+        { label: 'Mono', value: 'var(--font-geist-mono)' },
+      ],
     }),
   ],
 })

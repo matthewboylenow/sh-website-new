@@ -28,6 +28,7 @@ import { VideoEmbed } from '../../blocks/VideoEmbed/config'
 import { FormEmbed } from '../../blocks/FormEmbed/config'
 import { Spacer } from '../../blocks/Spacer/config'
 import { Divider } from '../../blocks/Divider/config'
+import { CustomCode } from '../../blocks/CustomCode/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -120,6 +121,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 // Saint Helen blocks - Layout Utilities
                 Spacer,
                 Divider,
+                // Saint Helen blocks - Custom Code
+                CustomCode,
                 // Original template blocks (keep for compatibility)
                 CallToAction,
                 Content,

@@ -675,3 +675,220 @@ Phase 5 (Editor Experience enhancements like inline CTA buttons in rich text, Un
 *(This section will track any questions for the client or technical blockers)*
 
 ---
+
+### Session 7: November 15, 2025 (Enhanced Hero Design)
+
+**Tasks Completed:**
+- ✅ Installed Framer Motion for smooth animations (v12.23.24)
+- ✅ Created animated mission statement component with dual animation modes
+- ✅ Designed and implemented frosted glass welcome card component
+- ✅ Added dark gradient overlay for video/image backgrounds
+- ✅ Updated HeroBasic configuration with mission statement and welcome card fields
+- ✅ Integrated all new components into HeroBasic
+- ✅ Generated TypeScript types for new fields
+- ✅ Verified responsive design and accessibility
+
+**Enhanced Hero Features:**
+
+**1. Video Background with Gradient Overlay**
+- ✅ Video background already supported (backgroundType: image/video/none)
+- ✅ Poster image fallback for video loading
+- ✅ Added dark gradient overlay (matte black #111111 at bottom → transparent at top)
+- ✅ Gradient overlay layered at z-[2] above solid overlays for proper depth
+- ✅ Enhances text readability and creates depth effect
+- ✅ Works with both image and video backgrounds
+
+**2. Animated Mission Statement Component** (`src/blocks/HeroBasic/MissionStatement.tsx`)
+
+**Two Animation Modes:**
+1. **Rotating Words Mode (Default):**
+   - Static text: "We are a community"
+   - Rotating phrases: "worshiping God." → "serving others." → "making disciples."
+   - Cycle interval: 2.5 seconds
+   - Fade in/out transition with vertical slide
+   - Rotating phrase highlighted in gold (`--sh-color-accent-gold`)
+
+2. **Line-by-Line Mode:**
+   - All three mission phrases appear sequentially
+   - Staggered animation: 0.3s delay between each line
+   - Fade in with upward slide effect
+   - Perfect for emphasizing all three mission points simultaneously
+
+**Features:**
+- Center-aligned with responsive text sizing (text-2xl → text-4xl)
+- White text with drop shadow for readability over backgrounds
+- ARIA live region for accessibility
+- Configurable via Payload CMS field: `missionAnimationMode`
+- Can be toggled on/off via `showMissionStatement` checkbox
+
+**3. Frosted Glass Welcome Card** (`src/blocks/HeroBasic/WelcomeCard.tsx`)
+
+**Design:**
+- **Glass Morphism Effect:**
+  - `backdrop-blur-xl` with `bg-white/10`
+  - `border-white/25` with 1px border
+  - Rounded corners (rounded-2xl)
+  - Large shadow (shadow-2xl)
+
+- **Positioning:**
+  - Floats at bottom of hero with negative margin (-mb-16 on mobile, -mb-20 on desktop)
+  - Overlaps hero bottom edge for "floating" effect
+  - Width: 85% on medium screens, 70% on large screens, full width minus padding on mobile
+
+- **Layout:**
+  - Desktop: Two-column grid (welcome text left, buttons right)
+  - Mobile: Single column, stacked vertically, center-aligned
+
+- **Content Structure:**
+  - Eyebrow text (small, uppercase, gold color)
+  - Welcome title (H3, large responsive sizing)
+  - Optional subtitle text
+  - 1-2 CTA buttons
+
+**Payload CMS Configuration:**
+
+**Mission Statement Fields:**
+```typescript
+showMissionStatement: boolean (default: true)
+missionAnimationMode: 'rotating' | 'lineByLine' (default: 'rotating')
+```
+
+**Welcome Card Fields:**
+```typescript
+showWelcomeCard: boolean (default: true)
+welcomeEyebrow: string (default: "WELCOME")
+welcomeTitle: string (default: "We're glad you're here.")
+welcomeSubtitle: string (optional)
+welcomeButtons: array (max 2 CTAs)
+```
+
+**Component Structure:**
+- Main hero section with min-height 60vh (mobile) / 70vh (desktop)
+- Background layer (z-0): video or image
+- Overlay layers (z-1, z-2): solid overlay + gradient
+- Content layer (z-10): mission statement + welcome card
+- Mission statement positioned in vertical center
+- Welcome card positioned at bottom with negative margin
+
+**Technical Implementation Notes:**
+
+1. **Framer Motion Integration:**
+   - Used for smooth, performant animations
+   - AnimatePresence for rotating text transitions
+   - Motion.div with initial/animate/exit states
+   - Configurable easing and duration
+
+2. **Backward Compatibility:**
+   - Legacy hero fields (eyebrow, title, subtitle, links) still work
+   - Can use new design OR old design
+   - Gradual migration path for existing pages
+
+3. **Accessibility:**
+   - ARIA live regions for dynamic content
+   - Semantic HTML structure
+   - Proper heading hierarchy
+   - High contrast with gradient overlay
+   - Keyboard accessible buttons
+
+4. **Responsive Design:**
+   - Mobile-first approach
+   - Touch-friendly button sizes
+   - Readable text at all viewport sizes
+   - Grid layout adapts to screen size
+   - Welcome card stacks on mobile
+
+5. **Performance:**
+   - Client component only for mission statement (uses state)
+   - Welcome card is server component (no JS needed)
+   - Video uses native HTML5 video element
+   - CSS backdrop-filter for frosted glass (hardware accelerated)
+
+**How to Use the Enhanced Hero:**
+
+1. **Create/Edit a HeroBasic Block** in Payload CMS
+2. **Set Background:**
+   - Choose `backgroundType`: image or video
+   - Upload video (MP4) + poster image for fallback
+   - Set `backgroundOverlay` darkness: none/light/medium/dark
+
+3. **Configure Mission Statement:**
+   - Toggle `showMissionStatement` checkbox
+   - Choose animation mode: Rotating or Line-by-Line
+   - (Mission phrases are hardcoded in component, can be made editable later)
+
+4. **Configure Welcome Card:**
+   - Toggle `showWelcomeCard` checkbox
+   - Set eyebrow text (e.g., "WELCOME")
+   - Set title (e.g., "We're glad you're here.")
+   - Add optional subtitle
+   - Add 1-2 CTA buttons (Plan Your Visit, This Sunday, etc.)
+
+**How to Switch Animation Modes:**
+
+In Payload CMS:
+1. Go to HeroBasic block settings
+2. Expand "Mission Statement Animation" section
+3. Select "Rotating Words" or "Line by Line"
+4. Save and preview
+
+To customize mission phrases (requires code change):
+- Edit `src/blocks/HeroBasic/MissionStatement.tsx`
+- Update `missionPhrases` array
+- Consider making this CMS-editable in future enhancement
+
+**Future Enhancements (Optional):**
+- [ ] Make mission statement phrases editable in CMS (array field)
+- [ ] Add animation speed control slider
+- [ ] Add more animation style options
+- [ ] Support for video background with WebM format (better compression)
+- [ ] Add blur intensity control for welcome card
+- [ ] Add color theme variants for welcome card
+
+**Files Modified:**
+- `src/blocks/HeroBasic/Component.tsx` - Enhanced with new components
+- `src/blocks/HeroBasic/config.ts` - Added mission and welcome card fields
+- `src/blocks/HeroBasic/MissionStatement.tsx` - NEW component
+- `src/blocks/HeroBasic/WelcomeCard.tsx` - NEW component
+- `package.json` - Added framer-motion dependency
+- `src/payload-types.ts` - Auto-generated types updated
+
+**Current Status:**
+- Enhanced hero is fully functional and ready for use
+- All features tested and responsive
+- Backward compatible with existing hero blocks
+- Documentation complete
+
+**Database Migration Strategy:**
+
+The new hero fields will be automatically migrated when deploying to Vercel:
+
+1. **Auto-Migration on Vercel:**
+   - The `ci` script in package.json runs: `payload migrate && pnpm build`
+   - Payload 3.x automatically detects schema changes
+   - Generates migration files in `src/migrations/`
+   - Applies migrations to the Postgres database
+   - Then builds the application
+
+2. **What Happens on Push:**
+   - Push code to GitHub/Git
+   - Vercel triggers build
+   - `payload migrate` runs first (auto-generates and applies migrations)
+   - Build completes successfully
+   - New hero fields are ready to use in CMS
+
+3. **No Manual Migration Needed:**
+   - Payload 3.x handles schema changes automatically
+   - Migration files are committed to the repo
+   - Existing data is preserved
+   - New fields are added to database schema
+
+**Vercel Environment Variables Required:**
+- `POSTGRES_URL` - Database connection string
+- `PAYLOAD_SECRET` - JWT encryption secret
+- `NEXT_PUBLIC_SERVER_URL` - Public URL
+- `CRON_SECRET` - Cron job authentication
+- `PREVIEW_SECRET` - Preview mode validation
+
+These should already be configured in your Vercel project settings.
+
+---
