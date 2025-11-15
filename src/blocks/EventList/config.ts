@@ -5,6 +5,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
+import { blockName } from '@/fields/blockName'
 
 export const EventList: Block = {
   slug: 'eventList',
@@ -124,5 +125,6 @@ export const EventList: Block = {
       },
     },
     blockAppearance(),
+    blockName,
   ],
 }

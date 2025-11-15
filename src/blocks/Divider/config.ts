@@ -1,5 +1,6 @@
 import type { Block } from 'payload'
 import { blockAppearance } from '@/fields/blockAppearance'
+import { blockName } from '@/fields/blockName'
 
 export const Divider: Block = {
   slug: 'divider',
@@ -66,5 +67,6 @@ export const Divider: Block = {
       fullWidth: true,
       padding: true,
     }),
+    blockName,
   ],
 }

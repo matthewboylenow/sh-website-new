@@ -6,6 +6,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
+import { blockName } from '@/fields/blockName'
 import { linkGroup } from '@/fields/linkGroup'
 import { typography } from '@/fields/typography'
 
@@ -216,6 +217,22 @@ export const HeroBasic: Block = {
         }),
       ],
     },
+    {
+      name: 'minHeight',
+      type: 'select',
+      label: 'Minimum Height',
+      defaultValue: 'default',
+      options: [
+        { label: 'Small (50vh)', value: 'small' },
+        { label: 'Default (60vh / 70vh)', value: 'default' },
+        { label: 'Large (80vh)', value: 'large' },
+        { label: 'Full Screen (100vh)', value: 'fullscreen' },
+        { label: 'Auto (Fit Content)', value: 'auto' },
+      ],
+      admin: {
+        description: 'Control the vertical height of the hero section',
+      },
+    },
     typography({
       fontFamily: true,
       alignment: true,
@@ -226,5 +243,6 @@ export const HeroBasic: Block = {
       fullWidth: false,
       padding: true,
     }),
+    blockName,
   ],
 }

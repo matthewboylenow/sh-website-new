@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { blockName } from '@/fields/blockName'
 
 export const AlertBanner: Block = {
   slug: 'alertBanner',
@@ -72,5 +73,6 @@ export const AlertBanner: Block = {
         { label: 'None', value: 'none' },
       ],
     },
+    blockName,
   ],
 }

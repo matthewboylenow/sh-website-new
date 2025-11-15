@@ -26,10 +26,20 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
   welcomeTitle,
   welcomeSubtitle,
   welcomeButtons,
+  minHeight = 'default',
   typography,
   appearance,
 }) => {
   const hasBackground = backgroundType && backgroundType !== 'none'
+
+  // Convert minHeight to Tailwind classes
+  const heightClasses = {
+    small: 'min-h-[50vh]',
+    default: 'min-h-[60vh] md:min-h-[70vh]',
+    large: 'min-h-[80vh]',
+    fullscreen: 'min-h-screen',
+    auto: 'min-h-fit',
+  }[minHeight] || 'min-h-[60vh] md:min-h-[70vh]'
 
   // Overlay classes with gradient for video/image backgrounds
   const overlayClasses = cn(
@@ -90,7 +100,8 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
         {/* Hero Content Area - Centered with proper spacing */}
         <div
           className={cn(
-            'min-h-[60vh] md:min-h-[70vh] flex flex-col justify-center items-center text-center py-16 md:py-24',
+            heightClasses,
+            'flex flex-col justify-center items-center text-center py-16 md:py-24',
             typographyToClasses(typography),
           )}
         >

@@ -5,6 +5,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
+import { blockName } from '@/fields/blockName'
 
 const bentoItemFields: Field[] = [
   {
@@ -109,5 +110,6 @@ export const BentoGrid: Block = {
       },
     },
     blockAppearance(),
+    blockName,
   ],
 }

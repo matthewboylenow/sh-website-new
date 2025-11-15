@@ -6,6 +6,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
+import { blockName } from '@/fields/blockName'
 import { typography } from '@/fields/typography'
 
 export const RichTextSection: Block = {
@@ -59,5 +60,6 @@ export const RichTextSection: Block = {
       alignment: true,
     }),
     blockAppearance(),
+    blockName,
   ],
 }

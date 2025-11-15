@@ -6,6 +6,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
+import { blockName } from '@/fields/blockName'
 import { linkGroup } from '@/fields/linkGroup'
 
 const columnFields: Field[] = [
@@ -102,5 +103,6 @@ export const Columns: Block = {
       },
     },
     blockAppearance(),
+    blockName,
   ],
 }

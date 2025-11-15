@@ -21,10 +21,8 @@ const libreFranklin = Libre_Franklin({
   display: 'swap',
 })
 
-// Mono font - Keep Geist Mono for code
-const geistMono = GeistMono({
-  variable: '--font-mono',
-})
+// Mono font - Keep Geist Mono for code (already configured with variable)
+// GeistMono is pre-configured, just use it directly
 
 import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/Footer/Component'
@@ -43,7 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html
-      className={cn(libreBaskerville.variable, libreFranklin.variable, geistMono.variable)}
+      className={cn(libreBaskerville.variable, libreFranklin.variable, GeistMono.variable)}
       lang="en"
       suppressHydrationWarning
     >

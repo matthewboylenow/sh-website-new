@@ -1,5 +1,6 @@
 import type { Block } from 'payload'
 import { blockAppearance } from '@/fields/blockAppearance'
+import { blockName } from '@/fields/blockName'
 
 export const StoryHighlight: Block = {
   slug: 'storyHighlight',
@@ -75,5 +76,6 @@ export const StoryHighlight: Block = {
       fullWidth: true,
       padding: true,
     }),
+    blockName,
   ],
 }

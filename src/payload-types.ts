@@ -624,6 +624,10 @@ export interface HeroBasicBlock {
       }[]
     | null;
   /**
+   * Control the vertical height of the hero section
+   */
+  minHeight?: ('small' | 'default' | 'large' | 'fullscreen' | 'auto') | null;
+  /**
    * Customize typography settings for this element
    */
   typography?: {
@@ -657,8 +661,8 @@ export interface HeroBasicBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'heroBasic';
 }
 /**
@@ -753,6 +757,10 @@ export interface HeroWithStatsBlock {
       }[]
     | null;
   /**
+   * Control the vertical height of the hero section
+   */
+  minHeight?: ('small' | 'default' | 'large' | 'fullscreen' | 'auto') | null;
+  /**
    * Control the visual appearance of this block
    */
   appearance?: {
@@ -777,8 +785,8 @@ export interface HeroWithStatsBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'heroWithStats';
 }
 /**
@@ -847,8 +855,8 @@ export interface RichTextSectionBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'richTextSection';
 }
 /**
@@ -945,8 +953,8 @@ export interface ColumnsBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'columns';
 }
 /**
@@ -1040,8 +1048,8 @@ export interface CTAFullWidthBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'ctaFullWidth';
 }
 /**
@@ -1070,8 +1078,8 @@ export interface AlertBannerBlock {
    */
   dismissible?: boolean | null;
   icon?: ('auto' | 'megaphone' | 'bell' | 'exclamation' | 'check' | 'none') | null;
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'alertBanner';
 }
 /**
@@ -1171,8 +1179,8 @@ export interface CardGridBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'cardGrid';
 }
 /**
@@ -1248,8 +1256,8 @@ export interface BentoGridBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'bentoGrid';
 }
 /**
@@ -1326,8 +1334,8 @@ export interface EventListBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'eventList';
 }
 /**
@@ -1399,8 +1407,8 @@ export interface PostListBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'postList';
 }
 /**
@@ -1461,8 +1469,8 @@ export interface BulletinListBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'bulletinList';
 }
 /**
@@ -1535,8 +1543,8 @@ export interface MediaListBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'mediaList';
 }
 /**
@@ -1600,8 +1608,8 @@ export interface TestimonialBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'testimonial';
 }
 /**
@@ -1666,8 +1674,8 @@ export interface StoryHighlightBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'storyHighlight';
 }
 /**
@@ -1739,8 +1747,8 @@ export interface FAQAccordionBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'faqAccordion';
 }
 /**
@@ -1807,8 +1815,8 @@ export interface VideoEmbedBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'videoEmbed';
 }
 /**
@@ -1883,8 +1891,8 @@ export interface FormEmbedBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'formEmbed';
 }
 /**
@@ -1896,8 +1904,8 @@ export interface SpacerBlock {
    * Amount of vertical space to add
    */
   size: 'small' | 'medium' | 'large' | 'xlarge';
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'spacer';
 }
 /**
@@ -1942,8 +1950,8 @@ export interface DividerBlock {
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
-  id?: string | null;
   blockName?: string | null;
+  id?: string | null;
   blockType: 'divider';
 }
 /**
@@ -3369,6 +3377,7 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  minHeight?: T;
   typography?:
     | T
     | {
@@ -3383,8 +3392,8 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3421,6 +3430,7 @@ export interface HeroWithStatsBlockSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  minHeight?: T;
   appearance?:
     | T
     | {
@@ -3430,8 +3440,8 @@ export interface HeroWithStatsBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3456,8 +3466,8 @@ export interface RichTextSectionBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3499,8 +3509,8 @@ export interface ColumnsBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3536,8 +3546,8 @@ export interface CTAFullWidthBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3550,8 +3560,8 @@ export interface AlertBannerBlockSelect<T extends boolean = true> {
   linkUrl?: T;
   dismissible?: T;
   icon?: T;
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3588,8 +3598,8 @@ export interface CardGridBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3619,8 +3629,8 @@ export interface BentoGridBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3646,8 +3656,8 @@ export interface EventListBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3673,8 +3683,8 @@ export interface PostListBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3698,8 +3708,8 @@ export interface BulletinListBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3723,8 +3733,8 @@ export interface MediaListBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3745,8 +3755,8 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3768,8 +3778,8 @@ export interface StoryHighlightBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3800,8 +3810,8 @@ export interface FAQAccordionBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3822,8 +3832,8 @@ export interface VideoEmbedBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3846,8 +3856,8 @@ export interface FormEmbedBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3855,8 +3865,8 @@ export interface FormEmbedBlockSelect<T extends boolean = true> {
  */
 export interface SpacerBlockSelect<T extends boolean = true> {
   size?: T;
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3875,8 +3885,8 @@ export interface DividerBlockSelect<T extends boolean = true> {
         paddingTop?: T;
         paddingBottom?: T;
       };
-  id?: T;
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

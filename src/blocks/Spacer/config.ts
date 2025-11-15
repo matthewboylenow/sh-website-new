@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { blockName } from '@/fields/blockName'
 
 export const Spacer: Block = {
   slug: 'spacer',
@@ -23,5 +24,6 @@ export const Spacer: Block = {
         description: 'Amount of vertical space to add',
       },
     },
+    blockName,
   ],
 }

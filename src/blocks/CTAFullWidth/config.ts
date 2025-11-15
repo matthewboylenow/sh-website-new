@@ -6,6 +6,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
+import { blockName } from '@/fields/blockName'
 import { linkGroup } from '@/fields/linkGroup'
 
 export const CTAFullWidth: Block = {
@@ -90,5 +91,6 @@ export const CTAFullWidth: Block = {
       fullWidth: true,
       padding: true,
     }),
+    blockName,
   ],
 }

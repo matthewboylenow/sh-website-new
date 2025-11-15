@@ -1,5 +1,6 @@
 import type { Block } from 'payload'
 import { blockAppearance } from '@/fields/blockAppearance'
+import { blockName } from '@/fields/blockName'
 
 export const MediaList: Block = {
   slug: 'mediaList',
@@ -87,5 +88,6 @@ export const MediaList: Block = {
       fullWidth: true,
       padding: true,
     }),
+    blockName,
   ],
 }

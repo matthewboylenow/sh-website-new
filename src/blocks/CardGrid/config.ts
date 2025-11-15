@@ -6,6 +6,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
+import { blockName } from '@/fields/blockName'
 
 const manualCardFields: Field[] = [
   {
@@ -195,5 +196,6 @@ export const CardGrid: Block = {
       },
     },
     blockAppearance(),
+    blockName,
   ],
 }

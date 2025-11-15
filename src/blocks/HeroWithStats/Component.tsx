@@ -17,9 +17,19 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
   backgroundOverlay,
   buttons,
   stats,
+  minHeight = 'default',
   appearance,
 }) => {
   const hasBackground = backgroundType && backgroundType !== 'none'
+
+  // Convert minHeight to Tailwind classes
+  const heightClasses = {
+    small: 'min-h-[50vh]',
+    default: 'min-h-[60vh] md:min-h-[70vh]',
+    large: 'min-h-[80vh]',
+    fullscreen: 'min-h-screen',
+    auto: 'min-h-fit',
+  }[minHeight] || 'min-h-[60vh] md:min-h-[70vh]'
 
   const overlayClasses = cn(
     'absolute inset-0 z-[1]',
@@ -69,7 +79,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
       )}
 
       {/* Content */}
-      <div className={cn(getContainerClasses(appearance?.fullWidth), 'relative z-10')}>
+      <div className={cn(getContainerClasses(appearance?.fullWidth), 'relative z-10', heightClasses, 'flex flex-col justify-center py-16 md:py-24')}>
         <div
           className={cn(
             'max-w-4xl',
