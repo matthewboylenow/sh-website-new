@@ -29,7 +29,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
     large: 'min-h-[80vh]',
     fullscreen: 'min-h-screen',
     auto: 'min-h-fit',
-  }[minHeight] || 'min-h-[60vh] md:min-h-[70vh]'
+  }[minHeight ?? 'default'] || 'min-h-[60vh] md:min-h-[70vh]'
 
   const overlayClasses = cn(
     'absolute inset-0 z-[1]',

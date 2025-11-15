@@ -1,7 +1,7 @@
 type TypographyData = {
-  fontFamily?: 'default' | 'heading' | 'body' | 'mono'
-  alignment?: 'left' | 'center' | 'right'
-  textSize?: 'default' | 'sm' | 'base' | 'lg' | 'xl'
+  fontFamily?: 'default' | 'heading' | 'body' | 'mono' | null
+  alignment?: 'left' | 'center' | 'right' | null
+  textSize?: 'default' | 'sm' | 'base' | 'lg' | 'xl' | null
 }
 
 /**

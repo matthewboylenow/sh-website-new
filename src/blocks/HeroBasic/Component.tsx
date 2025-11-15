@@ -39,7 +39,7 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
     large: 'min-h-[80vh]',
     fullscreen: 'min-h-screen',
     auto: 'min-h-fit',
-  }[minHeight] || 'min-h-[60vh] md:min-h-[70vh]'
+  }[minHeight ?? 'default'] || 'min-h-[60vh] md:min-h-[70vh]'
 
   // Overlay classes with gradient for video/image backgrounds
   const overlayClasses = cn(

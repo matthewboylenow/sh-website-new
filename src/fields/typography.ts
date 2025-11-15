@@ -88,7 +88,6 @@ export const typography = (
       ],
       admin: {
         description: 'Horizontal text alignment',
-        layout: 'horizontal',
       },
     })
   }
