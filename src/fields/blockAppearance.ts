@@ -152,7 +152,6 @@ export const blockAppearance = (
     name: 'appearance',
     type: 'group',
     label: 'Block Appearance',
-    dbName: 'appear',
     fields,
     admin: {
       description: 'Control the visual appearance of this block',
