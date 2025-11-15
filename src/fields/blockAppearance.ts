@@ -75,6 +75,7 @@ export const blockAppearance = (
       name: 'alignment',
       type: 'select',
       defaultValue: 'left',
+      dbName: 'align',
       options: [
         {
           label: 'Left',
@@ -115,6 +116,7 @@ export const blockAppearance = (
           name: 'paddingTop',
           type: 'select',
           defaultValue: 'default',
+          dbName: 'pad_top',
           options: [
             { label: 'None', value: 'none' },
             { label: 'Tight', value: 'tight' },
@@ -130,6 +132,7 @@ export const blockAppearance = (
           name: 'paddingBottom',
           type: 'select',
           defaultValue: 'default',
+          dbName: 'pad_btm',
           options: [
             { label: 'None', value: 'none' },
             { label: 'Tight', value: 'tight' },
@@ -149,6 +152,7 @@ export const blockAppearance = (
     name: 'appearance',
     type: 'group',
     label: 'Block Appearance',
+    dbName: 'appear',
     fields,
     admin: {
       description: 'Control the visual appearance of this block',
