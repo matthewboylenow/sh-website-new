@@ -45,6 +45,7 @@ export const blockAppearance = (
       name: 'backgroundVariant',
       type: 'select',
       defaultValue: 'light',
+      dbName: 'bg_var',
       options: [
         {
           label: 'Light',
