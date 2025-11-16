@@ -2,21 +2,23 @@ import type { BlockAppearanceType } from '@/fields/blockAppearance'
 import { cn } from '@/utilities/ui'
 
 /**
- * Converts block appearance configuration to Tailwind CSS classes
+ * Returns both classes and inline styles for block appearance
+ * Use this when you need custom background colors (which require inline styles)
  *
  * @param appearance - Block appearance configuration from Payload
  * @param additionalClasses - Additional classes to merge
- * @returns Combined class string
+ * @returns Object with className and style properties
  */
-export function blockAppearanceToClasses(
+export function getBlockAppearance(
   appearance?: BlockAppearanceType['appearance'] | null,
   additionalClasses?: string,
-): string {
-  if (!appearance) {
-    return cn(additionalClasses)
-  }
-
+): { className: string; style?: React.CSSProperties } {
   const classes: string[] = []
+  const style: React.CSSProperties = {}
+
+  if (!appearance) {
+    return { className: cn(additionalClasses) }
+  }
 
   // Background variant
   switch (appearance.backgroundVariant) {
@@ -32,11 +34,16 @@ export function blockAppearanceToClasses(
     case 'transparent':
       classes.push('bg-transparent')
       break
+    case 'custom':
+      if (appearance.customBackgroundColor) {
+        style.backgroundColor = appearance.customBackgroundColor
+      }
+      break
     default:
       classes.push('bg-sh-bg')
   }
 
-  // Text color - handle auto and explicit overrides
+  // Text color handling...
   const textColorSetting = appearance.textColor || 'auto'
 
   if (textColorSetting === 'auto') {
@@ -48,6 +55,11 @@ export function blockAppearanceToClasses(
       case 'brand':
       case 'dark':
         classes.push('text-sh-text-on-dark')
+        break
+      case 'custom':
+        // For custom colors, try to auto-detect if it's light or dark
+        // Default to dark text unless explicitly set
+        classes.push('text-sh-text-main')
         break
       case 'transparent':
         // Don't add text color for transparent
@@ -63,6 +75,9 @@ export function blockAppearanceToClasses(
         break
       case 'dark':
         classes.push('text-sh-text-main')
+        break
+      case 'black':
+        classes.push('text-black')
         break
       case 'brand':
         classes.push('text-sh-primary')
@@ -115,7 +130,25 @@ export function blockAppearanceToClasses(
       break
   }
 
-  return cn(classes, additionalClasses)
+  return {
+    className: cn(classes, additionalClasses),
+    ...(Object.keys(style).length > 0 && { style }),
+  }
+}
+
+/**
+ * Converts block appearance configuration to Tailwind CSS classes
+ * @deprecated Use getBlockAppearance() for better custom color support
+ *
+ * @param appearance - Block appearance configuration from Payload
+ * @param additionalClasses - Additional classes to merge
+ * @returns Combined class string
+ */
+export function blockAppearanceToClasses(
+  appearance?: BlockAppearanceType['appearance'] | null,
+  additionalClasses?: string,
+): string {
+  return getBlockAppearance(appearance, additionalClasses).className
 }
 
 /**

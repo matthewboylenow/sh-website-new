@@ -72,7 +72,7 @@ export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
           )}
 
           {title && (
-            <h2 className={cn('text-h2 font-heading font-semibold mb-4', textColorClass)}>{title}</h2>
+            <h2 className={cn('mb-4 font-heading text-h2 font-bold', textColorClass)}>{title}</h2>
           )}
 
           {body && (

@@ -11,10 +11,10 @@ import deepMerge from '@/utilities/deepMerge'
  * - Padding overrides
  */
 
-export type BackgroundVariant = 'light' | 'brand' | 'dark' | 'transparent'
+export type BackgroundVariant = 'light' | 'brand' | 'dark' | 'transparent' | 'custom'
 export type Alignment = 'left' | 'center' | 'right'
 export type PaddingOption = 'default' | 'none' | 'tight' | 'loose'
-export type TextColor = 'auto' | 'light' | 'dark' | 'brand'
+export type TextColor = 'auto' | 'light' | 'dark' | 'black' | 'brand'
 
 export interface BlockAppearanceOptions {
   backgroundVariant?: boolean // Enable background variant selector
@@ -66,9 +66,31 @@ export const blockAppearance = (
           label: 'Transparent',
           value: 'transparent',
         },
+        {
+          label: 'Custom Color',
+          value: 'custom',
+        },
       ],
       admin: {
         description: 'Choose the background color for this block',
+      },
+    })
+
+    // Custom background color field
+    fields.push({
+      name: 'customBackgroundColor',
+      type: 'text',
+      dbName: 'custom_bg',
+      admin: {
+        condition: (data, siblingData) => siblingData?.backgroundVariant === 'custom',
+        description: 'Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))',
+        placeholder: '#1a1a1a',
+      },
+      validate: (value, { siblingData }) => {
+        if (siblingData?.backgroundVariant === 'custom' && !value) {
+          return 'Custom background color is required when using Custom Color variant'
+        }
+        return true
       },
     })
   }
@@ -91,6 +113,10 @@ export const blockAppearance = (
         {
           label: 'Dark (default text)',
           value: 'dark',
+        },
+        {
+          label: 'Black (pure black)',
+          value: 'black',
         },
         {
           label: 'Brand (primary blue)',
@@ -200,6 +226,7 @@ export const blockAppearance = (
 export interface BlockAppearanceType {
   appearance?: {
     backgroundVariant?: BackgroundVariant | null
+    customBackgroundColor?: string | null
     alignment?: Alignment | null
     fullWidth?: boolean | null
     paddingTop?: PaddingOption | null

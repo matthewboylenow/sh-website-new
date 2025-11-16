@@ -7,9 +7,10 @@ import RichText from '@/components/RichText'
 import { Button } from '@/components/ui/button'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 import { cn } from '@/utilities/ui'
+import { DecorativePattern } from '@/components/DecorativePattern'
 
 export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
-  const { title, subtitle, items, appearance } = props
+  const { title, subtitle, items, appearance, decorativePattern } = props
 
   const containerClasses = blockAppearanceToClasses(appearance)
   const textColorClass = getTextColorClass(appearance)
@@ -32,6 +33,22 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
         return 'col-span-1 md:col-span-2 row-span-2'
       default:
         return 'col-span-1 row-span-1'
+    }
+  }
+
+  // Get overlay opacity based on strength setting
+  const getOverlayOpacity = (strength: string) => {
+    switch (strength) {
+      case 'light':
+        return 0.2
+      case 'medium':
+        return 0.4
+      case 'strong':
+        return 0.6
+      case 'veryStrong':
+        return 0.8
+      default:
+        return 0.4
     }
   }
 
@@ -93,8 +110,22 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
   }
 
   return (
-    <section className={containerClasses}>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className={cn('relative overflow-hidden', containerClasses)}>
+      {/* Decorative Pattern */}
+      {decorativePattern?.enabled && (
+        <DecorativePattern
+          type={decorativePattern.type || 'text'}
+          text={decorativePattern.text || undefined}
+          opacity={decorativePattern.opacity || undefined}
+          size={decorativePattern.size || undefined}
+          repeatCount={decorativePattern.repeatCount || undefined}
+          color={decorativePattern.color || undefined}
+          position={decorativePattern.position || undefined}
+          rotation={decorativePattern.rotation || undefined}
+        />
+      )}
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
         {(title || subtitle) && (
           <div className="mb-12 text-center">
@@ -158,9 +189,15 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
                       src={item.image.url}
                       alt={item.image.alt || item.title || ''}
                       fill
-                      className="object-cover opacity-30 transition-all duration-700 group-hover:scale-110 group-hover:opacity-40"
+                      className="object-cover transition-all duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-br from-sh-primary/20 via-blue-500/10 to-transparent" />
+                    {/* Overlay for better text readability */}
+                    <div
+                      className="absolute inset-0 bg-black transition-opacity duration-300 group-hover:opacity-75"
+                      style={{
+                        opacity: getOverlayOpacity(item.overlayStrength || 'medium')
+                      }}
+                    />
                   </div>
                 )}
 
@@ -199,12 +236,12 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
                   )}
 
                   {/* Title */}
-                  <h3 className={`mb-3 font-heading text-h4 font-bold transition-all duration-300 ${textColorClass}`}>
+                  <h3 className={`mb-3 font-heading text-h4 font-bold transition-all duration-300 ${hasBackgroundImage ? 'text-white' : textColorClass}`}>
                     {item.title}
                   </h3>
 
                   {/* Description */}
-                  <p className={`mb-5 flex-1 text-base leading-relaxed opacity-80 transition-colors duration-300 ${textColorClass}`}>
+                  <p className={`mb-5 flex-1 text-base leading-relaxed opacity-90 transition-colors duration-300 ${hasBackgroundImage ? 'text-white' : textColorClass}`}>
                     {item.description}
                   </p>
 
@@ -218,7 +255,7 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
                       {linkText}
                     </Button>
                   ) : (
-                    <div className={`flex items-center text-sm font-semibold transition-all duration-300 group-hover:gap-2 ${textColorClass}`}>
+                    <div className={`flex items-center text-sm font-semibold transition-all duration-300 group-hover:gap-2 ${hasBackgroundImage ? 'text-white' : textColorClass}`}>
                       <span className="transition-opacity group-hover:opacity-70">{linkText}</span>
                       <svg
                         className="h-4 w-4 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110"

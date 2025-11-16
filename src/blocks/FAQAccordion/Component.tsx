@@ -122,7 +122,7 @@ export const FAQAccordionBlock: React.FC<FAQAccordionProps> = ({
           {title && (
             <h2
               className={cn(
-                'text-h2 font-heading font-semibold mb-8',
+                'mb-8 font-heading text-h2 font-bold',
                 textColorClass,
               )}
             >

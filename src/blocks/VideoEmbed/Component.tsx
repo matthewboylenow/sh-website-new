@@ -64,7 +64,7 @@ export const VideoEmbedBlock: React.FC<VideoEmbedProps> = ({
           {title && (
             <h2
               className={cn(
-                'text-h2 font-heading font-semibold mb-6',
+                'mb-6 font-heading text-h2 font-bold',
                 textColorClass,
               )}
             >

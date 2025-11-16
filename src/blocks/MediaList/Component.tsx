@@ -34,7 +34,7 @@ export const MediaListBlock: React.FC<MediaListProps> = async ({
             {title && (
               <h2
                 className={cn(
-                  'text-h2 font-heading font-semibold mb-3',
+                  'mb-3 font-heading text-h2 font-bold',
                   textColorClass,
                   appearance?.alignment === 'center' && 'text-center',
                   appearance?.alignment === 'right' && 'text-right',

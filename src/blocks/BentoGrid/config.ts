@@ -7,6 +7,7 @@ import {
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { appearanceOptions } from '@/fields/link'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 const bentoItemFields: Field[] = [
   {
@@ -72,6 +73,22 @@ const bentoItemFields: Field[] = [
       { label: 'Icon (Small)', value: 'icon' },
       { label: 'Background Cover', value: 'background' },
     ],
+  },
+  {
+    name: 'overlayStrength',
+    type: 'select',
+    label: 'Background Overlay Strength',
+    defaultValue: 'medium',
+    options: [
+      { label: 'Light (20%)', value: 'light' },
+      { label: 'Medium (40%)', value: 'medium' },
+      { label: 'Strong (60%)', value: 'strong' },
+      { label: 'Very Strong (80%)', value: 'veryStrong' },
+    ],
+    admin: {
+      description: 'Controls the darkness of the overlay on background images for better text readability',
+      condition: (data, siblingData) => siblingData?.imageStyle === 'background',
+    },
   },
   {
     name: 'colorVariant',
@@ -176,6 +193,9 @@ export const BentoGrid: Block = {
       alignment: true,
       fullWidth: true,
       padding: true,
+    }),
+    decorativePattern({
+      enablePatterns: true,
     }),
     blockName,
   ],

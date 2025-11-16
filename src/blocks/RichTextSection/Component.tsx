@@ -35,7 +35,7 @@ export const RichTextSectionBlock: React.FC<RichTextSectionProps> = ({
           )}
         >
           {title && (
-            <h2 className={cn('text-h2 font-heading font-semibold mb-6', textColorClass)}>{title}</h2>
+            <h2 className={cn('mb-6 font-heading text-h2 font-bold', textColorClass)}>{title}</h2>
           )}
 
           {body && (

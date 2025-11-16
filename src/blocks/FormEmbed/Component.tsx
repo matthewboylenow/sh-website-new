@@ -36,7 +36,7 @@ export const FormEmbedBlock: React.FC<FormEmbedProps> = ({
               {title && (
                 <h2
                   className={cn(
-                    'text-h2 font-heading font-semibold mb-4',
+                    'mb-4 font-heading text-h2 font-bold',
                     textColorClass,
                   )}
                 >

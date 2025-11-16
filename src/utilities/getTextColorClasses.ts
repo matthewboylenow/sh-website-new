@@ -26,6 +26,8 @@ export function getTextColorClass(appearance?: BlockAppearance): string {
         return 'text-sh-text-on-dark'
       case 'dark':
         return 'text-sh-text-main'
+      case 'black':
+        return 'text-black'
       case 'brand':
         return 'text-sh-primary'
       default:
