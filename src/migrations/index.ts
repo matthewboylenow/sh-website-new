@@ -7,6 +7,7 @@ import * as migration_20251116_152000_add_block_text_color from './20251116_1520
 import * as migration_20251116_152100_add_columns_video_support from './20251116_152100_add_columns_video_support';
 import * as migration_20251116_153000_add_missing_text_color_columns from './20251116_153000_add_missing_text_color_columns';
 import * as migration_20251116_160000_add_bento_grid_customization from './20251116_160000_add_bento_grid_customization';
+import * as migration_20251116_161000_expand_link_appearance_enums from './20251116_161000_expand_link_appearance_enums';
 
 export const migrations = [
   {
@@ -53,5 +54,10 @@ export const migrations = [
     up: migration_20251116_160000_add_bento_grid_customization.up,
     down: migration_20251116_160000_add_bento_grid_customization.down,
     name: '20251116_160000_add_bento_grid_customization'
+  },
+  {
+    up: migration_20251116_161000_expand_link_appearance_enums.up,
+    down: migration_20251116_161000_expand_link_appearance_enums.down,
+    name: '20251116_161000_expand_link_appearance_enums'
   },
 ];

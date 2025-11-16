@@ -155,7 +155,13 @@ export const Columns: Block = {
         description: 'Space between columns',
       },
     },
-    blockAppearance(),
+    blockAppearance({
+      textColor: true,
+      backgroundVariant: true,
+      alignment: true,
+      fullWidth: true,
+      padding: true,
+    }),
     blockName,
   ],
 }
