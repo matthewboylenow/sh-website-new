@@ -86,7 +86,7 @@ export const ColumnsBlock: React.FC<ColumnsProps> = ({
                         <video
                           controls
                           poster={
-                            column.videoPoster && typeof column.videoPoster === 'object'
+                            column.videoPoster && typeof column.videoPoster === 'object' && column.videoPoster.url
                               ? column.videoPoster.url
                               : undefined
                           }
