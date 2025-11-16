@@ -46,7 +46,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
    -- Create submenu table
    CREATE TABLE IF NOT EXISTS "header_nav_items_submenu" (
      "_order" integer NOT NULL,
-     "_parent_id" integer NOT NULL,
+     "_parent_id" varchar NOT NULL,
      "id" varchar PRIMARY KEY NOT NULL,
      "title" varchar
    );
