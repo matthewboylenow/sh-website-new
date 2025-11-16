@@ -14,12 +14,14 @@ import deepMerge from '@/utilities/deepMerge'
 export type BackgroundVariant = 'light' | 'brand' | 'dark' | 'transparent'
 export type Alignment = 'left' | 'center' | 'right'
 export type PaddingOption = 'default' | 'none' | 'tight' | 'loose'
+export type TextColor = 'auto' | 'light' | 'dark' | 'brand'
 
 export interface BlockAppearanceOptions {
   backgroundVariant?: boolean // Enable background variant selector
   alignment?: boolean // Enable alignment selector
   fullWidth?: boolean // Enable full width toggle
   padding?: boolean // Enable padding controls
+  textColor?: boolean // Enable text color selector
 }
 
 /**
@@ -36,6 +38,7 @@ export const blockAppearance = (
     alignment = true,
     fullWidth = true,
     padding = true,
+    textColor = true,
   } = options
 
   const fields: Field[] = []
@@ -66,6 +69,36 @@ export const blockAppearance = (
       ],
       admin: {
         description: 'Choose the background color for this block',
+      },
+    })
+  }
+
+  if (textColor) {
+    fields.push({
+      name: 'textColor',
+      type: 'select',
+      defaultValue: 'auto',
+      dbName: 'text_color',
+      options: [
+        {
+          label: 'Auto (based on background)',
+          value: 'auto',
+        },
+        {
+          label: 'Light (white text)',
+          value: 'light',
+        },
+        {
+          label: 'Dark (default text)',
+          value: 'dark',
+        },
+        {
+          label: 'Brand (primary blue)',
+          value: 'brand',
+        },
+      ],
+      admin: {
+        description: 'Override text color for this block',
       },
     })
   }
@@ -171,5 +204,6 @@ export interface BlockAppearanceType {
     fullWidth?: boolean | null
     paddingTop?: PaddingOption | null
     paddingBottom?: PaddingOption | null
+    textColor?: TextColor | null
   } | null
 }

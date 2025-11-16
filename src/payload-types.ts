@@ -567,7 +567,7 @@ export interface HeroBasicBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('default' | 'secondary' | 'brandOutline' | 'light' | 'ghost') | null;
         };
         id?: string | null;
       }[]
@@ -648,6 +648,10 @@ export interface HeroBasicBlock {
      * Choose the background color for this block
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -769,6 +773,10 @@ export interface HeroWithStatsBlock {
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
     /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -839,6 +847,10 @@ export interface RichTextSectionBlock {
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
     /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -874,6 +886,10 @@ export interface ColumnsBlock {
   layout?: ('equal' | 'oneThirdLeft' | 'oneThirdRight') | null;
   columns?:
     | {
+        /**
+         * Choose the type of content for this column
+         */
+        contentType?: ('text' | 'image' | 'video') | null;
         title?: string | null;
         body?: {
           root: {
@@ -891,9 +907,25 @@ export interface ColumnsBlock {
           [k: string]: unknown;
         } | null;
         /**
-         * Optional icon or image for this column
+         * Optional icon or image above text content
          */
         icon?: (number | null) | Media;
+        /**
+         * Main image for this column
+         */
+        image?: (number | null) | Media;
+        /**
+         * Video file (MP4 recommended)
+         */
+        video?: (number | null) | Media;
+        /**
+         * Thumbnail image shown before video loads
+         */
+        videoPoster?: (number | null) | Media;
+        /**
+         * Alternative: YouTube, Vimeo, or other embed URL (optional if video file provided)
+         */
+        videoEmbed?: string | null;
         /**
          * Optional links for this column
          */
@@ -916,7 +948,7 @@ export interface ColumnsBlock {
                 /**
                  * Choose how the link should be rendered.
                  */
-                appearance?: ('default' | 'outline') | null;
+                appearance?: ('default' | 'secondary' | 'brandOutline' | 'outline' | 'ghost') | null;
               };
               id?: string | null;
             }[]
@@ -936,6 +968,10 @@ export interface ColumnsBlock {
      * Choose the background color for this block
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1031,6 +1067,10 @@ export interface CTAFullWidthBlock {
      * Choose the background color for this block
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1163,6 +1203,10 @@ export interface CardGridBlock {
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
     /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1239,6 +1283,10 @@ export interface BentoGridBlock {
      * Choose the background color for this block
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1318,6 +1366,10 @@ export interface EventListBlock {
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
     /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1391,6 +1443,10 @@ export interface PostListBlock {
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
     /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1452,6 +1508,10 @@ export interface BulletinListBlock {
      * Choose the background color for this block
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1527,6 +1587,10 @@ export interface MediaListBlock {
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
     /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1591,6 +1655,10 @@ export interface TestimonialBlock {
      * Choose the background color for this block
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1662,6 +1730,10 @@ export interface StoryHighlightBlock {
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
     /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    /**
      * Extend block to full viewport width (no container)
      */
     fullWidth?: boolean | null;
@@ -1731,6 +1803,10 @@ export interface FAQAccordionBlock {
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
     /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1798,6 +1874,10 @@ export interface VideoEmbedBlock {
      * Choose the background color for this block
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1875,6 +1955,10 @@ export interface FormEmbedBlock {
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
     /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1934,6 +2018,10 @@ export interface DividerBlock {
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
     /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1975,6 +2063,10 @@ export interface CustomCodeBlock {
      * Choose the background color for this block
      */
     backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
     /**
      * Extend block to full viewport width (no container)
      */
@@ -3388,6 +3480,7 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         paddingTop?: T;
         paddingBottom?: T;
@@ -3435,6 +3528,7 @@ export interface HeroWithStatsBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3461,6 +3555,7 @@ export interface RichTextSectionBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3479,9 +3574,14 @@ export interface ColumnsBlockSelect<T extends boolean = true> {
   columns?:
     | T
     | {
+        contentType?: T;
         title?: T;
         body?: T;
         icon?: T;
+        image?: T;
+        video?: T;
+        videoPoster?: T;
+        videoEmbed?: T;
         links?:
           | T
           | {
@@ -3504,6 +3604,7 @@ export interface ColumnsBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3541,6 +3642,7 @@ export interface CTAFullWidthBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3593,6 +3695,7 @@ export interface CardGridBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3624,6 +3727,7 @@ export interface BentoGridBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3651,6 +3755,7 @@ export interface EventListBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3678,6 +3783,7 @@ export interface PostListBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3703,6 +3809,7 @@ export interface BulletinListBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3728,6 +3835,7 @@ export interface MediaListBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3750,6 +3858,7 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3774,6 +3883,7 @@ export interface StoryHighlightBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         fullWidth?: T;
         paddingTop?: T;
         paddingBottom?: T;
@@ -3805,6 +3915,7 @@ export interface FAQAccordionBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3827,6 +3938,7 @@ export interface VideoEmbedBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3851,6 +3963,7 @@ export interface FormEmbedBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3880,6 +3993,7 @@ export interface DividerBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3899,6 +4013,7 @@ export interface CustomCodeBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        textColor?: T;
         fullWidth?: T;
         paddingTop?: T;
         paddingBottom?: T;

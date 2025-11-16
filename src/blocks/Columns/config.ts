@@ -11,6 +11,20 @@ import { linkGroup } from '@/fields/linkGroup'
 
 const columnFields: Field[] = [
   {
+    name: 'contentType',
+    type: 'radio',
+    defaultValue: 'text',
+    options: [
+      { label: 'Text Only', value: 'text' },
+      { label: 'Image', value: 'image' },
+      { label: 'Video', value: 'video' },
+    ],
+    admin: {
+      layout: 'horizontal',
+      description: 'Choose the type of content for this column',
+    },
+  },
+  {
     name: 'title',
     type: 'text',
     label: 'Column Title',
@@ -36,11 +50,51 @@ const columnFields: Field[] = [
     relationTo: 'media',
     label: 'Icon/Image',
     admin: {
-      description: 'Optional icon or image for this column',
+      condition: (data, siblingData) => siblingData?.contentType === 'text' || !siblingData?.contentType,
+      description: 'Optional icon or image above text content',
+    },
+  },
+  {
+    name: 'image',
+    type: 'upload',
+    relationTo: 'media',
+    label: 'Image',
+    admin: {
+      condition: (data, siblingData) => siblingData?.contentType === 'image',
+      description: 'Main image for this column',
+    },
+  },
+  {
+    name: 'video',
+    type: 'upload',
+    relationTo: 'media',
+    label: 'Video File',
+    admin: {
+      condition: (data, siblingData) => siblingData?.contentType === 'video',
+      description: 'Video file (MP4 recommended)',
+    },
+  },
+  {
+    name: 'videoPoster',
+    type: 'upload',
+    relationTo: 'media',
+    label: 'Video Poster Image',
+    admin: {
+      condition: (data, siblingData) => siblingData?.contentType === 'video',
+      description: 'Thumbnail image shown before video loads',
+    },
+  },
+  {
+    name: 'videoEmbed',
+    type: 'text',
+    label: 'Video Embed URL',
+    admin: {
+      condition: (data, siblingData) => siblingData?.contentType === 'video',
+      description: 'Alternative: YouTube, Vimeo, or other embed URL (optional if video file provided)',
     },
   },
   linkGroup({
-    appearances: ['default', 'outline'],
+    appearances: ['default', 'secondary', 'brandOutline', 'outline', 'ghost'],
     overrides: {
       maxRows: 3,
       admin: {

@@ -21,19 +21,53 @@ export function blockAppearanceToClasses(
   // Background variant
   switch (appearance.backgroundVariant) {
     case 'light':
-      classes.push('bg-sh-bg text-sh-text')
+      classes.push('bg-sh-bg')
       break
     case 'brand':
-      classes.push('bg-sh-primary text-sh-text-on-primary')
+      classes.push('bg-sh-primary')
       break
     case 'dark':
-      classes.push('bg-sh-bg-dark text-sh-text-on-dark')
+      classes.push('bg-sh-bg-dark')
       break
     case 'transparent':
       classes.push('bg-transparent')
       break
     default:
-      classes.push('bg-sh-bg text-sh-text')
+      classes.push('bg-sh-bg')
+  }
+
+  // Text color - handle auto and explicit overrides
+  const textColorSetting = appearance.textColor || 'auto'
+
+  if (textColorSetting === 'auto') {
+    // Auto-determine text color based on background
+    switch (appearance.backgroundVariant) {
+      case 'light':
+        classes.push('text-sh-text-main')
+        break
+      case 'brand':
+      case 'dark':
+        classes.push('text-sh-text-on-dark')
+        break
+      case 'transparent':
+        // Don't add text color for transparent
+        break
+      default:
+        classes.push('text-sh-text-main')
+    }
+  } else {
+    // Explicit text color override
+    switch (textColorSetting) {
+      case 'light':
+        classes.push('text-sh-text-on-dark')
+        break
+      case 'dark':
+        classes.push('text-sh-text-main')
+        break
+      case 'brand':
+        classes.push('text-sh-primary')
+        break
+    }
   }
 
   // Alignment

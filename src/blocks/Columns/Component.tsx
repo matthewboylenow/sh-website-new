@@ -53,15 +53,65 @@ export const ColumnsBlock: React.FC<ColumnsProps> = ({
 
             return (
               <div key={index} className={columnClasses}>
-                {column.icon && typeof column.icon === 'object' && (
-                  <div className="mb-4">
+                {/* Content Type: Image */}
+                {column.contentType === 'image' && column.image && typeof column.image === 'object' && (
+                  <div className="mb-4 w-full">
                     <Media
-                      resource={column.icon}
-                      className="w-16 h-16 object-contain"
-                      imgClassName="w-full h-full object-contain"
+                      resource={column.image}
+                      className="w-full h-auto rounded-lg overflow-hidden"
+                      imgClassName="w-full h-full object-cover"
                     />
                   </div>
                 )}
+
+                {/* Content Type: Video */}
+                {column.contentType === 'video' && (
+                  <div className="mb-4 w-full">
+                    {column.videoEmbed ? (
+                      // Embedded video (YouTube, Vimeo, etc.)
+                      <div className="relative w-full pb-[56.25%] rounded-lg overflow-hidden">
+                        <iframe
+                          src={column.videoEmbed}
+                          className="absolute top-0 left-0 w-full h-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          title={column.title || 'Video'}
+                        />
+                      </div>
+                    ) : (
+                      column.video &&
+                      typeof column.video === 'object' &&
+                      column.video.url && (
+                        // Uploaded video file
+                        <video
+                          controls
+                          poster={
+                            column.videoPoster && typeof column.videoPoster === 'object'
+                              ? column.videoPoster.url
+                              : undefined
+                          }
+                          className="w-full h-auto rounded-lg"
+                        >
+                          <source src={column.video.url} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                      )
+                    )}
+                  </div>
+                )}
+
+                {/* Content Type: Text (default) - Show icon if present */}
+                {(!column.contentType || column.contentType === 'text') &&
+                  column.icon &&
+                  typeof column.icon === 'object' && (
+                    <div className="mb-4">
+                      <Media
+                        resource={column.icon}
+                        className="w-16 h-16 object-contain"
+                        imgClassName="w-full h-full object-contain"
+                      />
+                    </div>
+                  )}
 
                 {column.title && (
                   <h3 className="text-h3 font-heading font-semibold mb-4">

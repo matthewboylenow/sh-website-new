@@ -112,7 +112,7 @@ export const HeroBasic: Block = {
       },
     },
     linkGroup({
-      appearances: ['default', 'outline'],
+      appearances: ['default', 'secondary', 'brandOutline', 'light', 'ghost'],
       overrides: {
         maxRows: 3,
         admin: {
