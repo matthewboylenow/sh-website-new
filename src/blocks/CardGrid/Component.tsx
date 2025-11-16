@@ -4,6 +4,8 @@ import Link from 'next/link'
 import type { CardGridBlock as CardGridBlockType } from '@/payload-types'
 import { blockAppearanceToClasses } from '@/utilities/blockAppearanceToClasses'
 import RichText from '@/components/RichText'
+import { cn } from '@/utilities/ui'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 
 export const CardGridBlock: React.FC<CardGridBlockType> = (props) => {
   const {
@@ -18,6 +20,8 @@ export const CardGridBlock: React.FC<CardGridBlockType> = (props) => {
   } = props
 
   const containerClasses = blockAppearanceToClasses(props.appearance)
+  const textColorClass = getTextColorClass(props.appearance)
+  const proseColorClass = getProseColorClass(props.appearance)
 
   const gridClasses = {
     '2': 'grid-cols-1 md:grid-cols-2',
@@ -46,13 +50,13 @@ export const CardGridBlock: React.FC<CardGridBlockType> = (props) => {
         {(title || subtitle) && (
           <div className="mb-12 text-center">
             {title && (
-              <h2 className="mb-4 font-heading text-h2 font-bold text-sh-text-main">
+              <h2 className={cn('mb-4 font-heading text-h2 font-bold', textColorClass)}>
                 {title}
               </h2>
             )}
             {subtitle && (
-              <div className="mx-auto max-w-3xl text-lg text-sh-text-muted">
-                <RichText data={subtitle} enableGutter={false} />
+              <div className="mx-auto max-w-3xl text-lg">
+                <RichText data={subtitle} enableGutter={false} className={cn('prose max-w-none', proseColorClass, textColorClass)} />
               </div>
             )}
           </div>
@@ -82,12 +86,12 @@ export const CardGridBlock: React.FC<CardGridBlockType> = (props) => {
 
                 {/* Card Content */}
                 <div className="p-6">
-                  <h3 className="mb-3 font-heading text-h4 font-semibold text-sh-text-main">
+                  <h3 className={cn('mb-3 font-heading text-h4 font-semibold', textColorClass)}>
                     {card.title}
                   </h3>
                   {card.body && (
-                    <div className="text-base text-sh-text-muted">
-                      <RichText data={card.body} enableGutter={false} />
+                    <div className="text-base">
+                      <RichText data={card.body} enableGutter={false} className={cn('prose max-w-none', proseColorClass, textColorClass)} />
                     </div>
                   )}
                 </div>
@@ -122,7 +126,7 @@ export const CardGridBlock: React.FC<CardGridBlockType> = (props) => {
           <div className="mt-12 text-center">
             <Link
               href={viewAllUrl}
-              className="inline-flex items-center text-lg font-medium text-sh-primary hover:text-sh-primary-soft"
+              className={cn('inline-flex items-center text-lg font-medium hover:opacity-80', textColorClass)}
             >
               View All
               <svg

@@ -5,6 +5,7 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 
 export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
   eyebrow,
@@ -16,6 +17,8 @@ export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
   appearance,
 }) => {
   const hasBackgroundImage = Boolean(backgroundImage)
+  const textColorClass = getTextColorClass(appearance)
+  const proseColorClass = getProseColorClass(appearance)
 
   const overlayClasses = cn(
     'absolute inset-0',
@@ -61,7 +64,7 @@ export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
             <p
               className={cn(
                 'text-sm font-medium uppercase tracking-wider mb-3',
-                hasBackgroundImage ? 'text-white/90' : 'text-sh-gold',
+                textColorClass,
               )}
             >
               {eyebrow}
@@ -69,7 +72,7 @@ export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
           )}
 
           {title && (
-            <h2 className="text-h2 font-heading font-semibold mb-4">{title}</h2>
+            <h2 className={cn('text-h2 font-heading font-semibold mb-4', textColorClass)}>{title}</h2>
           )}
 
           {body && (
@@ -78,10 +81,9 @@ export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
                 data={body}
                 enableGutter={false}
                 className={cn(
-                  'prose',
-                  hasBackgroundImage && 'prose-invert',
-                  appearance?.backgroundVariant === 'dark' && 'prose-invert',
-                  appearance?.backgroundVariant === 'brand' && 'prose-invert',
+                  'prose max-w-none',
+                  proseColorClass,
+                  textColorClass,
                 )}
               />
             </div>

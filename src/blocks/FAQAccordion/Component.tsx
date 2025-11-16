@@ -5,13 +5,15 @@ import type { FAQAccordionBlock as FAQAccordionProps } from '@/payload-types'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 
 interface AccordionItemProps {
   question: string
   answer: any
   isOpen: boolean
   onToggle: () => void
-  isDarkBg: boolean
+  textColorClass: string
+  proseColorClass: string
 }
 
 const AccordionItem: React.FC<AccordionItemProps> = ({
@@ -19,28 +21,27 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   answer,
   isOpen,
   onToggle,
-  isDarkBg,
+  textColorClass,
+  proseColorClass,
 }) => {
   return (
     <div
       className={cn(
-        'border-b',
-        isDarkBg ? 'border-white/20' : 'border-sh-border-subtle',
+        'border-b border-sh-border-subtle',
       )}
     >
       <button
         type="button"
         onClick={onToggle}
         className={cn(
-          'w-full flex items-center justify-between gap-4 py-5 text-left transition-colors',
-          isDarkBg ? 'hover:text-white/80' : 'hover:text-sh-primary',
+          'w-full flex items-center justify-between gap-4 py-5 text-left transition-colors hover:opacity-80',
         )}
         aria-expanded={isOpen}
       >
         <span
           className={cn(
             'text-lg font-semibold',
-            isDarkBg && 'text-white',
+            textColorClass,
           )}
         >
           {question}
@@ -49,7 +50,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
           className={cn(
             'w-5 h-5 flex-shrink-0 transition-transform',
             isOpen && 'rotate-180',
-            isDarkBg ? 'text-white/70' : 'text-sh-text-muted',
+            textColorClass,
           )}
           fill="none"
           viewBox="0 0 24 24"
@@ -65,8 +66,9 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
             data={answer}
             enableGutter={false}
             className={cn(
-              'prose',
-              isDarkBg && 'prose-invert',
+              'prose max-w-none',
+              proseColorClass,
+              textColorClass,
             )}
           />
         </div>
@@ -104,7 +106,8 @@ export const FAQAccordionBlock: React.FC<FAQAccordionProps> = ({
     })
   }
 
-  const isDarkBg = appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
+  const textColorClass = getTextColorClass(appearance)
+  const proseColorClass = getProseColorClass(appearance)
 
   return (
     <section className={blockAppearanceToClasses(appearance)}>
@@ -120,7 +123,7 @@ export const FAQAccordionBlock: React.FC<FAQAccordionProps> = ({
             <h2
               className={cn(
                 'text-h2 font-heading font-semibold mb-8',
-                isDarkBg && 'text-white',
+                textColorClass,
               )}
             >
               {title}
@@ -135,7 +138,8 @@ export const FAQAccordionBlock: React.FC<FAQAccordionProps> = ({
                 answer={item.answer}
                 isOpen={openItems.has(index)}
                 onToggle={() => toggleItem(index)}
-                isDarkBg={isDarkBg}
+                textColorClass={textColorClass}
+                proseColorClass={proseColorClass}
               />
             ))}
           </div>

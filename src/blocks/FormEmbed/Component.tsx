@@ -5,6 +5,7 @@ import type { FormEmbedBlock as FormEmbedProps } from '@/payload-types'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 
 export const FormEmbedBlock: React.FC<FormEmbedProps> = ({
   title,
@@ -16,7 +17,8 @@ export const FormEmbedBlock: React.FC<FormEmbedProps> = ({
   widthMode = 'centered',
   appearance,
 }) => {
-  const isDarkBg = appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
+  const textColorClass = getTextColorClass(appearance)
+  const proseColorClass = getProseColorClass(appearance)
 
   return (
     <section className={blockAppearanceToClasses(appearance)}>
@@ -35,7 +37,7 @@ export const FormEmbedBlock: React.FC<FormEmbedProps> = ({
                 <h2
                   className={cn(
                     'text-h2 font-heading font-semibold mb-4',
-                    isDarkBg && 'text-white',
+                    textColorClass,
                   )}
                 >
                   {title}
@@ -47,8 +49,9 @@ export const FormEmbedBlock: React.FC<FormEmbedProps> = ({
                   data={description}
                   enableGutter={false}
                   className={cn(
-                    'prose',
-                    isDarkBg && 'prose-invert',
+                    'prose max-w-none',
+                    proseColorClass,
+                    textColorClass,
                   )}
                 />
               )}
@@ -84,9 +87,7 @@ export const FormEmbedBlock: React.FC<FormEmbedProps> = ({
               <div
                 className={cn(
                   'p-8 rounded-lg border-2 border-dashed text-center',
-                  isDarkBg
-                    ? 'border-white/30 text-white/70'
-                    : 'border-sh-border-subtle text-sh-text-muted',
+                  textColorClass,
                 )}
               >
                 <p>Form embed not configured. Please add embed code or form URL.</p>

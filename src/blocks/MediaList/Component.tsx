@@ -4,6 +4,7 @@ import RichText from '@/components/RichText'
 import { CMSLink } from '@/components/Link'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 
 export const MediaListBlock: React.FC<MediaListProps> = async ({
   title,
@@ -20,7 +21,8 @@ export const MediaListBlock: React.FC<MediaListProps> = async ({
   // For now, we'll show a placeholder
   const mediaItems: any[] = []
 
-  const isDarkBg = appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
+  const textColorClass = getTextColorClass(appearance)
+  const proseColorClass = getProseColorClass(appearance)
 
   return (
     <section className={blockAppearanceToClasses(appearance)}>
@@ -32,7 +34,7 @@ export const MediaListBlock: React.FC<MediaListProps> = async ({
               <h2
                 className={cn(
                   'text-h2 font-heading font-semibold mb-3',
-                  isDarkBg && 'text-white',
+                  textColorClass,
                   appearance?.alignment === 'center' && 'text-center',
                   appearance?.alignment === 'right' && 'text-right',
                 )}
@@ -46,8 +48,9 @@ export const MediaListBlock: React.FC<MediaListProps> = async ({
                 data={subtitle}
                 enableGutter={false}
                 className={cn(
-                  'prose',
-                  isDarkBg && 'prose-invert',
+                  'prose max-w-none',
+                  proseColorClass,
+                  textColorClass,
                   appearance?.alignment === 'center' && 'mx-auto text-center',
                   appearance?.alignment === 'right' && 'ml-auto text-right',
                 )}
@@ -75,11 +78,11 @@ export const MediaListBlock: React.FC<MediaListProps> = async ({
               >
                 {/* Placeholder for media item */}
                 <div className="p-6">
-                  <h3 className={cn('font-semibold mb-2', isDarkBg && 'text-white')}>
+                  <h3 className={cn('font-semibold mb-2', textColorClass)}>
                     {item.title}
                   </h3>
                   {showDate && (
-                    <p className={cn('text-sm', isDarkBg ? 'text-white/70' : 'text-sh-text-muted')}>
+                    <p className={cn('text-sm', textColorClass)}>
                       {item.date}
                     </p>
                   )}
@@ -91,9 +94,7 @@ export const MediaListBlock: React.FC<MediaListProps> = async ({
           <div
             className={cn(
               'p-8 rounded-lg border-2 border-dashed text-center',
-              isDarkBg
-                ? 'border-white/30 text-white/70'
-                : 'border-sh-border-subtle text-sh-text-muted',
+              textColorClass,
             )}
           >
             <p>No media items to display. The Podcasts collection needs to be created and populated.</p>

@@ -5,6 +5,7 @@ import type { VideoEmbedBlock as VideoEmbedProps } from '@/payload-types'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 
 /**
  * Convert various video URLs to embed URLs
@@ -38,7 +39,8 @@ export const VideoEmbedBlock: React.FC<VideoEmbedProps> = ({
   aspectRatio = '16/9',
   appearance,
 }) => {
-  const isDarkBg = appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
+  const textColorClass = getTextColorClass(appearance)
+  const proseColorClass = getProseColorClass(appearance)
   const embedSrc = getEmbedUrl(embedUrl)
 
   // Calculate aspect ratio padding
@@ -63,7 +65,7 @@ export const VideoEmbedBlock: React.FC<VideoEmbedProps> = ({
             <h2
               className={cn(
                 'text-h2 font-heading font-semibold mb-6',
-                isDarkBg && 'text-white',
+                textColorClass,
               )}
             >
               {title}
@@ -87,8 +89,9 @@ export const VideoEmbedBlock: React.FC<VideoEmbedProps> = ({
                 data={description}
                 enableGutter={false}
                 className={cn(
-                  'prose',
-                  isDarkBg && 'prose-invert',
+                  'prose max-w-none',
+                  proseColorClass,
+                  textColorClass,
                 )}
               />
             </div>

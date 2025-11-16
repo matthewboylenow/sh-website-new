@@ -6,6 +6,7 @@ import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
 import { typographyToClasses } from '@/utilities/typographyToClasses'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 import { MissionStatement } from './MissionStatement'
 import { WelcomeCard } from './WelcomeCard'
 
@@ -31,6 +32,8 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
   appearance,
 }) => {
   const hasBackground = backgroundType && backgroundType !== 'none'
+  const textColorClass = getTextColorClass(appearance)
+  const proseColorClass = getProseColorClass(appearance)
 
   // Convert minHeight to Tailwind classes
   const heightClasses = {
@@ -112,7 +115,7 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
                 <p
                   className={cn(
                     'text-sm font-medium uppercase tracking-wider mb-4',
-                    hasBackground ? 'text-white/90' : 'text-sh-gold',
+                    textColorClass,
                   )}
                 >
                   {eyebrow}
@@ -123,7 +126,7 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
                 <h1
                   className={cn(
                     'text-hero font-heading font-semibold mb-6',
-                    hasBackground && 'text-white',
+                    textColorClass,
                   )}
                 >
                   {title}
@@ -135,7 +138,7 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
                   <RichText
                     data={subtitle}
                     enableGutter={false}
-                    className={cn('prose-lg', hasBackground && 'prose-invert')}
+                    className={cn('prose-lg max-w-none', proseColorClass, textColorClass)}
                   />
                 </div>
               )}

@@ -5,6 +5,7 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 
 export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
   eyebrow,
@@ -21,6 +22,8 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
   appearance,
 }) => {
   const hasBackground = backgroundType && backgroundType !== 'none'
+  const textColorClass = getTextColorClass(appearance)
+  const proseColorClass = getProseColorClass(appearance)
 
   // Convert minHeight to Tailwind classes
   const heightClasses = {
@@ -92,7 +95,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
             <p
               className={cn(
                 'text-sm font-medium uppercase tracking-wider mb-4',
-                hasBackground ? 'text-white/90' : 'text-sh-gold',
+                textColorClass,
               )}
             >
               {eyebrow}
@@ -100,7 +103,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
           )}
 
           {/* Title */}
-          <h1 className="text-hero font-heading font-bold mb-6">{title}</h1>
+          <h1 className={cn('text-hero font-heading font-bold mb-6', textColorClass)}>{title}</h1>
 
           {/* Subtitle */}
           {subtitle && (
@@ -109,10 +112,9 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
                 data={subtitle}
                 enableGutter={false}
                 className={cn(
-                  'prose prose-lg',
-                  hasBackground && 'prose-invert',
-                  appearance?.backgroundVariant === 'dark' && 'prose-invert',
-                  appearance?.backgroundVariant === 'brand' && 'prose-invert',
+                  'prose prose-lg max-w-none',
+                  proseColorClass,
+                  textColorClass,
                 )}
               />
             </div>
@@ -157,10 +159,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
                   <div
                     className={cn(
                       'text-4xl font-bold font-heading mb-2',
-                      hasBackground && 'text-white',
-                      appearance?.backgroundVariant === 'brand' && 'text-white',
-                      appearance?.backgroundVariant === 'dark' && 'text-white',
-                      (!hasBackground && !appearance?.backgroundVariant || appearance?.backgroundVariant === 'light' || appearance?.backgroundVariant === 'transparent') && 'text-sh-primary',
+                      textColorClass,
                     )}
                   >
                     {stat.value}
@@ -168,10 +167,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
                   <div
                     className={cn(
                       'text-base',
-                      hasBackground && 'text-white/80',
-                      appearance?.backgroundVariant === 'dark' && 'text-white/80',
-                      appearance?.backgroundVariant === 'brand' && 'text-white/80',
-                      (!hasBackground && !appearance?.backgroundVariant || appearance?.backgroundVariant === 'light' || appearance?.backgroundVariant === 'transparent') && 'text-sh-text-muted',
+                      textColorClass,
                     )}
                   >
                     {stat.label}

@@ -5,46 +5,19 @@ import type { BentoGridBlock as BentoGridBlockType } from '@/payload-types'
 import { blockAppearanceToClasses } from '@/utilities/blockAppearanceToClasses'
 import RichText from '@/components/RichText'
 import { Button } from '@/components/ui/button'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
+import { cn } from '@/utilities/ui'
 
 export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
   const { title, subtitle, items, appearance } = props
 
   const containerClasses = blockAppearanceToClasses(appearance)
+  const textColorClass = getTextColorClass(appearance)
+  const proseColorClass = getProseColorClass(appearance)
 
   if (!items || items.length === 0) {
     return null
   }
-
-  // Get text color class based on appearance settings
-  const getTextColorClass = () => {
-    const textColorSetting = appearance?.textColor || 'auto'
-
-    if (textColorSetting === 'auto') {
-      // Auto-determine based on background
-      switch (appearance?.backgroundVariant) {
-        case 'brand':
-        case 'dark':
-          return 'text-sh-text-on-dark'
-        case 'light':
-        default:
-          return 'text-sh-text-main'
-      }
-    } else {
-      // Explicit override
-      switch (textColorSetting) {
-        case 'light':
-          return 'text-sh-text-on-dark'
-        case 'dark':
-          return 'text-sh-text-main'
-        case 'brand':
-          return 'text-sh-primary'
-        default:
-          return 'text-sh-text-main'
-      }
-    }
-  }
-
-  const textColorClass = getTextColorClass()
 
   // Map size to grid span classes
   const getSizeClasses = (size: string) => {
@@ -131,8 +104,8 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
               </h2>
             )}
             {subtitle && (
-              <div className={`mx-auto max-w-3xl text-lg opacity-80 ${textColorClass}`}>
-                <RichText data={subtitle} enableGutter={false} />
+              <div className={cn('mx-auto max-w-3xl text-lg opacity-80')}>
+                <RichText data={subtitle} enableGutter={false} className={cn('prose max-w-none', proseColorClass, textColorClass)} />
               </div>
             )}
           </div>

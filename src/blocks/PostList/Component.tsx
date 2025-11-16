@@ -6,6 +6,8 @@ import { blockAppearanceToClasses } from '@/utilities/blockAppearanceToClasses'
 import RichText from '@/components/RichText'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { cn } from '@/utilities/ui'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 
 export const PostListBlock: React.FC<PostListBlockType> = async (props) => {
   const {
@@ -22,6 +24,8 @@ export const PostListBlock: React.FC<PostListBlockType> = async (props) => {
   } = props
 
   const containerClasses = blockAppearanceToClasses(props.appearance)
+  const textColorClass = getTextColorClass(props.appearance)
+  const proseColorClass = getProseColorClass(props.appearance)
   const payload = await getPayload({ config })
 
   // Build query
@@ -75,13 +79,13 @@ export const PostListBlock: React.FC<PostListBlockType> = async (props) => {
         {(title || subtitle) && (
           <div className="mb-12 text-center">
             {title && (
-              <h2 className="mb-4 font-heading text-h2 font-bold text-sh-text-main">
+              <h2 className={cn('mb-4 font-heading text-h2 font-bold', textColorClass)}>
                 {title}
               </h2>
             )}
             {subtitle && (
-              <div className="mx-auto max-w-3xl text-lg text-sh-text-muted">
-                <RichText data={subtitle} enableGutter={false} />
+              <div className="mx-auto max-w-3xl text-lg">
+                <RichText data={subtitle} enableGutter={false} className={cn('prose max-w-none', proseColorClass, textColorClass)} />
               </div>
             )}
           </div>
@@ -323,7 +327,7 @@ export const PostListBlock: React.FC<PostListBlockType> = async (props) => {
           <div className="mt-12 text-center">
             <Link
               href={viewAllUrl}
-              className="inline-flex items-center text-lg font-medium text-sh-primary hover:text-sh-primary-soft"
+              className={cn('inline-flex items-center text-lg font-medium hover:opacity-80', textColorClass)}
             >
               View All Posts
               <svg

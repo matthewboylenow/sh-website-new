@@ -5,6 +5,7 @@ import { Media } from '@/components/Media'
 import { CMSLink } from '@/components/Link'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 
 export const StoryHighlightBlock: React.FC<StoryHighlightProps> = ({
   title,
@@ -16,7 +17,8 @@ export const StoryHighlightBlock: React.FC<StoryHighlightProps> = ({
   imagePosition = 'left',
   appearance,
 }) => {
-  const isDarkBg = appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
+  const textColorClass = getTextColorClass(appearance)
+  const proseColorClass = getProseColorClass(appearance)
 
   return (
     <section className={blockAppearanceToClasses(appearance)}>
@@ -60,7 +62,7 @@ export const StoryHighlightBlock: React.FC<StoryHighlightProps> = ({
             <h2
               className={cn(
                 'text-h2 font-heading font-semibold mb-4',
-                isDarkBg && 'text-white',
+                textColorClass,
               )}
             >
               {title}
@@ -71,8 +73,9 @@ export const StoryHighlightBlock: React.FC<StoryHighlightProps> = ({
                 data={body}
                 enableGutter={false}
                 className={cn(
-                  'prose',
-                  isDarkBg && 'prose-invert',
+                  'prose max-w-none',
+                  proseColorClass,
+                  textColorClass,
                 )}
               />
             </div>
@@ -83,7 +86,7 @@ export const StoryHighlightBlock: React.FC<StoryHighlightProps> = ({
                   type: 'custom',
                   url,
                   label: linkLabel,
-                  appearance: isDarkBg ? 'default' : 'secondary',
+                  appearance: 'default',
                 }}
               />
             )}

@@ -5,6 +5,7 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 
 export const ColumnsBlock: React.FC<ColumnsProps> = ({
   sectionTitle,
@@ -31,51 +32,8 @@ export const ColumnsBlock: React.FC<ColumnsProps> = ({
     layout === 'oneThirdRight' && 'md:grid-cols-3',
   )
 
-  // Get text color class based on appearance settings
-  const getTextColorClass = () => {
-    const textColorSetting = appearance?.textColor || 'auto'
-
-    if (textColorSetting === 'auto') {
-      // Auto-determine based on background
-      switch (appearance?.backgroundVariant) {
-        case 'brand':
-        case 'dark':
-          return 'text-sh-text-on-dark'
-        case 'light':
-        default:
-          return 'text-sh-text-main'
-      }
-    } else {
-      // Explicit override
-      switch (textColorSetting) {
-        case 'light':
-          return 'text-sh-text-on-dark'
-        case 'dark':
-          return 'text-sh-text-main'
-        case 'brand':
-          return 'text-sh-primary'
-        default:
-          return 'text-sh-text-main'
-      }
-    }
-  }
-
-  const textColorClass = getTextColorClass()
-
-  // Determine prose color variant
-  const getProseColorClass = () => {
-    const textColorSetting = appearance?.textColor || 'auto'
-
-    if (textColorSetting === 'auto') {
-      // Use prose-invert for dark backgrounds
-      return (appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand')
-        ? 'prose-invert'
-        : ''
-    } else {
-      // Explicit text color - use prose-invert for light text
-      return textColorSetting === 'light' ? 'prose-invert' : ''
-    }
-  }
+  const textColorClass = getTextColorClass(appearance)
+  const proseColorClass = getProseColorClass(appearance)
 
   return (
     <section className={blockAppearanceToClasses(appearance)}>
@@ -172,7 +130,7 @@ export const ColumnsBlock: React.FC<ColumnsProps> = ({
                       enableGutter={false}
                       className={cn(
                         'prose max-w-none',
-                        getProseColorClass(),
+                        proseColorClass,
                         textColorClass,
                       )}
                     />

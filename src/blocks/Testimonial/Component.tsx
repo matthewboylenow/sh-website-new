@@ -4,6 +4,7 @@ import RichText from '@/components/RichText'
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
+import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 
 export const TestimonialBlock: React.FC<TestimonialProps> = ({
   quote,
@@ -13,7 +14,8 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
   layout = 'card',
   appearance,
 }) => {
-  const isDarkBg = appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
+  const textColorClass = getTextColorClass(appearance)
+  const proseColorClass = getProseColorClass(appearance)
 
   // Card layout - boxed testimonial
   if (layout === 'card') {
@@ -32,7 +34,7 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
             <svg
               className={cn(
                 'w-10 h-10 mb-4',
-                isDarkBg ? 'text-white/40' : 'text-sh-primary/30',
+                textColorClass,
               )}
               fill="currentColor"
               viewBox="0 0 24 24"
@@ -47,8 +49,9 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
                 data={quote}
                 enableGutter={false}
                 className={cn(
-                  'prose text-lg',
-                  isDarkBg && 'prose-invert',
+                  'prose text-lg max-w-none',
+                  proseColorClass,
+                  textColorClass,
                 )}
               />
             </div>
@@ -65,11 +68,11 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
                 </div>
               )}
               <div>
-                <p className={cn('font-semibold', isDarkBg && 'text-white')}>
+                <p className={cn('font-semibold', textColorClass)}>
                   {name}
                 </p>
                 {role && (
-                  <p className={cn('text-sm', isDarkBg ? 'text-white/70' : 'text-sh-text-muted')}>
+                  <p className={cn('text-sm', textColorClass)}>
                     {role}
                   </p>
                 )}
@@ -100,8 +103,9 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
                 data={quote}
                 enableGutter={false}
                 className={cn(
-                  'prose text-lg italic',
-                  isDarkBg && 'prose-invert',
+                  'prose text-lg italic max-w-none',
+                  proseColorClass,
+                  textColorClass,
                 )}
               />
             </div>
@@ -116,9 +120,9 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
                 />
               )}
               <div>
-                <p className={cn('font-semibold text-sm', isDarkBg && 'text-white')}>
+                <p className={cn('font-semibold text-sm', textColorClass)}>
                   — {name}
-                  {role && <span className={cn('font-normal', isDarkBg ? 'text-white/70' : 'text-sh-text-muted')}>, {role}</span>}
+                  {role && <span className={cn('font-normal', textColorClass)}>, {role}</span>}
                 </p>
               </div>
             </div>
@@ -150,19 +154,20 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
               data={quote}
               enableGutter={false}
               className={cn(
-                'prose prose-xl',
-                isDarkBg && 'prose-invert',
+                'prose prose-xl max-w-none',
+                proseColorClass,
+                textColorClass,
               )}
             />
           </div>
 
           {/* Attribution */}
           <div>
-            <p className={cn('text-lg font-semibold', isDarkBg && 'text-white')}>
+            <p className={cn('text-lg font-semibold', textColorClass)}>
               {name}
             </p>
             {role && (
-              <p className={cn('text-base', isDarkBg ? 'text-white/70' : 'text-sh-text-muted')}>
+              <p className={cn('text-base', textColorClass)}>
                 {role}
               </p>
             )}
