@@ -170,11 +170,9 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             {/* Logo */}
             <Link href="/" className="flex items-center">
               {logo && typeof logo === 'object' ? (
-                <Media
-                  resource={logo}
-                  imgClassName={cn('object-contain')}
-                  style={{ height: `${logoHeight}px` }}
-                />
+                <div style={{ height: `${logoHeight}px` }}>
+                  <Media resource={logo} imgClassName={cn('h-full w-auto object-contain')} />
+                </div>
               ) : (
                 <Logo loading="eager" priority="high" className="h-10" />
               )}

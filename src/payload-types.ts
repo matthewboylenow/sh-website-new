@@ -4626,8 +4626,20 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: number;
+  /**
+   * Upload a logo for the header. Recommended size: 200x80px
+   */
+  logo?: (number | null) | Media;
+  /**
+   * Height of the logo in pixels. Default is 40px.
+   */
+  logoHeight?: number | null;
   navItems?:
     | {
+        /**
+         * Choose how this menu item behaves
+         */
+        menuType?: ('simple' | 'dropdown' | 'megamenu') | null;
         link: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
@@ -4643,9 +4655,59 @@ export interface Header {
           url?: string | null;
           label: string;
         };
+        /**
+         * Add submenu items for dropdown or megamenu
+         */
+        submenu?:
+          | {
+              /**
+               * Optional group title (for megamenu organization)
+               */
+              title?: string | null;
+              items?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: number | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: number | Post;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                    };
+                    /**
+                     * Optional description (shown in megamenu)
+                     */
+                    description?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
+  appearance?: {
+    /**
+     * Choose how the header appears on the page
+     */
+    style?: ('solid' | 'transparent' | 'transparentScroll') | null;
+    /**
+     * Background color for solid header style
+     */
+    backgroundColor?: ('default' | 'dark' | 'brand' | 'transparent') | null;
+    /**
+     * Keep header fixed at top when scrolling
+     */
+    stickyHeader?: boolean | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -4810,9 +4872,12 @@ export interface GlobalSetting {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  logo?: T;
+  logoHeight?: T;
   navItems?:
     | T
     | {
+        menuType?: T;
         link?:
           | T
           | {
@@ -4822,7 +4887,35 @@ export interface HeaderSelect<T extends boolean = true> {
               url?: T;
               label?: T;
             };
+        submenu?:
+          | T
+          | {
+              title?: T;
+              items?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
         id?: T;
+      };
+  appearance?:
+    | T
+    | {
+        style?: T;
+        backgroundColor?: T;
+        stickyHeader?: T;
       };
   updatedAt?: T;
   createdAt?: T;
