@@ -48,7 +48,6 @@ export const blockAppearance = (
       name: 'backgroundVariant',
       type: 'select',
       defaultValue: 'light',
-      dbName: 'bg_var',
       options: [
         {
           label: 'Light',
@@ -80,13 +79,12 @@ export const blockAppearance = (
     fields.push({
       name: 'customBackgroundColor',
       type: 'text',
-      dbName: 'custom_bg',
       admin: {
         condition: (data, siblingData) => siblingData?.backgroundVariant === 'custom',
         description: 'Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))',
         placeholder: '#1a1a1a',
       },
-      validate: (value, { siblingData }) => {
+      validate: (value: string | null | undefined, { siblingData }: any) => {
         if (siblingData?.backgroundVariant === 'custom' && !value) {
           return 'Custom background color is required when using Custom Color variant'
         }
@@ -100,7 +98,6 @@ export const blockAppearance = (
       name: 'textColor',
       type: 'select',
       defaultValue: 'auto',
-      dbName: 'text_color',
       options: [
         {
           label: 'Auto (based on background)',
@@ -134,7 +131,6 @@ export const blockAppearance = (
       name: 'alignment',
       type: 'select',
       defaultValue: 'left',
-      dbName: 'align',
       options: [
         {
           label: 'Left',
@@ -175,7 +171,6 @@ export const blockAppearance = (
           name: 'paddingTop',
           type: 'select',
           defaultValue: 'default',
-          dbName: 'pad_top',
           options: [
             { label: 'None', value: 'none' },
             { label: 'Tight', value: 'tight' },
@@ -191,7 +186,6 @@ export const blockAppearance = (
           name: 'paddingBottom',
           type: 'select',
           defaultValue: 'default',
-          dbName: 'pad_btm',
           options: [
             { label: 'None', value: 'none' },
             { label: 'Tight', value: 'tight' },

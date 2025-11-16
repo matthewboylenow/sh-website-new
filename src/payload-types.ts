@@ -647,11 +647,15 @@ export interface HeroBasicBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -771,11 +775,15 @@ export interface HeroWithStatsBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -845,11 +853,15 @@ export interface RichTextSectionBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -967,11 +979,15 @@ export interface ColumnsBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1066,11 +1082,15 @@ export interface CTAFullWidthBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1201,11 +1221,15 @@ export interface CardGridBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1273,6 +1297,10 @@ export interface BentoGridBlock {
         size?: ('small' | 'medium' | 'large' | 'xlarge') | null;
         imageStyle?: ('icon' | 'background') | null;
         /**
+         * Controls the darkness of the overlay on background images for better text readability
+         */
+        overlayStrength?: ('light' | 'medium' | 'strong' | 'veryStrong') | null;
+        /**
          * Choose the background color style for this tile to differentiate it
          */
         colorVariant?: ('default' | 'brand' | 'gold' | 'dark' | 'gradientBlue' | 'gradientGold') | null;
@@ -1295,11 +1323,15 @@ export interface BentoGridBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1316,6 +1348,47 @@ export interface BentoGridBlock {
      * Bottom padding
      */
     paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+  };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1377,11 +1450,15 @@ export interface EventListBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1454,11 +1531,15 @@ export interface PostListBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1520,11 +1601,15 @@ export interface BulletinListBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1598,11 +1683,15 @@ export interface MediaListBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1667,11 +1756,15 @@ export interface TestimonialBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1741,11 +1834,15 @@ export interface StoryHighlightBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Extend block to full viewport width (no container)
      */
@@ -1814,11 +1911,15 @@ export interface FAQAccordionBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1886,11 +1987,15 @@ export interface VideoEmbedBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -1966,11 +2071,15 @@ export interface FormEmbedBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -2029,11 +2138,15 @@ export interface DividerBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Text alignment for this block
      */
@@ -2075,11 +2188,15 @@ export interface CustomCodeBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent') | null;
+    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBackgroundColor?: string | null;
     /**
      * Override text color for this block
      */
-    textColor?: ('auto' | 'light' | 'dark' | 'brand') | null;
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
     /**
      * Extend block to full viewport width (no container)
      */
@@ -3493,6 +3610,7 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         paddingTop?: T;
@@ -3541,6 +3659,7 @@ export interface HeroWithStatsBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3568,6 +3687,7 @@ export interface RichTextSectionBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3617,6 +3737,7 @@ export interface ColumnsBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3655,6 +3776,7 @@ export interface CTAFullWidthBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3708,6 +3830,7 @@ export interface CardGridBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3734,6 +3857,7 @@ export interface BentoGridBlockSelect<T extends boolean = true> {
         tag?: T;
         size?: T;
         imageStyle?: T;
+        overlayStrength?: T;
         colorVariant?: T;
         linkType?: T;
         linkText?: T;
@@ -3744,11 +3868,25 @@ export interface BentoGridBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
         paddingTop?: T;
         paddingBottom?: T;
+      };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
       };
   blockName?: T;
   id?: T;
@@ -3772,6 +3910,7 @@ export interface EventListBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3800,6 +3939,7 @@ export interface PostListBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3826,6 +3966,7 @@ export interface BulletinListBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3852,6 +3993,7 @@ export interface MediaListBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3875,6 +4017,7 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3900,6 +4043,7 @@ export interface StoryHighlightBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -3932,6 +4076,7 @@ export interface FAQAccordionBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3955,6 +4100,7 @@ export interface VideoEmbedBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3980,6 +4126,7 @@ export interface FormEmbedBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -4010,6 +4157,7 @@ export interface DividerBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -4030,6 +4178,7 @@ export interface CustomCodeBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
+        customBackgroundColor?: T;
         textColor?: T;
         fullWidth?: T;
         paddingTop?: T;
