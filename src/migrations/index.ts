@@ -5,6 +5,7 @@ import * as migration_20251116_001100_add_header_customization from './20251116_
 import * as migration_20251116_002000_add_mobile_desktop_colors from './20251116_002000_add_mobile_desktop_colors';
 import * as migration_20251116_152000_add_block_text_color from './20251116_152000_add_block_text_color';
 import * as migration_20251116_152100_add_columns_video_support from './20251116_152100_add_columns_video_support';
+import * as migration_20251116_153000_add_missing_text_color_columns from './20251116_153000_add_missing_text_color_columns';
 
 export const migrations = [
   {
@@ -41,5 +42,10 @@ export const migrations = [
     up: migration_20251116_152100_add_columns_video_support.up,
     down: migration_20251116_152100_add_columns_video_support.down,
     name: '20251116_152100_add_columns_video_support'
+  },
+  {
+    up: migration_20251116_153000_add_missing_text_color_columns.up,
+    down: migration_20251116_153000_add_missing_text_color_columns.down,
+    name: '20251116_153000_add_missing_text_color_columns'
   },
 ];
