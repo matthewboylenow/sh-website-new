@@ -1,6 +1,6 @@
-import type { Page } from '@/payload-types'
+import type { BlockAppearanceType } from '@/fields/blockAppearance'
 
-type BlockAppearance = NonNullable<Page['layout']>[0]['appearance']
+type BlockAppearance = BlockAppearanceType['appearance']
 
 /**
  * Get text color class based on appearance settings
@@ -35,19 +35,25 @@ export function getTextColorClass(appearance?: BlockAppearance): string {
 }
 
 /**
+ * Determines if the background is dark based on appearance settings
+ * Returns true for dark or brand backgrounds
+ */
+export function isDarkBackground(appearance?: BlockAppearance): boolean {
+  const textColorSetting = appearance?.textColor || 'auto'
+
+  if (textColorSetting === 'auto') {
+    // Auto-determine based on background variant
+    return appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
+  } else {
+    // If text color is explicitly set to light, background is considered dark
+    return textColorSetting === 'light'
+  }
+}
+
+/**
  * Get prose color class for rich text content
  * Returns 'prose-invert' for light text on dark backgrounds
  */
 export function getProseColorClass(appearance?: BlockAppearance): string {
-  const textColorSetting = appearance?.textColor || 'auto'
-
-  if (textColorSetting === 'auto') {
-    // Use prose-invert for dark backgrounds
-    return (appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand')
-      ? 'prose-invert'
-      : ''
-  } else {
-    // Explicit text color - use prose-invert for light text
-    return textColorSetting === 'light' ? 'prose-invert' : ''
-  }
+  return isDarkBackground(appearance) ? 'prose-invert' : ''
 }

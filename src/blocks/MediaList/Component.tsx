@@ -4,7 +4,7 @@ import RichText from '@/components/RichText'
 import { CMSLink } from '@/components/Link'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
-import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
+import { getTextColorClass, getProseColorClass, isDarkBackground } from '@/utilities/getTextColorClasses'
 
 export const MediaListBlock: React.FC<MediaListProps> = async ({
   title,
@@ -23,6 +23,7 @@ export const MediaListBlock: React.FC<MediaListProps> = async ({
 
   const textColorClass = getTextColorClass(appearance)
   const proseColorClass = getProseColorClass(appearance)
+  const isDarkBg = isDarkBackground(appearance)
 
   return (
     <section className={blockAppearanceToClasses(appearance)}>

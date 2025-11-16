@@ -4,7 +4,7 @@ import RichText from '@/components/RichText'
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
-import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
+import { getTextColorClass, getProseColorClass, isDarkBackground } from '@/utilities/getTextColorClasses'
 
 export const TestimonialBlock: React.FC<TestimonialProps> = ({
   quote,
@@ -16,6 +16,7 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
 }) => {
   const textColorClass = getTextColorClass(appearance)
   const proseColorClass = getProseColorClass(appearance)
+  const isDarkBg = isDarkBackground(appearance)
 
   // Card layout - boxed testimonial
   if (layout === 'card') {
