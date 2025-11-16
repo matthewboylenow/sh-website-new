@@ -28,7 +28,11 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   const appearance = data?.appearance
   const headerStyle = appearance?.style || 'solid'
-  const backgroundColor = appearance?.backgroundColor || 'default'
+  // Support both old backgroundColor and new desktop/mobile specific colors
+  const backgroundColorDesktop = appearance?.backgroundColorDesktop || appearance?.backgroundColor || 'default'
+  const backgroundColorMobile = appearance?.backgroundColorMobile || appearance?.backgroundColor || 'default'
+  const textColorDesktop = appearance?.textColorDesktop || 'auto'
+  const textColorMobile = appearance?.textColorMobile || 'auto'
   const stickyHeader = appearance?.stickyHeader !== false
   const logo = data?.logo
   const logoHeight = data?.logoHeight || 40
@@ -73,32 +77,45 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   const isTransparent =
     headerStyle === 'transparent' || (headerStyle === 'transparentScroll' && !isScrolled)
 
-  // Background color classes
+  // Determine text color based on background and preference
+  const getAutoTextColor = (bgColor: string) => {
+    return bgColor === 'dark' || bgColor === 'brand' ? 'light' : 'dark'
+  }
+
+  const effectiveTextColorMobile = textColorMobile === 'auto' ? getAutoTextColor(backgroundColorMobile) : textColorMobile
+  const effectiveTextColorDesktop = textColorDesktop === 'auto' ? getAutoTextColor(backgroundColorDesktop) : textColorDesktop
+
+  // Background color classes (responsive using proper Tailwind classes)
   const bgClasses = cn(
-    isTransparent
-      ? 'bg-transparent'
-      : backgroundColor === 'dark'
-        ? 'bg-sh-bg-dark'
-        : backgroundColor === 'brand'
-          ? 'bg-sh-primary'
-          : backgroundColor === 'transparent'
-            ? 'bg-transparent'
-            : 'bg-sh-bg/95 backdrop-blur-sm',
+    isTransparent && 'bg-transparent',
+    !isTransparent && backgroundColorMobile === 'dark' && 'bg-sh-bg-dark',
+    !isTransparent && backgroundColorMobile === 'brand' && 'bg-sh-primary',
+    !isTransparent && backgroundColorMobile === 'transparent' && 'bg-transparent',
+    !isTransparent && backgroundColorMobile === 'default' && 'bg-sh-bg/95 backdrop-blur-sm',
+    // Desktop overrides
+    !isTransparent && backgroundColorDesktop === 'dark' && 'lg:bg-sh-bg-dark',
+    !isTransparent && backgroundColorDesktop === 'brand' && 'lg:bg-sh-primary',
+    !isTransparent && backgroundColorDesktop === 'transparent' && 'lg:bg-transparent',
+    !isTransparent && backgroundColorDesktop === 'default' && 'lg:bg-sh-bg/95 lg:backdrop-blur-sm',
   )
 
-  // Text color classes
+  // Text color classes (responsive)
   const textClasses = cn(
-    isTransparent || backgroundColor === 'dark' || backgroundColor === 'brand'
-      ? 'text-white'
-      : 'text-sh-text-main',
+    isTransparent && 'text-white',
+    !isTransparent && effectiveTextColorMobile === 'light' && 'text-white',
+    !isTransparent && effectiveTextColorMobile === 'dark' && 'text-sh-text-main',
+    // Desktop overrides
+    !isTransparent && effectiveTextColorDesktop === 'light' && 'lg:text-white',
+    !isTransparent && effectiveTextColorDesktop === 'dark' && 'lg:text-sh-text-main',
   )
 
-  // Border classes
+  // Border classes (responsive)
   const borderClasses = cn(
-    !isTransparent &&
-      (backgroundColor === 'dark' || backgroundColor === 'brand'
-        ? 'border-white/20'
-        : 'border-sh-border-subtle'),
+    !isTransparent && (backgroundColorMobile === 'dark' || backgroundColorMobile === 'brand') && 'border-white/20',
+    !isTransparent && backgroundColorMobile !== 'dark' && backgroundColorMobile !== 'brand' && 'border-sh-border-subtle',
+    // Desktop overrides
+    !isTransparent && (backgroundColorDesktop === 'dark' || backgroundColorDesktop === 'brand') && 'lg:border-white/20',
+    !isTransparent && backgroundColorDesktop !== 'dark' && backgroundColorDesktop !== 'brand' && 'lg:border-sh-border-subtle',
   )
 
   // Render navigation item based on type
@@ -111,6 +128,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           key={index}
           item={item}
           isMobile={isMobile}
+          isTransparent={isTransparent}
           onClose={() => setMobileMenuOpen(false)}
         />
       )
@@ -122,6 +140,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           key={index}
           item={item}
           isMobile={isMobile}
+          isTransparent={isTransparent}
           onClose={() => setMobileMenuOpen(false)}
         />
       )
@@ -145,7 +164,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         {...item.link}
         className={cn(
           'text-base font-medium transition-colors',
-          isTransparent || backgroundColor === 'dark' || backgroundColor === 'brand'
+          isTransparent || effectiveTextColorDesktop === 'light'
             ? 'text-white hover:text-white/80'
             : 'text-sh-text-main hover:text-sh-primary',
         )}
@@ -170,8 +189,22 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             {/* Logo */}
             <Link href="/" className="flex items-center">
               {logo && typeof logo === 'object' ? (
-                <div style={{ height: `${logoHeight}px` }}>
-                  <Media resource={logo} imgClassName={cn('h-full w-auto object-contain')} />
+                <div
+                  className="relative flex items-center"
+                  style={{
+                    height: `${logoHeight}px`,
+                    width:
+                      typeof logo === 'object' && logo.width && logo.height
+                        ? `${(logo.width / logo.height) * logoHeight}px`
+                        : 'auto',
+                  }}
+                >
+                  <Media
+                    resource={logo}
+                    imgClassName={cn('object-contain')}
+                    fill={true}
+                    priority={true}
+                  />
                 </div>
               ) : (
                 <Logo loading="eager" priority="high" className="h-10" />
@@ -189,7 +222,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
                 href="/search"
                 className={cn(
                   'p-2 rounded-full transition-colors',
-                  isTransparent || backgroundColor === 'dark' || backgroundColor === 'brand'
+                  isTransparent || effectiveTextColorDesktop === 'light'
                     ? 'hover:bg-white/10'
                     : 'hover:bg-sh-surface',
                 )}
@@ -201,11 +234,9 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
                 href="/give"
                 className={cn(
                   'inline-flex items-center justify-center rounded-lg px-6 py-2.5 text-sm font-semibold shadow-sm transition-colors',
-                  isTransparent || backgroundColor === 'dark'
+                  isTransparent || effectiveTextColorDesktop === 'light'
                     ? 'bg-white text-sh-primary hover:bg-white/90'
-                    : backgroundColor === 'brand'
-                      ? 'bg-white text-sh-primary hover:bg-white/90'
-                      : 'bg-sh-primary text-white hover:bg-sh-primary-soft',
+                    : 'bg-sh-primary text-white hover:bg-sh-primary-soft',
                 )}
               >
                 Give
@@ -217,7 +248,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               type="button"
               className={cn(
                 'lg:hidden p-2 rounded-lg transition-colors',
-                isTransparent || backgroundColor === 'dark' || backgroundColor === 'brand'
+                isTransparent || effectiveTextColorMobile === 'light'
                   ? 'hover:bg-white/10'
                   : 'hover:bg-sh-surface',
               )}

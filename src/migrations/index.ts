@@ -2,6 +2,7 @@ import * as migration_20251115_195449 from './20251115_195449';
 import * as migration_20251115_224016_fix_hero_basic_welcome_buttons from './20251115_224016_fix_hero_basic_welcome_buttons';
 import * as migration_20251115_231215_add_block_names_minheight_typography from './20251115_231215_add_block_names_minheight_typography';
 import * as migration_20251116_001100_add_header_customization from './20251116_001100_add_header_customization';
+import * as migration_20251116_002000_add_mobile_desktop_colors from './20251116_002000_add_mobile_desktop_colors';
 
 export const migrations = [
   {
@@ -23,5 +24,10 @@ export const migrations = [
     up: migration_20251116_001100_add_header_customization.up,
     down: migration_20251116_001100_add_header_customization.down,
     name: '20251116_001100_add_header_customization'
+  },
+  {
+    up: migration_20251116_002000_add_mobile_desktop_colors.up,
+    down: migration_20251116_002000_add_mobile_desktop_colors.down,
+    name: '20251116_002000_add_mobile_desktop_colors'
   },
 ];

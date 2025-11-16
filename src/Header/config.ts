@@ -53,23 +53,34 @@ export const Header: GlobalConfig = {
                   type: 'array',
                   label: 'Submenu Items',
                   admin: {
-                    description: 'Add submenu items for dropdown or megamenu',
-                    condition: (data: any) =>
-                      data.menuType === 'dropdown' || data.menuType === 'megamenu',
+                    description:
+                      'Add submenu items here. For dropdown menus, add multiple groups with links. For megamenus, each group becomes a column.',
+                    condition: (data: any, siblingData: any) => {
+                      // Check siblingData first (within the same array item)
+                      const menuTypeValue = siblingData?.menuType || data?.menuType
+                      return menuTypeValue === 'dropdown' || menuTypeValue === 'megamenu'
+                    },
+                    initCollapsed: false,
                   },
                   fields: [
                     {
                       name: 'title',
                       type: 'text',
-                      label: 'Title',
+                      label: 'Group Title',
                       admin: {
-                        description: 'Optional group title (for megamenu organization)',
+                        description:
+                          'Optional title for this group. For megamenus, this appears as a column heading. For dropdowns, you can leave this empty.',
                       },
                     },
                     {
                       name: 'items',
                       type: 'array',
                       label: 'Links',
+                      required: true,
+                      admin: {
+                        description: 'Add the links that appear in this submenu group',
+                        initCollapsed: false,
+                      },
                       fields: [
                         link({
                           appearances: false,
@@ -77,9 +88,11 @@ export const Header: GlobalConfig = {
                         {
                           name: 'description',
                           type: 'textarea',
-                          label: 'Description',
+                          label: 'Link Description',
                           admin: {
-                            description: 'Optional description (shown in megamenu)',
+                            description:
+                              'Optional description text shown below the link (megamenus only)',
+                            rows: 2,
                           },
                         },
                       ],

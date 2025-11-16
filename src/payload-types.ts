@@ -4656,38 +4656,39 @@ export interface Header {
           label: string;
         };
         /**
-         * Add submenu items for dropdown or megamenu
+         * Add submenu items here. For dropdown menus, add multiple groups with links. For megamenus, each group becomes a column.
          */
         submenu?:
           | {
               /**
-               * Optional group title (for megamenu organization)
+               * Optional title for this group. For megamenus, this appears as a column heading. For dropdowns, you can leave this empty.
                */
               title?: string | null;
-              items?:
-                | {
-                    link: {
-                      type?: ('reference' | 'custom') | null;
-                      newTab?: boolean | null;
-                      reference?:
-                        | ({
-                            relationTo: 'pages';
-                            value: number | Page;
-                          } | null)
-                        | ({
-                            relationTo: 'posts';
-                            value: number | Post;
-                          } | null);
-                      url?: string | null;
-                      label: string;
-                    };
-                    /**
-                     * Optional description (shown in megamenu)
-                     */
-                    description?: string | null;
-                    id?: string | null;
-                  }[]
-                | null;
+              /**
+               * Add the links that appear in this submenu group
+               */
+              items: {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: number | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: number | Post;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                /**
+                 * Optional description text shown below the link (megamenus only)
+                 */
+                description?: string | null;
+                id?: string | null;
+              }[];
               id?: string | null;
             }[]
           | null;
@@ -4700,9 +4701,21 @@ export interface Header {
      */
     style?: ('solid' | 'transparent' | 'transparentScroll') | null;
     /**
-     * Background color for solid header style
+     * Background color for desktop
      */
-    backgroundColor?: ('default' | 'dark' | 'brand' | 'transparent') | null;
+    backgroundColorDesktop?: ('default' | 'dark' | 'brand' | 'transparent') | null;
+    /**
+     * Background color for mobile
+     */
+    backgroundColorMobile?: ('default' | 'dark' | 'brand' | 'transparent') | null;
+    /**
+     * Text color for desktop navigation
+     */
+    textColorDesktop?: ('auto' | 'light' | 'dark') | null;
+    /**
+     * Text color for mobile navigation
+     */
+    textColorMobile?: ('auto' | 'light' | 'dark') | null;
     /**
      * Keep header fixed at top when scrolling
      */
@@ -4737,6 +4750,24 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
+  appearance?: {
+    /**
+     * Background color for desktop footer
+     */
+    backgroundColorDesktop?: ('default' | 'dark' | 'brand' | 'surface') | null;
+    /**
+     * Background color for mobile footer
+     */
+    backgroundColorMobile?: ('default' | 'dark' | 'brand' | 'surface') | null;
+    /**
+     * Text color for desktop footer
+     */
+    textColorDesktop?: ('auto' | 'light' | 'dark') | null;
+    /**
+     * Text color for mobile footer
+     */
+    textColorMobile?: ('auto' | 'light' | 'dark') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -4914,7 +4945,10 @@ export interface HeaderSelect<T extends boolean = true> {
     | T
     | {
         style?: T;
-        backgroundColor?: T;
+        backgroundColorDesktop?: T;
+        backgroundColorMobile?: T;
+        textColorDesktop?: T;
+        textColorMobile?: T;
         stickyHeader?: T;
       };
   updatedAt?: T;
@@ -4939,6 +4973,14 @@ export interface FooterSelect<T extends boolean = true> {
               label?: T;
             };
         id?: T;
+      };
+  appearance?:
+    | T
+    | {
+        backgroundColorDesktop?: T;
+        backgroundColorMobile?: T;
+        textColorDesktop?: T;
+        textColorMobile?: T;
       };
   updatedAt?: T;
   createdAt?: T;

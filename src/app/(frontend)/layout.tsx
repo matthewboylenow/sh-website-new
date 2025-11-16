@@ -32,12 +32,17 @@ import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { draftMode } from 'next/headers'
+import { getCachedGlobal } from '@/utilities/getGlobals'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
+  const headerData = await getCachedGlobal('header', 1)()
+
+  // Check if header is transparent
+  const isTransparentHeader = headerData?.appearance?.style === 'transparent'
 
   return (
     <html
@@ -59,7 +64,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
 
           <Header />
-          {children}
+          <main className={cn(isTransparentHeader && '-mt-20')}>{children}</main>
           <Footer />
           <NeedHelpWidget />
         </Providers>

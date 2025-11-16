@@ -12,15 +12,18 @@ interface DropdownMenuProps {
   item: NavItem
   isMobile?: boolean
   onClose?: () => void
+  isTransparent?: boolean
 }
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   item,
   isMobile = false,
   onClose,
+  isTransparent = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -37,6 +40,32 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [isOpen, isMobile])
+
+  // Cleanup hover timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeout) clearTimeout(hoverTimeout)
+    }
+  }, [hoverTimeout])
+
+  const handleMouseEnter = () => {
+    if (hoverTimeout) clearTimeout(hoverTimeout)
+    setIsOpen(true)
+  }
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => setIsOpen(false), 150)
+    setHoverTimeout(timeout)
+  }
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      setIsOpen(!isOpen)
+    } else if (event.key === 'Escape') {
+      setIsOpen(false)
+    }
+  }
 
   const submenu = item.submenu || []
   const allItems = submenu.flatMap((group) => group.items || [])
@@ -73,27 +102,40 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   return (
     <div className="relative" ref={menuRef}>
       <button
-        onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => setIsOpen(false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 text-base font-medium text-sh-text-main hover:text-sh-primary transition-colors"
+        onKeyDown={handleKeyDown}
+        className={cn(
+          'flex items-center gap-1 text-base font-medium transition-colors',
+          isTransparent ? 'text-white hover:text-white/80' : 'text-sh-text-main hover:text-sh-primary'
+        )}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
       >
         <span>{typeof item.link === 'object' ? item.link.label : 'Menu'}</span>
-        <ChevronDown className={cn('h-4 w-4 transition-transform', isOpen && 'rotate-180')} />
+        <ChevronDown
+          className={cn('h-4 w-4 transition-transform duration-200', isOpen && 'rotate-180')}
+        />
       </button>
 
       {isOpen && (
         <div
-          className="absolute left-0 top-full mt-2 w-56 z-50"
-          onMouseEnter={() => setIsOpen(true)}
-          onMouseLeave={() => setIsOpen(false)}
+          className="absolute left-0 top-full mt-2 w-64 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          role="menu"
         >
-          <div className="bg-sh-bg border border-sh-border-subtle rounded-lg shadow-xl py-2">
+          <div className="bg-white border border-sh-border-subtle rounded-lg shadow-xl py-2 overflow-hidden">
             {allItems.map((subItem, idx) => (
-              <div key={idx}>
+              <div key={idx} role="menuitem">
                 <CMSLink
                   {...subItem.link}
-                  className="block px-4 py-2.5 text-sm font-medium text-sh-text-main hover:bg-sh-surface hover:text-sh-primary transition-colors"
+                  className="block px-4 py-2.5 text-sm font-medium text-sh-text-main hover:bg-sh-primary/10 hover:text-sh-primary transition-colors"
+                  onClick={() => {
+                    setIsOpen(false)
+                    onClose?.()
+                  }}
                 />
               </div>
             ))}

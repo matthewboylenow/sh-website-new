@@ -1,37 +1,14 @@
 import type { Field } from 'payload'
 
 /**
- * Header appearance field for controlling header styling
- * Includes transparency, background colors, and positioning options
+ * Footer appearance field for controlling footer styling
+ * Includes background and text colors for mobile and desktop
  */
-export const headerAppearance: Field = {
+export const footerAppearance: Field = {
   type: 'group',
   name: 'appearance',
-  label: 'Header Appearance',
+  label: 'Footer Appearance',
   fields: [
-    {
-      type: 'select',
-      name: 'style',
-      label: 'Header Style',
-      defaultValue: 'solid',
-      options: [
-        {
-          label: 'Solid (Default)',
-          value: 'solid',
-        },
-        {
-          label: 'Transparent Overlay (overlaps hero)',
-          value: 'transparent',
-        },
-        {
-          label: 'Transparent with Scroll (becomes solid on scroll)',
-          value: 'transparentScroll',
-        },
-      ],
-      admin: {
-        description: 'Choose how the header appears on the page',
-      },
-    },
     {
       type: 'row',
       fields: [
@@ -39,16 +16,15 @@ export const headerAppearance: Field = {
           type: 'select',
           name: 'backgroundColorDesktop',
           label: 'Background Color (Desktop)',
-          defaultValue: 'default',
+          defaultValue: 'dark',
           options: [
             { label: 'Default (Light)', value: 'default' },
             { label: 'Dark', value: 'dark' },
             { label: 'Brand/Primary', value: 'brand' },
-            { label: 'Transparent', value: 'transparent' },
+            { label: 'Surface (White)', value: 'surface' },
           ],
           admin: {
-            description: 'Background color for desktop',
-            condition: (data: any) => data.appearance?.style === 'solid',
+            description: 'Background color for desktop footer',
             width: '50%',
           },
         },
@@ -56,16 +32,15 @@ export const headerAppearance: Field = {
           type: 'select',
           name: 'backgroundColorMobile',
           label: 'Background Color (Mobile)',
-          defaultValue: 'default',
+          defaultValue: 'dark',
           options: [
             { label: 'Default (Light)', value: 'default' },
             { label: 'Dark', value: 'dark' },
             { label: 'Brand/Primary', value: 'brand' },
-            { label: 'Transparent', value: 'transparent' },
+            { label: 'Surface (White)', value: 'surface' },
           ],
           admin: {
-            description: 'Background color for mobile',
-            condition: (data: any) => data.appearance?.style === 'solid',
+            description: 'Background color for mobile footer',
             width: '50%',
           },
         },
@@ -85,7 +60,7 @@ export const headerAppearance: Field = {
             { label: 'Dark', value: 'dark' },
           ],
           admin: {
-            description: 'Text color for desktop navigation',
+            description: 'Text color for desktop footer',
             width: '50%',
           },
         },
@@ -100,20 +75,11 @@ export const headerAppearance: Field = {
             { label: 'Dark', value: 'dark' },
           ],
           admin: {
-            description: 'Text color for mobile navigation',
+            description: 'Text color for mobile footer',
             width: '50%',
           },
         },
       ],
-    },
-    {
-      type: 'checkbox',
-      name: 'stickyHeader',
-      label: 'Sticky Header',
-      defaultValue: true,
-      admin: {
-        description: 'Keep header fixed at top when scrolling',
-      },
     },
   ],
 }

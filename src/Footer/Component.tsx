@@ -7,6 +7,7 @@ import type { Footer } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
 import { Facebook, Instagram, Youtube, Twitter } from 'lucide-react'
+import { cn } from '@/utilities/ui'
 
 export async function Footer() {
   const footerData: Footer = await getCachedGlobal('footer', 1)()
@@ -23,8 +24,48 @@ export async function Footer() {
   const navItems = footerData?.navItems || []
   const currentYear = new Date().getFullYear()
 
+  const appearance = footerData?.appearance
+  const backgroundColorMobile = appearance?.backgroundColorMobile || 'dark'
+  const backgroundColorDesktop = appearance?.backgroundColorDesktop || 'dark'
+  const textColorMobile = appearance?.textColorMobile || 'auto'
+  const textColorDesktop = appearance?.textColorDesktop || 'auto'
+
+  // Helper to determine text color
+  const getAutoTextColor = (bgColor: string) => {
+    return bgColor === 'dark' || bgColor === 'brand' ? 'light' : 'dark'
+  }
+
+  const effectiveTextColorMobile = textColorMobile === 'auto' ? getAutoTextColor(backgroundColorMobile) : textColorMobile
+  const effectiveTextColorDesktop = textColorDesktop === 'auto' ? getAutoTextColor(backgroundColorDesktop) : textColorDesktop
+
+  // Background classes
+  const bgClasses = cn(
+    // Mobile
+    backgroundColorMobile === 'dark' && 'bg-sh-bg-dark',
+    backgroundColorMobile === 'brand' && 'bg-sh-primary',
+    backgroundColorMobile === 'surface' && 'bg-sh-surface',
+    backgroundColorMobile === 'default' && 'bg-sh-bg',
+    // Desktop
+    backgroundColorDesktop === 'dark' && 'lg:bg-sh-bg-dark',
+    backgroundColorDesktop === 'brand' && 'lg:bg-sh-primary',
+    backgroundColorDesktop === 'surface' && 'lg:bg-sh-surface',
+    backgroundColorDesktop === 'default' && 'lg:bg-sh-bg',
+  )
+
+  // Text classes
+  const textClasses = cn(
+    // Mobile
+    effectiveTextColorMobile === 'light' && 'text-sh-text-on-dark',
+    effectiveTextColorMobile === 'dark' && 'text-sh-text-main',
+    // Desktop
+    effectiveTextColorDesktop === 'light' && 'lg:text-sh-text-on-dark',
+    effectiveTextColorDesktop === 'dark' && 'lg:text-sh-text-main',
+  )
+
+  const isLightText = effectiveTextColorDesktop === 'light'
+
   return (
-    <footer className="mt-auto bg-sh-bg-dark text-sh-text-on-dark">
+    <footer className={cn('mt-auto', bgClasses, textClasses)}>
       {/* Main Footer Content */}
       <div className="mx-auto max-w-7xl px-6 py-12 lg:py-16">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
