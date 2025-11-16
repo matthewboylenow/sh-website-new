@@ -15,6 +15,37 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
     return null
   }
 
+  // Get text color class based on appearance settings
+  const getTextColorClass = () => {
+    const textColorSetting = appearance?.textColor || 'auto'
+
+    if (textColorSetting === 'auto') {
+      // Auto-determine based on background
+      switch (appearance?.backgroundVariant) {
+        case 'brand':
+        case 'dark':
+          return 'text-sh-text-on-dark'
+        case 'light':
+        default:
+          return 'text-sh-text-main'
+      }
+    } else {
+      // Explicit override
+      switch (textColorSetting) {
+        case 'light':
+          return 'text-sh-text-on-dark'
+        case 'dark':
+          return 'text-sh-text-main'
+        case 'brand':
+          return 'text-sh-primary'
+        default:
+          return 'text-sh-text-main'
+      }
+    }
+  }
+
+  const textColorClass = getTextColorClass()
+
   // Map size to grid span classes
   const getSizeClasses = (size: string) => {
     switch (size) {
@@ -95,12 +126,12 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
         {(title || subtitle) && (
           <div className="mb-12 text-center">
             {title && (
-              <h2 className="mb-4 font-heading text-h2 font-bold text-sh-text-main">
+              <h2 className={`mb-4 font-heading text-h2 font-bold ${textColorClass}`}>
                 {title}
               </h2>
             )}
             {subtitle && (
-              <div className="mx-auto max-w-3xl text-lg text-sh-text-muted">
+              <div className={`mx-auto max-w-3xl text-lg opacity-80 ${textColorClass}`}>
                 <RichText data={subtitle} enableGutter={false} />
               </div>
             )}
@@ -110,11 +141,12 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
         {/* Bento Grid */}
         <div className="grid auto-rows-fr grid-cols-1 gap-4 md:grid-cols-4 md:gap-6">
           {items.map((item, index) => {
-            const hasBackgroundImage =
+            const hasBackgroundImage = Boolean(
               item.imageStyle === 'background' &&
               item.image &&
               typeof item.image === 'object' &&
               item.image.url
+            )
 
             const linkType = item.linkType || 'text'
             const linkText = item.linkText || 'Learn more'
@@ -194,12 +226,12 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
                   )}
 
                   {/* Title */}
-                  <h3 className="mb-3 bg-gradient-to-br from-sh-text-main to-sh-text-main/80 bg-clip-text font-heading text-h4 font-bold transition-all duration-500 group-hover:from-sh-primary group-hover:to-blue-600 group-hover:text-transparent">
+                  <h3 className={`mb-3 font-heading text-h4 font-bold transition-all duration-300 ${textColorClass}`}>
                     {item.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="mb-5 flex-1 text-base leading-relaxed text-sh-text-muted transition-colors duration-300 group-hover:text-sh-text-main">
+                  <p className={`mb-5 flex-1 text-base leading-relaxed opacity-80 transition-colors duration-300 ${textColorClass}`}>
                     {item.description}
                   </p>
 
@@ -213,8 +245,8 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
                       {linkText}
                     </Button>
                   ) : (
-                    <div className="flex items-center text-sm font-semibold text-sh-primary transition-all duration-300 group-hover:gap-2">
-                      <span className="transition-colors group-hover:text-blue-600">{linkText}</span>
+                    <div className={`flex items-center text-sm font-semibold transition-all duration-300 group-hover:gap-2 ${textColorClass}`}>
+                      <span className="transition-opacity group-hover:opacity-70">{linkText}</span>
                       <svg
                         className="h-4 w-4 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110"
                         fill="none"

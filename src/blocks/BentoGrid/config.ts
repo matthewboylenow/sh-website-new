@@ -170,7 +170,13 @@ export const BentoGrid: Block = {
         description: 'Create 3-6 tiles for your bento grid',
       },
     },
-    blockAppearance(),
+    blockAppearance({
+      textColor: true,
+      backgroundVariant: true,
+      alignment: true,
+      fullWidth: true,
+      padding: true,
+    }),
     blockName,
   ],
 }
