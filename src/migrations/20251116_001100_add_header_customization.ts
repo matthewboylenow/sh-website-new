@@ -2,22 +2,46 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-vercel-postg
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
-   -- Create enum types for header appearance
-   CREATE TYPE "public"."enum_header_appearance_style" AS ENUM('solid', 'transparent', 'transparentScroll');
-   CREATE TYPE "public"."enum_header_appearance_background_color" AS ENUM('default', 'dark', 'brand', 'transparent');
-   CREATE TYPE "public"."enum_header_nav_items_menu_type" AS ENUM('simple', 'dropdown', 'megamenu');
-   CREATE TYPE "public"."enum_header_nav_items_link_type" AS ENUM('reference', 'custom');
-   CREATE TYPE "public"."enum_header_nav_items_submenu_items_link_type" AS ENUM('reference', 'custom');
+   -- Create enum types for header appearance (only if they don't exist)
+   DO $$ BEGIN
+     CREATE TYPE "public"."enum_header_appearance_style" AS ENUM('solid', 'transparent', 'transparentScroll');
+   EXCEPTION
+     WHEN duplicate_object THEN null;
+   END $$;
 
-   -- Add new columns to header table
-   ALTER TABLE "header" ADD COLUMN "logo_id" integer;
-   ALTER TABLE "header" ADD COLUMN "logo_height" numeric DEFAULT 40;
-   ALTER TABLE "header" ADD COLUMN "appearance_style" "enum_header_appearance_style" DEFAULT 'solid';
-   ALTER TABLE "header" ADD COLUMN "appearance_background_color" "enum_header_appearance_background_color" DEFAULT 'default';
-   ALTER TABLE "header" ADD COLUMN "appearance_sticky_header" boolean DEFAULT true;
+   DO $$ BEGIN
+     CREATE TYPE "public"."enum_header_appearance_background_color" AS ENUM('default', 'dark', 'brand', 'transparent');
+   EXCEPTION
+     WHEN duplicate_object THEN null;
+   END $$;
 
-   -- Add menu_type to existing header_nav_items table
-   ALTER TABLE "header_nav_items" ADD COLUMN "menu_type" "enum_header_nav_items_menu_type" DEFAULT 'simple';
+   DO $$ BEGIN
+     CREATE TYPE "public"."enum_header_nav_items_menu_type" AS ENUM('simple', 'dropdown', 'megamenu');
+   EXCEPTION
+     WHEN duplicate_object THEN null;
+   END $$;
+
+   DO $$ BEGIN
+     CREATE TYPE "public"."enum_header_nav_items_link_type" AS ENUM('reference', 'custom');
+   EXCEPTION
+     WHEN duplicate_object THEN null;
+   END $$;
+
+   DO $$ BEGIN
+     CREATE TYPE "public"."enum_header_nav_items_submenu_items_link_type" AS ENUM('reference', 'custom');
+   EXCEPTION
+     WHEN duplicate_object THEN null;
+   END $$;
+
+   -- Add new columns to header table (only if they don't exist)
+   ALTER TABLE "header" ADD COLUMN IF NOT EXISTS "logo_id" integer;
+   ALTER TABLE "header" ADD COLUMN IF NOT EXISTS "logo_height" numeric DEFAULT 40;
+   ALTER TABLE "header" ADD COLUMN IF NOT EXISTS "appearance_style" "enum_header_appearance_style" DEFAULT 'solid';
+   ALTER TABLE "header" ADD COLUMN IF NOT EXISTS "appearance_background_color" "enum_header_appearance_background_color" DEFAULT 'default';
+   ALTER TABLE "header" ADD COLUMN IF NOT EXISTS "appearance_sticky_header" boolean DEFAULT true;
+
+   -- Add menu_type to existing header_nav_items table (only if it doesn't exist)
+   ALTER TABLE "header_nav_items" ADD COLUMN IF NOT EXISTS "menu_type" "enum_header_nav_items_menu_type" DEFAULT 'simple';
 
    -- Create submenu table
    CREATE TABLE IF NOT EXISTS "header_nav_items_submenu" (
@@ -39,10 +63,24 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
      "description" varchar
    );
 
-   -- Add foreign key constraints
-   ALTER TABLE "header" ADD CONSTRAINT "header_logo_id_media_id_fk" FOREIGN KEY ("logo_id") REFERENCES "media"("id") ON DELETE set null ON UPDATE no action;
-   ALTER TABLE "header_nav_items_submenu" ADD CONSTRAINT "header_nav_items_submenu_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "header_nav_items"("id") ON DELETE cascade ON UPDATE no action;
-   ALTER TABLE "header_nav_items_submenu_items" ADD CONSTRAINT "header_nav_items_submenu_items_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "header_nav_items_submenu"("id") ON DELETE cascade ON UPDATE no action;
+   -- Add foreign key constraints (only if they don't exist)
+   DO $$ BEGIN
+     ALTER TABLE "header" ADD CONSTRAINT "header_logo_id_media_id_fk" FOREIGN KEY ("logo_id") REFERENCES "media"("id") ON DELETE set null ON UPDATE no action;
+   EXCEPTION
+     WHEN duplicate_object THEN null;
+   END $$;
+
+   DO $$ BEGIN
+     ALTER TABLE "header_nav_items_submenu" ADD CONSTRAINT "header_nav_items_submenu_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "header_nav_items"("id") ON DELETE cascade ON UPDATE no action;
+   EXCEPTION
+     WHEN duplicate_object THEN null;
+   END $$;
+
+   DO $$ BEGIN
+     ALTER TABLE "header_nav_items_submenu_items" ADD CONSTRAINT "header_nav_items_submenu_items_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "header_nav_items_submenu"("id") ON DELETE cascade ON UPDATE no action;
+   EXCEPTION
+     WHEN duplicate_object THEN null;
+   END $$;
 
    -- Create indexes
    CREATE INDEX IF NOT EXISTS "header_logo_idx" ON "header" USING btree ("logo_id");
