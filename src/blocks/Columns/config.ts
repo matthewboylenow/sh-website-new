@@ -94,7 +94,6 @@ const columnFields: Field[] = [
     },
   },
   linkGroup({
-    appearances: ['default', 'secondary', 'brandOutline', 'outline', 'ghost'],
     overrides: {
       maxRows: 3,
       admin: {

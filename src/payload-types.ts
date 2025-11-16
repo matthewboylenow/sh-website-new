@@ -208,7 +208,7 @@ export interface Page {
             /**
              * Choose how the link should be rendered.
              */
-            appearance?: ('default' | 'outline') | null;
+            appearance?: ('default' | 'secondary' | 'outline' | 'brandOutline' | 'light' | 'ghost') | null;
           };
           id?: string | null;
         }[]
@@ -567,7 +567,7 @@ export interface HeroBasicBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'secondary' | 'brandOutline' | 'light' | 'ghost') | null;
+          appearance?: ('default' | 'secondary' | 'outline' | 'brandOutline' | 'light' | 'ghost') | null;
         };
         id?: string | null;
       }[]
@@ -618,7 +618,7 @@ export interface HeroBasicBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('default' | 'secondary' | 'outline' | 'brandOutline' | 'light' | 'ghost') | null;
         };
         id?: string | null;
       }[]
@@ -739,7 +739,7 @@ export interface HeroWithStatsBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('default' | 'secondary' | 'outline' | 'brandOutline' | 'light' | 'ghost') | null;
         };
         id?: string | null;
       }[]
@@ -948,7 +948,7 @@ export interface ColumnsBlock {
                 /**
                  * Choose how the link should be rendered.
                  */
-                appearance?: ('default' | 'secondary' | 'brandOutline' | 'outline' | 'ghost') | null;
+                appearance?: ('default' | 'secondary' | 'outline' | 'brandOutline' | 'light' | 'ghost') | null;
               };
               id?: string | null;
             }[]
@@ -1054,7 +1054,7 @@ export interface CTAFullWidthBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('default' | 'secondary' | 'outline' | 'brandOutline' | 'light' | 'ghost') | null;
         };
         id?: string | null;
       }[]
@@ -2123,7 +2123,7 @@ export interface CallToActionBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('default' | 'secondary' | 'outline' | 'brandOutline' | 'light' | 'ghost') | null;
         };
         id?: string | null;
       }[]
@@ -2173,7 +2173,7 @@ export interface ContentBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('default' | 'secondary' | 'outline' | 'brandOutline' | 'light' | 'ghost') | null;
         };
         id?: string | null;
       }[]

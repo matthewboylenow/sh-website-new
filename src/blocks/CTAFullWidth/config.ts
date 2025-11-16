@@ -77,7 +77,6 @@ export const CTAFullWidth: Block = {
       },
     },
     linkGroup({
-      appearances: ['default', 'outline'],
       overrides: {
         maxRows: 3,
         admin: {
