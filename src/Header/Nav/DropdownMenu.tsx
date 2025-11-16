@@ -128,14 +128,17 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
         >
           <div className="bg-white border border-sh-border-subtle rounded-lg shadow-xl py-2 overflow-hidden">
             {allItems.map((subItem, idx) => (
-              <div key={idx} role="menuitem">
+              <div
+                key={idx}
+                role="menuitem"
+                onClick={() => {
+                  setIsOpen(false)
+                  onClose?.()
+                }}
+              >
                 <CMSLink
                   {...subItem.link}
                   className="block px-4 py-2.5 text-sm font-medium text-sh-text-main hover:bg-sh-primary/10 hover:text-sh-primary transition-colors"
-                  onClick={() => {
-                    setIsOpen(false)
-                    onClose?.()
-                  }}
                 />
               </div>
             ))}

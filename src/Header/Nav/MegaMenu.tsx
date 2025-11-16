@@ -160,14 +160,17 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
                   )}
                   <div className="space-y-3">
                     {group.items?.map((subItem, itemIdx) => (
-                      <div key={itemIdx} role="menuitem">
+                      <div
+                        key={itemIdx}
+                        role="menuitem"
+                        onClick={() => {
+                          setIsOpen(false)
+                          onClose?.()
+                        }}
+                      >
                         <CMSLink
                           {...subItem.link}
                           className="block text-sm font-medium text-sh-text-main hover:text-sh-primary transition-colors group"
-                          onClick={() => {
-                            setIsOpen(false)
-                            onClose?.()
-                          }}
                         />
                         {subItem.description && (
                           <p className="text-xs text-sh-text-muted mt-1 leading-relaxed">

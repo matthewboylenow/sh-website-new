@@ -33,13 +33,14 @@ import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { draftMode } from 'next/headers'
 import { getCachedGlobal } from '@/utilities/getGlobals'
+import type { Header as HeaderType } from '@/payload-types'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
-  const headerData = await getCachedGlobal('header', 1)()
+  const headerData = (await getCachedGlobal('header', 1)()) as HeaderType
 
   // Check if header is transparent
   const isTransparentHeader = headerData?.appearance?.style === 'transparent'

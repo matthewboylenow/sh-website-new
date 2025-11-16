@@ -28,9 +28,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   const appearance = data?.appearance
   const headerStyle = appearance?.style || 'solid'
-  // Support both old backgroundColor and new desktop/mobile specific colors
-  const backgroundColorDesktop = appearance?.backgroundColorDesktop || appearance?.backgroundColor || 'default'
-  const backgroundColorMobile = appearance?.backgroundColorMobile || appearance?.backgroundColor || 'default'
+  const backgroundColorDesktop = appearance?.backgroundColorDesktop || 'default'
+  const backgroundColorMobile = appearance?.backgroundColorMobile || 'default'
   const textColorDesktop = appearance?.textColorDesktop || 'auto'
   const textColorMobile = appearance?.textColorMobile || 'auto'
   const stickyHeader = appearance?.stickyHeader !== false

@@ -10,7 +10,7 @@ import { Facebook, Instagram, Youtube, Twitter } from 'lucide-react'
 import { cn } from '@/utilities/ui'
 
 export async function Footer() {
-  const footerData: Footer = await getCachedGlobal('footer', 1)()
+  const footerData = (await getCachedGlobal('footer', 1)()) as Footer
 
   // Get global settings for parish info, mass times, etc.
   let globalSettings: any = null
