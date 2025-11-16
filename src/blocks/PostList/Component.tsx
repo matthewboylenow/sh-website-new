@@ -93,28 +93,30 @@ export const PostListBlock: React.FC<PostListBlockType> = async (props) => {
             {posts.docs.map((post) => (
               <article
                 key={post.id}
-                className="group flex flex-col overflow-hidden rounded-lg border border-sh-border-subtle bg-sh-surface transition-all hover:border-sh-border-strong hover:shadow-lg"
+                className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-black/5 transition-all hover:-translate-y-1 hover:shadow-2xl hover:ring-black/10"
               >
                 {post.heroImage && typeof post.heroImage === 'object' && (
-                  <Link href={`/posts/${post.slug}`} className="block">
+                  <Link href={`/posts/${post.slug}`} className="block relative">
                     <div className="relative aspect-[16/9] w-full overflow-hidden">
                       <Image
                         src={post.heroImage.url || ''}
                         alt={post.heroImage.alt || post.title || ''}
                         fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-110"
                       />
+                      {/* Gradient Overlay on Image */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60 transition-opacity group-hover:opacity-40" />
                     </div>
                   </Link>
                 )}
-                <div className="flex flex-1 flex-col p-6">
+                <div className="flex flex-1 flex-col p-6 bg-gradient-to-br from-white to-gray-50/50">
                   {/* Categories */}
                   {post.categories && Array.isArray(post.categories) && post.categories.length > 0 && (
                     <div className="mb-3 flex flex-wrap gap-2">
                       {post.categories.slice(0, 2).map((cat) => (
                         <span
                           key={typeof cat === 'object' ? cat.id : cat}
-                          className="rounded-full bg-sh-accent-teal/10 px-3 py-1 text-xs font-medium text-sh-accent-teal"
+                          className="inline-flex items-center rounded-full bg-gradient-to-r from-sh-primary to-blue-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm ring-1 ring-blue-600/20"
                         >
                           {typeof cat === 'object' ? cat.title : cat}
                         </span>
@@ -187,7 +189,7 @@ export const PostListBlock: React.FC<PostListBlockType> = async (props) => {
                       {post.categories.slice(0, 2).map((cat) => (
                         <span
                           key={typeof cat === 'object' ? cat.id : cat}
-                          className="rounded-full bg-sh-accent-teal/10 px-3 py-1 text-xs font-medium text-sh-accent-teal"
+                          className="inline-flex items-center rounded-full bg-gradient-to-r from-sh-primary to-blue-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm ring-1 ring-blue-600/20"
                         >
                           {typeof cat === 'object' ? cat.title : cat}
                         </span>

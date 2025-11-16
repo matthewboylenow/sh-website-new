@@ -100,12 +100,18 @@ export const BulletinListBlock: React.FC<BulletinListBlockType> = async (props) 
             {bulletins.docs.map((bulletin) => (
               <article
                 key={bulletin.id}
-                className="group flex flex-col rounded-lg border border-sh-border-subtle bg-sh-surface p-6 transition-all hover:border-sh-border-strong hover:shadow-lg"
+                className="group relative flex flex-col overflow-hidden rounded-xl bg-gradient-to-br from-white to-gray-50 p-6 shadow-sm ring-1 ring-gray-200 transition-all hover:shadow-xl hover:ring-gray-300"
               >
+                {/* Left Accent Border */}
+                <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-red-500 to-red-600 transition-all group-hover:w-2" />
+
+                {/* Corner Fold Effect */}
+                <div className="absolute right-0 top-0 h-0 w-0 border-l-[20px] border-t-[20px] border-l-transparent border-t-gray-200 transition-all group-hover:border-t-gray-300" />
+
                 {/* PDF Icon */}
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-lg bg-red-500/10">
+                <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-red-600 shadow-lg shadow-red-500/30">
                   <svg
-                    className="h-8 w-8 text-red-600"
+                    className="h-8 w-8 text-white"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >

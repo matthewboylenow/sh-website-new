@@ -59,7 +59,13 @@ export const RichTextSection: Block = {
       fontFamily: true,
       alignment: true,
     }),
-    blockAppearance(),
+    blockAppearance({
+      textColor: true,
+      backgroundVariant: true,
+      alignment: true,
+      fullWidth: true,
+      padding: true,
+    }),
     blockName,
   ],
 }

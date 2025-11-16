@@ -113,25 +113,34 @@ export const EventListBlock: React.FC<EventListBlockType> = async (props) => {
               <Link
                 key={event.id}
                 href={`/events/${event.slug}`}
-                className="group overflow-hidden rounded-lg border border-sh-border-subtle bg-sh-surface transition-all hover:border-sh-border-strong hover:shadow-lg"
+                className="group relative overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-black/5 transition-all hover:-translate-y-1 hover:shadow-xl hover:ring-sh-accent-gold/30"
               >
+                {/* Date Badge - Prominent Calendar Style */}
+                <div className="absolute left-4 top-4 z-10 flex flex-col items-center rounded-xl bg-gradient-to-br from-sh-accent-gold to-yellow-500 px-4 py-3 text-white shadow-lg shadow-sh-accent-gold/40 ring-2 ring-white transition-transform group-hover:scale-110">
+                  <span className="text-xs font-bold uppercase tracking-wider">
+                    {new Date(event.startDate).toLocaleDateString('en-US', { month: 'short' })}
+                  </span>
+                  <span className="text-2xl font-black leading-none">
+                    {new Date(event.startDate).getDate()}
+                  </span>
+                </div>
+
                 {event.featuredImage && typeof event.featuredImage === 'object' && (
                   <div className="relative aspect-[16/9] w-full overflow-hidden">
                     <Image
                       src={event.featuredImage.url || ''}
                       alt={event.featuredImage.alt || event.title || ''}
                       fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-105"
                     />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                   </div>
                 )}
                 <div className="p-6">
                   <div className="mb-3 flex items-center gap-2">
-                    <time className="text-sm font-medium text-sh-primary">
-                      {formatEventDate(event.startDate)}
-                    </time>
                     {event.category && (
-                      <span className="rounded-full bg-sh-accent-teal/10 px-2 py-1 text-xs font-medium text-sh-accent-teal">
+                      <span className="rounded-full bg-sh-accent-gold/15 px-3 py-1 text-xs font-semibold text-sh-accent-gold ring-1 ring-sh-accent-gold/30">
                         {event.category}
                       </span>
                     )}
