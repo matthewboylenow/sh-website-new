@@ -4,6 +4,7 @@ import Link from 'next/link'
 import type { BentoGridBlock as BentoGridBlockType } from '@/payload-types'
 import { blockAppearanceToClasses } from '@/utilities/blockAppearanceToClasses'
 import RichText from '@/components/RichText'
+import { Button } from '@/components/ui/button'
 
 export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
   const { title, subtitle, items, appearance } = props
@@ -27,6 +28,63 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
         return 'col-span-1 md:col-span-2 row-span-2'
       default:
         return 'col-span-1 row-span-1'
+    }
+  }
+
+  // Get color variant styles
+  const getColorVariantStyles = (variant: string, hasBackgroundImage: boolean) => {
+    if (hasBackgroundImage) {
+      return {
+        background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.08), 0 2px 8px 0 rgba(0, 0, 0, 0.04), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8)',
+      }
+    }
+
+    switch (variant) {
+      case 'brand':
+        return {
+          background: 'linear-gradient(135deg, rgba(32, 51, 107, 0.15) 0%, rgba(43, 69, 133, 0.1) 100%)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          boxShadow: '0 8px 32px 0 rgba(32, 51, 107, 0.12), 0 2px 8px 0 rgba(32, 51, 107, 0.08), inset 0 1px 1px 0 rgba(255, 255, 255, 0.6)',
+        }
+      case 'gold':
+        return {
+          background: 'linear-gradient(135deg, rgba(224, 166, 58, 0.15) 0%, rgba(249, 168, 37, 0.1) 100%)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          boxShadow: '0 8px 32px 0 rgba(224, 166, 58, 0.12), 0 2px 8px 0 rgba(224, 166, 58, 0.08), inset 0 1px 1px 0 rgba(255, 255, 255, 0.6)',
+        }
+      case 'dark':
+        return {
+          background: 'linear-gradient(135deg, rgba(17, 17, 17, 0.7) 0%, rgba(31, 31, 31, 0.6) 100%)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
+        }
+      case 'gradientBlue':
+        return {
+          background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(147, 197, 253, 0.15) 50%, rgba(32, 51, 107, 0.2) 100%)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          boxShadow: '0 8px 32px 0 rgba(59, 130, 246, 0.2), 0 2px 8px 0 rgba(59, 130, 246, 0.1), inset 0 1px 1px 0 rgba(255, 255, 255, 0.6)',
+        }
+      case 'gradientGold':
+        return {
+          background: 'linear-gradient(135deg, rgba(249, 168, 37, 0.25) 0%, rgba(234, 179, 8, 0.15) 50%, rgba(224, 166, 58, 0.2) 100%)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          boxShadow: '0 8px 32px 0 rgba(249, 168, 37, 0.2), 0 2px 8px 0 rgba(249, 168, 37, 0.1), inset 0 1px 1px 0 rgba(255, 255, 255, 0.6)',
+        }
+      default:
+        return {
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.08), 0 2px 8px 0 rgba(0, 0, 0, 0.04), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8)',
+        }
     }
   }
 
@@ -58,6 +116,10 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
               typeof item.image === 'object' &&
               item.image.url
 
+            const linkType = item.linkType || 'text'
+            const linkText = item.linkText || 'Learn more'
+            const buttonAppearance = item.buttonAppearance || 'default'
+
             return (
               <Link
                 key={index}
@@ -65,15 +127,7 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
                 className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] ${getSizeClasses(
                   item.size || 'medium',
                 )}`}
-                style={{
-                  background: hasBackgroundImage
-                    ? 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)'
-                    : 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)',
-                  backdropFilter: 'blur(20px)',
-                  WebkitBackdropFilter: 'blur(20px)',
-                  boxShadow:
-                    '0 8px 32px 0 rgba(0, 0, 0, 0.08), 0 2px 8px 0 rgba(0, 0, 0, 0.04), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8)',
-                }}
+                style={getColorVariantStyles(item.colorVariant || 'default', hasBackgroundImage)}
               >
                 {/* Animated gradient border */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -149,23 +203,33 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
                     {item.description}
                   </p>
 
-                  {/* Arrow Indicator */}
-                  <div className="flex items-center text-sm font-semibold text-sh-primary transition-all duration-300 group-hover:gap-2">
-                    <span className="transition-colors group-hover:text-blue-600">Learn more</span>
-                    <svg
-                      className="h-4 w-4 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                  {/* Link/Button */}
+                  {linkType === 'button' ? (
+                    <Button
+                      variant={buttonAppearance as any}
+                      size="sm"
+                      className="w-fit"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2.5}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </div>
+                      {linkText}
+                    </Button>
+                  ) : (
+                    <div className="flex items-center text-sm font-semibold text-sh-primary transition-all duration-300 group-hover:gap-2">
+                      <span className="transition-colors group-hover:text-blue-600">{linkText}</span>
+                      <svg
+                        className="h-4 w-4 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2.5}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
+                  )}
                 </div>
               </Link>
             )

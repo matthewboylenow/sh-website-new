@@ -6,6 +6,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
+import { appearanceOptions } from '@/fields/link'
 
 const bentoItemFields: Field[] = [
   {
@@ -70,6 +71,66 @@ const bentoItemFields: Field[] = [
     options: [
       { label: 'Icon (Small)', value: 'icon' },
       { label: 'Background Cover', value: 'background' },
+    ],
+  },
+  {
+    name: 'colorVariant',
+    type: 'select',
+    label: 'Background Color Variant',
+    defaultValue: 'default',
+    options: [
+      { label: 'Default (White Glass)', value: 'default' },
+      { label: 'Brand Blue (Blue Tint)', value: 'brand' },
+      { label: 'Gold Accent (Gold Tint)', value: 'gold' },
+      { label: 'Dark Glass (Muted)', value: 'dark' },
+      { label: 'Gradient Blue', value: 'gradientBlue' },
+      { label: 'Gradient Gold', value: 'gradientGold' },
+    ],
+    admin: {
+      description: 'Choose the background color style for this tile to differentiate it',
+    },
+  },
+  {
+    type: 'collapsible',
+    label: 'Link Appearance',
+    admin: {
+      description: 'Customize how the link appears on this tile',
+      initCollapsed: true,
+    },
+    fields: [
+      {
+        name: 'linkType',
+        type: 'radio',
+        label: 'Link Display Style',
+        defaultValue: 'text',
+        options: [
+          { label: 'Text Link with Arrow', value: 'text' },
+          { label: 'Button', value: 'button' },
+        ],
+        admin: {
+          layout: 'horizontal',
+        },
+      },
+      {
+        name: 'linkText',
+        type: 'text',
+        label: 'Link Text',
+        defaultValue: 'Learn more',
+        admin: {
+          description: 'Customize the text displayed (e.g., "Explore", "Get Started", "View Details")',
+        },
+      },
+      {
+        name: 'buttonAppearance',
+        type: 'select',
+        label: 'Button Style',
+        defaultValue: 'default',
+        options: Object.values(appearanceOptions),
+        admin: {
+          condition: (data, siblingData) => siblingData?.linkType === 'button',
+          description: 'Choose the button style (only applies when Link Display Style is Button)',
+        },
+      },
     ],
   },
 ]

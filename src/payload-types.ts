@@ -1272,6 +1272,19 @@ export interface BentoGridBlock {
          */
         size?: ('small' | 'medium' | 'large' | 'xlarge') | null;
         imageStyle?: ('icon' | 'background') | null;
+        /**
+         * Choose the background color style for this tile to differentiate it
+         */
+        colorVariant?: ('default' | 'brand' | 'gold' | 'dark' | 'gradientBlue' | 'gradientGold') | null;
+        linkType?: ('text' | 'button') | null;
+        /**
+         * Customize the text displayed (e.g., "Explore", "Get Started", "View Details")
+         */
+        linkText?: string | null;
+        /**
+         * Choose the button style (only applies when Link Display Style is Button)
+         */
+        buttonAppearance?: ('default' | 'secondary' | 'outline' | 'brandOutline' | 'light' | 'ghost') | null;
         id?: string | null;
       }[]
     | null;
@@ -3721,6 +3734,10 @@ export interface BentoGridBlockSelect<T extends boolean = true> {
         tag?: T;
         size?: T;
         imageStyle?: T;
+        colorVariant?: T;
+        linkType?: T;
+        linkText?: T;
+        buttonAppearance?: T;
         id?: T;
       };
   appearance?:
