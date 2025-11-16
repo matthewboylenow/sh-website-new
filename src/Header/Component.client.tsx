@@ -9,8 +9,11 @@ import { Menu, X, Search } from 'lucide-react'
 import type { Header } from '@/payload-types'
 
 import { Logo } from '@/components/Logo/Logo'
+import { Media } from '@/components/Media'
 import { CMSLink } from '@/components/Link'
 import { cn } from '@/utilities/ui'
+import { MegaMenu } from './Nav/MegaMenu'
+import { DropdownMenu } from './Nav/DropdownMenu'
 
 interface HeaderClientProps {
   data: Header
@@ -19,12 +22,21 @@ interface HeaderClientProps {
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   const [theme, setTheme] = useState<string | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
 
+  const appearance = data?.appearance
+  const headerStyle = appearance?.style || 'solid'
+  const backgroundColor = appearance?.backgroundColor || 'default'
+  const stickyHeader = appearance?.stickyHeader !== false
+  const logo = data?.logo
+  const logoHeight = data?.logoHeight || 40
+  const navItems = data?.navItems || []
+
   useEffect(() => {
     setHeaderTheme(null)
-    setMobileMenuOpen(false) // Close mobile menu on route change
+    setMobileMenuOpen(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
@@ -32,6 +44,18 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerTheme])
+
+  // Track scroll position for transparentScroll style
+  useEffect(() => {
+    if (headerStyle !== 'transparentScroll') return
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [headerStyle])
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -45,13 +69,99 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     }
   }, [mobileMenuOpen])
 
-  const navItems = data?.navItems || []
+  // Determine if header should be transparent
+  const isTransparent =
+    headerStyle === 'transparent' || (headerStyle === 'transparentScroll' && !isScrolled)
+
+  // Background color classes
+  const bgClasses = cn(
+    isTransparent
+      ? 'bg-transparent'
+      : backgroundColor === 'dark'
+        ? 'bg-sh-bg-dark'
+        : backgroundColor === 'brand'
+          ? 'bg-sh-primary'
+          : backgroundColor === 'transparent'
+            ? 'bg-transparent'
+            : 'bg-sh-bg/95 backdrop-blur-sm',
+  )
+
+  // Text color classes
+  const textClasses = cn(
+    isTransparent || backgroundColor === 'dark' || backgroundColor === 'brand'
+      ? 'text-white'
+      : 'text-sh-text-main',
+  )
+
+  // Border classes
+  const borderClasses = cn(
+    !isTransparent &&
+      (backgroundColor === 'dark' || backgroundColor === 'brand'
+        ? 'border-white/20'
+        : 'border-sh-border-subtle'),
+  )
+
+  // Render navigation item based on type
+  const renderNavItem = (item: (typeof navItems)[number], index: number, isMobile = false) => {
+    const menuType = item.menuType || 'simple'
+
+    if (menuType === 'megamenu') {
+      return (
+        <MegaMenu
+          key={index}
+          item={item}
+          isMobile={isMobile}
+          onClose={() => setMobileMenuOpen(false)}
+        />
+      )
+    }
+
+    if (menuType === 'dropdown') {
+      return (
+        <DropdownMenu
+          key={index}
+          item={item}
+          isMobile={isMobile}
+          onClose={() => setMobileMenuOpen(false)}
+        />
+      )
+    }
+
+    // Simple link
+    if (isMobile) {
+      return (
+        <div key={index} onClick={() => setMobileMenuOpen(false)}>
+          <CMSLink
+            {...item.link}
+            className="block px-4 py-3 text-base font-medium text-sh-text-main hover:bg-sh-surface hover:text-sh-primary rounded-lg transition-colors"
+          />
+        </div>
+      )
+    }
+
+    return (
+      <CMSLink
+        key={index}
+        {...item.link}
+        className={cn(
+          'text-base font-medium transition-colors',
+          isTransparent || backgroundColor === 'dark' || backgroundColor === 'brand'
+            ? 'text-white hover:text-white/80'
+            : 'text-sh-text-main hover:text-sh-primary',
+        )}
+      />
+    )
+  }
 
   return (
     <>
       <header
         className={cn(
-          'sticky top-0 z-50 bg-sh-bg/95 backdrop-blur-sm border-b border-sh-border-subtle',
+          'z-50 transition-all duration-300',
+          stickyHeader ? 'sticky top-0' : 'relative',
+          bgClasses,
+          !isTransparent && 'border-b',
+          borderClasses,
         )}
         {...(theme ? { 'data-theme': theme } : {})}
       >
@@ -59,32 +169,46 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           <div className="flex h-20 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              <Logo loading="eager" priority="high" className="h-10" />
+              {logo && typeof logo === 'object' ? (
+                <Media
+                  resource={logo}
+                  imgClassName={cn('object-contain')}
+                  style={{ height: `${logoHeight}px` }}
+                />
+              ) : (
+                <Logo loading="eager" priority="high" className="h-10" />
+              )}
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
-              {navItems.map(({ link }, i) => (
-                <CMSLink
-                  key={i}
-                  {...link}
-                  className="text-base font-medium text-sh-text-main hover:text-sh-primary transition-colors"
-                />
-              ))}
+            <nav className={cn('hidden lg:flex items-center gap-8', textClasses)}>
+              {navItems.map((item, i) => renderNavItem(item, i, false))}
             </nav>
 
             {/* Desktop Right Side - Give Button + Search */}
             <div className="hidden lg:flex items-center gap-4">
               <Link
                 href="/search"
-                className="p-2 rounded-full hover:bg-sh-surface transition-colors"
+                className={cn(
+                  'p-2 rounded-full transition-colors',
+                  isTransparent || backgroundColor === 'dark' || backgroundColor === 'brand'
+                    ? 'hover:bg-white/10'
+                    : 'hover:bg-sh-surface',
+                )}
                 aria-label="Search"
               >
-                <Search className="h-5 w-5 text-sh-text-main" />
+                <Search className={cn('h-5 w-5', textClasses)} />
               </Link>
               <Link
                 href="/give"
-                className="inline-flex items-center justify-center rounded-lg bg-sh-primary px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-sh-primary-soft transition-colors"
+                className={cn(
+                  'inline-flex items-center justify-center rounded-lg px-6 py-2.5 text-sm font-semibold shadow-sm transition-colors',
+                  isTransparent || backgroundColor === 'dark'
+                    ? 'bg-white text-sh-primary hover:bg-white/90'
+                    : backgroundColor === 'brand'
+                      ? 'bg-white text-sh-primary hover:bg-white/90'
+                      : 'bg-sh-primary text-white hover:bg-sh-primary-soft',
+                )}
               >
                 Give
               </Link>
@@ -93,14 +217,19 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             {/* Mobile Menu Button */}
             <button
               type="button"
-              className="lg:hidden p-2 rounded-lg hover:bg-sh-surface transition-colors"
+              className={cn(
+                'lg:hidden p-2 rounded-lg transition-colors',
+                isTransparent || backgroundColor === 'dark' || backgroundColor === 'brand'
+                  ? 'hover:bg-white/10'
+                  : 'hover:bg-sh-surface',
+              )}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
-                <X className="h-6 w-6 text-sh-text-main" />
+                <X className={cn('h-6 w-6', textClasses)} />
               ) : (
-                <Menu className="h-6 w-6 text-sh-text-main" />
+                <Menu className={cn('h-6 w-6', textClasses)} />
               )}
             </button>
           </div>
@@ -156,14 +285,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           </div>
 
           {/* Navigation Links */}
-          {navItems.map(({ link }, i) => (
-            <div key={i} onClick={() => setMobileMenuOpen(false)}>
-              <CMSLink
-                {...link}
-                className="block px-4 py-3 text-base font-medium text-sh-text-main hover:bg-sh-surface hover:text-sh-primary rounded-lg transition-colors"
-              />
-            </div>
-          ))}
+          {navItems.map((item, i) => renderNavItem(item, i, true))}
 
           {/* Search Link */}
           <Link
