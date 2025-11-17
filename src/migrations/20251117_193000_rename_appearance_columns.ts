@@ -2,9 +2,9 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-vercel-postg
 
 export async function up({ db }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
-   -- Rename appearance columns in all block tables to match new dbName properties
+   -- Rename appearance columns in all block tables to match new shortened field names
+   -- Note: Fields inside groups don't support dbName, so we use shorter actual field names
 
-   -- Helper function to rename column if it exists
    DO $$
    DECLARE
      tables TEXT[] := ARRAY[
@@ -49,7 +49,7 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
    BEGIN
      FOREACH tbl IN ARRAY tables
      LOOP
-       -- Rename customBackgroundColor to custom_bg_color
+       -- Rename customBackgroundColor to customBgColor
        IF EXISTS (
          SELECT 1 FROM information_schema.columns
          WHERE table_name = tbl
@@ -58,7 +58,7 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
          EXECUTE format('ALTER TABLE %I RENAME COLUMN appearance_custom_background_color TO appearance_custom_bg_color', tbl);
        END IF;
 
-       -- Rename background_variant to bg_variant
+       -- Rename backgroundVariant to bgVariant
        IF EXISTS (
          SELECT 1 FROM information_schema.columns
          WHERE table_name = tbl
@@ -67,7 +67,7 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
          EXECUTE format('ALTER TABLE %I RENAME COLUMN appearance_background_variant TO appearance_bg_variant', tbl);
        END IF;
 
-       -- Rename padding_top to pt
+       -- Rename paddingTop to pt
        IF EXISTS (
          SELECT 1 FROM information_schema.columns
          WHERE table_name = tbl
@@ -76,7 +76,7 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
          EXECUTE format('ALTER TABLE %I RENAME COLUMN appearance_padding_top TO appearance_pt', tbl);
        END IF;
 
-       -- Rename padding_bottom to pb
+       -- Rename paddingBottom to pb
        IF EXISTS (
          SELECT 1 FROM information_schema.columns
          WHERE table_name = tbl

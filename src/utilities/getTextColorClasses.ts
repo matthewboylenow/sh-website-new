@@ -11,7 +11,7 @@ export function getTextColorClass(appearance?: BlockAppearance): string {
 
   if (textColorSetting === 'auto') {
     // Auto-determine based on background
-    switch (appearance?.backgroundVariant) {
+    switch (appearance?.bgVariant) {
       case 'brand':
       case 'dark':
         return 'text-sh-text-on-dark'
@@ -45,7 +45,7 @@ export function isDarkBackground(appearance?: BlockAppearance): boolean {
 
   if (textColorSetting === 'auto') {
     // Auto-determine based on background variant
-    return appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
+    return appearance?.bgVariant === 'dark' || appearance?.bgVariant === 'brand'
   } else {
     // If text color is explicitly set to light, background is considered dark
     return textColorSetting === 'light'

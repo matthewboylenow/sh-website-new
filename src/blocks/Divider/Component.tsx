@@ -30,9 +30,9 @@ export const DividerBlock: React.FC<DividerProps> = ({
 
   // Border color based on background variant
   const borderColorClasses = cn(
-    appearance?.backgroundVariant === 'dark' && 'border-white/20',
-    appearance?.backgroundVariant === 'brand' && 'border-white/20',
-    (!appearance?.backgroundVariant || appearance?.backgroundVariant === 'light' || appearance?.backgroundVariant === 'transparent') && 'border-sh-border-subtle',
+    appearance?.bgVariant === 'dark' && 'border-white/20',
+    appearance?.bgVariant === 'brand' && 'border-white/20',
+    (!appearance?.bgVariant || appearance?.bgVariant === 'light' || appearance?.bgVariant === 'transparent') && 'border-sh-border-subtle',
   )
 
   // Alignment classes
@@ -68,7 +68,7 @@ export const DividerBlock: React.FC<DividerProps> = ({
             <div
               className={cn(
                 'flex gap-1',
-                appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
+                appearance?.bgVariant === 'dark' || appearance?.bgVariant === 'brand'
                   ? 'text-white/40'
                   : 'text-sh-primary/40',
               )}

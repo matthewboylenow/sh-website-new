@@ -45,9 +45,9 @@ export const blockAppearance = (
 
   if (backgroundVariant) {
     fields.push({
-      name: 'backgroundVariant',
+      name: 'bgVariant',
       type: 'select',
-      dbName: 'bg_variant',
+      label: 'Background Variant',
       defaultValue: 'light',
       options: [
         {
@@ -82,12 +82,12 @@ export const blockAppearance = (
       type: 'text',
       label: 'Custom Background Color',
       admin: {
-        condition: (data, siblingData) => siblingData?.backgroundVariant === 'custom',
+        condition: (data, siblingData) => siblingData?.bgVariant === 'custom',
         description: 'Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))',
         placeholder: '#1a1a1a',
       },
       validate: (value: string | null | undefined, { siblingData }: any) => {
-        if (siblingData?.backgroundVariant === 'custom' && !value) {
+        if (siblingData?.bgVariant === 'custom' && !value) {
           return 'Custom background color is required when using Custom Color variant'
         }
         return true
@@ -170,9 +170,9 @@ export const blockAppearance = (
       type: 'row',
       fields: [
         {
-          name: 'paddingTop',
+          name: 'pt',
           type: 'select',
-          dbName: 'pt',
+          label: 'Padding Top',
           defaultValue: 'default',
           options: [
             { label: 'None', value: 'none' },
@@ -186,9 +186,9 @@ export const blockAppearance = (
           },
         },
         {
-          name: 'paddingBottom',
+          name: 'pb',
           type: 'select',
-          dbName: 'pb',
+          label: 'Padding Bottom',
           defaultValue: 'default',
           options: [
             { label: 'None', value: 'none' },
@@ -223,12 +223,12 @@ export const blockAppearance = (
  */
 export interface BlockAppearanceType {
   appearance?: {
-    backgroundVariant?: BackgroundVariant | null
+    bgVariant?: BackgroundVariant | null
     customBgColor?: string | null
     alignment?: Alignment | null
     fullWidth?: boolean | null
-    paddingTop?: PaddingOption | null
-    paddingBottom?: PaddingOption | null
+    pt?: PaddingOption | null
+    pb?: PaddingOption | null
     textColor?: TextColor | null
   } | null
 }

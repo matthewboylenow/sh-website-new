@@ -143,7 +143,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
                 stats.length === 2 && 'grid-cols-2',
                 stats.length === 3 && 'grid-cols-3',
                 stats.length === 4 && 'sm:grid-cols-2 lg:grid-cols-4',
-                hasBackground || appearance?.backgroundVariant === 'dark' || appearance?.backgroundVariant === 'brand'
+                hasBackground || appearance?.bgVariant === 'dark' || appearance?.bgVariant === 'brand'
                   ? 'border-white/30'
                   : 'border-sh-border-subtle',
               )}

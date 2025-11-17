@@ -647,7 +647,7 @@ export interface HeroBasicBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -663,11 +663,11 @@ export interface HeroBasicBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -775,7 +775,7 @@ export interface HeroWithStatsBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -795,11 +795,11 @@ export interface HeroWithStatsBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -853,7 +853,7 @@ export interface RichTextSectionBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -873,11 +873,11 @@ export interface RichTextSectionBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -979,7 +979,7 @@ export interface ColumnsBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -999,11 +999,11 @@ export interface ColumnsBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1082,7 +1082,7 @@ export interface CTAFullWidthBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -1102,11 +1102,11 @@ export interface CTAFullWidthBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1221,7 +1221,7 @@ export interface CardGridBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -1241,11 +1241,11 @@ export interface CardGridBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1323,7 +1323,7 @@ export interface BentoGridBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -1343,11 +1343,11 @@ export interface BentoGridBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   /**
    * Add a subtle decorative pattern to the background
@@ -1450,7 +1450,7 @@ export interface EventListBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -1470,11 +1470,11 @@ export interface EventListBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1531,7 +1531,7 @@ export interface PostListBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -1551,11 +1551,11 @@ export interface PostListBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1601,7 +1601,7 @@ export interface BulletinListBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -1621,11 +1621,11 @@ export interface BulletinListBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1683,7 +1683,7 @@ export interface MediaListBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -1703,11 +1703,11 @@ export interface MediaListBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1756,7 +1756,7 @@ export interface TestimonialBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -1776,11 +1776,11 @@ export interface TestimonialBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1834,7 +1834,7 @@ export interface StoryHighlightBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -1850,11 +1850,11 @@ export interface StoryHighlightBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1911,7 +1911,7 @@ export interface FAQAccordionBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -1931,11 +1931,11 @@ export interface FAQAccordionBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1987,7 +1987,7 @@ export interface VideoEmbedBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -2007,11 +2007,11 @@ export interface VideoEmbedBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -2071,7 +2071,7 @@ export interface FormEmbedBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -2091,11 +2091,11 @@ export interface FormEmbedBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -2138,7 +2138,7 @@ export interface DividerBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -2158,11 +2158,11 @@ export interface DividerBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -2188,7 +2188,7 @@ export interface CustomCodeBlock {
     /**
      * Choose the background color for this block
      */
-    backgroundVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
@@ -2204,11 +2204,11 @@ export interface CustomCodeBlock {
     /**
      * Top padding
      */
-    paddingTop?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
     /**
      * Bottom padding
      */
-    paddingBottom?: ('none' | 'tight' | 'default' | 'loose') | null;
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -3609,12 +3609,12 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -3658,13 +3658,13 @@ export interface HeroWithStatsBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -3686,13 +3686,13 @@ export interface RichTextSectionBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -3736,13 +3736,13 @@ export interface ColumnsBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -3775,13 +3775,13 @@ export interface CTAFullWidthBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -3829,13 +3829,13 @@ export interface CardGridBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -3867,13 +3867,13 @@ export interface BentoGridBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   decorativePattern?:
     | T
@@ -3909,13 +3909,13 @@ export interface EventListBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -3938,13 +3938,13 @@ export interface PostListBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -3965,13 +3965,13 @@ export interface BulletinListBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -3992,13 +3992,13 @@ export interface MediaListBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -4016,13 +4016,13 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -4042,12 +4042,12 @@ export interface StoryHighlightBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -4075,13 +4075,13 @@ export interface FAQAccordionBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -4099,13 +4099,13 @@ export interface VideoEmbedBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -4125,13 +4125,13 @@ export interface FormEmbedBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -4156,13 +4156,13 @@ export interface DividerBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   blockName?: T;
   id?: T;
@@ -4177,12 +4177,12 @@ export interface CustomCodeBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        backgroundVariant?: T;
+        bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
         fullWidth?: T;
-        paddingTop?: T;
-        paddingBottom?: T;
+        pt?: T;
+        pb?: T;
       };
   id?: T;
   blockName?: T;

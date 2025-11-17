@@ -21,7 +21,7 @@ export function getBlockAppearance(
   }
 
   // Background variant
-  switch (appearance.backgroundVariant) {
+  switch (appearance.bgVariant) {
     case 'light':
       classes.push('bg-sh-bg')
       break
@@ -48,7 +48,7 @@ export function getBlockAppearance(
 
   if (textColorSetting === 'auto') {
     // Auto-determine text color based on background
-    switch (appearance.backgroundVariant) {
+    switch (appearance.bgVariant) {
       case 'light':
         classes.push('text-sh-text-main')
         break
@@ -99,7 +99,7 @@ export function getBlockAppearance(
   }
 
   // Padding top
-  switch (appearance.paddingTop) {
+  switch (appearance.pt) {
     case 'none':
       classes.push('pt-0')
       break
@@ -115,7 +115,7 @@ export function getBlockAppearance(
   }
 
   // Padding bottom
-  switch (appearance.paddingBottom) {
+  switch (appearance.pb) {
     case 'none':
       classes.push('pb-0')
       break
