@@ -651,7 +651,7 @@ export interface HeroBasicBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -779,7 +779,7 @@ export interface HeroWithStatsBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -857,7 +857,7 @@ export interface RichTextSectionBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -983,7 +983,7 @@ export interface ColumnsBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -1086,7 +1086,7 @@ export interface CTAFullWidthBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -1225,7 +1225,7 @@ export interface CardGridBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -1327,7 +1327,7 @@ export interface BentoGridBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -1454,7 +1454,7 @@ export interface EventListBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -1535,7 +1535,7 @@ export interface PostListBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -1605,7 +1605,7 @@ export interface BulletinListBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -1687,7 +1687,7 @@ export interface MediaListBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -1760,7 +1760,7 @@ export interface TestimonialBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -1838,7 +1838,7 @@ export interface StoryHighlightBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -1915,7 +1915,7 @@ export interface FAQAccordionBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -1991,7 +1991,7 @@ export interface VideoEmbedBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -2075,7 +2075,7 @@ export interface FormEmbedBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -2142,7 +2142,7 @@ export interface DividerBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -2192,7 +2192,7 @@ export interface CustomCodeBlock {
     /**
      * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
      */
-    customBackgroundColor?: string | null;
+    customBgColor?: string | null;
     /**
      * Override text color for this block
      */
@@ -3610,7 +3610,7 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         paddingTop?: T;
@@ -3659,7 +3659,7 @@ export interface HeroWithStatsBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3687,7 +3687,7 @@ export interface RichTextSectionBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3737,7 +3737,7 @@ export interface ColumnsBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3776,7 +3776,7 @@ export interface CTAFullWidthBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3830,7 +3830,7 @@ export interface CardGridBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3868,7 +3868,7 @@ export interface BentoGridBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3910,7 +3910,7 @@ export interface EventListBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3939,7 +3939,7 @@ export interface PostListBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3966,7 +3966,7 @@ export interface BulletinListBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -3993,7 +3993,7 @@ export interface MediaListBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -4017,7 +4017,7 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -4043,7 +4043,7 @@ export interface StoryHighlightBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         fullWidth?: T;
         paddingTop?: T;
@@ -4076,7 +4076,7 @@ export interface FAQAccordionBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -4100,7 +4100,7 @@ export interface VideoEmbedBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -4126,7 +4126,7 @@ export interface FormEmbedBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -4157,7 +4157,7 @@ export interface DividerBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         alignment?: T;
         fullWidth?: T;
@@ -4178,7 +4178,7 @@ export interface CustomCodeBlockSelect<T extends boolean = true> {
     | T
     | {
         backgroundVariant?: T;
-        customBackgroundColor?: T;
+        customBgColor?: T;
         textColor?: T;
         fullWidth?: T;
         paddingTop?: T;

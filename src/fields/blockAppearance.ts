@@ -47,6 +47,7 @@ export const blockAppearance = (
     fields.push({
       name: 'backgroundVariant',
       type: 'select',
+      dbName: 'bg_variant',
       defaultValue: 'light',
       options: [
         {
@@ -77,8 +78,9 @@ export const blockAppearance = (
 
     // Custom background color field
     fields.push({
-      name: 'customBackgroundColor',
+      name: 'customBgColor',
       type: 'text',
+      label: 'Custom Background Color',
       admin: {
         condition: (data, siblingData) => siblingData?.backgroundVariant === 'custom',
         description: 'Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))',
@@ -220,7 +222,7 @@ export const blockAppearance = (
 export interface BlockAppearanceType {
   appearance?: {
     backgroundVariant?: BackgroundVariant | null
-    customBackgroundColor?: string | null
+    customBgColor?: string | null
     alignment?: Alignment | null
     fullWidth?: boolean | null
     paddingTop?: PaddingOption | null

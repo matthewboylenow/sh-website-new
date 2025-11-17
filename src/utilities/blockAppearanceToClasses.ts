@@ -35,8 +35,8 @@ export function getBlockAppearance(
       classes.push('bg-transparent')
       break
     case 'custom':
-      if (appearance.customBackgroundColor) {
-        style.backgroundColor = appearance.customBackgroundColor
+      if (appearance.customBgColor) {
+        style.backgroundColor = appearance.customBgColor
       }
       break
     default:
