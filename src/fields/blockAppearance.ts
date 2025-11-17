@@ -172,6 +172,7 @@ export const blockAppearance = (
         {
           name: 'paddingTop',
           type: 'select',
+          dbName: 'pt',
           defaultValue: 'default',
           options: [
             { label: 'None', value: 'none' },
@@ -187,6 +188,7 @@ export const blockAppearance = (
         {
           name: 'paddingBottom',
           type: 'select',
+          dbName: 'pb',
           defaultValue: 'default',
           options: [
             { label: 'None', value: 'none' },
