@@ -2,7 +2,7 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-vercel-postg
 
 export async function up({ db, payload }: MigrateUpArgs): Promise<void> {
   // This migration handles the field name changes for appearance fields
-  // It will rename columns if they exist with old names, or skip if already using new names
+  // It will rename columns if they exist with old names, create new columns if missing
 
   await db.execute(sql`
    DO $$
@@ -47,20 +47,29 @@ export async function up({ db, payload }: MigrateUpArgs): Promise<void> {
      ];
      tbl TEXT;
      has_old_bg_variant BOOLEAN;
+     has_new_bg_variant BOOLEAN;
      has_old_custom_bg BOOLEAN;
+     has_new_custom_bg BOOLEAN;
      has_old_pt BOOLEAN;
+     has_new_pt BOOLEAN;
      has_old_pb BOOLEAN;
+     has_new_pb BOOLEAN;
    BEGIN
      FOREACH tbl IN ARRAY tables
      LOOP
        -- Check if table exists
        IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = tbl) THEN
 
-         -- Check for old column names
+         -- Check for old and new column names
          SELECT EXISTS (
            SELECT 1 FROM information_schema.columns
            WHERE table_name = tbl AND column_name = 'appearance_background_variant'
          ) INTO has_old_bg_variant;
+
+         SELECT EXISTS (
+           SELECT 1 FROM information_schema.columns
+           WHERE table_name = tbl AND column_name = 'appearance_bg_variant'
+         ) INTO has_new_bg_variant;
 
          SELECT EXISTS (
            SELECT 1 FROM information_schema.columns
@@ -69,37 +78,61 @@ export async function up({ db, payload }: MigrateUpArgs): Promise<void> {
 
          SELECT EXISTS (
            SELECT 1 FROM information_schema.columns
+           WHERE table_name = tbl AND column_name = 'appearance_custom_bg_color'
+         ) INTO has_new_custom_bg;
+
+         SELECT EXISTS (
+           SELECT 1 FROM information_schema.columns
            WHERE table_name = tbl AND column_name = 'appearance_padding_top'
          ) INTO has_old_pt;
+
+         SELECT EXISTS (
+           SELECT 1 FROM information_schema.columns
+           WHERE table_name = tbl AND column_name = 'appearance_pt'
+         ) INTO has_new_pt;
 
          SELECT EXISTS (
            SELECT 1 FROM information_schema.columns
            WHERE table_name = tbl AND column_name = 'appearance_padding_bottom'
          ) INTO has_old_pb;
 
-         -- Rename columns if old names exist
+         SELECT EXISTS (
+           SELECT 1 FROM information_schema.columns
+           WHERE table_name = tbl AND column_name = 'appearance_pb'
+         ) INTO has_new_pb;
+
+         -- Handle appearance_bg_variant
          IF has_old_bg_variant THEN
            EXECUTE format('ALTER TABLE %I RENAME COLUMN appearance_background_variant TO appearance_bg_variant', tbl);
+         ELSIF NOT has_new_bg_variant THEN
+           -- Column doesn't exist at all, create it
+           EXECUTE format('ALTER TABLE %I ADD COLUMN appearance_bg_variant text', tbl);
          END IF;
 
+         -- Handle appearance_custom_bg_color
          IF has_old_custom_bg THEN
            EXECUTE format('ALTER TABLE %I RENAME COLUMN appearance_custom_background_color TO appearance_custom_bg_color', tbl);
+         ELSIF NOT has_new_custom_bg THEN
+           EXECUTE format('ALTER TABLE %I ADD COLUMN appearance_custom_bg_color text', tbl);
          END IF;
 
+         -- Handle appearance_pt
          IF has_old_pt THEN
            EXECUTE format('ALTER TABLE %I RENAME COLUMN appearance_padding_top TO appearance_pt', tbl);
+         ELSIF NOT has_new_pt THEN
+           EXECUTE format('ALTER TABLE %I ADD COLUMN appearance_pt text', tbl);
          END IF;
 
+         -- Handle appearance_pb
          IF has_old_pb THEN
            EXECUTE format('ALTER TABLE %I RENAME COLUMN appearance_padding_bottom TO appearance_pb', tbl);
+         ELSIF NOT has_new_pb THEN
+           EXECUTE format('ALTER TABLE %I ADD COLUMN appearance_pb text', tbl);
          END IF;
        END IF;
      END LOOP;
    END $$;
   `)
-
-  // Now let Payload's schema builder create any missing columns via the normal sync process
-  // This happens automatically after migrations run
 }
 
 export async function down({ db }: MigrateDownArgs): Promise<void> {
