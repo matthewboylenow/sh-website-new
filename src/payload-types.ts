@@ -703,19 +703,19 @@ export interface HeroBasicBlock {
     /**
      * Choose an entrance animation for this block
      */
-    animationPreset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
     /**
-     * Delay before animation starts
+     * Delay before animation starts (multiples of 100ms recommended)
      */
-    animationDelay?: number | null;
+    delay?: number | null;
     /**
-     * Animation duration
+     * Animation duration (multiples of 100ms recommended)
      */
-    animationDuration?: number | null;
+    duration?: number | null;
     /**
      * Only animate on first scroll into view (recommended)
      */
-    animateOnce?: boolean | null;
+    once?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -955,19 +955,19 @@ export interface RichTextSectionBlock {
     /**
      * Choose an entrance animation for this block
      */
-    animationPreset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
     /**
-     * Delay before animation starts
+     * Delay before animation starts (multiples of 100ms recommended)
      */
-    animationDelay?: number | null;
+    delay?: number | null;
     /**
-     * Animation duration
+     * Animation duration (multiples of 100ms recommended)
      */
-    animationDuration?: number | null;
+    duration?: number | null;
     /**
      * Only animate on first scroll into view (recommended)
      */
-    animateOnce?: boolean | null;
+    once?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1226,19 +1226,19 @@ export interface CTAFullWidthBlock {
     /**
      * Choose an entrance animation for this block
      */
-    animationPreset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
     /**
-     * Delay before animation starts
+     * Delay before animation starts (multiples of 100ms recommended)
      */
-    animationDelay?: number | null;
+    delay?: number | null;
     /**
-     * Animation duration
+     * Animation duration (multiples of 100ms recommended)
      */
-    animationDuration?: number | null;
+    duration?: number | null;
     /**
      * Only animate on first scroll into view (recommended)
      */
-    animateOnce?: boolean | null;
+    once?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1407,19 +1407,19 @@ export interface CardGridBlock {
     /**
      * Choose an entrance animation for this block
      */
-    animationPreset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
     /**
-     * Delay before animation starts
+     * Delay before animation starts (multiples of 100ms recommended)
      */
-    animationDelay?: number | null;
+    delay?: number | null;
     /**
-     * Animation duration
+     * Animation duration (multiples of 100ms recommended)
      */
-    animationDuration?: number | null;
+    duration?: number | null;
     /**
      * Only animate on first scroll into view (recommended)
      */
-    animateOnce?: boolean | null;
+    once?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1984,19 +1984,19 @@ export interface TestimonialBlock {
     /**
      * Choose an entrance animation for this block
      */
-    animationPreset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
     /**
-     * Delay before animation starts
+     * Delay before animation starts (multiples of 100ms recommended)
      */
-    animationDelay?: number | null;
+    delay?: number | null;
     /**
-     * Animation duration
+     * Animation duration (multiples of 100ms recommended)
      */
-    animationDuration?: number | null;
+    duration?: number | null;
     /**
      * Only animate on first scroll into view (recommended)
      */
-    animateOnce?: boolean | null;
+    once?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -3901,10 +3901,10 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
   animation?:
     | T
     | {
-        animationPreset?: T;
-        animationDelay?: T;
-        animationDuration?: T;
-        animateOnce?: T;
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
       };
   blockName?: T;
   id?: T;
@@ -3995,10 +3995,10 @@ export interface RichTextSectionBlockSelect<T extends boolean = true> {
   animation?:
     | T
     | {
-        animationPreset?: T;
-        animationDelay?: T;
-        animationDuration?: T;
-        animateOnce?: T;
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
       };
   blockName?: T;
   id?: T;
@@ -4100,10 +4100,10 @@ export interface CTAFullWidthBlockSelect<T extends boolean = true> {
   animation?:
     | T
     | {
-        animationPreset?: T;
-        animationDelay?: T;
-        animationDuration?: T;
-        animateOnce?: T;
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
       };
   blockName?: T;
   id?: T;
@@ -4170,10 +4170,10 @@ export interface CardGridBlockSelect<T extends boolean = true> {
   animation?:
     | T
     | {
-        animationPreset?: T;
-        animationDelay?: T;
-        animationDuration?: T;
-        animateOnce?: T;
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
       };
   blockName?: T;
   id?: T;
@@ -4373,10 +4373,10 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
   animation?:
     | T
     | {
-        animationPreset?: T;
-        animationDelay?: T;
-        animationDuration?: T;
-        animateOnce?: T;
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
       };
   blockName?: T;
   id?: T;

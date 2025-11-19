@@ -31,18 +31,18 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
 }) => {
   const ref = React.useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, {
-    once: animation?.animateOnce ?? true,
+    once: animation?.once ?? true,
     amount: 0.2, // Trigger when 20% of element is visible
   })
 
   // If no animation preset or 'none', render children without animation
-  if (!animation?.animationPreset || animation.animationPreset === 'none') {
+  if (!animation?.preset || animation.preset === 'none') {
     return <>{children}</>
   }
 
   // Get animation settings with defaults
-  const delay = (animation.animationDelay ?? 0) / 1000 // Convert ms to seconds
-  const duration = (animation.animationDuration ?? 600) / 1000 // Convert ms to seconds
+  const delay = (animation.delay ?? 0) / 1000 // Convert ms to seconds
+  const duration = (animation.duration ?? 600) / 1000 // Convert ms to seconds
 
   // Define animation variants based on preset
   const variants = {
@@ -60,7 +60,7 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
     },
   }
 
-  const selectedVariant = variants[animation.animationPreset as keyof typeof variants]
+  const selectedVariant = variants[animation.preset as keyof typeof variants]
 
   if (!selectedVariant) {
     return <>{children}</>

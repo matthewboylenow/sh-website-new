@@ -9,6 +9,9 @@ import type { Field, GroupField } from 'payload'
  * - Animate once or repeat on scroll
  *
  * Similar to Breakdance's entrance animations for page builder UX.
+ *
+ * NOTE: Field names are shortened (preset, delay, duration, once) to avoid
+ * PostgreSQL's 63-character limit for identifiers when nested in blocks.
  */
 
 export type AnimationPreset = 'none' | 'fadeIn' | 'fadeUp' | 'fadeInScale'
@@ -38,7 +41,7 @@ export const animationSettings = (
 
   if (presets) {
     fields.push({
-      name: 'animationPreset',
+      name: 'preset',
       type: 'select',
       label: 'Animation Preset',
       defaultValue: 'none',
@@ -71,7 +74,7 @@ export const animationSettings = (
       type: 'row',
       fields: [
         {
-          name: 'animationDelay',
+          name: 'delay',
           type: 'number',
           label: 'Delay (ms)',
           defaultValue: 0,
@@ -80,11 +83,11 @@ export const animationSettings = (
           admin: {
             width: '50%',
             description: 'Delay before animation starts (multiples of 100ms recommended)',
-            condition: (data, siblingData) => siblingData?.animationPreset !== 'none',
+            condition: (data, siblingData) => siblingData?.preset !== 'none',
           },
         },
         {
-          name: 'animationDuration',
+          name: 'duration',
           type: 'number',
           label: 'Duration (ms)',
           defaultValue: 600,
@@ -93,7 +96,7 @@ export const animationSettings = (
           admin: {
             width: '50%',
             description: 'Animation duration (multiples of 100ms recommended)',
-            condition: (data, siblingData) => siblingData?.animationPreset !== 'none',
+            condition: (data, siblingData) => siblingData?.preset !== 'none',
           },
         },
       ],
@@ -102,13 +105,13 @@ export const animationSettings = (
 
   if (behavior) {
     fields.push({
-      name: 'animateOnce',
+      name: 'once',
       type: 'checkbox',
       defaultValue: true,
       label: 'Animate Once',
       admin: {
         description: 'Only animate on first scroll into view (recommended)',
-        condition: (data, siblingData) => siblingData?.animationPreset !== 'none',
+        condition: (data, siblingData) => siblingData?.preset !== 'none',
       },
     })
   }
@@ -131,10 +134,10 @@ export const animationSettings = (
  */
 export interface AnimationSettingsType {
   animation?: {
-    animationPreset?: AnimationPreset | null
-    animationDelay?: number | null
-    animationDuration?: number | null
-    animateOnce?: boolean | null
+    preset?: AnimationPreset | null
+    delay?: number | null
+    duration?: number | null
+    once?: boolean | null
   } | null
 }
 
