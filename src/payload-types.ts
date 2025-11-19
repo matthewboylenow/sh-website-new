@@ -79,6 +79,7 @@ export interface Config {
     lifelines: Lifeline;
     staff: Staff;
     'search-items': SearchItem;
+    patterns: Pattern;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -108,6 +109,7 @@ export interface Config {
     lifelines: LifelinesSelect<false> | LifelinesSelect<true>;
     staff: StaffSelect<false> | StaffSelect<true>;
     'search-items': SearchItemsSelect<false> | SearchItemsSelect<true>;
+    patterns: PatternsSelect<false> | PatternsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -585,6 +587,10 @@ export interface HeroBasicBlock {
    */
   showWelcomeCard?: boolean | null;
   /**
+   * Control the width of the welcome card (default: page width matches logo to Give button)
+   */
+  welcomeCardWidth?: ('narrow' | 'page' | 'medium' | 'wide') | null;
+  /**
    * Small text above the welcome title (e.g., "WELCOME")
    */
   welcomeEyebrow?: string | null;
@@ -645,18 +651,6 @@ export interface HeroBasicBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -668,6 +662,60 @@ export interface HeroBasicBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
+  };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    animationPreset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts
+     */
+    animationDelay?: number | null;
+    /**
+     * Animation duration
+     */
+    animationDuration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    animateOnce?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -773,18 +821,6 @@ export interface HeroWithStatsBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -800,6 +836,18 @@ export interface HeroWithStatsBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -851,18 +899,6 @@ export interface RichTextSectionBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -878,6 +914,60 @@ export interface RichTextSectionBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
+  };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    animationPreset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts
+     */
+    animationDelay?: number | null;
+    /**
+     * Animation duration
+     */
+    animationDuration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    animateOnce?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -977,18 +1067,6 @@ export interface ColumnsBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1004,6 +1082,18 @@ export interface ColumnsBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1080,18 +1170,6 @@ export interface CTAFullWidthBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1107,6 +1185,60 @@ export interface CTAFullWidthBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
+  };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    animationPreset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts
+     */
+    animationDelay?: number | null;
+    /**
+     * Animation duration
+     */
+    animationDuration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    animateOnce?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1219,18 +1351,6 @@ export interface CardGridBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1246,6 +1366,60 @@ export interface CardGridBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
+  };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    animationPreset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts
+     */
+    animationDelay?: number | null;
+    /**
+     * Animation duration
+     */
+    animationDuration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    animateOnce?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1321,18 +1495,6 @@ export interface BentoGridBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1348,6 +1510,18 @@ export interface BentoGridBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   /**
    * Add a subtle decorative pattern to the background
@@ -1448,18 +1622,6 @@ export interface EventListBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1475,6 +1637,18 @@ export interface EventListBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1529,18 +1703,6 @@ export interface PostListBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1556,6 +1718,18 @@ export interface PostListBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1599,18 +1773,6 @@ export interface BulletinListBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1626,6 +1788,18 @@ export interface BulletinListBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1681,18 +1855,6 @@ export interface MediaListBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1708,6 +1870,18 @@ export interface MediaListBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1754,18 +1928,6 @@ export interface TestimonialBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1781,6 +1943,60 @@ export interface TestimonialBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
+  };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    animationPreset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts
+     */
+    animationDelay?: number | null;
+    /**
+     * Animation duration
+     */
+    animationDuration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    animateOnce?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1832,18 +2048,6 @@ export interface StoryHighlightBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Extend block to full viewport width (no container)
      */
     fullWidth?: boolean | null;
@@ -1855,6 +2059,18 @@ export interface StoryHighlightBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1909,18 +2125,6 @@ export interface FAQAccordionBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1936,6 +2140,18 @@ export interface FAQAccordionBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1985,18 +2201,6 @@ export interface VideoEmbedBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -2012,6 +2216,18 @@ export interface VideoEmbedBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -2069,18 +2285,6 @@ export interface FormEmbedBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -2096,6 +2300,18 @@ export interface FormEmbedBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -2136,18 +2352,6 @@ export interface DividerBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Text alignment for this block
      */
     alignment?: ('left' | 'center' | 'right') | null;
@@ -2163,6 +2367,18 @@ export interface DividerBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -2186,18 +2402,6 @@ export interface CustomCodeBlock {
    */
   appearance?: {
     /**
-     * Choose the background color for this block
-     */
-    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
-    /**
-     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
-     */
-    customBgColor?: string | null;
-    /**
-     * Override text color for this block
-     */
-    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
-    /**
      * Extend block to full viewport width (no container)
      */
     fullWidth?: boolean | null;
@@ -2209,6 +2413,18 @@ export interface CustomCodeBlock {
      * Bottom padding
      */
     pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -3178,6 +3394,59 @@ export interface SearchItem {
   createdAt: string;
 }
 /**
+ * Reusable page layouts that can be inserted into pages
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "patterns".
+ */
+export interface Pattern {
+  id: number;
+  /**
+   * Descriptive name for this pattern (e.g., "Standard Ministry Page")
+   */
+  name: string;
+  /**
+   * What is this pattern for? When should editors use it?
+   */
+  description?: string | null;
+  /**
+   * Build a reusable layout using blocks (same as page content)
+   */
+  layout: (
+    | HeroBasicBlock
+    | HeroWithStatsBlock
+    | RichTextSectionBlock
+    | ColumnsBlock
+    | CTAFullWidthBlock
+    | AlertBannerBlock
+    | CardGridBlock
+    | BentoGridBlock
+    | EventListBlock
+    | PostListBlock
+    | BulletinListBlock
+    | MediaListBlock
+    | TestimonialBlock
+    | StoryHighlightBlock
+    | FAQAccordionBlock
+    | VideoEmbedBlock
+    | FormEmbedBlock
+    | SpacerBlock
+    | DividerBlock
+    | CustomCodeBlock
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+  )[];
+  /**
+   * Categorize this pattern to help editors find it
+   */
+  category?: ('ministry' | 'event' | 'about' | 'landing' | 'other') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -3416,6 +3685,10 @@ export interface PayloadLockedDocument {
         value: number | SearchItem;
       } | null)
     | ({
+        relationTo: 'patterns';
+        value: number | Pattern;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -3581,6 +3854,7 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
   showMissionStatement?: T;
   missionAnimationMode?: T;
   showWelcomeCard?: T;
+  welcomeCardWidth?: T;
   welcomeEyebrow?: T;
   welcomeTitle?: T;
   welcomeSubtitle?: T;
@@ -3609,12 +3883,28 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
+      };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        animationPreset?: T;
+        animationDelay?: T;
+        animationDuration?: T;
+        animateOnce?: T;
       };
   blockName?: T;
   id?: T;
@@ -3658,13 +3948,13 @@ export interface HeroWithStatsBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   blockName?: T;
   id?: T;
@@ -3686,13 +3976,29 @@ export interface RichTextSectionBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
+      };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        animationPreset?: T;
+        animationDelay?: T;
+        animationDuration?: T;
+        animateOnce?: T;
       };
   blockName?: T;
   id?: T;
@@ -3736,13 +4042,13 @@ export interface ColumnsBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   blockName?: T;
   id?: T;
@@ -3775,13 +4081,29 @@ export interface CTAFullWidthBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
+      };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        animationPreset?: T;
+        animationDelay?: T;
+        animationDuration?: T;
+        animateOnce?: T;
       };
   blockName?: T;
   id?: T;
@@ -3829,13 +4151,29 @@ export interface CardGridBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
+      };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        animationPreset?: T;
+        animationDelay?: T;
+        animationDuration?: T;
+        animateOnce?: T;
       };
   blockName?: T;
   id?: T;
@@ -3867,13 +4205,13 @@ export interface BentoGridBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   decorativePattern?:
     | T
@@ -3909,13 +4247,13 @@ export interface EventListBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   blockName?: T;
   id?: T;
@@ -3938,13 +4276,13 @@ export interface PostListBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   blockName?: T;
   id?: T;
@@ -3965,13 +4303,13 @@ export interface BulletinListBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   blockName?: T;
   id?: T;
@@ -3992,13 +4330,13 @@ export interface MediaListBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   blockName?: T;
   id?: T;
@@ -4016,13 +4354,29 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
+      };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        animationPreset?: T;
+        animationDelay?: T;
+        animationDuration?: T;
+        animateOnce?: T;
       };
   blockName?: T;
   id?: T;
@@ -4042,12 +4396,12 @@ export interface StoryHighlightBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   blockName?: T;
   id?: T;
@@ -4075,13 +4429,13 @@ export interface FAQAccordionBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   blockName?: T;
   id?: T;
@@ -4099,13 +4453,13 @@ export interface VideoEmbedBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   blockName?: T;
   id?: T;
@@ -4125,13 +4479,13 @@ export interface FormEmbedBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   blockName?: T;
   id?: T;
@@ -4156,13 +4510,13 @@ export interface DividerBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         alignment?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   blockName?: T;
   id?: T;
@@ -4177,12 +4531,12 @@ export interface CustomCodeBlockSelect<T extends boolean = true> {
   appearance?:
     | T
     | {
-        bgVariant?: T;
-        customBgColor?: T;
-        textColor?: T;
         fullWidth?: T;
         pt?: T;
         pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
       };
   id?: T;
   blockName?: T;
@@ -4623,6 +4977,46 @@ export interface SearchItemsSelect<T extends boolean = true> {
   sourceCollection?: T;
   sourceId?: T;
   lastSyncedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "patterns_select".
+ */
+export interface PatternsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  layout?:
+    | T
+    | {
+        heroBasic?: T | HeroBasicBlockSelect<T>;
+        heroWithStats?: T | HeroWithStatsBlockSelect<T>;
+        richTextSection?: T | RichTextSectionBlockSelect<T>;
+        columns?: T | ColumnsBlockSelect<T>;
+        ctaFullWidth?: T | CTAFullWidthBlockSelect<T>;
+        alertBanner?: T | AlertBannerBlockSelect<T>;
+        cardGrid?: T | CardGridBlockSelect<T>;
+        bentoGrid?: T | BentoGridBlockSelect<T>;
+        eventList?: T | EventListBlockSelect<T>;
+        postList?: T | PostListBlockSelect<T>;
+        bulletinList?: T | BulletinListBlockSelect<T>;
+        mediaList?: T | MediaListBlockSelect<T>;
+        testimonial?: T | TestimonialBlockSelect<T>;
+        storyHighlight?: T | StoryHighlightBlockSelect<T>;
+        faqAccordion?: T | FAQAccordionBlockSelect<T>;
+        videoEmbed?: T | VideoEmbedBlockSelect<T>;
+        formEmbed?: T | FormEmbedBlockSelect<T>;
+        spacer?: T | SpacerBlockSelect<T>;
+        divider?: T | DividerBlockSelect<T>;
+        customCode?: T | CustomCodeBlockSelect<T>;
+        cta?: T | CallToActionBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+      };
+  category?: T;
   updatedAt?: T;
   createdAt?: T;
 }

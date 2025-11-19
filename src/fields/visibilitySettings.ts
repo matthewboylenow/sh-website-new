@@ -130,15 +130,6 @@ export const visibilitySettings = (
           },
         ],
       },
-      {
-        type: 'ui',
-        name: 'seasonalHelp',
-        admin: {
-          components: {
-            Field: () => null,
-          },
-        },
-      },
     )
   }
 

@@ -85,7 +85,7 @@ export const EditorHelpOverlay: React.FC = () => {
               label sections for easy identification in the Block Navigator.
             </p>
             <p style={styles.text}>
-              <strong>Example:</strong> "Welcome Hero", "Ministries Grid", "Contact CTA"
+              <strong>Example:</strong> &ldquo;Welcome Hero&rdquo;, &ldquo;Ministries Grid&rdquo;, &ldquo;Contact CTA&rdquo;
             </p>
           </section>
 
@@ -198,7 +198,7 @@ export const EditorHelpOverlay: React.FC = () => {
               </li>
               <li style={styles.listItem}>Select a pattern from the dropdown</li>
               <li style={styles.listItem}>
-                The pattern's blocks will be copied into your page
+                The pattern&apos;s blocks will be copied into your page
               </li>
             </ol>
             <p style={styles.text}>

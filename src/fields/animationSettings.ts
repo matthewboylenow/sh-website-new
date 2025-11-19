@@ -77,10 +77,9 @@ export const animationSettings = (
           defaultValue: 0,
           min: 0,
           max: 2000,
-          step: 100,
           admin: {
             width: '50%',
-            description: 'Delay before animation starts',
+            description: 'Delay before animation starts (multiples of 100ms recommended)',
             condition: (data, siblingData) => siblingData?.animationPreset !== 'none',
           },
         },
@@ -91,10 +90,9 @@ export const animationSettings = (
           defaultValue: 600,
           min: 200,
           max: 2000,
-          step: 100,
           admin: {
             width: '50%',
-            description: 'Animation duration',
+            description: 'Animation duration (multiples of 100ms recommended)',
             condition: (data, siblingData) => siblingData?.animationPreset !== 'none',
           },
         },
