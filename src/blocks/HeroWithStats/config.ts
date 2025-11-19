@@ -1,13 +1,8 @@
 import type { Block } from 'payload'
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { linkGroup } from '@/fields/linkGroup'
+import { defaultLexical } from '@/fields/defaultLexical'
 
 export const HeroWithStats: Block = {
   slug: 'heroWithStats',
@@ -38,15 +33,7 @@ export const HeroWithStats: Block = {
       name: 'subtitle',
       type: 'richText',
       label: 'Subtitle',
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            FixedToolbarFeature(),
-            InlineToolbarFeature(),
-          ]
-        },
-      }),
+      editor: defaultLexical,
       admin: {
         description: 'Brief description or introduction',
       },

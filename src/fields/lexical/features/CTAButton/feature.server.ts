@@ -14,6 +14,7 @@ export const CTAButtonFeature = () => {
       }
     },
     key: 'ctaButton',
+    serverFeatureProps: null,
     clientFeature: {
       __bundled: false,
       clientFeatureProps: null,

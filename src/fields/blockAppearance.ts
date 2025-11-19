@@ -205,11 +205,72 @@ export const blockAppearance = (
     })
   }
 
+  // Organize fields into logical groups for better UX (Breakdance-style)
+  const organizedFields: Field[] = []
+
+  // Section Layout group
+  const layoutFields: Field[] = []
+  if (alignment) {
+    layoutFields.push(
+      fields.find((f) => 'name' in f && f.name === 'alignment') as Field,
+    )
+  }
+  if (fullWidth) {
+    layoutFields.push(
+      fields.find((f) => 'name' in f && f.name === 'fullWidth') as Field,
+    )
+  }
+  if (padding) {
+    layoutFields.push(
+      fields.find((f) => f.type === 'row' && 'fields' in f) as Field,
+    )
+  }
+
+  if (layoutFields.filter(Boolean).length > 0) {
+    organizedFields.push({
+      type: 'collapsible',
+      label: 'Section Layout',
+      admin: {
+        description: 'Controls width, spacing, and alignment of this section',
+        initCollapsed: false,
+      },
+      fields: layoutFields.filter(Boolean),
+    })
+  }
+
+  // Background & Style group
+  const styleFields: Field[] = []
+  if (backgroundVariant) {
+    styleFields.push(
+      fields.find((f) => 'name' in f && f.name === 'bgVariant') as Field,
+    )
+    styleFields.push(
+      fields.find((f) => 'name' in f && f.name === 'customBgColor') as Field,
+    )
+  }
+  if (textColor) {
+    styleFields.push(
+      fields.find((f) => 'name' in f && f.name === 'textColor') as Field,
+    )
+  }
+
+  if (styleFields.filter(Boolean).length > 0) {
+    organizedFields.push({
+      type: 'collapsible',
+      label: 'Background & Style',
+      admin: {
+        description: 'Choose section background styling and text colors',
+        initCollapsed: false,
+      },
+      fields: styleFields.filter(Boolean),
+    })
+  }
+
   const appearanceGroup: GroupField = {
     name: 'appearance',
     type: 'group',
     label: 'Block Appearance',
-    fields,
+    fields: organizedFields.length > 0 ? organizedFields : fields,
     admin: {
       description: 'Control the visual appearance of this block',
     },

@@ -7,6 +7,8 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
+import { visibilitySettings } from '@/fields/visibilitySettings'
+import { animationSettings } from '@/fields/animationSettings'
 
 const manualCardFields: Field[] = [
   {
@@ -196,6 +198,16 @@ export const CardGrid: Block = {
       },
     },
     blockAppearance(),
+    visibilitySettings({
+      deviceVisibility: true,
+      audienceTargeting: true,
+      seasonalDisplay: false,
+    }),
+    animationSettings({
+      presets: true,
+      timing: true,
+      behavior: true,
+    }),
     blockName,
   ],
 }

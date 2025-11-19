@@ -20,6 +20,7 @@ import { Ministries } from './collections/Ministries'
 import { LifeLines } from './collections/LifeLines'
 import { Staff } from './collections/Staff'
 import { SearchItems } from './collections/SearchItems'
+import { Patterns } from './collections/Patterns'
 
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
@@ -90,6 +91,7 @@ export default buildConfig({
     LifeLines,
     Staff,
     SearchItems,
+    Patterns,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, GlobalSettings],

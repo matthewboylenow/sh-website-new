@@ -1,13 +1,9 @@
 import type { Block, Field } from 'payload'
-import {
-  FixedToolbarFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { appearanceOptions } from '@/fields/link'
 import { decorativePattern } from '@/fields/decorativePattern'
+import { defaultLexical } from '@/fields/defaultLexical'
 
 const bentoItemFields: Field[] = [
   {
@@ -169,11 +165,7 @@ export const BentoGrid: Block = {
       name: 'subtitle',
       type: 'richText',
       label: 'Section Subtitle',
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
-        },
-      }),
+      editor: defaultLexical,
     },
     {
       name: 'items',

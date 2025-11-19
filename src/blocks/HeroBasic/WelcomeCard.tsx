@@ -4,6 +4,7 @@ import { CMSLink } from '@/components/Link'
 import type { HeroBasicBlock } from '@/payload-types'
 
 interface WelcomeCardProps {
+  width?: 'narrow' | 'page' | 'medium' | 'wide'
   eyebrow?: string
   title?: string
   subtitle?: string
@@ -12,19 +13,29 @@ interface WelcomeCardProps {
 }
 
 export const WelcomeCard: React.FC<WelcomeCardProps> = ({
+  width = 'page',
   eyebrow = 'WELCOME',
   title = "We're glad you're here.",
   subtitle,
   buttons,
   className,
 }) => {
+  // Width mapping: page width matches the main container (logo to Give button)
+  const widthClasses = {
+    narrow: 'w-full px-6 md:px-0 md:w-[60%]',
+    page: 'w-full px-6 md:px-0 md:max-w-7xl', // Matches main container width
+    medium: 'w-full px-6 md:px-0 md:w-[85%]',
+    wide: 'w-full px-6 md:px-0 md:w-[95%]',
+  }[width]
+
   return (
     <div
       className={cn(
         // Positioning - float at bottom with negative margin
         'relative -mb-16 md:-mb-20',
-        // Container width
-        'w-full px-6 md:px-0 md:w-[85%] lg:w-[70%] mx-auto',
+        // Container width - dynamic based on width prop
+        widthClasses,
+        'mx-auto',
         className,
       )}
     >

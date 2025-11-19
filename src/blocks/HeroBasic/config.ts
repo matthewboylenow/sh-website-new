@@ -1,14 +1,11 @@
 import type { Block } from 'payload'
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { linkGroup } from '@/fields/linkGroup'
 import { typography } from '@/fields/typography'
+import { defaultLexical } from '@/fields/defaultLexical'
+import { visibilitySettings } from '@/fields/visibilitySettings'
+import { animationSettings } from '@/fields/animationSettings'
 
 export const HeroBasic: Block = {
   slug: 'heroBasic',
@@ -39,15 +36,7 @@ export const HeroBasic: Block = {
       name: 'subtitle',
       type: 'richText',
       label: 'Subtitle',
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            FixedToolbarFeature(),
-            InlineToolbarFeature(),
-          ]
-        },
-      }),
+      editor: defaultLexical,
       admin: {
         description: '1-2 sentences of welcoming text',
       },
@@ -175,6 +164,34 @@ export const HeroBasic: Block = {
           },
         },
         {
+          name: 'welcomeCardWidth',
+          type: 'select',
+          label: 'Welcome Card Width',
+          defaultValue: 'page',
+          options: [
+            {
+              label: 'Narrow (60%)',
+              value: 'narrow',
+            },
+            {
+              label: 'Page Width (Container)',
+              value: 'page',
+            },
+            {
+              label: 'Medium (85%)',
+              value: 'medium',
+            },
+            {
+              label: 'Wide (95%)',
+              value: 'wide',
+            },
+          ],
+          admin: {
+            condition: (data, siblingData) => siblingData?.showWelcomeCard,
+            description: 'Control the width of the welcome card (default: page width matches logo to Give button)',
+          },
+        },
+        {
           name: 'welcomeEyebrow',
           type: 'text',
           defaultValue: 'WELCOME',
@@ -241,6 +258,16 @@ export const HeroBasic: Block = {
       alignment: true,
       fullWidth: false,
       padding: true,
+    }),
+    visibilitySettings({
+      deviceVisibility: true,
+      audienceTargeting: true,
+      seasonalDisplay: false,
+    }),
+    animationSettings({
+      presets: true,
+      timing: true,
+      behavior: true,
     }),
     blockName,
   ],

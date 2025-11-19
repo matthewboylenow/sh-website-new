@@ -1,11 +1,7 @@
 import type { Block } from 'payload'
-import {
-  FixedToolbarFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
+import { defaultLexical } from '@/fields/defaultLexical'
 
 export const EventList: Block = {
   slug: 'eventList',
@@ -25,11 +21,7 @@ export const EventList: Block = {
       name: 'subtitle',
       type: 'richText',
       label: 'Section Subtitle',
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
-        },
-      }),
+      editor: defaultLexical,
     },
     {
       name: 'mode',

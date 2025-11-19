@@ -145,6 +145,19 @@
 }
 
 @layer utilities {
+  /* RichText color utilities - mapped from Lexical TextColorFeature */
+  .text-brand {
+    color: hsl(var(--sh-color-primary));
+  }
+
+  .text-muted {
+    color: hsl(var(--sh-color-text-muted));
+  }
+
+  .text-accent {
+    color: hsl(var(--sh-color-accent-gold));
+  }
+
   /* Glassmorphism utility classes */
   .glass {
     background: rgba(255, 255, 255, 0.9);

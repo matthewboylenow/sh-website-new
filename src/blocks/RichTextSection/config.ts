@@ -8,6 +8,8 @@ import {
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { typography } from '@/fields/typography'
+import { visibilitySettings } from '@/fields/visibilitySettings'
+import { animationSettings } from '@/fields/animationSettings'
 
 export const RichTextSection: Block = {
   slug: 'richTextSection',
@@ -65,6 +67,16 @@ export const RichTextSection: Block = {
       alignment: true,
       fullWidth: true,
       padding: true,
+    }),
+    visibilitySettings({
+      deviceVisibility: true,
+      audienceTargeting: true,
+      seasonalDisplay: false,
+    }),
+    animationSettings({
+      presets: true,
+      timing: true,
+      behavior: true,
     }),
     blockName,
   ],

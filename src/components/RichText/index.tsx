@@ -11,7 +11,6 @@ import {
   RichText as ConvertRichText,
 } from '@payloadcms/richtext-lexical/react'
 import type { SerializedLexicalNode } from 'lexical'
-import { TypographyJSXConverters } from 'payload-lexical-typography/converters'
 
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 
@@ -24,6 +23,7 @@ import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { CTAButton } from './CTAButton'
 import type { CTAButtonAppearance } from './CTAButton'
+import { TextColorJSXConverter } from './textColorConverter'
 import { cn } from '@/utilities/ui'
 
 type SerializedCTAButtonNode = SerializedLexicalNode & {
@@ -51,7 +51,7 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
-  ...TypographyJSXConverters,
+  ...TextColorJSXConverter, // Custom text color converter with CSS classes
   ctaButton: ({ node }) => {
     if (node.type === 'ctaButton') {
       return (

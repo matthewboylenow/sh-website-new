@@ -23,6 +23,7 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
   showMissionStatement,
   missionAnimationMode,
   showWelcomeCard,
+  welcomeCardWidth = 'page',
   welcomeEyebrow,
   welcomeTitle,
   welcomeSubtitle,
@@ -172,6 +173,7 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
         {/* Welcome Card - Floats at bottom */}
         {showWelcomeCard && (
           <WelcomeCard
+            width={welcomeCardWidth ?? 'page'}
             eyebrow={welcomeEyebrow ?? undefined}
             title={welcomeTitle ?? undefined}
             subtitle={welcomeSubtitle ?? undefined}
