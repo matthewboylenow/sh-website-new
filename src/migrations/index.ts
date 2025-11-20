@@ -21,6 +21,7 @@ import * as migration_20251120_000004_add_appearance_to_cta_block from './202511
 import * as migration_20251120_000005_add_patterns_to_locked_docs_rels from './20251120_000005_add_patterns_to_locked_docs_rels';
 import * as migration_20251120_000009_add_custom_svg_force from './20251120_000009_add_custom_svg_force';
 import * as migration_20251120_000010_fix_custom_svg_column from './20251120_000010_fix_custom_svg_column';
+import * as migration_20251120_000011_add_custom_svg_direct from './20251120_000011_add_custom_svg_direct';
 
 export const migrations = [
   {
@@ -137,5 +138,10 @@ export const migrations = [
     up: migration_20251120_000010_fix_custom_svg_column.up,
     down: migration_20251120_000010_fix_custom_svg_column.down,
     name: '20251120_000010_fix_custom_svg_column'
+  },
+  {
+    up: migration_20251120_000011_add_custom_svg_direct.up,
+    down: migration_20251120_000011_add_custom_svg_direct.down,
+    name: '20251120_000011_add_custom_svg_direct'
   },
 ];
