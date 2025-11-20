@@ -6,6 +6,7 @@ import { typography } from '@/fields/typography'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { visibilitySettings } from '@/fields/visibilitySettings'
 import { animationSettings } from '@/fields/animationSettings'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 export const HeroBasic: Block = {
   slug: 'heroBasic',
@@ -258,6 +259,9 @@ export const HeroBasic: Block = {
       alignment: true,
       fullWidth: false,
       padding: true,
+    }),
+    decorativePattern({
+      enablePatterns: true,
     }),
     visibilitySettings({
       deviceVisibility: true,

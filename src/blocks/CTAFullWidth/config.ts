@@ -10,6 +10,7 @@ import { blockName } from '@/fields/blockName'
 import { linkGroup } from '@/fields/linkGroup'
 import { visibilitySettings } from '@/fields/visibilitySettings'
 import { animationSettings } from '@/fields/animationSettings'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 export const CTAFullWidth: Block = {
   slug: 'ctaFullWidth',
@@ -91,6 +92,9 @@ export const CTAFullWidth: Block = {
       alignment: true,
       fullWidth: true,
       padding: true,
+    }),
+    decorativePattern({
+      enablePatterns: true,
     }),
     visibilitySettings({
       deviceVisibility: true,

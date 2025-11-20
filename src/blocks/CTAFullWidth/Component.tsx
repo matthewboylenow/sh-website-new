@@ -6,6 +6,7 @@ import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
+import { DecorativePattern } from '@/components/DecorativePattern'
 
 export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
   eyebrow,
@@ -15,6 +16,7 @@ export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
   backgroundOverlay,
   links,
   appearance,
+  decorativePattern,
 }) => {
   const hasBackgroundImage = Boolean(backgroundImage)
   const textColorClass = getTextColorClass(appearance)
@@ -30,11 +32,25 @@ export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
   return (
     <section
       className={cn(
-        'relative',
+        'relative overflow-hidden',
         blockAppearanceToClasses(appearance),
         hasBackgroundImage && 'text-white',
       )}
     >
+      {/* Decorative Pattern */}
+      {decorativePattern?.enabled && (
+        <DecorativePattern
+          type={decorativePattern.type || 'text'}
+          text={decorativePattern.text || undefined}
+          opacity={decorativePattern.opacity || undefined}
+          size={decorativePattern.size || undefined}
+          repeatCount={decorativePattern.repeatCount || undefined}
+          color={decorativePattern.color || undefined}
+          position={decorativePattern.position || undefined}
+          rotation={decorativePattern.rotation || undefined}
+        />
+      )}
+
       {/* Background Image */}
       {hasBackgroundImage && typeof backgroundImage === 'object' && (
         <>

@@ -6,6 +6,7 @@ import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
+import { DecorativePattern } from '@/components/DecorativePattern'
 
 /**
  * Convert various video URLs to embed URLs
@@ -38,6 +39,7 @@ export const VideoEmbedBlock: React.FC<VideoEmbedProps> = ({
   description,
   aspectRatio = '16/9',
   appearance,
+  decorativePattern,
 }) => {
   const textColorClass = getTextColorClass(appearance)
   const proseColorClass = getProseColorClass(appearance)
@@ -52,8 +54,22 @@ export const VideoEmbedBlock: React.FC<VideoEmbedProps> = ({
   }[aspectRatio || '16/9'] || 'pb-[56.25%]'
 
   return (
-    <section className={blockAppearanceToClasses(appearance)}>
-      <div className={getContainerClasses(appearance?.fullWidth)}>
+    <section className={cn(blockAppearanceToClasses(appearance), 'relative overflow-hidden')}>
+      {/* Decorative Pattern */}
+      {decorativePattern?.enabled && (
+        <DecorativePattern
+          type={decorativePattern.type || 'text'}
+          text={decorativePattern.text || undefined}
+          opacity={decorativePattern.opacity || undefined}
+          size={decorativePattern.size || undefined}
+          repeatCount={decorativePattern.repeatCount || undefined}
+          color={decorativePattern.color || undefined}
+          position={decorativePattern.position || undefined}
+          rotation={decorativePattern.rotation || undefined}
+        />
+      )}
+
+      <div className={cn(getContainerClasses(appearance?.fullWidth), 'relative z-10')}>
         <div
           className={cn(
             'max-w-4xl',

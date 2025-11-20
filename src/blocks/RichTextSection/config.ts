@@ -10,6 +10,7 @@ import { blockName } from '@/fields/blockName'
 import { typography } from '@/fields/typography'
 import { visibilitySettings } from '@/fields/visibilitySettings'
 import { animationSettings } from '@/fields/animationSettings'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 export const RichTextSection: Block = {
   slug: 'richTextSection',
@@ -67,6 +68,9 @@ export const RichTextSection: Block = {
       alignment: true,
       fullWidth: true,
       padding: true,
+    }),
+    decorativePattern({
+      enablePatterns: true,
     }),
     visibilitySettings({
       deviceVisibility: true,

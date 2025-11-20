@@ -1,6 +1,7 @@
 import type { Block } from 'payload'
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 export const FAQAccordion: Block = {
   slug: 'faqAccordion',
@@ -78,6 +79,7 @@ export const FAQAccordion: Block = {
       fullWidth: true,
       padding: true,
     }),
+    decorativePattern({ enablePatterns: true }),
     blockName,
   ],
 }

@@ -6,6 +6,7 @@ import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
+import { DecorativePattern } from '@/components/DecorativePattern'
 
 export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
   eyebrow,
@@ -20,6 +21,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
   stats,
   minHeight = 'default',
   appearance,
+  decorativePattern,
 }) => {
   const hasBackground = backgroundType && backgroundType !== 'none'
   const textColorClass = getTextColorClass(appearance)
@@ -44,11 +46,25 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
   return (
     <section
       className={cn(
-        'relative',
+        'relative overflow-hidden',
         blockAppearanceToClasses(appearance),
         hasBackground && 'text-white',
       )}
     >
+      {/* Decorative Pattern */}
+      {decorativePattern?.enabled && (
+        <DecorativePattern
+          type={decorativePattern.type || 'text'}
+          text={decorativePattern.text || undefined}
+          opacity={decorativePattern.opacity || undefined}
+          size={decorativePattern.size || undefined}
+          repeatCount={decorativePattern.repeatCount || undefined}
+          color={decorativePattern.color || undefined}
+          position={decorativePattern.position || undefined}
+          rotation={decorativePattern.rotation || undefined}
+        />
+      )}
+
       {/* Background Image */}
       {backgroundType === 'image' && typeof backgroundImage === 'object' && (
         <div className="absolute inset-0 z-0">

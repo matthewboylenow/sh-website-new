@@ -2,6 +2,7 @@ import type { Block } from 'payload'
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { defaultLexical } from '@/fields/defaultLexical'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 export const PostList: Block = {
   slug: 'postList',
@@ -98,6 +99,7 @@ export const PostList: Block = {
       },
     },
     blockAppearance(),
+    decorativePattern({ enablePatterns: true }),
     blockName,
   ],
 }

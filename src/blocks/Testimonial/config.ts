@@ -3,6 +3,7 @@ import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { visibilitySettings } from '@/fields/visibilitySettings'
 import { animationSettings } from '@/fields/animationSettings'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 export const Testimonial: Block = {
   slug: 'testimonial',
@@ -72,6 +73,7 @@ export const Testimonial: Block = {
       fullWidth: true,
       padding: true,
     }),
+    decorativePattern({ enablePatterns: true }),
     visibilitySettings({
       deviceVisibility: true,
       audienceTargeting: true,

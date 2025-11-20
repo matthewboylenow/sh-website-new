@@ -3,6 +3,7 @@ import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { linkGroup } from '@/fields/linkGroup'
 import { defaultLexical } from '@/fields/defaultLexical'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 export const HeroWithStats: Block = {
   slug: 'heroWithStats',
@@ -156,6 +157,7 @@ export const HeroWithStats: Block = {
       fullWidth: true,
       padding: true,
     }),
+    decorativePattern({ enablePatterns: true }),
     blockName,
   ],
 }

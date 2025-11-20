@@ -5,6 +5,7 @@ import { CMSLink } from '@/components/Link'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
 import { getTextColorClass, getProseColorClass, isDarkBackground } from '@/utilities/getTextColorClasses'
+import { DecorativePattern } from '@/components/DecorativePattern'
 
 export const MediaListBlock: React.FC<MediaListProps> = async ({
   title,
@@ -16,6 +17,7 @@ export const MediaListBlock: React.FC<MediaListProps> = async ({
   showDuration = true,
   viewAllUrl,
   appearance,
+  decorativePattern,
 }) => {
   // TODO: Fetch media/podcasts from collection once it's created
   // For now, we'll show a placeholder
@@ -26,8 +28,22 @@ export const MediaListBlock: React.FC<MediaListProps> = async ({
   const isDarkBg = isDarkBackground(appearance)
 
   return (
-    <section className={blockAppearanceToClasses(appearance)}>
-      <div className={getContainerClasses(appearance?.fullWidth)}>
+    <section className={cn(blockAppearanceToClasses(appearance), 'relative overflow-hidden')}>
+      {/* Decorative Pattern */}
+      {decorativePattern?.enabled && (
+        <DecorativePattern
+          type={decorativePattern.type || 'text'}
+          text={decorativePattern.text || undefined}
+          opacity={decorativePattern.opacity || undefined}
+          size={decorativePattern.size || undefined}
+          repeatCount={decorativePattern.repeatCount || undefined}
+          color={decorativePattern.color || undefined}
+          position={decorativePattern.position || undefined}
+          rotation={decorativePattern.rotation || undefined}
+        />
+      )}
+
+      <div className={cn(getContainerClasses(appearance?.fullWidth), 'relative z-10')}>
         {/* Header */}
         {(title || subtitle) && (
           <div className="mb-8">

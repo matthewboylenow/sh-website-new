@@ -2,6 +2,7 @@ import type { Block } from 'payload'
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { defaultLexical } from '@/fields/defaultLexical'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 export const EventList: Block = {
   slug: 'eventList',
@@ -117,6 +118,7 @@ export const EventList: Block = {
       },
     },
     blockAppearance(),
+    decorativePattern({ enablePatterns: true }),
     blockName,
   ],
 }

@@ -6,6 +6,7 @@ import { CMSLink } from '@/components/Link'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
+import { DecorativePattern } from '@/components/DecorativePattern'
 
 export const StoryHighlightBlock: React.FC<StoryHighlightProps> = ({
   title,
@@ -16,13 +17,28 @@ export const StoryHighlightBlock: React.FC<StoryHighlightProps> = ({
   tag,
   imagePosition = 'left',
   appearance,
+  decorativePattern,
 }) => {
   const textColorClass = getTextColorClass(appearance)
   const proseColorClass = getProseColorClass(appearance)
 
   return (
-    <section className={blockAppearanceToClasses(appearance)}>
-      <div className={getContainerClasses(appearance?.fullWidth)}>
+    <section className={cn(blockAppearanceToClasses(appearance), 'relative overflow-hidden')}>
+      {/* Decorative Pattern */}
+      {decorativePattern?.enabled && (
+        <DecorativePattern
+          type={decorativePattern.type || 'text'}
+          text={decorativePattern.text || undefined}
+          opacity={decorativePattern.opacity || undefined}
+          size={decorativePattern.size || undefined}
+          repeatCount={decorativePattern.repeatCount || undefined}
+          color={decorativePattern.color || undefined}
+          position={decorativePattern.position || undefined}
+          rotation={decorativePattern.rotation || undefined}
+        />
+      )}
+
+      <div className={cn(getContainerClasses(appearance?.fullWidth), 'relative z-10')}>
         <div
           className={cn(
             'grid md:grid-cols-2 gap-8 lg:gap-12 items-center',

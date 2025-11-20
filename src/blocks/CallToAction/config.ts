@@ -8,6 +8,9 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { linkGroup } from '../../fields/linkGroup'
+import { blockAppearance } from '@/fields/blockAppearance'
+import { blockName } from '@/fields/blockName'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 export const CallToAction: Block = {
   slug: 'cta',
@@ -33,6 +36,11 @@ export const CallToAction: Block = {
         maxRows: 2,
       },
     }),
+    blockAppearance(),
+    decorativePattern({
+      enablePatterns: true,
+    }),
+    blockName,
   ],
   labels: {
     plural: 'Calls to Action',

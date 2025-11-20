@@ -1,5 +1,6 @@
 import type { Block } from 'payload'
 import { blockName } from '@/fields/blockName'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 export const AlertBanner: Block = {
   slug: 'alertBanner',
@@ -73,6 +74,7 @@ export const AlertBanner: Block = {
         { label: 'None', value: 'none' },
       ],
     },
+    decorativePattern({ enablePatterns: true }),
     blockName,
   ],
 }

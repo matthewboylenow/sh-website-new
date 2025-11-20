@@ -6,6 +6,7 @@ import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
+import { DecorativePattern } from '@/components/DecorativePattern'
 
 export const ColumnsBlock: React.FC<ColumnsProps> = ({
   sectionTitle,
@@ -13,6 +14,7 @@ export const ColumnsBlock: React.FC<ColumnsProps> = ({
   columns,
   columnGap = 'default',
   appearance,
+  decorativePattern,
 }) => {
   const gapClasses = cn(
     columnGap === 'small' && 'gap-4 md:gap-6',
@@ -36,8 +38,22 @@ export const ColumnsBlock: React.FC<ColumnsProps> = ({
   const proseColorClass = getProseColorClass(appearance)
 
   return (
-    <section className={blockAppearanceToClasses(appearance)}>
-      <div className={getContainerClasses(appearance?.fullWidth)}>
+    <section className={cn(blockAppearanceToClasses(appearance), 'relative overflow-hidden')}>
+      {/* Decorative Pattern */}
+      {decorativePattern?.enabled && (
+        <DecorativePattern
+          type={decorativePattern.type || 'text'}
+          text={decorativePattern.text || undefined}
+          opacity={decorativePattern.opacity || undefined}
+          size={decorativePattern.size || undefined}
+          repeatCount={decorativePattern.repeatCount || undefined}
+          color={decorativePattern.color || undefined}
+          position={decorativePattern.position || undefined}
+          rotation={decorativePattern.rotation || undefined}
+        />
+      )}
+
+      <div className={cn(getContainerClasses(appearance?.fullWidth), 'relative z-10')}>
         {sectionTitle && (
           <h2 className={cn('mb-8 font-heading text-h2 font-bold', textColorClass)}>
             {sectionTitle}

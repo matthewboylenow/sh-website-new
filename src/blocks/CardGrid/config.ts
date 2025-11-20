@@ -9,6 +9,7 @@ import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { visibilitySettings } from '@/fields/visibilitySettings'
 import { animationSettings } from '@/fields/animationSettings'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 const manualCardFields: Field[] = [
   {
@@ -198,6 +199,9 @@ export const CardGrid: Block = {
       },
     },
     blockAppearance(),
+    decorativePattern({
+      enablePatterns: true,
+    }),
     visibilitySettings({
       deviceVisibility: true,
       audienceTargeting: true,

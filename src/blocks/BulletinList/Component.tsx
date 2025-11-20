@@ -7,6 +7,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { cn } from '@/utilities/ui'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
+import { DecorativePattern } from '@/components/DecorativePattern'
 
 export const BulletinListBlock: React.FC<BulletinListBlockType> = async (props) => {
   const {
@@ -18,6 +19,7 @@ export const BulletinListBlock: React.FC<BulletinListBlockType> = async (props) 
     layout = 'grid',
     showViewAllLink,
     viewAllUrl,
+    decorativePattern,
   } = props
 
   const containerClasses = blockAppearanceToClasses(props.appearance)
@@ -80,8 +82,22 @@ export const BulletinListBlock: React.FC<BulletinListBlockType> = async (props) 
   }
 
   return (
-    <section className={containerClasses}>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className={cn(containerClasses, 'relative overflow-hidden')}>
+      {/* Decorative Pattern */}
+      {decorativePattern?.enabled && (
+        <DecorativePattern
+          type={decorativePattern.type || 'text'}
+          text={decorativePattern.text || undefined}
+          opacity={decorativePattern.opacity || undefined}
+          size={decorativePattern.size || undefined}
+          repeatCount={decorativePattern.repeatCount || undefined}
+          color={decorativePattern.color || undefined}
+          position={decorativePattern.position || undefined}
+          rotation={decorativePattern.rotation || undefined}
+        />
+      )}
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
         {(title || subtitle) && (
           <div className="mb-12 text-center">

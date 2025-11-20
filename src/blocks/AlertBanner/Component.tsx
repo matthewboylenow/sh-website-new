@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import type { AlertBannerBlock as AlertBannerProps } from '@/payload-types'
 import { cn } from '@/utilities/ui'
+import { DecorativePattern } from '@/components/DecorativePattern'
 
 const iconMap = {
   megaphone: (
@@ -54,6 +55,7 @@ export const AlertBannerBlock: React.FC<AlertBannerProps> = ({
   linkUrl,
   dismissible = true,
   icon = 'auto',
+  decorativePattern,
 }) => {
   const [isDismissed, setIsDismissed] = useState(false)
 
@@ -92,8 +94,22 @@ export const AlertBannerBlock: React.FC<AlertBannerProps> = ({
   )
 
   return (
-    <div className={cn('border-l-4 p-4', typeClasses)} role="alert">
-      <div className="flex items-start gap-3">
+    <div className={cn('relative overflow-hidden border-l-4 p-4', typeClasses)} role="alert">
+      {/* Decorative Pattern */}
+      {decorativePattern?.enabled && (
+        <DecorativePattern
+          type={decorativePattern.type || 'text'}
+          text={decorativePattern.text || undefined}
+          opacity={decorativePattern.opacity || undefined}
+          size={decorativePattern.size || undefined}
+          repeatCount={decorativePattern.repeatCount || undefined}
+          color={decorativePattern.color || undefined}
+          position={decorativePattern.position || undefined}
+          rotation={decorativePattern.rotation || undefined}
+        />
+      )}
+
+      <div className="relative z-10 flex items-start gap-3">
         {/* Icon */}
         {iconElement && <div className="flex-shrink-0 mt-0.5">{iconElement}</div>}
 

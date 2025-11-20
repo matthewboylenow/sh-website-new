@@ -8,6 +8,7 @@ import {
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { linkGroup } from '@/fields/linkGroup'
+import { decorativePattern } from '@/fields/decorativePattern'
 
 const columnFields: Field[] = [
   {
@@ -162,6 +163,7 @@ export const Columns: Block = {
       fullWidth: true,
       padding: true,
     }),
+    decorativePattern({ enablePatterns: true }),
     blockName,
   ],
 }
