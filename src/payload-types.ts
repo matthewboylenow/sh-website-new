@@ -79,7 +79,6 @@ export interface Config {
     lifelines: Lifeline;
     staff: Staff;
     'search-items': SearchItem;
-    patterns: Pattern;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -109,7 +108,6 @@ export interface Config {
     lifelines: LifelinesSelect<false> | LifelinesSelect<true>;
     staff: StaffSelect<false> | StaffSelect<true>;
     'search-items': SearchItemsSelect<false> | SearchItemsSelect<true>;
-    patterns: PatternsSelect<false> | PatternsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -676,6 +674,47 @@ export interface HeroBasicBlock {
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
+  };
+  /**
    * Control when and where this block appears
    */
   visibility?: {
@@ -849,6 +888,47 @@ export interface HeroWithStatsBlock {
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'heroWithStats';
@@ -926,6 +1006,47 @@ export interface RichTextSectionBlock {
      * Override text color for this block
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
+  };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
   };
   /**
    * Control when and where this block appears
@@ -1095,6 +1216,47 @@ export interface ColumnsBlock {
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'columns';
@@ -1199,6 +1361,47 @@ export interface CTAFullWidthBlock {
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
   /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
+  };
+  /**
    * Control when and where this block appears
    */
   visibility?: {
@@ -1270,6 +1473,47 @@ export interface AlertBannerBlock {
    */
   dismissible?: boolean | null;
   icon?: ('auto' | 'megaphone' | 'bell' | 'exclamation' | 'check' | 'none') | null;
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'alertBanner';
@@ -1378,6 +1622,47 @@ export interface CardGridBlock {
      * Override text color for this block
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
+  };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
   };
   /**
    * Control when and where this block appears
@@ -1650,6 +1935,47 @@ export interface EventListBlock {
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'eventList';
@@ -1731,6 +2057,47 @@ export interface PostListBlock {
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'postList';
@@ -1800,6 +2167,47 @@ export interface BulletinListBlock {
      * Override text color for this block
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
+  };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1883,6 +2291,47 @@ export interface MediaListBlock {
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'mediaList';
@@ -1955,6 +2404,47 @@ export interface TestimonialBlock {
      * Override text color for this block
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
+  };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
   };
   /**
    * Control when and where this block appears
@@ -2072,6 +2562,47 @@ export interface StoryHighlightBlock {
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'storyHighlight';
@@ -2153,6 +2684,47 @@ export interface FAQAccordionBlock {
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
   };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'faqAccordion';
@@ -2228,6 +2800,47 @@ export interface VideoEmbedBlock {
      * Override text color for this block
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
+  };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -2312,6 +2925,47 @@ export interface FormEmbedBlock {
      * Override text color for this block
      */
     textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
+  };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -2474,8 +3128,82 @@ export interface CallToActionBlock {
         id?: string | null;
       }[]
     | null;
-  id?: string | null;
+  /**
+   * Control the visual appearance of this block
+   */
+  appearance?: {
+    /**
+     * Text alignment for this block
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+    /**
+     * Extend block to full viewport width (no container)
+     */
+    fullWidth?: boolean | null;
+    /**
+     * Top padding
+     */
+    pt?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Bottom padding
+     */
+    pb?: ('none' | 'tight' | 'default' | 'loose') | null;
+    /**
+     * Choose the background color for this block
+     */
+    bgVariant?: ('light' | 'brand' | 'dark' | 'transparent' | 'custom') | null;
+    /**
+     * Enter hex color (e.g., #1a1a1a) or CSS color (e.g., rgb(26, 26, 26))
+     */
+    customBgColor?: string | null;
+    /**
+     * Override text color for this block
+     */
+    textColor?: ('auto' | 'light' | 'dark' | 'black' | 'brand') | null;
+  };
+  /**
+   * Add a subtle decorative pattern to the background
+   */
+  decorativePattern?: {
+    /**
+     * Add a decorative background pattern to this block
+     */
+    enabled?: boolean | null;
+    /**
+     * Choose the type of decorative pattern
+     */
+    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    /**
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     */
+    text?: string | null;
+    /**
+     * Opacity (1-30%)
+     */
+    opacity?: number | null;
+    /**
+     * Pattern size
+     */
+    size?: ('small' | 'medium' | 'large') | null;
+    /**
+     * Repeat count
+     */
+    repeatCount?: number | null;
+    /**
+     * Pattern color (hex)
+     */
+    color?: string | null;
+    /**
+     * Pattern position
+     */
+    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    /**
+     * Rotation (degrees)
+     */
+    rotation?: number | null;
+  };
   blockName?: string | null;
+  id?: string | null;
   blockType: 'cta';
 }
 /**
@@ -3394,59 +4122,6 @@ export interface SearchItem {
   createdAt: string;
 }
 /**
- * Reusable page layouts that can be inserted into pages
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "patterns".
- */
-export interface Pattern {
-  id: number;
-  /**
-   * Descriptive name for this pattern (e.g., "Standard Ministry Page")
-   */
-  name: string;
-  /**
-   * What is this pattern for? When should editors use it?
-   */
-  description?: string | null;
-  /**
-   * Build a reusable layout using blocks (same as page content)
-   */
-  layout: (
-    | HeroBasicBlock
-    | HeroWithStatsBlock
-    | RichTextSectionBlock
-    | ColumnsBlock
-    | CTAFullWidthBlock
-    | AlertBannerBlock
-    | CardGridBlock
-    | BentoGridBlock
-    | EventListBlock
-    | PostListBlock
-    | BulletinListBlock
-    | MediaListBlock
-    | TestimonialBlock
-    | StoryHighlightBlock
-    | FAQAccordionBlock
-    | VideoEmbedBlock
-    | FormEmbedBlock
-    | SpacerBlock
-    | DividerBlock
-    | CustomCodeBlock
-    | CallToActionBlock
-    | ContentBlock
-    | MediaBlock
-    | ArchiveBlock
-    | FormBlock
-  )[];
-  /**
-   * Categorize this pattern to help editors find it
-   */
-  category?: ('ministry' | 'event' | 'about' | 'landing' | 'other') | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -3685,10 +4360,6 @@ export interface PayloadLockedDocument {
         value: number | SearchItem;
       } | null)
     | ({
-        relationTo: 'patterns';
-        value: number | Pattern;
-      } | null)
-    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -3890,6 +4561,19 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
+      };
   visibility?:
     | T
     | {
@@ -3956,6 +4640,19 @@ export interface HeroWithStatsBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -3983,6 +4680,19 @@ export interface RichTextSectionBlockSelect<T extends boolean = true> {
         bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
+      };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
       };
   visibility?:
     | T
@@ -4050,6 +4760,19 @@ export interface ColumnsBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -4089,6 +4812,19 @@ export interface CTAFullWidthBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
+      };
   visibility?:
     | T
     | {
@@ -4119,6 +4855,19 @@ export interface AlertBannerBlockSelect<T extends boolean = true> {
   linkUrl?: T;
   dismissible?: T;
   icon?: T;
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -4158,6 +4907,19 @@ export interface CardGridBlockSelect<T extends boolean = true> {
         bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
+      };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
       };
   visibility?:
     | T
@@ -4255,6 +5017,19 @@ export interface EventListBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -4284,6 +5059,19 @@ export interface PostListBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -4310,6 +5098,19 @@ export interface BulletinListBlockSelect<T extends boolean = true> {
         bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
+      };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
       };
   blockName?: T;
   id?: T;
@@ -4338,6 +5139,19 @@ export interface MediaListBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -4361,6 +5175,19 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
         bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
+      };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
       };
   visibility?:
     | T
@@ -4403,6 +5230,19 @@ export interface StoryHighlightBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -4437,6 +5277,19 @@ export interface FAQAccordionBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -4460,6 +5313,19 @@ export interface VideoEmbedBlockSelect<T extends boolean = true> {
         bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
+      };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
       };
   blockName?: T;
   id?: T;
@@ -4486,6 +5352,19 @@ export interface FormEmbedBlockSelect<T extends boolean = true> {
         bgVariant?: T;
         customBgColor?: T;
         textColor?: T;
+      };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
       };
   blockName?: T;
   id?: T;
@@ -4562,8 +5441,32 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  id?: T;
+  appearance?:
+    | T
+    | {
+        alignment?: T;
+        fullWidth?: T;
+        pt?: T;
+        pb?: T;
+        bgVariant?: T;
+        customBgColor?: T;
+        textColor?: T;
+      };
+  decorativePattern?:
+    | T
+    | {
+        enabled?: T;
+        type?: T;
+        text?: T;
+        opacity?: T;
+        size?: T;
+        repeatCount?: T;
+        color?: T;
+        position?: T;
+        rotation?: T;
+      };
   blockName?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4977,46 +5880,6 @@ export interface SearchItemsSelect<T extends boolean = true> {
   sourceCollection?: T;
   sourceId?: T;
   lastSyncedAt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "patterns_select".
- */
-export interface PatternsSelect<T extends boolean = true> {
-  name?: T;
-  description?: T;
-  layout?:
-    | T
-    | {
-        heroBasic?: T | HeroBasicBlockSelect<T>;
-        heroWithStats?: T | HeroWithStatsBlockSelect<T>;
-        richTextSection?: T | RichTextSectionBlockSelect<T>;
-        columns?: T | ColumnsBlockSelect<T>;
-        ctaFullWidth?: T | CTAFullWidthBlockSelect<T>;
-        alertBanner?: T | AlertBannerBlockSelect<T>;
-        cardGrid?: T | CardGridBlockSelect<T>;
-        bentoGrid?: T | BentoGridBlockSelect<T>;
-        eventList?: T | EventListBlockSelect<T>;
-        postList?: T | PostListBlockSelect<T>;
-        bulletinList?: T | BulletinListBlockSelect<T>;
-        mediaList?: T | MediaListBlockSelect<T>;
-        testimonial?: T | TestimonialBlockSelect<T>;
-        storyHighlight?: T | StoryHighlightBlockSelect<T>;
-        faqAccordion?: T | FAQAccordionBlockSelect<T>;
-        videoEmbed?: T | VideoEmbedBlockSelect<T>;
-        formEmbed?: T | FormEmbedBlockSelect<T>;
-        spacer?: T | SpacerBlockSelect<T>;
-        divider?: T | DividerBlockSelect<T>;
-        customCode?: T | CustomCodeBlockSelect<T>;
-        cta?: T | CallToActionBlockSelect<T>;
-        content?: T | ContentBlockSelect<T>;
-        mediaBlock?: T | MediaBlockSelect<T>;
-        archive?: T | ArchiveBlockSelect<T>;
-        formBlock?: T | FormBlockSelect<T>;
-      };
-  category?: T;
   updatedAt?: T;
   createdAt?: T;
 }
