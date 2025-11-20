@@ -20,6 +20,7 @@ import * as migration_20251120_000003_add_decorative_patterns_correct_tables fro
 import * as migration_20251120_000004_add_appearance_to_cta_block from './20251120_000004_add_appearance_to_cta_block';
 import * as migration_20251120_000005_add_patterns_to_locked_docs_rels from './20251120_000005_add_patterns_to_locked_docs_rels';
 import * as migration_20251120_000009_add_custom_svg_force from './20251120_000009_add_custom_svg_force';
+import * as migration_20251120_000010_fix_custom_svg_column from './20251120_000010_fix_custom_svg_column';
 
 export const migrations = [
   {
@@ -131,5 +132,10 @@ export const migrations = [
     up: migration_20251120_000009_add_custom_svg_force.up,
     down: migration_20251120_000009_add_custom_svg_force.down,
     name: '20251120_000009_add_custom_svg_force'
+  },
+  {
+    up: migration_20251120_000010_fix_custom_svg_column.up,
+    down: migration_20251120_000010_fix_custom_svg_column.down,
+    name: '20251120_000010_fix_custom_svg_column'
   },
 ];

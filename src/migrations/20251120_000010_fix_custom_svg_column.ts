@@ -1,8 +1,8 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-vercel-postgres'
 
 export async function up({ db }: MigrateUpArgs): Promise<void> {
-  // Add customSvg field to all block tables that have decorPattern
-  // This allows users to upload custom SVG patterns
+  // This migration fixes the custom_svg column that may not have been created properly
+  // Uses explicit column existence checks before attempting to add
   await db.execute(sql`
    DO $$
    DECLARE
@@ -45,46 +45,75 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
        '_pages_v__blocks_cta'
      ];
      tbl TEXT;
+     short_name TEXT;
+     col_exists BOOLEAN;
+     tbl_exists BOOLEAN;
    BEGIN
      FOREACH tbl IN ARRAY tables
      LOOP
-       -- Check if table exists
-       IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = tbl) THEN
+       -- Check if table exists (case-insensitive)
+       SELECT EXISTS (
+         SELECT 1 FROM information_schema.tables
+         WHERE LOWER(table_name) = LOWER(tbl)
+         AND table_schema = 'public'
+       ) INTO tbl_exists;
+
+       IF tbl_exists THEN
          RAISE NOTICE 'Processing table: %', tbl;
 
-         -- Add decor_pattern_custom_svg_id column if it doesn't exist
-         IF NOT EXISTS (
+         -- Check if column exists (case-insensitive)
+         SELECT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decor_pattern_custom_svg_id'
-         ) THEN
-           RAISE NOTICE '  Creating decor_pattern_custom_svg_id column';
+           WHERE LOWER(table_name) = LOWER(tbl)
+           AND LOWER(column_name) = 'decor_pattern_custom_svg_id'
+           AND table_schema = 'public'
+         ) INTO col_exists;
+
+         IF NOT col_exists THEN
+           RAISE NOTICE '  Adding decor_pattern_custom_svg_id column';
+
+           -- Add the column
            EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_custom_svg_id integer', tbl);
 
-           -- Add foreign key constraint to media table if it exists
-           IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'media') THEN
-             EXECUTE format('ALTER TABLE %I ADD CONSTRAINT %I FOREIGN KEY (decor_pattern_custom_svg_id) REFERENCES media(id) ON DELETE SET NULL',
-               tbl,
-               tbl || '_decor_pattern_custom_svg_fk'
-             );
-             EXECUTE format('CREATE INDEX IF NOT EXISTS %I ON %I (decor_pattern_custom_svg_id)',
-               tbl || '_decor_pattern_custom_svg_idx',
-               tbl
-             );
-           END IF;
-         ELSE
-           RAISE NOTICE '  decor_pattern_custom_svg_id already exists';
-         END IF;
+           -- Create a short unique identifier for constraint names
+           short_name := substring(md5(tbl) from 1 for 8);
 
+           -- Add foreign key constraint if media table exists
+           IF EXISTS (SELECT 1 FROM information_schema.tables WHERE LOWER(table_name) = 'media' AND table_schema = 'public') THEN
+             BEGIN
+               EXECUTE format(
+                 'ALTER TABLE %I ADD CONSTRAINT decor_svg_fk_%s FOREIGN KEY (decor_pattern_custom_svg_id) REFERENCES media(id) ON DELETE SET NULL',
+                 tbl, short_name
+               );
+               RAISE NOTICE '  Added FK constraint: decor_svg_fk_%', short_name;
+             EXCEPTION WHEN duplicate_object THEN
+               RAISE NOTICE '  FK constraint already exists: decor_svg_fk_%', short_name;
+             END;
+           END IF;
+
+           -- Create index
+           EXECUTE format(
+             'CREATE INDEX decor_svg_idx_%s ON %I (decor_pattern_custom_svg_id)',
+             short_name, tbl
+           );
+           RAISE NOTICE '  Created index: decor_svg_idx_%', short_name;
+
+           RAISE NOTICE '  Successfully added column to: %', tbl;
+         ELSE
+           RAISE NOTICE '  Column already exists in: %', tbl;
+         END IF;
        ELSE
-         RAISE NOTICE 'Table % does not exist, skipping', tbl;
+         RAISE NOTICE 'Table does not exist: %', tbl;
        END IF;
      END LOOP;
+
+     RAISE NOTICE 'Migration 000010 completed successfully';
    END $$;
   `)
 }
 
 export async function down({ db }: MigrateDownArgs): Promise<void> {
-  // Remove customSvg field from all block tables
+  // Remove the column
   await db.execute(sql`
    DO $$
    DECLARE
@@ -127,17 +156,14 @@ export async function down({ db }: MigrateDownArgs): Promise<void> {
        '_pages_v__blocks_cta'
      ];
      tbl TEXT;
+     short_name TEXT;
    BEGIN
      FOREACH tbl IN ARRAY tables
      LOOP
-       IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = tbl) THEN
-         RAISE NOTICE 'Reverting table: %', tbl;
-
-         -- Drop foreign key constraint and index
-         EXECUTE format('ALTER TABLE %I DROP CONSTRAINT IF EXISTS %I', tbl, tbl || '_decor_pattern_custom_svg_fk');
-         EXECUTE format('DROP INDEX IF EXISTS %I', tbl || '_decor_pattern_custom_svg_idx');
-
-         -- Drop column
+       IF EXISTS (SELECT 1 FROM information_schema.tables WHERE LOWER(table_name) = LOWER(tbl) AND table_schema = 'public') THEN
+         short_name := substring(md5(tbl) from 1 for 8);
+         EXECUTE format('ALTER TABLE %I DROP CONSTRAINT IF EXISTS decor_svg_fk_%s', tbl, short_name);
+         EXECUTE format('DROP INDEX IF EXISTS decor_svg_idx_%s', short_name);
          EXECUTE format('ALTER TABLE %I DROP COLUMN IF EXISTS decor_pattern_custom_svg_id', tbl);
        END IF;
      END LOOP;
