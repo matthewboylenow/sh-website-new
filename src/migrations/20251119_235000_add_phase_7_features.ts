@@ -525,6 +525,6 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   `)
 }
 
-export async function down({ db }: MigrateDownArgs): Promise<void> {
+export async function down({ db: _db }: MigrateDownArgs): Promise<void> {
   // Rollback not implemented - Phase 7 columns are optional and safe to leave
 }
