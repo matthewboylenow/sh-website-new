@@ -13,6 +13,7 @@ import * as migration_20251119_000000_add_all_missing_appearance_columns from '.
 import * as migration_20251119_000001_add_bento_grid_overlay_strength from './20251119_000001_add_bento_grid_overlay_strength';
 import * as migration_20251119_000002_add_decorative_pattern_columns from './20251119_000002_add_decorative_pattern_columns';
 import * as migration_20251119_235000_add_phase_7_features from './20251119_235000_add_phase_7_features';
+import * as migration_20251120_000000_add_phase_7_to_patterns from './20251120_000000_add_phase_7_to_patterns';
 
 export const migrations = [
   {
@@ -89,5 +90,10 @@ export const migrations = [
     up: migration_20251119_235000_add_phase_7_features.up,
     down: migration_20251119_235000_add_phase_7_features.down,
     name: '20251119_235000_add_phase_7_features'
+  },
+  {
+    up: migration_20251120_000000_add_phase_7_to_patterns.up,
+    down: migration_20251120_000000_add_phase_7_to_patterns.down,
+    name: '20251120_000000_add_phase_7_to_patterns'
   },
 ];
