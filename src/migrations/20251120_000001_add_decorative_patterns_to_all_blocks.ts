@@ -49,103 +49,103 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
        IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = tbl) THEN
          RAISE NOTICE 'Processing table: %', tbl;
 
-         -- Add decorative_pattern_enabled column
+         -- Add decor_pattern_enabled column
          IF NOT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decorative_pattern_enabled'
+           WHERE table_name = tbl AND column_name = 'decor_pattern_enabled'
          ) THEN
-           RAISE NOTICE '  Creating decorative_pattern_enabled column';
-           EXECUTE format('ALTER TABLE %I ADD COLUMN decorative_pattern_enabled boolean DEFAULT false', tbl);
+           RAISE NOTICE '  Creating decor_pattern_enabled column';
+           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_enabled boolean DEFAULT false', tbl);
          ELSE
-           RAISE NOTICE '  decorative_pattern_enabled already exists';
+           RAISE NOTICE '  decor_pattern_enabled already exists';
          END IF;
 
-         -- Add decorative_pattern_type column
+         -- Add decor_pattern_type column
          IF NOT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decorative_pattern_type'
+           WHERE table_name = tbl AND column_name = 'decor_pattern_type'
          ) THEN
-           RAISE NOTICE '  Creating decorative_pattern_type column';
-           EXECUTE format('ALTER TABLE %I ADD COLUMN decorative_pattern_type text DEFAULT ''text''', tbl);
+           RAISE NOTICE '  Creating decor_pattern_type column';
+           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_type text DEFAULT ''text''', tbl);
          ELSE
-           RAISE NOTICE '  decorative_pattern_type already exists';
+           RAISE NOTICE '  decor_pattern_type already exists';
          END IF;
 
-         -- Add decorative_pattern_text column
+         -- Add decor_pattern_text column
          IF NOT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decorative_pattern_text'
+           WHERE table_name = tbl AND column_name = 'decor_pattern_text'
          ) THEN
-           RAISE NOTICE '  Creating decorative_pattern_text column';
-           EXECUTE format('ALTER TABLE %I ADD COLUMN decorative_pattern_text text DEFAULT ''CHURCH''', tbl);
+           RAISE NOTICE '  Creating decor_pattern_text column';
+           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_text text DEFAULT ''CHURCH''', tbl);
          ELSE
-           RAISE NOTICE '  decorative_pattern_text already exists';
+           RAISE NOTICE '  decor_pattern_text already exists';
          END IF;
 
-         -- Add decorative_pattern_opacity column
+         -- Add decor_pattern_opacity column
          IF NOT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decorative_pattern_opacity'
+           WHERE table_name = tbl AND column_name = 'decor_pattern_opacity'
          ) THEN
-           RAISE NOTICE '  Creating decorative_pattern_opacity column';
-           EXECUTE format('ALTER TABLE %I ADD COLUMN decorative_pattern_opacity numeric DEFAULT 5', tbl);
+           RAISE NOTICE '  Creating decor_pattern_opacity column';
+           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_opacity numeric DEFAULT 5', tbl);
          ELSE
-           RAISE NOTICE '  decorative_pattern_opacity already exists';
+           RAISE NOTICE '  decor_pattern_opacity already exists';
          END IF;
 
-         -- Add decorative_pattern_size column
+         -- Add decor_pattern_size column
          IF NOT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decorative_pattern_size'
+           WHERE table_name = tbl AND column_name = 'decor_pattern_size'
          ) THEN
-           RAISE NOTICE '  Creating decorative_pattern_size column';
-           EXECUTE format('ALTER TABLE %I ADD COLUMN decorative_pattern_size text DEFAULT ''large''', tbl);
+           RAISE NOTICE '  Creating decor_pattern_size column';
+           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_size text DEFAULT ''large''', tbl);
          ELSE
-           RAISE NOTICE '  decorative_pattern_size already exists';
+           RAISE NOTICE '  decor_pattern_size already exists';
          END IF;
 
-         -- Add decorative_pattern_repeat_count column
+         -- Add decor_pattern_repeat_count column
          IF NOT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decorative_pattern_repeat_count'
+           WHERE table_name = tbl AND column_name = 'decor_pattern_repeat_count'
          ) THEN
-           RAISE NOTICE '  Creating decorative_pattern_repeat_count column';
-           EXECUTE format('ALTER TABLE %I ADD COLUMN decorative_pattern_repeat_count numeric DEFAULT 3', tbl);
+           RAISE NOTICE '  Creating decor_pattern_repeat_count column';
+           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_repeat_count numeric DEFAULT 3', tbl);
          ELSE
-           RAISE NOTICE '  decorative_pattern_repeat_count already exists';
+           RAISE NOTICE '  decor_pattern_repeat_count already exists';
          END IF;
 
-         -- Add decorative_pattern_color column
+         -- Add decor_pattern_color column
          IF NOT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decorative_pattern_color'
+           WHERE table_name = tbl AND column_name = 'decor_pattern_color'
          ) THEN
-           RAISE NOTICE '  Creating decorative_pattern_color column';
-           EXECUTE format('ALTER TABLE %I ADD COLUMN decorative_pattern_color text DEFAULT ''#20336b''', tbl);
+           RAISE NOTICE '  Creating decor_pattern_color column';
+           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_color text DEFAULT ''#20336b''', tbl);
          ELSE
-           RAISE NOTICE '  decorative_pattern_color already exists';
+           RAISE NOTICE '  decor_pattern_color already exists';
          END IF;
 
-         -- Add decorative_pattern_position column
+         -- Add decor_pattern_position column
          IF NOT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decorative_pattern_position'
+           WHERE table_name = tbl AND column_name = 'decor_pattern_position'
          ) THEN
-           RAISE NOTICE '  Creating decorative_pattern_position column';
-           EXECUTE format('ALTER TABLE %I ADD COLUMN decorative_pattern_position text DEFAULT ''center''', tbl);
+           RAISE NOTICE '  Creating decor_pattern_position column';
+           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_position text DEFAULT ''center''', tbl);
          ELSE
-           RAISE NOTICE '  decorative_pattern_position already exists';
+           RAISE NOTICE '  decor_pattern_position already exists';
          END IF;
 
-         -- Add decorative_pattern_rotation column
+         -- Add decor_pattern_rotation column
          IF NOT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decorative_pattern_rotation'
+           WHERE table_name = tbl AND column_name = 'decor_pattern_rotation'
          ) THEN
-           RAISE NOTICE '  Creating decorative_pattern_rotation column';
-           EXECUTE format('ALTER TABLE %I ADD COLUMN decorative_pattern_rotation numeric DEFAULT 0', tbl);
+           RAISE NOTICE '  Creating decor_pattern_rotation column';
+           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_rotation numeric DEFAULT 0', tbl);
          ELSE
-           RAISE NOTICE '  decorative_pattern_rotation already exists';
+           RAISE NOTICE '  decor_pattern_rotation already exists';
          END IF;
 
        ELSE
@@ -199,15 +199,15 @@ export async function down({ db }: MigrateDownArgs): Promise<void> {
      ];
      tbl TEXT;
      columns TEXT[] := ARRAY[
-       'decorative_pattern_enabled',
-       'decorative_pattern_type',
-       'decorative_pattern_text',
-       'decorative_pattern_opacity',
-       'decorative_pattern_size',
-       'decorative_pattern_repeat_count',
-       'decorative_pattern_color',
-       'decorative_pattern_position',
-       'decorative_pattern_rotation'
+       'decor_pattern_enabled',
+       'decor_pattern_type',
+       'decor_pattern_text',
+       'decor_pattern_opacity',
+       'decor_pattern_size',
+       'decor_pattern_repeat_count',
+       'decor_pattern_color',
+       'decor_pattern_position',
+       'decor_pattern_rotation'
      ];
      col TEXT;
    BEGIN

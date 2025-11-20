@@ -156,6 +156,7 @@ export const decorativePattern = (
     admin: {
       description: 'Add a subtle decorative pattern to the background',
     },
+    dbName: 'decor_pattern',
   }
 }
 
