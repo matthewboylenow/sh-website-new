@@ -44,7 +44,8 @@ export const decorativePattern = (
           { label: 'Chevron', value: 'chevron' },
           { label: 'Hexagons', value: 'hexagons' },
           { label: 'Crosses', value: 'crosses' },
-          { label: 'Custom SVG', value: 'custom-svg' },
+          // TODO: Re-enable after fixing database migration
+          // { label: 'Custom SVG', value: 'custom-svg' },
         ],
         admin: {
           condition: (data, siblingData) => siblingData?.enabled === true,
@@ -62,17 +63,18 @@ export const decorativePattern = (
           placeholder: 'CHURCH',
         },
       },
-      {
-        name: 'customSvg',
-        type: 'upload',
-        relationTo: 'media',
-        label: 'Custom SVG Pattern',
-        admin: {
-          condition: (data, siblingData) =>
-            siblingData?.enabled === true && siblingData?.typ === 'custom-svg',
-          description: 'Upload an SVG file to use as a custom pattern',
-        },
-      },
+      // TODO: Re-enable custom SVG after fixing database migration issues
+      // {
+      //   name: 'customSvg',
+      //   type: 'upload',
+      //   relationTo: 'media',
+      //   label: 'Custom SVG Pattern',
+      //   admin: {
+      //     condition: (data, siblingData) =>
+      //       siblingData?.enabled === true && siblingData?.typ === 'custom-svg',
+      //     description: 'Upload an SVG file to use as a custom pattern',
+      //   },
+      // },
       {
         type: 'row',
         fields: [
@@ -184,9 +186,9 @@ export const decorativePattern = (
 export interface DecorativePatternType {
   decorPattern?: {
     enabled?: boolean | null
-    typ?: 'text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses' | 'custom-svg' | null
+    typ?: 'text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses' | null
     text?: string | null
-    customSvg?: number | string | null | { url?: string; alt?: string }
+    // customSvg removed temporarily due to migration issues
     opacity?: number | null
     sz?: 'small' | 'medium' | 'large' | null
     repeatCount?: number | null
