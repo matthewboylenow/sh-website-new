@@ -2,12 +2,13 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-vercel-postg
 
 export async function up({ db }: MigrateUpArgs): Promise<void> {
   // Add appearance columns to CTA block tables that were missed in previous migrations
+  // Note: Payload uses pages__blocks_{slug} (double underscore) naming convention
   await db.execute(sql`
    DO $$
    DECLARE
      tables TEXT[] := ARRAY[
-       'pages_blocks_cta',
-       '_pages_v_blocks_cta'
+       'pages__blocks_cta',
+       '_pages_v__blocks_cta'
      ];
      tbl TEXT;
    BEGIN
@@ -108,8 +109,8 @@ export async function down({ db }: MigrateDownArgs): Promise<void> {
    DO $$
    DECLARE
      tables TEXT[] := ARRAY[
-       'pages_blocks_cta',
-       '_pages_v_blocks_cta'
+       'pages__blocks_cta',
+       '_pages_v__blocks_cta'
      ];
      tbl TEXT;
    BEGIN
