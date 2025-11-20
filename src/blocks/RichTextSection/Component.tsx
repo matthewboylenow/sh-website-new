@@ -13,7 +13,7 @@ export const RichTextSectionBlock: React.FC<RichTextSectionProps> = ({
   maxWidth = 'prose',
   typography,
   appearance,
-  decorativePattern,
+  decorPattern,
 }) => {
   const maxWidthClasses = cn(
     maxWidth === 'prose' && 'max-w-prose',
@@ -28,16 +28,16 @@ export const RichTextSectionBlock: React.FC<RichTextSectionProps> = ({
   return (
     <section className={cn(blockAppearanceToClasses(appearance), 'relative overflow-hidden')}>
       {/* Decorative Pattern */}
-      {decorativePattern?.enabled && (
+      {decorPattern?.enabled && (
         <DecorativePattern
-          type={decorativePattern.type || 'text'}
-          text={decorativePattern.text || undefined}
-          opacity={decorativePattern.opacity || undefined}
-          size={decorativePattern.size || undefined}
-          repeatCount={decorativePattern.repeatCount || undefined}
-          color={decorativePattern.color || undefined}
-          position={decorativePattern.position || undefined}
-          rotation={decorativePattern.rotation || undefined}
+          type={decorPattern.type || 'text'}
+          text={decorPattern.text || undefined}
+          opacity={decorPattern.opacity || undefined}
+          size={decorPattern.size || undefined}
+          repeatCount={decorPattern.repeatCount || undefined}
+          color={decorPattern.color || undefined}
+          position={decorPattern.position || undefined}
+          rotation={decorPattern.rotation || undefined}
         />
       )}
 

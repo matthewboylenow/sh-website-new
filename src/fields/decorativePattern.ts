@@ -152,14 +152,13 @@ export const decorativePattern = (
   }
 
   return {
-    name: 'decorativePattern',
+    name: 'decorPattern',
     type: 'group',
     label: 'Decorative Pattern',
     fields,
     admin: {
       description: 'Add a subtle decorative pattern to the background',
     },
-    dbName: 'decor_pattern',
   }
 }
 
@@ -167,7 +166,7 @@ export const decorativePattern = (
  * TypeScript type for DecorativePattern data structure
  */
 export interface DecorativePatternType {
-  decorativePattern?: {
+  decorPattern?: {
     enabled?: boolean | null
     type?: 'text' | 'circles' | 'lines' | 'dots' | 'waves' | null
     text?: string | null

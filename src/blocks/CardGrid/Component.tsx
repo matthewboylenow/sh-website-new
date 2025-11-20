@@ -18,7 +18,7 @@ export const CardGridBlock: React.FC<CardGridBlockType> = (props) => {
     cardStyle,
     showViewAllLink,
     viewAllUrl,
-    decorativePattern,
+    decorPattern,
   } = props
 
   const containerClasses = blockAppearanceToClasses(props.appearance)
@@ -48,16 +48,16 @@ export const CardGridBlock: React.FC<CardGridBlockType> = (props) => {
   return (
     <section className={cn(containerClasses, 'relative overflow-hidden')}>
       {/* Decorative Pattern */}
-      {decorativePattern?.enabled && (
+      {decorPattern?.enabled && (
         <DecorativePattern
-          type={decorativePattern.type || 'text'}
-          text={decorativePattern.text || undefined}
-          opacity={decorativePattern.opacity || undefined}
-          size={decorativePattern.size || undefined}
-          repeatCount={decorativePattern.repeatCount || undefined}
-          color={decorativePattern.color || undefined}
-          position={decorativePattern.position || undefined}
-          rotation={decorativePattern.rotation || undefined}
+          type={decorPattern.type || 'text'}
+          text={decorPattern.text || undefined}
+          opacity={decorPattern.opacity || undefined}
+          size={decorPattern.size || undefined}
+          repeatCount={decorPattern.repeatCount || undefined}
+          color={decorPattern.color || undefined}
+          position={decorPattern.position || undefined}
+          rotation={decorPattern.rotation || undefined}
         />
       )}
 

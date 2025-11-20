@@ -678,7 +678,7 @@ export interface HeroBasicBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -893,7 +893,7 @@ export interface HeroWithStatsBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -1012,7 +1012,7 @@ export interface RichTextSectionBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -1221,7 +1221,7 @@ export interface ColumnsBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -1365,7 +1365,7 @@ export interface CTAFullWidthBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -1478,7 +1478,7 @@ export interface AlertBannerBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -1628,7 +1628,7 @@ export interface CardGridBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -1813,7 +1813,7 @@ export interface BentoGridBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -1940,7 +1940,7 @@ export interface EventListBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -2062,7 +2062,7 @@ export interface PostListBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -2173,7 +2173,7 @@ export interface BulletinListBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -2296,7 +2296,7 @@ export interface MediaListBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -2410,7 +2410,7 @@ export interface TestimonialBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -2567,7 +2567,7 @@ export interface StoryHighlightBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -2689,7 +2689,7 @@ export interface FAQAccordionBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -2806,7 +2806,7 @@ export interface VideoEmbedBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -2931,7 +2931,7 @@ export interface FormEmbedBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -3166,7 +3166,7 @@ export interface CallToActionBlock {
   /**
    * Add a subtle decorative pattern to the background
    */
-  decorativePattern?: {
+  decorPattern?: {
     /**
      * Add a decorative background pattern to this block
      */
@@ -4620,7 +4620,7 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -4699,7 +4699,7 @@ export interface HeroWithStatsBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -4740,7 +4740,7 @@ export interface RichTextSectionBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -4819,7 +4819,7 @@ export interface ColumnsBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -4871,7 +4871,7 @@ export interface CTAFullWidthBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -4914,7 +4914,7 @@ export interface AlertBannerBlockSelect<T extends boolean = true> {
   linkUrl?: T;
   dismissible?: T;
   icon?: T;
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -4967,7 +4967,7 @@ export interface CardGridBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -5034,7 +5034,7 @@ export interface BentoGridBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -5076,7 +5076,7 @@ export interface EventListBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -5118,7 +5118,7 @@ export interface PostListBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -5158,7 +5158,7 @@ export interface BulletinListBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -5198,7 +5198,7 @@ export interface MediaListBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -5235,7 +5235,7 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -5289,7 +5289,7 @@ export interface StoryHighlightBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -5336,7 +5336,7 @@ export interface FAQAccordionBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -5373,7 +5373,7 @@ export interface VideoEmbedBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -5412,7 +5412,7 @@ export interface FormEmbedBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;
@@ -5511,7 +5511,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
-  decorativePattern?:
+  decorPattern?:
     | T
     | {
         enabled?: T;

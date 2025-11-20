@@ -10,7 +10,7 @@ import { cn } from '@/utilities/ui'
 import { DecorativePattern } from '@/components/DecorativePattern'
 
 export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
-  const { title, subtitle, items, appearance, decorativePattern } = props
+  const { title, subtitle, items, appearance, decorPattern } = props
 
   const containerClasses = blockAppearanceToClasses(appearance)
   const textColorClass = getTextColorClass(appearance)
@@ -112,16 +112,16 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
   return (
     <section className={cn('relative overflow-hidden', containerClasses)}>
       {/* Decorative Pattern */}
-      {decorativePattern?.enabled && (
+      {decorPattern?.enabled && (
         <DecorativePattern
-          type={decorativePattern.type || 'text'}
-          text={decorativePattern.text || undefined}
-          opacity={decorativePattern.opacity || undefined}
-          size={decorativePattern.size || undefined}
-          repeatCount={decorativePattern.repeatCount || undefined}
-          color={decorativePattern.color || undefined}
-          position={decorativePattern.position || undefined}
-          rotation={decorativePattern.rotation || undefined}
+          type={decorPattern.type || 'text'}
+          text={decorPattern.text || undefined}
+          opacity={decorPattern.opacity || undefined}
+          size={decorPattern.size || undefined}
+          repeatCount={decorPattern.repeatCount || undefined}
+          color={decorPattern.color || undefined}
+          position={decorPattern.position || undefined}
+          rotation={decorPattern.rotation || undefined}
         />
       )}
 

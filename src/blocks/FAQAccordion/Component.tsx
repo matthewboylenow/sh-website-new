@@ -83,7 +83,7 @@ export const FAQAccordionBlock: React.FC<FAQAccordionProps> = ({
   items,
   defaultOpen = 'none',
   appearance,
-  decorativePattern,
+  decorPattern,
 }) => {
   // Initialize open state based on defaultOpen setting
   const [openItems, setOpenItems] = useState<Set<number>>(() => {
@@ -114,16 +114,16 @@ export const FAQAccordionBlock: React.FC<FAQAccordionProps> = ({
   return (
     <section className={cn(blockAppearanceToClasses(appearance), 'relative overflow-hidden')}>
       {/* Decorative Pattern */}
-      {decorativePattern?.enabled && (
+      {decorPattern?.enabled && (
         <DecorativePattern
-          type={decorativePattern.type || 'text'}
-          text={decorativePattern.text || undefined}
-          opacity={decorativePattern.opacity || undefined}
-          size={decorativePattern.size || undefined}
-          repeatCount={decorativePattern.repeatCount || undefined}
-          color={decorativePattern.color || undefined}
-          position={decorativePattern.position || undefined}
-          rotation={decorativePattern.rotation || undefined}
+          type={decorPattern.type || 'text'}
+          text={decorPattern.text || undefined}
+          opacity={decorPattern.opacity || undefined}
+          size={decorPattern.size || undefined}
+          repeatCount={decorPattern.repeatCount || undefined}
+          color={decorPattern.color || undefined}
+          position={decorPattern.position || undefined}
+          rotation={decorPattern.rotation || undefined}
         />
       )}
 
