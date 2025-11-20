@@ -17,6 +17,9 @@ import * as migration_20251120_000000_add_phase_7_to_patterns from './20251120_0
 import * as migration_20251120_000001_add_decorative_patterns_to_all_blocks from './20251120_000001_add_decorative_patterns_to_all_blocks';
 import * as migration_20251120_000002_fix_decorative_pattern_table_names from './20251120_000002_fix_decorative_pattern_table_names';
 import * as migration_20251120_000003_add_decorative_patterns_correct_tables from './20251120_000003_add_decorative_patterns_correct_tables';
+import * as migration_20251120_000004_add_appearance_to_cta_block from './20251120_000004_add_appearance_to_cta_block';
+import * as migration_20251120_000005_add_patterns_to_locked_docs_rels from './20251120_000005_add_patterns_to_locked_docs_rels';
+import * as migration_20251120_000009_add_custom_svg_force from './20251120_000009_add_custom_svg_force';
 
 export const migrations = [
   {
@@ -113,5 +116,20 @@ export const migrations = [
     up: migration_20251120_000003_add_decorative_patterns_correct_tables.up,
     down: migration_20251120_000003_add_decorative_patterns_correct_tables.down,
     name: '20251120_000003_add_decorative_patterns_correct_tables'
+  },
+  {
+    up: migration_20251120_000004_add_appearance_to_cta_block.up,
+    down: migration_20251120_000004_add_appearance_to_cta_block.down,
+    name: '20251120_000004_add_appearance_to_cta_block'
+  },
+  {
+    up: migration_20251120_000005_add_patterns_to_locked_docs_rels.up,
+    down: migration_20251120_000005_add_patterns_to_locked_docs_rels.down,
+    name: '20251120_000005_add_patterns_to_locked_docs_rels'
+  },
+  {
+    up: migration_20251120_000009_add_custom_svg_force.up,
+    down: migration_20251120_000009_add_custom_svg_force.down,
+    name: '20251120_000009_add_custom_svg_force'
   },
 ];
