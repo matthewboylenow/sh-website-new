@@ -30,8 +30,9 @@ export const decorativePattern = (
         },
       },
       {
-        name: 'type',
+        name: 'typ',
         type: 'select',
+        label: 'Type',
         defaultValue: 'text',
         options: [
           { label: 'Text (Faded Words)', value: 'text' },
@@ -44,7 +45,6 @@ export const decorativePattern = (
           condition: (data, siblingData) => siblingData?.enabled === true,
           description: 'Choose the type of decorative pattern',
         },
-        dbName: 'typ',
       },
       {
         name: 'text',
@@ -73,8 +73,9 @@ export const decorativePattern = (
             },
           },
           {
-            name: 'size',
+            name: 'sz',
             type: 'select',
+            label: 'Size',
             defaultValue: 'large',
             options: [
               { label: 'Small', value: 'small' },
@@ -86,7 +87,6 @@ export const decorativePattern = (
               description: 'Pattern size',
               width: '33%',
             },
-            dbName: 'sz',
           },
           {
             name: 'repeatCount',
@@ -117,8 +117,9 @@ export const decorativePattern = (
             },
           },
           {
-            name: 'position',
+            name: 'pos',
             type: 'select',
+            label: 'Position',
             defaultValue: 'center',
             options: [
               { label: 'Center', value: 'center' },
@@ -132,7 +133,6 @@ export const decorativePattern = (
               description: 'Pattern position',
               width: '30%',
             },
-            dbName: 'pos',
           },
           {
             name: 'rotation',
@@ -168,13 +168,13 @@ export const decorativePattern = (
 export interface DecorativePatternType {
   decorPattern?: {
     enabled?: boolean | null
-    type?: 'text' | 'circles' | 'lines' | 'dots' | 'waves' | null
+    typ?: 'text' | 'circles' | 'lines' | 'dots' | 'waves' | null
     text?: string | null
     opacity?: number | null
-    size?: 'small' | 'medium' | 'large' | null
+    sz?: 'small' | 'medium' | 'large' | null
     repeatCount?: number | null
     color?: string | null
-    position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center' | null
+    pos?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center' | null
     rotation?: number | null
   } | null
 }

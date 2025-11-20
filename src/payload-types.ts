@@ -686,7 +686,7 @@ export interface HeroBasicBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -698,7 +698,7 @@ export interface HeroBasicBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -710,7 +710,7 @@ export interface HeroBasicBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -901,7 +901,7 @@ export interface HeroWithStatsBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -913,7 +913,7 @@ export interface HeroWithStatsBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -925,7 +925,7 @@ export interface HeroWithStatsBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -1020,7 +1020,7 @@ export interface RichTextSectionBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -1032,7 +1032,7 @@ export interface RichTextSectionBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -1044,7 +1044,7 @@ export interface RichTextSectionBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -1229,7 +1229,7 @@ export interface ColumnsBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -1241,7 +1241,7 @@ export interface ColumnsBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -1253,7 +1253,7 @@ export interface ColumnsBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -1373,7 +1373,7 @@ export interface CTAFullWidthBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -1385,7 +1385,7 @@ export interface CTAFullWidthBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -1397,7 +1397,7 @@ export interface CTAFullWidthBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -1486,7 +1486,7 @@ export interface AlertBannerBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -1498,7 +1498,7 @@ export interface AlertBannerBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -1510,7 +1510,7 @@ export interface AlertBannerBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -1636,7 +1636,7 @@ export interface CardGridBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -1648,7 +1648,7 @@ export interface CardGridBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -1660,7 +1660,7 @@ export interface CardGridBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -1821,7 +1821,7 @@ export interface BentoGridBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -1833,7 +1833,7 @@ export interface BentoGridBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -1845,7 +1845,7 @@ export interface BentoGridBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -1948,7 +1948,7 @@ export interface EventListBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -1960,7 +1960,7 @@ export interface EventListBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -1972,7 +1972,7 @@ export interface EventListBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -2070,7 +2070,7 @@ export interface PostListBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -2082,7 +2082,7 @@ export interface PostListBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -2094,7 +2094,7 @@ export interface PostListBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -2181,7 +2181,7 @@ export interface BulletinListBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -2193,7 +2193,7 @@ export interface BulletinListBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -2205,7 +2205,7 @@ export interface BulletinListBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -2304,7 +2304,7 @@ export interface MediaListBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -2316,7 +2316,7 @@ export interface MediaListBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -2328,7 +2328,7 @@ export interface MediaListBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -2418,7 +2418,7 @@ export interface TestimonialBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -2430,7 +2430,7 @@ export interface TestimonialBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -2442,7 +2442,7 @@ export interface TestimonialBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -2575,7 +2575,7 @@ export interface StoryHighlightBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -2587,7 +2587,7 @@ export interface StoryHighlightBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -2599,7 +2599,7 @@ export interface StoryHighlightBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -2697,7 +2697,7 @@ export interface FAQAccordionBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -2709,7 +2709,7 @@ export interface FAQAccordionBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -2721,7 +2721,7 @@ export interface FAQAccordionBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -2814,7 +2814,7 @@ export interface VideoEmbedBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -2826,7 +2826,7 @@ export interface VideoEmbedBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -2838,7 +2838,7 @@ export interface VideoEmbedBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -2939,7 +2939,7 @@ export interface FormEmbedBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -2951,7 +2951,7 @@ export interface FormEmbedBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -2963,7 +2963,7 @@ export interface FormEmbedBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -3174,7 +3174,7 @@ export interface CallToActionBlock {
     /**
      * Choose the type of decorative pattern
      */
-    type?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
     /**
      * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
      */
@@ -3186,7 +3186,7 @@ export interface CallToActionBlock {
     /**
      * Pattern size
      */
-    size?: ('small' | 'medium' | 'large') | null;
+    sz?: ('small' | 'medium' | 'large') | null;
     /**
      * Repeat count
      */
@@ -3198,7 +3198,7 @@ export interface CallToActionBlock {
     /**
      * Pattern position
      */
-    position?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+    pos?: ('center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
     /**
      * Rotation (degrees)
      */
@@ -4624,13 +4624,13 @@ export interface HeroBasicBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   visibility?:
@@ -4703,13 +4703,13 @@ export interface HeroWithStatsBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;
@@ -4744,13 +4744,13 @@ export interface RichTextSectionBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   visibility?:
@@ -4823,13 +4823,13 @@ export interface ColumnsBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;
@@ -4875,13 +4875,13 @@ export interface CTAFullWidthBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   visibility?:
@@ -4918,13 +4918,13 @@ export interface AlertBannerBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;
@@ -4971,13 +4971,13 @@ export interface CardGridBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   visibility?:
@@ -5038,13 +5038,13 @@ export interface BentoGridBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;
@@ -5080,13 +5080,13 @@ export interface EventListBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;
@@ -5122,13 +5122,13 @@ export interface PostListBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;
@@ -5162,13 +5162,13 @@ export interface BulletinListBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;
@@ -5202,13 +5202,13 @@ export interface MediaListBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;
@@ -5239,13 +5239,13 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   visibility?:
@@ -5293,13 +5293,13 @@ export interface StoryHighlightBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;
@@ -5340,13 +5340,13 @@ export interface FAQAccordionBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;
@@ -5377,13 +5377,13 @@ export interface VideoEmbedBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;
@@ -5416,13 +5416,13 @@ export interface FormEmbedBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;
@@ -5515,13 +5515,13 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        type?: T;
+        typ?: T;
         text?: T;
         opacity?: T;
-        size?: T;
+        sz?: T;
         repeatCount?: T;
         color?: T;
-        position?: T;
+        pos?: T;
         rotation?: T;
       };
   blockName?: T;

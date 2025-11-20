@@ -58,13 +58,13 @@ export const VideoEmbedBlock: React.FC<VideoEmbedProps> = ({
       {/* Decorative Pattern */}
       {decorPattern?.enabled && (
         <DecorativePattern
-          type={decorPattern.type || 'text'}
+          type={decorPattern.typ || 'text'}
           text={decorPattern.text || undefined}
           opacity={decorPattern.opacity || undefined}
-          size={decorPattern.size || undefined}
+          size={decorPattern.sz || undefined}
           repeatCount={decorPattern.repeatCount || undefined}
           color={decorPattern.color || undefined}
-          position={decorPattern.position || undefined}
+          position={decorPattern.pos || undefined}
           rotation={decorPattern.rotation || undefined}
         />
       )}
