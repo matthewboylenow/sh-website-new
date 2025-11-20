@@ -20,7 +20,7 @@ import { Ministries } from './collections/Ministries'
 import { LifeLines } from './collections/LifeLines'
 import { Staff } from './collections/Staff'
 import { SearchItems } from './collections/SearchItems'
-import { Patterns } from './collections/Patterns'
+// import { Patterns } from './collections/Patterns' // Temporarily disabled
 
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
@@ -91,7 +91,7 @@ export default buildConfig({
     LifeLines,
     Staff,
     SearchItems,
-    Patterns,
+    // Patterns, // Temporarily disabled - will re-enable after verifying base tables
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, GlobalSettings],
