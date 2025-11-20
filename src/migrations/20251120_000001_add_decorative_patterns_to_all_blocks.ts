@@ -60,15 +60,15 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
            RAISE NOTICE '  decor_pattern_enabled already exists';
          END IF;
 
-         -- Add decor_pattern_type column
+         -- Add decor_pattern_typ column
          IF NOT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decor_pattern_type'
+           WHERE table_name = tbl AND column_name = 'decor_pattern_typ'
          ) THEN
-           RAISE NOTICE '  Creating decor_pattern_type column';
-           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_type text DEFAULT ''text''', tbl);
+           RAISE NOTICE '  Creating decor_pattern_typ column';
+           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_typ text DEFAULT ''text''', tbl);
          ELSE
-           RAISE NOTICE '  decor_pattern_type already exists';
+           RAISE NOTICE '  decor_pattern_typ already exists';
          END IF;
 
          -- Add decor_pattern_text column
@@ -93,15 +93,15 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
            RAISE NOTICE '  decor_pattern_opacity already exists';
          END IF;
 
-         -- Add decor_pattern_size column
+         -- Add decor_pattern_sz column
          IF NOT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decor_pattern_size'
+           WHERE table_name = tbl AND column_name = 'decor_pattern_sz'
          ) THEN
-           RAISE NOTICE '  Creating decor_pattern_size column';
-           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_size text DEFAULT ''large''', tbl);
+           RAISE NOTICE '  Creating decor_pattern_sz column';
+           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_sz text DEFAULT ''large''', tbl);
          ELSE
-           RAISE NOTICE '  decor_pattern_size already exists';
+           RAISE NOTICE '  decor_pattern_sz already exists';
          END IF;
 
          -- Add decor_pattern_repeat_count column
@@ -126,15 +126,15 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
            RAISE NOTICE '  decor_pattern_color already exists';
          END IF;
 
-         -- Add decor_pattern_position column
+         -- Add decor_pattern_pos column
          IF NOT EXISTS (
            SELECT 1 FROM information_schema.columns
-           WHERE table_name = tbl AND column_name = 'decor_pattern_position'
+           WHERE table_name = tbl AND column_name = 'decor_pattern_pos'
          ) THEN
-           RAISE NOTICE '  Creating decor_pattern_position column';
-           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_position text DEFAULT ''center''', tbl);
+           RAISE NOTICE '  Creating decor_pattern_pos column';
+           EXECUTE format('ALTER TABLE %I ADD COLUMN decor_pattern_pos text DEFAULT ''center''', tbl);
          ELSE
-           RAISE NOTICE '  decor_pattern_position already exists';
+           RAISE NOTICE '  decor_pattern_pos already exists';
          END IF;
 
          -- Add decor_pattern_rotation column
@@ -200,13 +200,13 @@ export async function down({ db }: MigrateDownArgs): Promise<void> {
      tbl TEXT;
      columns TEXT[] := ARRAY[
        'decor_pattern_enabled',
-       'decor_pattern_type',
+       'decor_pattern_typ',
        'decor_pattern_text',
        'decor_pattern_opacity',
-       'decor_pattern_size',
+       'decor_pattern_sz',
        'decor_pattern_repeat_count',
        'decor_pattern_color',
-       'decor_pattern_position',
+       'decor_pattern_pos',
        'decor_pattern_rotation'
      ];
      col TEXT;

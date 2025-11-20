@@ -44,6 +44,7 @@ export const decorativePattern = (
           condition: (data, siblingData) => siblingData?.enabled === true,
           description: 'Choose the type of decorative pattern',
         },
+        dbName: 'typ',
       },
       {
         name: 'text',
@@ -85,6 +86,7 @@ export const decorativePattern = (
               description: 'Pattern size',
               width: '33%',
             },
+            dbName: 'sz',
           },
           {
             name: 'repeatCount',
@@ -130,6 +132,7 @@ export const decorativePattern = (
               description: 'Pattern position',
               width: '30%',
             },
+            dbName: 'pos',
           },
           {
             name: 'rotation',
