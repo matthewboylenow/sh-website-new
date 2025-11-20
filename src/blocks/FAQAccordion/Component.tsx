@@ -118,6 +118,7 @@ export const FAQAccordionBlock: React.FC<FAQAccordionProps> = ({
         <DecorativePattern
           type={decorPattern.typ || 'text'}
           text={decorPattern.text || undefined}
+          customSvg={typeof decorPattern.customSvg === 'object' ? decorPattern.customSvg : undefined}
           opacity={decorPattern.opacity || undefined}
           size={decorPattern.sz || undefined}
           repeatCount={decorPattern.repeatCount || undefined}

@@ -40,6 +40,11 @@ export const decorativePattern = (
           { label: 'Lines', value: 'lines' },
           { label: 'Dots Grid', value: 'dots' },
           { label: 'Waves', value: 'waves' },
+          { label: 'Zig Zag', value: 'zigzag' },
+          { label: 'Chevron', value: 'chevron' },
+          { label: 'Hexagons', value: 'hexagons' },
+          { label: 'Crosses', value: 'crosses' },
+          { label: 'Custom SVG', value: 'custom-svg' },
         ],
         admin: {
           condition: (data, siblingData) => siblingData?.enabled === true,
@@ -52,9 +57,20 @@ export const decorativePattern = (
         defaultValue: 'CHURCH',
         admin: {
           condition: (data, siblingData) =>
-            siblingData?.enabled === true && siblingData?.type === 'text',
-          description: 'The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")',
+            siblingData?.enabled === true && siblingData?.typ === 'text',
+          description: 'The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")',
           placeholder: 'CHURCH',
+        },
+      },
+      {
+        name: 'customSvg',
+        type: 'upload',
+        relationTo: 'media',
+        label: 'Custom SVG Pattern',
+        admin: {
+          condition: (data, siblingData) =>
+            siblingData?.enabled === true && siblingData?.typ === 'custom-svg',
+          description: 'Upload an SVG file to use as a custom pattern',
         },
       },
       {
@@ -168,8 +184,9 @@ export const decorativePattern = (
 export interface DecorativePatternType {
   decorPattern?: {
     enabled?: boolean | null
-    typ?: 'text' | 'circles' | 'lines' | 'dots' | 'waves' | null
+    typ?: 'text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses' | 'custom-svg' | null
     text?: string | null
+    customSvg?: number | string | null | { url?: string; alt?: string }
     opacity?: number | null
     sz?: 'small' | 'medium' | 'large' | null
     repeatCount?: number | null

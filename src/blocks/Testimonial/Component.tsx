@@ -29,6 +29,7 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
           <DecorativePattern
             type={decorPattern.typ || 'text'}
             text={decorPattern.text || undefined}
+          customSvg={typeof decorPattern.customSvg === 'object' ? decorPattern.customSvg : undefined}
             opacity={decorPattern.opacity || undefined}
             size={decorPattern.sz || undefined}
             repeatCount={decorPattern.repeatCount || undefined}
@@ -110,6 +111,7 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
           <DecorativePattern
             type={decorPattern.typ || 'text'}
             text={decorPattern.text || undefined}
+          customSvg={typeof decorPattern.customSvg === 'object' ? decorPattern.customSvg : undefined}
             opacity={decorPattern.opacity || undefined}
             size={decorPattern.sz || undefined}
             repeatCount={decorPattern.repeatCount || undefined}
@@ -171,6 +173,7 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
         <DecorativePattern
           type={decorPattern.typ || 'text'}
           text={decorPattern.text || undefined}
+          customSvg={typeof decorPattern.customSvg === 'object' ? decorPattern.customSvg : undefined}
           opacity={decorPattern.opacity || undefined}
           size={decorPattern.sz || undefined}
           repeatCount={decorPattern.repeatCount || undefined}
