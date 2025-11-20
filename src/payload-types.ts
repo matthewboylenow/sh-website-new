@@ -79,6 +79,7 @@ export interface Config {
     lifelines: Lifeline;
     staff: Staff;
     'search-items': SearchItem;
+    patterns: Pattern;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -108,6 +109,7 @@ export interface Config {
     lifelines: LifelinesSelect<false> | LifelinesSelect<true>;
     staff: StaffSelect<false> | StaffSelect<true>;
     'search-items': SearchItemsSelect<false> | SearchItemsSelect<true>;
+    patterns: PatternsSelect<false> | PatternsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -4122,6 +4124,59 @@ export interface SearchItem {
   createdAt: string;
 }
 /**
+ * Reusable page layouts that can be inserted into pages
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "patterns".
+ */
+export interface Pattern {
+  id: number;
+  /**
+   * Descriptive name for this pattern (e.g., "Standard Ministry Page")
+   */
+  name: string;
+  /**
+   * What is this pattern for? When should editors use it?
+   */
+  description?: string | null;
+  /**
+   * Build a reusable layout using blocks (same as page content)
+   */
+  layout: (
+    | HeroBasicBlock
+    | HeroWithStatsBlock
+    | RichTextSectionBlock
+    | ColumnsBlock
+    | CTAFullWidthBlock
+    | AlertBannerBlock
+    | CardGridBlock
+    | BentoGridBlock
+    | EventListBlock
+    | PostListBlock
+    | BulletinListBlock
+    | MediaListBlock
+    | TestimonialBlock
+    | StoryHighlightBlock
+    | FAQAccordionBlock
+    | VideoEmbedBlock
+    | FormEmbedBlock
+    | SpacerBlock
+    | DividerBlock
+    | CustomCodeBlock
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+  )[];
+  /**
+   * Categorize this pattern to help editors find it
+   */
+  category?: ('ministry' | 'event' | 'about' | 'landing' | 'other') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -4358,6 +4413,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'search-items';
         value: number | SearchItem;
+      } | null)
+    | ({
+        relationTo: 'patterns';
+        value: number | Pattern;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -5880,6 +5939,46 @@ export interface SearchItemsSelect<T extends boolean = true> {
   sourceCollection?: T;
   sourceId?: T;
   lastSyncedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "patterns_select".
+ */
+export interface PatternsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  layout?:
+    | T
+    | {
+        heroBasic?: T | HeroBasicBlockSelect<T>;
+        heroWithStats?: T | HeroWithStatsBlockSelect<T>;
+        richTextSection?: T | RichTextSectionBlockSelect<T>;
+        columns?: T | ColumnsBlockSelect<T>;
+        ctaFullWidth?: T | CTAFullWidthBlockSelect<T>;
+        alertBanner?: T | AlertBannerBlockSelect<T>;
+        cardGrid?: T | CardGridBlockSelect<T>;
+        bentoGrid?: T | BentoGridBlockSelect<T>;
+        eventList?: T | EventListBlockSelect<T>;
+        postList?: T | PostListBlockSelect<T>;
+        bulletinList?: T | BulletinListBlockSelect<T>;
+        mediaList?: T | MediaListBlockSelect<T>;
+        testimonial?: T | TestimonialBlockSelect<T>;
+        storyHighlight?: T | StoryHighlightBlockSelect<T>;
+        faqAccordion?: T | FAQAccordionBlockSelect<T>;
+        videoEmbed?: T | VideoEmbedBlockSelect<T>;
+        formEmbed?: T | FormEmbedBlockSelect<T>;
+        spacer?: T | SpacerBlockSelect<T>;
+        divider?: T | DividerBlockSelect<T>;
+        customCode?: T | CustomCodeBlockSelect<T>;
+        cta?: T | CallToActionBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+      };
+  category?: T;
   updatedAt?: T;
   createdAt?: T;
 }
