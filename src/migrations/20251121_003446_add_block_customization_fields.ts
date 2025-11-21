@@ -5,12 +5,12 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
    DO $$
    BEGIN
-     -- Add custom_code column to pages__blocks_columns_columns
+     -- Add custom_code column to pages_blocks_columns_columns
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_columns_columns' AND column_name = 'custom_code'
+       WHERE table_name = 'pages_blocks_columns_columns' AND column_name = 'custom_code'
      ) THEN
-       ALTER TABLE "pages__blocks_columns_columns" ADD COLUMN "custom_code" varchar;
+       ALTER TABLE "pages_blocks_columns_columns" ADD COLUMN "custom_code" varchar;
      END IF;
    END $$;
   `)
@@ -22,49 +22,49 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
      -- Add show_categories column
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_postList' AND column_name = 'show_categories'
+       WHERE table_name = 'pages_blocks_post_list' AND column_name = 'show_categories'
      ) THEN
-       ALTER TABLE "pages__blocks_postList" ADD COLUMN "show_categories" boolean DEFAULT true;
+       ALTER TABLE "pages_blocks_post_list" ADD COLUMN "show_categories" boolean DEFAULT true;
      END IF;
 
      -- Add image_size column
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_postList' AND column_name = 'image_size'
+       WHERE table_name = 'pages_blocks_post_list' AND column_name = 'image_size'
      ) THEN
-       ALTER TABLE "pages__blocks_postList" ADD COLUMN "image_size" varchar DEFAULT 'default';
+       ALTER TABLE "pages_blocks_post_list" ADD COLUMN "image_size" varchar DEFAULT 'default';
      END IF;
 
      -- Add card_background_color column
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_postList' AND column_name = 'card_background_color'
+       WHERE table_name = 'pages_blocks_post_list' AND column_name = 'card_background_color'
      ) THEN
-       ALTER TABLE "pages__blocks_postList" ADD COLUMN "card_background_color" varchar;
+       ALTER TABLE "pages_blocks_post_list" ADD COLUMN "card_background_color" varchar;
      END IF;
 
      -- Add card_title_color column
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_postList' AND column_name = 'card_title_color'
+       WHERE table_name = 'pages_blocks_post_list' AND column_name = 'card_title_color'
      ) THEN
-       ALTER TABLE "pages__blocks_postList" ADD COLUMN "card_title_color" varchar;
+       ALTER TABLE "pages_blocks_post_list" ADD COLUMN "card_title_color" varchar;
      END IF;
 
      -- Add card_text_color column
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_postList' AND column_name = 'card_text_color'
+       WHERE table_name = 'pages_blocks_post_list' AND column_name = 'card_text_color'
      ) THEN
-       ALTER TABLE "pages__blocks_postList" ADD COLUMN "card_text_color" varchar;
+       ALTER TABLE "pages_blocks_post_list" ADD COLUMN "card_text_color" varchar;
      END IF;
 
      -- Add card_category_color column
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_postList' AND column_name = 'card_category_color'
+       WHERE table_name = 'pages_blocks_post_list' AND column_name = 'card_category_color'
      ) THEN
-       ALTER TABLE "pages__blocks_postList" ADD COLUMN "card_category_color" varchar;
+       ALTER TABLE "pages_blocks_post_list" ADD COLUMN "card_category_color" varchar;
      END IF;
    END $$;
   `)
@@ -76,57 +76,57 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
      -- Add show_categories column
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_eventList' AND column_name = 'show_categories'
+       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'show_categories'
      ) THEN
-       ALTER TABLE "pages__blocks_eventList" ADD COLUMN "show_categories" boolean DEFAULT true;
+       ALTER TABLE "pages_blocks_event_list" ADD COLUMN "show_categories" boolean DEFAULT true;
      END IF;
 
      -- Add image_size column
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_eventList' AND column_name = 'image_size'
+       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'image_size'
      ) THEN
-       ALTER TABLE "pages__blocks_eventList" ADD COLUMN "image_size" varchar DEFAULT 'default';
+       ALTER TABLE "pages_blocks_event_list" ADD COLUMN "image_size" varchar DEFAULT 'default';
      END IF;
 
      -- Add card_background_color column
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_eventList' AND column_name = 'card_background_color'
+       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'card_background_color'
      ) THEN
-       ALTER TABLE "pages__blocks_eventList" ADD COLUMN "card_background_color" varchar;
+       ALTER TABLE "pages_blocks_event_list" ADD COLUMN "card_background_color" varchar;
      END IF;
 
      -- Add card_title_color column
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_eventList' AND column_name = 'card_title_color'
+       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'card_title_color'
      ) THEN
-       ALTER TABLE "pages__blocks_eventList" ADD COLUMN "card_title_color" varchar;
+       ALTER TABLE "pages_blocks_event_list" ADD COLUMN "card_title_color" varchar;
      END IF;
 
      -- Add card_text_color column
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_eventList' AND column_name = 'card_text_color'
+       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'card_text_color'
      ) THEN
-       ALTER TABLE "pages__blocks_eventList" ADD COLUMN "card_text_color" varchar;
+       ALTER TABLE "pages_blocks_event_list" ADD COLUMN "card_text_color" varchar;
      END IF;
 
      -- Add card_category_color column
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_eventList' AND column_name = 'card_category_color'
+       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'card_category_color'
      ) THEN
-       ALTER TABLE "pages__blocks_eventList" ADD COLUMN "card_category_color" varchar;
+       ALTER TABLE "pages_blocks_event_list" ADD COLUMN "card_category_color" varchar;
      END IF;
 
      -- Add date_badge_color column (specific to EventList)
      IF NOT EXISTS (
        SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages__blocks_eventList' AND column_name = 'date_badge_color'
+       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'date_badge_color'
      ) THEN
-       ALTER TABLE "pages__blocks_eventList" ADD COLUMN "date_badge_color" varchar;
+       ALTER TABLE "pages_blocks_event_list" ADD COLUMN "date_badge_color" varchar;
      END IF;
    END $$;
   `)
@@ -137,7 +137,7 @@ export async function down({ db }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    DO $$
    BEGIN
-     ALTER TABLE "pages__blocks_columns_columns" DROP COLUMN IF EXISTS "custom_code";
+     ALTER TABLE "pages_blocks_columns_columns" DROP COLUMN IF EXISTS "custom_code";
    END $$;
   `)
 
@@ -145,12 +145,12 @@ export async function down({ db }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    DO $$
    BEGIN
-     ALTER TABLE "pages__blocks_postList" DROP COLUMN IF EXISTS "show_categories";
-     ALTER TABLE "pages__blocks_postList" DROP COLUMN IF EXISTS "image_size";
-     ALTER TABLE "pages__blocks_postList" DROP COLUMN IF EXISTS "card_background_color";
-     ALTER TABLE "pages__blocks_postList" DROP COLUMN IF EXISTS "card_title_color";
-     ALTER TABLE "pages__blocks_postList" DROP COLUMN IF EXISTS "card_text_color";
-     ALTER TABLE "pages__blocks_postList" DROP COLUMN IF EXISTS "card_category_color";
+     ALTER TABLE "pages_blocks_post_list" DROP COLUMN IF EXISTS "show_categories";
+     ALTER TABLE "pages_blocks_post_list" DROP COLUMN IF EXISTS "image_size";
+     ALTER TABLE "pages_blocks_post_list" DROP COLUMN IF EXISTS "card_background_color";
+     ALTER TABLE "pages_blocks_post_list" DROP COLUMN IF EXISTS "card_title_color";
+     ALTER TABLE "pages_blocks_post_list" DROP COLUMN IF EXISTS "card_text_color";
+     ALTER TABLE "pages_blocks_post_list" DROP COLUMN IF EXISTS "card_category_color";
    END $$;
   `)
 
@@ -158,13 +158,13 @@ export async function down({ db }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    DO $$
    BEGIN
-     ALTER TABLE "pages__blocks_eventList" DROP COLUMN IF EXISTS "show_categories";
-     ALTER TABLE "pages__blocks_eventList" DROP COLUMN IF EXISTS "image_size";
-     ALTER TABLE "pages__blocks_eventList" DROP COLUMN IF EXISTS "card_background_color";
-     ALTER TABLE "pages__blocks_eventList" DROP COLUMN IF EXISTS "card_title_color";
-     ALTER TABLE "pages__blocks_eventList" DROP COLUMN IF EXISTS "card_text_color";
-     ALTER TABLE "pages__blocks_eventList" DROP COLUMN IF EXISTS "card_category_color";
-     ALTER TABLE "pages__blocks_eventList" DROP COLUMN IF EXISTS "date_badge_color";
+     ALTER TABLE "pages_blocks_event_list" DROP COLUMN IF EXISTS "show_categories";
+     ALTER TABLE "pages_blocks_event_list" DROP COLUMN IF EXISTS "image_size";
+     ALTER TABLE "pages_blocks_event_list" DROP COLUMN IF EXISTS "card_background_color";
+     ALTER TABLE "pages_blocks_event_list" DROP COLUMN IF EXISTS "card_title_color";
+     ALTER TABLE "pages_blocks_event_list" DROP COLUMN IF EXISTS "card_text_color";
+     ALTER TABLE "pages_blocks_event_list" DROP COLUMN IF EXISTS "card_category_color";
+     ALTER TABLE "pages_blocks_event_list" DROP COLUMN IF EXISTS "date_badge_color";
    END $$;
   `)
 }
