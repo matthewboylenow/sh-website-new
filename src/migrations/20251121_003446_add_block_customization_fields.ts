@@ -1,7 +1,7 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-vercel-postgres'
 
 export async function up({ db }: MigrateUpArgs): Promise<void> {
-  // Add customCode field to Columns block
+  // Add customCode field to Columns block (both main and version tables)
   await db.execute(sql`
    DO $$
    BEGIN
@@ -12,136 +12,127 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
      ) THEN
        ALTER TABLE "pages_blocks_columns_columns" ADD COLUMN "custom_code" varchar;
      END IF;
+
+     -- Add custom_code column to _pages_v_blocks_columns_columns (version table)
+     IF NOT EXISTS (
+       SELECT 1 FROM information_schema.columns
+       WHERE table_name = '_pages_v_blocks_columns_columns' AND column_name = 'custom_code'
+     ) THEN
+       ALTER TABLE "_pages_v_blocks_columns_columns" ADD COLUMN "custom_code" varchar;
+     END IF;
    END $$;
   `)
 
-  // Add card customization fields to PostList block
+  // Add card customization fields to PostList block (both main and version tables)
   await db.execute(sql`
    DO $$
    BEGIN
-     -- Add show_categories column
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_post_list' AND column_name = 'show_categories'
-     ) THEN
+     -- Main table: pages_blocks_post_list
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_post_list' AND column_name = 'show_categories') THEN
        ALTER TABLE "pages_blocks_post_list" ADD COLUMN "show_categories" boolean DEFAULT true;
      END IF;
-
-     -- Add image_size column
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_post_list' AND column_name = 'image_size'
-     ) THEN
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_post_list' AND column_name = 'image_size') THEN
        ALTER TABLE "pages_blocks_post_list" ADD COLUMN "image_size" varchar DEFAULT 'default';
      END IF;
-
-     -- Add card_background_color column
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_post_list' AND column_name = 'card_background_color'
-     ) THEN
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_post_list' AND column_name = 'card_background_color') THEN
        ALTER TABLE "pages_blocks_post_list" ADD COLUMN "card_background_color" varchar;
      END IF;
-
-     -- Add card_title_color column
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_post_list' AND column_name = 'card_title_color'
-     ) THEN
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_post_list' AND column_name = 'card_title_color') THEN
        ALTER TABLE "pages_blocks_post_list" ADD COLUMN "card_title_color" varchar;
      END IF;
-
-     -- Add card_text_color column
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_post_list' AND column_name = 'card_text_color'
-     ) THEN
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_post_list' AND column_name = 'card_text_color') THEN
        ALTER TABLE "pages_blocks_post_list" ADD COLUMN "card_text_color" varchar;
      END IF;
-
-     -- Add card_category_color column
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_post_list' AND column_name = 'card_category_color'
-     ) THEN
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_post_list' AND column_name = 'card_category_color') THEN
        ALTER TABLE "pages_blocks_post_list" ADD COLUMN "card_category_color" varchar;
+     END IF;
+
+     -- Version table: _pages_v_blocks_post_list
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_post_list' AND column_name = 'show_categories') THEN
+       ALTER TABLE "_pages_v_blocks_post_list" ADD COLUMN "show_categories" boolean DEFAULT true;
+     END IF;
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_post_list' AND column_name = 'image_size') THEN
+       ALTER TABLE "_pages_v_blocks_post_list" ADD COLUMN "image_size" varchar DEFAULT 'default';
+     END IF;
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_post_list' AND column_name = 'card_background_color') THEN
+       ALTER TABLE "_pages_v_blocks_post_list" ADD COLUMN "card_background_color" varchar;
+     END IF;
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_post_list' AND column_name = 'card_title_color') THEN
+       ALTER TABLE "_pages_v_blocks_post_list" ADD COLUMN "card_title_color" varchar;
+     END IF;
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_post_list' AND column_name = 'card_text_color') THEN
+       ALTER TABLE "_pages_v_blocks_post_list" ADD COLUMN "card_text_color" varchar;
+     END IF;
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_post_list' AND column_name = 'card_category_color') THEN
+       ALTER TABLE "_pages_v_blocks_post_list" ADD COLUMN "card_category_color" varchar;
      END IF;
    END $$;
   `)
 
-  // Add card customization fields to EventList block
+  // Add card customization fields to EventList block (both main and version tables)
   await db.execute(sql`
    DO $$
    BEGIN
-     -- Add show_categories column
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'show_categories'
-     ) THEN
+     -- Main table: pages_blocks_event_list
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_event_list' AND column_name = 'show_categories') THEN
        ALTER TABLE "pages_blocks_event_list" ADD COLUMN "show_categories" boolean DEFAULT true;
      END IF;
-
-     -- Add image_size column
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'image_size'
-     ) THEN
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_event_list' AND column_name = 'image_size') THEN
        ALTER TABLE "pages_blocks_event_list" ADD COLUMN "image_size" varchar DEFAULT 'default';
      END IF;
-
-     -- Add card_background_color column
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'card_background_color'
-     ) THEN
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_event_list' AND column_name = 'card_background_color') THEN
        ALTER TABLE "pages_blocks_event_list" ADD COLUMN "card_background_color" varchar;
      END IF;
-
-     -- Add card_title_color column
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'card_title_color'
-     ) THEN
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_event_list' AND column_name = 'card_title_color') THEN
        ALTER TABLE "pages_blocks_event_list" ADD COLUMN "card_title_color" varchar;
      END IF;
-
-     -- Add card_text_color column
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'card_text_color'
-     ) THEN
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_event_list' AND column_name = 'card_text_color') THEN
        ALTER TABLE "pages_blocks_event_list" ADD COLUMN "card_text_color" varchar;
      END IF;
-
-     -- Add card_category_color column
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'card_category_color'
-     ) THEN
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_event_list' AND column_name = 'card_category_color') THEN
        ALTER TABLE "pages_blocks_event_list" ADD COLUMN "card_category_color" varchar;
      END IF;
-
-     -- Add date_badge_color column (specific to EventList)
-     IF NOT EXISTS (
-       SELECT 1 FROM information_schema.columns
-       WHERE table_name = 'pages_blocks_event_list' AND column_name = 'date_badge_color'
-     ) THEN
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'pages_blocks_event_list' AND column_name = 'date_badge_color') THEN
        ALTER TABLE "pages_blocks_event_list" ADD COLUMN "date_badge_color" varchar;
+     END IF;
+
+     -- Version table: _pages_v_blocks_event_list
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_event_list' AND column_name = 'show_categories') THEN
+       ALTER TABLE "_pages_v_blocks_event_list" ADD COLUMN "show_categories" boolean DEFAULT true;
+     END IF;
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_event_list' AND column_name = 'image_size') THEN
+       ALTER TABLE "_pages_v_blocks_event_list" ADD COLUMN "image_size" varchar DEFAULT 'default';
+     END IF;
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_event_list' AND column_name = 'card_background_color') THEN
+       ALTER TABLE "_pages_v_blocks_event_list" ADD COLUMN "card_background_color" varchar;
+     END IF;
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_event_list' AND column_name = 'card_title_color') THEN
+       ALTER TABLE "_pages_v_blocks_event_list" ADD COLUMN "card_title_color" varchar;
+     END IF;
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_event_list' AND column_name = 'card_text_color') THEN
+       ALTER TABLE "_pages_v_blocks_event_list" ADD COLUMN "card_text_color" varchar;
+     END IF;
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_event_list' AND column_name = 'card_category_color') THEN
+       ALTER TABLE "_pages_v_blocks_event_list" ADD COLUMN "card_category_color" varchar;
+     END IF;
+     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = '_pages_v_blocks_event_list' AND column_name = 'date_badge_color') THEN
+       ALTER TABLE "_pages_v_blocks_event_list" ADD COLUMN "date_badge_color" varchar;
      END IF;
    END $$;
   `)
 }
 
 export async function down({ db }: MigrateDownArgs): Promise<void> {
-  // Remove customCode field from Columns block
+  // Remove customCode field from Columns block (both main and version tables)
   await db.execute(sql`
    DO $$
    BEGIN
      ALTER TABLE "pages_blocks_columns_columns" DROP COLUMN IF EXISTS "custom_code";
+     ALTER TABLE "_pages_v_blocks_columns_columns" DROP COLUMN IF EXISTS "custom_code";
    END $$;
   `)
 
-  // Remove card customization fields from PostList block
+  // Remove card customization fields from PostList block (both main and version tables)
   await db.execute(sql`
    DO $$
    BEGIN
@@ -151,10 +142,16 @@ export async function down({ db }: MigrateDownArgs): Promise<void> {
      ALTER TABLE "pages_blocks_post_list" DROP COLUMN IF EXISTS "card_title_color";
      ALTER TABLE "pages_blocks_post_list" DROP COLUMN IF EXISTS "card_text_color";
      ALTER TABLE "pages_blocks_post_list" DROP COLUMN IF EXISTS "card_category_color";
+     ALTER TABLE "_pages_v_blocks_post_list" DROP COLUMN IF EXISTS "show_categories";
+     ALTER TABLE "_pages_v_blocks_post_list" DROP COLUMN IF EXISTS "image_size";
+     ALTER TABLE "_pages_v_blocks_post_list" DROP COLUMN IF EXISTS "card_background_color";
+     ALTER TABLE "_pages_v_blocks_post_list" DROP COLUMN IF EXISTS "card_title_color";
+     ALTER TABLE "_pages_v_blocks_post_list" DROP COLUMN IF EXISTS "card_text_color";
+     ALTER TABLE "_pages_v_blocks_post_list" DROP COLUMN IF EXISTS "card_category_color";
    END $$;
   `)
 
-  // Remove card customization fields from EventList block
+  // Remove card customization fields from EventList block (both main and version tables)
   await db.execute(sql`
    DO $$
    BEGIN
@@ -165,6 +162,13 @@ export async function down({ db }: MigrateDownArgs): Promise<void> {
      ALTER TABLE "pages_blocks_event_list" DROP COLUMN IF EXISTS "card_text_color";
      ALTER TABLE "pages_blocks_event_list" DROP COLUMN IF EXISTS "card_category_color";
      ALTER TABLE "pages_blocks_event_list" DROP COLUMN IF EXISTS "date_badge_color";
+     ALTER TABLE "_pages_v_blocks_event_list" DROP COLUMN IF EXISTS "show_categories";
+     ALTER TABLE "_pages_v_blocks_event_list" DROP COLUMN IF EXISTS "image_size";
+     ALTER TABLE "_pages_v_blocks_event_list" DROP COLUMN IF EXISTS "card_background_color";
+     ALTER TABLE "_pages_v_blocks_event_list" DROP COLUMN IF EXISTS "card_title_color";
+     ALTER TABLE "_pages_v_blocks_event_list" DROP COLUMN IF EXISTS "card_text_color";
+     ALTER TABLE "_pages_v_blocks_event_list" DROP COLUMN IF EXISTS "card_category_color";
+     ALTER TABLE "_pages_v_blocks_event_list" DROP COLUMN IF EXISTS "date_badge_color";
    END $$;
   `)
 }
