@@ -686,9 +686,9 @@ export interface HeroBasicBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -901,9 +901,9 @@ export interface HeroWithStatsBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -1020,9 +1020,9 @@ export interface RichTextSectionBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -1114,7 +1114,7 @@ export interface ColumnsBlock {
         /**
          * Choose the type of content for this column
          */
-        contentType?: ('text' | 'image' | 'video') | null;
+        contentType?: ('text' | 'image' | 'video' | 'customCode') | null;
         title?: string | null;
         body?: {
           root: {
@@ -1151,6 +1151,10 @@ export interface ColumnsBlock {
          * Alternative: YouTube, Vimeo, or other embed URL (optional if video file provided)
          */
         videoEmbed?: string | null;
+        /**
+         * Add custom HTML, iframe embeds, or JavaScript. Use for forms, calendars, maps, etc.
+         */
+        customCode?: string | null;
         /**
          * Optional links for this column
          */
@@ -1229,9 +1233,9 @@ export interface ColumnsBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -1373,9 +1377,9 @@ export interface CTAFullWidthBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -1486,9 +1490,9 @@ export interface AlertBannerBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -1636,9 +1640,9 @@ export interface CardGridBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -1821,9 +1825,9 @@ export interface BentoGridBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -1902,6 +1906,34 @@ export interface EventListBlock {
    */
   limit?: number | null;
   layout?: ('cards' | 'list' | 'compact') | null;
+  /**
+   * Display category tags on event cards
+   */
+  showCategories?: boolean | null;
+  /**
+   * Size of the date badge area
+   */
+  imageSize?: ('small' | 'default' | 'large') | null;
+  /**
+   * Hex color (e.g., #ffffff) or leave blank for default
+   */
+  cardBackgroundColor?: string | null;
+  /**
+   * Hex color (e.g., #000000) or leave blank for default
+   */
+  cardTitleColor?: string | null;
+  /**
+   * Hex color (e.g., #666666) or leave blank for default
+   */
+  cardTextColor?: string | null;
+  /**
+   * Hex color (e.g., #D4AF37) or leave blank for default gold
+   */
+  cardCategoryColor?: string | null;
+  /**
+   * Hex color (e.g., #D4AF37) or leave blank for default gold
+   */
+  dateBadgeColor?: string | null;
   showViewAllLink?: boolean | null;
   viewAllUrl?: string | null;
   /**
@@ -1948,9 +1980,9 @@ export interface EventListBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -2013,6 +2045,10 @@ export interface PostListBlock {
   limit?: number | null;
   layout?: ('cards' | 'list' | 'featured') | null;
   /**
+   * Display category tags on cards
+   */
+  showCategories?: boolean | null;
+  /**
    * Display post excerpt/preview text
    */
   showExcerpt?: boolean | null;
@@ -2024,6 +2060,26 @@ export interface PostListBlock {
    * Display publication date
    */
   showDate?: boolean | null;
+  /**
+   * Height of the card image
+   */
+  imageSize?: ('small' | 'default' | 'large' | 'xlarge') | null;
+  /**
+   * Hex color (e.g., #ffffff) or leave blank for default
+   */
+  cardBackgroundColor?: string | null;
+  /**
+   * Hex color (e.g., #000000) or leave blank for default
+   */
+  cardTitleColor?: string | null;
+  /**
+   * Hex color (e.g., #666666) or leave blank for default
+   */
+  cardTextColor?: string | null;
+  /**
+   * Hex color (e.g., #4F46E5) or leave blank for default gradient
+   */
+  cardCategoryColor?: string | null;
   showViewAllLink?: boolean | null;
   viewAllUrl?: string | null;
   /**
@@ -2070,9 +2126,9 @@ export interface PostListBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -2181,9 +2237,9 @@ export interface BulletinListBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -2304,9 +2360,9 @@ export interface MediaListBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -2418,9 +2474,9 @@ export interface TestimonialBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -2575,9 +2631,9 @@ export interface StoryHighlightBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -2697,9 +2753,9 @@ export interface FAQAccordionBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -2814,9 +2870,9 @@ export interface VideoEmbedBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -2939,9 +2995,9 @@ export interface FormEmbedBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -3174,9 +3230,9 @@ export interface CallToActionBlock {
     /**
      * Choose the type of decorative pattern
      */
-    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves') | null;
+    typ?: ('text' | 'circles' | 'lines' | 'dots' | 'waves' | 'zigzag' | 'chevron' | 'hexagons' | 'crosses') | null;
     /**
-     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE")
+     * The text to display as a decorative pattern (e.g., "CHURCH", "FAITH", "HOPE", "LOVE")
      */
     text?: string | null;
     /**
@@ -4790,6 +4846,7 @@ export interface ColumnsBlockSelect<T extends boolean = true> {
         video?: T;
         videoPoster?: T;
         videoEmbed?: T;
+        customCode?: T;
         links?:
           | T
           | {
@@ -5063,6 +5120,13 @@ export interface EventListBlockSelect<T extends boolean = true> {
   categoryFilter?: T;
   limit?: T;
   layout?: T;
+  showCategories?: T;
+  imageSize?: T;
+  cardBackgroundColor?: T;
+  cardTitleColor?: T;
+  cardTextColor?: T;
+  cardCategoryColor?: T;
+  dateBadgeColor?: T;
   showViewAllLink?: T;
   viewAllUrl?: T;
   appearance?:
@@ -5102,9 +5166,15 @@ export interface PostListBlockSelect<T extends boolean = true> {
   categoryFilter?: T;
   limit?: T;
   layout?: T;
+  showCategories?: T;
   showExcerpt?: T;
   showAuthor?: T;
   showDate?: T;
+  imageSize?: T;
+  cardBackgroundColor?: T;
+  cardTitleColor?: T;
+  cardTextColor?: T;
+  cardCategoryColor?: T;
   showViewAllLink?: T;
   viewAllUrl?: T;
   appearance?:
@@ -6387,6 +6457,14 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Upload a custom logo for the footer (recommended: SVG or PNG with transparent background)
+   */
+  logo?: (number | null) | Media;
+  /**
+   * Custom copyright text. Leave blank to use default format: "© [Year] [Parish Name]. All rights reserved."
+   */
+  copyrightText?: string | null;
   appearance?: {
     /**
      * Background color for desktop footer
@@ -6418,6 +6496,14 @@ export interface GlobalSetting {
    * Full name of the parish
    */
   parishName: string;
+  /**
+   * Website name used in page titles, meta tags, and SEO (e.g., "Saint Helen")
+   */
+  websiteName: string;
+  /**
+   * Upload a custom favicon (recommended: ICO, PNG, or SVG, 32x32px or larger)
+   */
+  favicon?: (number | null) | Media;
   address: {
     street: string;
     city: string;
@@ -6611,6 +6697,8 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  logo?: T;
+  copyrightText?: T;
   appearance?:
     | T
     | {
@@ -6629,6 +6717,8 @@ export interface FooterSelect<T extends boolean = true> {
  */
 export interface GlobalSettingsSelect<T extends boolean = true> {
   parishName?: T;
+  websiteName?: T;
+  favicon?: T;
   address?:
     | T
     | {

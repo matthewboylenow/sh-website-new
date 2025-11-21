@@ -103,6 +103,93 @@ export const EventList: Block = {
       ],
     },
     {
+      type: 'collapsible',
+      label: 'Card Display Options',
+      admin: {
+        initCollapsed: true,
+      },
+      fields: [
+        {
+          name: 'showCategories',
+          type: 'checkbox',
+          label: 'Show Category Tags',
+          defaultValue: true,
+          admin: {
+            description: 'Display category tags on event cards',
+          },
+        },
+        {
+          name: 'imageSize',
+          type: 'select',
+          label: 'Card Image/Date Badge Size',
+          defaultValue: 'default',
+          options: [
+            { label: 'Small (150px)', value: 'small' },
+            { label: 'Default (200px)', value: 'default' },
+            { label: 'Large (250px)', value: 'large' },
+          ],
+          admin: {
+            description: 'Size of the date badge area',
+          },
+        },
+      ],
+    },
+    {
+      type: 'collapsible',
+      label: 'Card Color Overrides',
+      admin: {
+        initCollapsed: true,
+        description: 'Override default card colors (leave blank to use defaults)',
+      },
+      fields: [
+        {
+          name: 'cardBackgroundColor',
+          type: 'text',
+          label: 'Card Background Color',
+          admin: {
+            description: 'Hex color (e.g., #ffffff) or leave blank for default',
+            placeholder: '#ffffff',
+          },
+        },
+        {
+          name: 'cardTitleColor',
+          type: 'text',
+          label: 'Card Title Color',
+          admin: {
+            description: 'Hex color (e.g., #000000) or leave blank for default',
+            placeholder: '#000000',
+          },
+        },
+        {
+          name: 'cardTextColor',
+          type: 'text',
+          label: 'Card Text Color',
+          admin: {
+            description: 'Hex color (e.g., #666666) or leave blank for default',
+            placeholder: '#666666',
+          },
+        },
+        {
+          name: 'cardCategoryColor',
+          type: 'text',
+          label: 'Category Tag Background',
+          admin: {
+            description: 'Hex color (e.g., #D4AF37) or leave blank for default gold',
+            placeholder: '#D4AF37',
+          },
+        },
+        {
+          name: 'dateBadgeColor',
+          type: 'text',
+          label: 'Date Badge Background',
+          admin: {
+            description: 'Hex color (e.g., #D4AF37) or leave blank for default gold',
+            placeholder: '#D4AF37',
+          },
+        },
+      ],
+    },
+    {
       name: 'showViewAllLink',
       type: 'checkbox',
       label: 'Show "View All" Link',

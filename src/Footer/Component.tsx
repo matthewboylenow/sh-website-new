@@ -1,6 +1,7 @@
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import Link from 'next/link'
 import React from 'react'
+import Image from 'next/image'
 
 import type { Footer } from '@/payload-types'
 
@@ -72,7 +73,17 @@ export async function Footer() {
           {/* Parish Info Column */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-4">
-              <Logo className="h-10" />
+              {footerData?.logo && typeof footerData.logo === 'object' ? (
+                <Image
+                  src={footerData.logo.url || ''}
+                  alt={footerData.logo.alt || 'Logo'}
+                  width={footerData.logo.width || 193}
+                  height={footerData.logo.height || 34}
+                  className="h-10 w-auto"
+                />
+              ) : (
+                <Logo className="h-10" />
+              )}
             </Link>
             {globalSettings?.parishName && (
               <h3 className="text-lg font-heading font-semibold mb-4">
@@ -279,8 +290,7 @@ export async function Footer() {
         <div className="mx-auto max-w-7xl px-6 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-sh-text-on-dark/60">
             <p>
-              © {currentYear} {globalSettings?.parishName || 'Saint Helen Catholic Church'}. All
-              rights reserved.
+              {footerData?.copyrightText || `© ${currentYear} ${globalSettings?.parishName || 'Saint Helen Catholic Church'}. All rights reserved.`}
             </p>
             <div className="flex gap-6">
               <Link href="/privacy-policy" className="hover:text-white transition-colors">

@@ -19,6 +19,7 @@ const columnFields: Field[] = [
       { label: 'Text Only', value: 'text' },
       { label: 'Image', value: 'image' },
       { label: 'Video', value: 'video' },
+      { label: 'Custom Code/Embed', value: 'customCode' },
     ],
     admin: {
       layout: 'horizontal',
@@ -92,6 +93,16 @@ const columnFields: Field[] = [
     admin: {
       condition: (data, siblingData) => siblingData?.contentType === 'video',
       description: 'Alternative: YouTube, Vimeo, or other embed URL (optional if video file provided)',
+    },
+  },
+  {
+    name: 'customCode',
+    type: 'code',
+    label: 'Custom Code/Embed',
+    admin: {
+      condition: (data, siblingData) => siblingData?.contentType === 'customCode',
+      description: 'Add custom HTML, iframe embeds, or JavaScript. Use for forms, calendars, maps, etc.',
+      language: 'html',
     },
   },
   linkGroup({

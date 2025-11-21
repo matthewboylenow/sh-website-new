@@ -25,6 +25,23 @@ export const EventListBlock: React.FC<EventListBlockType> = async (props) => {
     decorPattern,
   } = props
 
+  // New customization options
+  const showCategories = (props as any).showCategories !== false
+  const imageSize = (props as any).imageSize || 'default'
+  const cardBackgroundColor = (props as any).cardBackgroundColor
+  const cardTitleColor = (props as any).cardTitleColor
+  const cardTextColor = (props as any).cardTextColor
+  const cardCategoryColor = (props as any).cardCategoryColor
+  const dateBadgeColor = (props as any).dateBadgeColor
+
+  // Image/Badge size mappings
+  const badgeSizeMap = {
+    small: 'w-16 h-16 text-xs',
+    default: 'w-20 h-20 text-sm',
+    large: 'w-24 h-24 text-base',
+  }
+  const badgeSizeClass = badgeSizeMap[imageSize as keyof typeof badgeSizeMap] || badgeSizeMap.default
+
   const containerClasses = blockAppearanceToClasses(props.appearance)
   const textColorClass = getTextColorClass(props.appearance)
   const proseColorClass = getProseColorClass(props.appearance)
@@ -134,10 +151,18 @@ export const EventListBlock: React.FC<EventListBlockType> = async (props) => {
               <Link
                 key={event.id}
                 href={`/events/${event.slug}`}
-                className="group relative overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-black/5 transition-all hover:-translate-y-1 hover:shadow-xl hover:ring-sh-accent-gold/30"
+                className="group relative overflow-hidden rounded-2xl shadow-md ring-1 ring-black/5 transition-all hover:-translate-y-1 hover:shadow-xl hover:ring-sh-accent-gold/30"
+                style={{ backgroundColor: cardBackgroundColor || undefined }}
               >
                 {/* Date Badge - Prominent Calendar Style */}
-                <div className="absolute left-4 top-4 z-10 flex flex-col items-center rounded-xl bg-gradient-to-br from-sh-accent-gold to-yellow-500 px-4 py-3 text-white shadow-lg shadow-sh-accent-gold/40 ring-2 ring-white transition-transform group-hover:scale-110">
+                <div
+                  className={cn(
+                    "absolute left-4 top-4 z-10 flex flex-col items-center rounded-xl px-4 py-3 text-white shadow-lg shadow-sh-accent-gold/40 ring-2 ring-white transition-transform group-hover:scale-110",
+                    badgeSizeClass,
+                    !dateBadgeColor && "bg-gradient-to-br from-sh-accent-gold to-yellow-500"
+                  )}
+                  style={dateBadgeColor ? { backgroundColor: dateBadgeColor } : undefined}
+                >
                   <span className="text-xs font-bold uppercase tracking-wider">
                     {new Date(event.startDate).toLocaleDateString('en-US', { month: 'short' })}
                   </span>
@@ -159,17 +184,29 @@ export const EventListBlock: React.FC<EventListBlockType> = async (props) => {
                   </div>
                 )}
                 <div className="p-6">
-                  <div className="mb-3 flex items-center gap-2">
-                    {event.category && (
-                      <span className="rounded-full bg-sh-accent-gold/15 px-3 py-1 text-xs font-semibold text-sh-accent-gold ring-1 ring-sh-accent-gold/30">
+                  {showCategories && event.category && (
+                    <div className="mb-3 flex items-center gap-2">
+                      <span
+                        className={cn(
+                          "rounded-full px-3 py-1 text-xs font-semibold",
+                          !cardCategoryColor && "bg-sh-accent-gold/15 text-sh-accent-gold ring-1 ring-sh-accent-gold/30"
+                        )}
+                        style={cardCategoryColor ? { backgroundColor: cardCategoryColor, color: '#ffffff' } : undefined}
+                      >
                         {event.category}
                       </span>
-                    )}
-                  </div>
-                  <h3 className="mb-2 font-heading text-h4 font-semibold text-sh-text-main group-hover:text-sh-primary">
+                    </div>
+                  )}
+                  <h3
+                    className="mb-2 font-heading text-h4 font-semibold group-hover:text-sh-primary"
+                    style={{ color: cardTitleColor || undefined }}
+                  >
                     {event.title}
                   </h3>
-                  <div className="flex items-center gap-4 text-sm text-sh-text-muted">
+                  <div
+                    className="flex items-center gap-4 text-sm"
+                    style={{ color: cardTextColor || undefined }}
+                  >
                     {event.startDate && (
                       <span className="flex items-center gap-1">
                         <svg

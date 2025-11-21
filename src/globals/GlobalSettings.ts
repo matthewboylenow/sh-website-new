@@ -23,6 +23,24 @@ export const GlobalSettings: GlobalConfig = {
               },
             },
             {
+              name: 'websiteName',
+              type: 'text',
+              required: true,
+              defaultValue: 'Saint Helen',
+              admin: {
+                description: 'Website name used in page titles, meta tags, and SEO (e.g., "Saint Helen")',
+              },
+            },
+            {
+              name: 'favicon',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Website Favicon',
+              admin: {
+                description: 'Upload a custom favicon (recommended: ICO, PNG, or SVG, 32x32px or larger)',
+              },
+            },
+            {
               name: 'address',
               type: 'group',
               fields: [

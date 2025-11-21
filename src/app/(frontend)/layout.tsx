@@ -42,8 +42,21 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { isEnabled } = await draftMode()
   const headerData = (await getCachedGlobal('header', 1)()) as HeaderType
 
+  // Get global settings for favicon
+  let globalSettings: any = null
+  try {
+    globalSettings = await getCachedGlobal('global-settings', 1)()
+  } catch (error) {
+    console.log('Global settings not available')
+  }
+
   // Check if header is transparent
   const isTransparentHeader = headerData?.appearance?.style === 'transparent'
+
+  // Determine favicon URL
+  const faviconUrl = globalSettings?.favicon && typeof globalSettings.favicon === 'object'
+    ? globalSettings.favicon.url
+    : '/favicon.ico'
 
   return (
     <html
@@ -53,8 +66,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     >
       <head>
         <InitTheme />
-        <link href="/favicon.ico" rel="icon" sizes="32x32" />
-        <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+        {globalSettings?.favicon && typeof globalSettings.favicon === 'object' ? (
+          <link href={globalSettings.favicon.url} rel="icon" type={globalSettings.favicon.mimeType || 'image/x-icon'} />
+        ) : (
+          <>
+            <link href="/favicon.ico" rel="icon" sizes="32x32" />
+            <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+          </>
+        )}
       </head>
       <body>
         <Providers>

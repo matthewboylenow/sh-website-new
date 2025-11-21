@@ -25,6 +25,23 @@ export const PostListBlock: React.FC<PostListBlockType> = async (props) => {
     decorPattern,
   } = props
 
+  // New customization options
+  const showCategories = (props as any).showCategories !== false
+  const imageSize = (props as any).imageSize || 'default'
+  const cardBackgroundColor = (props as any).cardBackgroundColor
+  const cardTitleColor = (props as any).cardTitleColor
+  const cardTextColor = (props as any).cardTextColor
+  const cardCategoryColor = (props as any).cardCategoryColor
+
+  // Image size mappings
+  const imageSizeMap = {
+    small: 'h-[150px]',
+    default: 'h-[250px]',
+    large: 'h-[350px]',
+    xlarge: 'h-[450px]',
+  }
+  const imageHeightClass = imageSizeMap[imageSize as keyof typeof imageSizeMap] || imageSizeMap.default
+
   const containerClasses = blockAppearanceToClasses(props.appearance)
   const textColorClass = getTextColorClass(props.appearance)
   const proseColorClass = getProseColorClass(props.appearance)
@@ -114,11 +131,12 @@ export const PostListBlock: React.FC<PostListBlockType> = async (props) => {
             {posts.docs.map((post) => (
               <article
                 key={post.id}
-                className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-black/5 transition-all hover:-translate-y-1 hover:shadow-2xl hover:ring-black/10"
+                className="group flex flex-col overflow-hidden rounded-2xl shadow-md ring-1 ring-black/5 transition-all hover:-translate-y-1 hover:shadow-2xl hover:ring-black/10"
+                style={{ backgroundColor: cardBackgroundColor || undefined }}
               >
                 {post.heroImage && typeof post.heroImage === 'object' && (
                   <Link href={`/posts/${post.slug}`} className="block relative">
-                    <div className="relative aspect-[16/9] w-full overflow-hidden">
+                    <div className={cn("relative w-full overflow-hidden", imageHeightClass)}>
                       <Image
                         src={post.heroImage.url || ''}
                         alt={post.heroImage.alt || post.title || ''}
@@ -132,12 +150,16 @@ export const PostListBlock: React.FC<PostListBlockType> = async (props) => {
                 )}
                 <div className="flex flex-1 flex-col p-6 bg-gradient-to-br from-white to-gray-50/50">
                   {/* Categories */}
-                  {post.categories && Array.isArray(post.categories) && post.categories.length > 0 && (
+                  {showCategories && post.categories && Array.isArray(post.categories) && post.categories.length > 0 && (
                     <div className="mb-3 flex flex-wrap gap-2">
                       {post.categories.slice(0, 2).map((cat) => (
                         <span
                           key={typeof cat === 'object' ? cat.id : cat}
-                          className="inline-flex items-center rounded-full bg-gradient-to-r from-sh-primary to-blue-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm ring-1 ring-blue-600/20"
+                          className={cn(
+                            "inline-flex items-center rounded-full px-3 py-1.5 text-xs font-semibold text-white shadow-sm",
+                            !cardCategoryColor && "bg-gradient-to-r from-sh-primary to-blue-600 ring-1 ring-blue-600/20"
+                          )}
+                          style={cardCategoryColor ? { backgroundColor: cardCategoryColor } : undefined}
                         >
                           {typeof cat === 'object' ? cat.title : cat}
                         </span>
@@ -147,14 +169,20 @@ export const PostListBlock: React.FC<PostListBlockType> = async (props) => {
 
                   {/* Title */}
                   <Link href={`/posts/${post.slug}`} className="mb-3">
-                    <h3 className="font-heading text-h4 font-semibold text-sh-text-main transition-colors group-hover:text-sh-primary">
+                    <h3
+                      className="font-heading text-h4 font-semibold transition-colors group-hover:text-sh-primary"
+                      style={{ color: cardTitleColor || undefined }}
+                    >
                       {post.title}
                     </h3>
                   </Link>
 
                   {/* Excerpt */}
                   {showExcerpt && post.meta?.description && (
-                    <p className="mb-4 flex-1 text-base leading-relaxed text-sh-text-muted">
+                    <p
+                      className="mb-4 flex-1 text-base leading-relaxed"
+                      style={{ color: cardTextColor || undefined }}
+                    >
                       {post.meta.description}
                     </p>
                   )}

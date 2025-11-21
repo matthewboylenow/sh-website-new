@@ -35,6 +35,29 @@ export const Footer: GlobalConfig = {
           ],
         },
         {
+          label: 'Branding',
+          fields: [
+            {
+              name: 'logo',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Footer Logo',
+              admin: {
+                description: 'Upload a custom logo for the footer (recommended: SVG or PNG with transparent background)',
+              },
+            },
+            {
+              name: 'copyrightText',
+              type: 'text',
+              label: 'Copyright Text',
+              admin: {
+                description: 'Custom copyright text. Leave blank to use default format: "© [Year] [Parish Name]. All rights reserved."',
+                placeholder: 'e.g., "© 2025 Saint Helen Catholic Church. All rights reserved."',
+              },
+            },
+          ],
+        },
+        {
           label: 'Appearance',
           fields: [footerAppearance],
         },

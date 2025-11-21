@@ -121,6 +121,14 @@ export const ColumnsBlock: React.FC<ColumnsProps> = ({
                   </div>
                 )}
 
+                {/* Content Type: Custom Code/Embed */}
+                {column.contentType === 'customCode' && (column as any).customCode && (
+                  <div
+                    className="mb-4 w-full"
+                    dangerouslySetInnerHTML={{ __html: (column as any).customCode }}
+                  />
+                )}
+
                 {/* Content Type: Text (default) - Show icon if present */}
                 {(!column.contentType || column.contentType === 'text') &&
                   column.icon &&

@@ -4,6 +4,7 @@ import type { Media, Page, Post, Config } from '../payload-types'
 
 import { mergeOpenGraph } from './mergeOpenGraph'
 import { getServerSideURL } from './getURL'
+import { getCachedGlobal } from './getGlobals'
 
 const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
   const serverUrl = getServerSideURL()
@@ -24,11 +25,21 @@ export const generateMeta = async (args: {
 }): Promise<Metadata> => {
   const { doc } = args
 
+  // Get website name from global settings
+  let websiteName = 'Saint Helen'
+  try {
+    const globalSettings: any = await getCachedGlobal('global-settings', 1)()
+    websiteName = globalSettings?.websiteName || 'Saint Helen'
+  } catch (error) {
+    // Use default if settings not available
+    console.log('Global settings not available, using default website name')
+  }
+
   const ogImage = getImageURL(doc?.meta?.image)
 
   const title = doc?.meta?.title
-    ? doc?.meta?.title + ' | Payload Website Template'
-    : 'Payload Website Template'
+    ? doc?.meta?.title + ' | ' + websiteName
+    : websiteName
 
   return {
     description: doc?.meta?.description,
@@ -43,6 +54,7 @@ export const generateMeta = async (args: {
         : undefined,
       title,
       url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
+      siteName: websiteName,
     }),
     title,
   }

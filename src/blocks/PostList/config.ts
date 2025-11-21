@@ -57,31 +57,110 @@ export const PostList: Block = {
       ],
     },
     {
-      name: 'showExcerpt',
-      type: 'checkbox',
-      label: 'Show Excerpt',
-      defaultValue: true,
+      type: 'collapsible',
+      label: 'Card Display Options',
       admin: {
-        description: 'Display post excerpt/preview text',
+        initCollapsed: true,
       },
+      fields: [
+        {
+          name: 'showCategories',
+          type: 'checkbox',
+          label: 'Show Categories',
+          defaultValue: true,
+          admin: {
+            description: 'Display category tags on cards',
+          },
+        },
+        {
+          name: 'showExcerpt',
+          type: 'checkbox',
+          label: 'Show Excerpt',
+          defaultValue: true,
+          admin: {
+            description: 'Display post excerpt/preview text',
+          },
+        },
+        {
+          name: 'showAuthor',
+          type: 'checkbox',
+          label: 'Show Author',
+          defaultValue: true,
+          admin: {
+            description: 'Display post author',
+          },
+        },
+        {
+          name: 'showDate',
+          type: 'checkbox',
+          label: 'Show Date',
+          defaultValue: true,
+          admin: {
+            description: 'Display publication date',
+          },
+        },
+        {
+          name: 'imageSize',
+          type: 'select',
+          label: 'Card Image Size',
+          defaultValue: 'default',
+          options: [
+            { label: 'Small (150px)', value: 'small' },
+            { label: 'Default (250px)', value: 'default' },
+            { label: 'Large (350px)', value: 'large' },
+            { label: 'Extra Large (450px)', value: 'xlarge' },
+          ],
+          admin: {
+            description: 'Height of the card image',
+          },
+        },
+      ],
     },
     {
-      name: 'showAuthor',
-      type: 'checkbox',
-      label: 'Show Author',
-      defaultValue: true,
+      type: 'collapsible',
+      label: 'Card Color Overrides',
       admin: {
-        description: 'Display post author',
+        initCollapsed: true,
+        description: 'Override default card colors (leave blank to use defaults)',
       },
-    },
-    {
-      name: 'showDate',
-      type: 'checkbox',
-      label: 'Show Date',
-      defaultValue: true,
-      admin: {
-        description: 'Display publication date',
-      },
+      fields: [
+        {
+          name: 'cardBackgroundColor',
+          type: 'text',
+          label: 'Card Background Color',
+          admin: {
+            description: 'Hex color (e.g., #ffffff) or leave blank for default',
+            placeholder: '#ffffff',
+          },
+        },
+        {
+          name: 'cardTitleColor',
+          type: 'text',
+          label: 'Card Title Color',
+          admin: {
+            description: 'Hex color (e.g., #000000) or leave blank for default',
+            placeholder: '#000000',
+          },
+        },
+        {
+          name: 'cardTextColor',
+          type: 'text',
+          label: 'Card Text Color',
+          admin: {
+            description: 'Hex color (e.g., #666666) or leave blank for default',
+            placeholder: '#666666',
+          },
+        },
+        {
+          name: 'cardCategoryColor',
+          type: 'text',
+          label: 'Category Tag Background',
+          admin: {
+            description: 'Hex color (e.g., #4F46E5) or leave blank for default gradient',
+            placeholder: '#4F46E5',
+          },
+        },
+      ],
     },
     {
       name: 'showViewAllLink',
