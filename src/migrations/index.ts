@@ -21,6 +21,7 @@ import * as migration_20251120_000004_add_appearance_to_cta_block from './202511
 import * as migration_20251120_000005_add_patterns_to_locked_docs_rels from './20251120_000005_add_patterns_to_locked_docs_rels';
 import * as migration_20251121_003445_add_footer_and_global_settings_fields from './20251121_003445_add_footer_and_global_settings_fields';
 import * as migration_20251121_003446_add_block_customization_fields from './20251121_003446_add_block_customization_fields';
+import * as migration_20251125_000000_critical_fix_columns_and_patterns from './20251125_000000_critical_fix_columns_and_patterns';
 
 export const migrations = [
   {
@@ -137,5 +138,10 @@ export const migrations = [
     up: migration_20251121_003446_add_block_customization_fields.up,
     down: migration_20251121_003446_add_block_customization_fields.down,
     name: '20251121_003446_add_block_customization_fields'
+  },
+  {
+    up: migration_20251125_000000_critical_fix_columns_and_patterns.up,
+    down: migration_20251125_000000_critical_fix_columns_and_patterns.down,
+    name: '20251125_000000_critical_fix_columns_and_patterns'
   },
 ];
