@@ -7,6 +7,7 @@ import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 import { DecorativePattern } from '@/components/DecorativePattern'
+import { AnimatedSection } from '@/components/AnimatedSection'
 
 export const CardGridBlock: React.FC<CardGridBlockType> = (props) => {
   const {
@@ -19,6 +20,7 @@ export const CardGridBlock: React.FC<CardGridBlockType> = (props) => {
     showViewAllLink,
     viewAllUrl,
     decorPattern,
+    animation,
   } = props
 
   const containerClasses = blockAppearanceToClasses(props.appearance)
@@ -45,7 +47,7 @@ export const CardGridBlock: React.FC<CardGridBlockType> = (props) => {
     return null
   }
 
-  return (
+  const sectionContent = (
     <section className={cn(containerClasses, 'relative overflow-hidden')}>
       {/* Decorative Pattern */}
       {decorPattern?.enabled && (
@@ -165,4 +167,11 @@ export const CardGridBlock: React.FC<CardGridBlockType> = (props) => {
       </div>
     </section>
   )
+
+  // Wrap with animation if settings exist
+  if (animation?.preset && animation.preset !== 'none') {
+    return <AnimatedSection animation={animation}>{sectionContent}</AnimatedSection>
+  }
+
+  return sectionContent
 }

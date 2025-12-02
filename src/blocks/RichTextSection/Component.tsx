@@ -6,6 +6,7 @@ import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/block
 import { typographyToClasses } from '@/utilities/typographyToClasses'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 import { DecorativePattern } from '@/components/DecorativePattern'
+import { AnimatedSection } from '@/components/AnimatedSection'
 
 export const RichTextSectionBlock: React.FC<RichTextSectionProps> = ({
   title,
@@ -14,6 +15,7 @@ export const RichTextSectionBlock: React.FC<RichTextSectionProps> = ({
   typography,
   appearance,
   decorPattern,
+  animation,
 }) => {
   const maxWidthClasses = cn(
     maxWidth === 'prose' && 'max-w-prose',
@@ -25,7 +27,7 @@ export const RichTextSectionBlock: React.FC<RichTextSectionProps> = ({
   const textColorClass = getTextColorClass(appearance)
   const proseColorClass = getProseColorClass(appearance)
 
-  return (
+  const sectionContent = (
     <section className={cn(blockAppearanceToClasses(appearance), 'relative overflow-hidden')}>
       {/* Decorative Pattern */}
       {decorPattern?.enabled && (
@@ -70,4 +72,11 @@ export const RichTextSectionBlock: React.FC<RichTextSectionProps> = ({
       </div>
     </section>
   )
+
+  // Wrap with animation if settings exist
+  if (animation?.preset && animation.preset !== 'none') {
+    return <AnimatedSection animation={animation}>{sectionContent}</AnimatedSection>
+  }
+
+  return sectionContent
 }

@@ -8,9 +8,10 @@ import { Button } from '@/components/ui/button'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 import { cn } from '@/utilities/ui'
 import { DecorativePattern } from '@/components/DecorativePattern'
+import { AnimatedSection } from '@/components/AnimatedSection'
 
 export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
-  const { title, subtitle, items, appearance, decorPattern } = props
+  const { title, subtitle, items, appearance, decorPattern, animation } = props
 
   const containerClasses = blockAppearanceToClasses(appearance)
   const textColorClass = getTextColorClass(appearance)
@@ -109,7 +110,7 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
     }
   }
 
-  return (
+  const sectionContent = (
     <section className={cn('relative overflow-hidden', containerClasses)}>
       {/* Decorative Pattern */}
       {decorPattern?.enabled && (
@@ -281,4 +282,11 @@ export const BentoGridBlock: React.FC<BentoGridBlockType> = (props) => {
       </div>
     </section>
   )
+
+  // Wrap with animation if settings exist
+  if (animation?.preset && animation.preset !== 'none') {
+    return <AnimatedSection animation={animation}>{sectionContent}</AnimatedSection>
+  }
+
+  return sectionContent
 }

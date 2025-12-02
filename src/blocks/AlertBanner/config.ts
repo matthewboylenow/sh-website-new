@@ -1,6 +1,8 @@
 import type { Block } from 'payload'
 import { blockName } from '@/fields/blockName'
 import { decorativePattern } from '@/fields/decorativePattern'
+import { visibilitySettings } from '@/fields/visibilitySettings'
+import { animationSettings } from '@/fields/animationSettings'
 
 export const AlertBanner: Block = {
   slug: 'alertBanner',
@@ -75,6 +77,16 @@ export const AlertBanner: Block = {
       ],
     },
     decorativePattern({ enablePatterns: true }),
+    visibilitySettings({
+      deviceVisibility: true,
+      audienceTargeting: true,
+      seasonalDisplay: true, // Alerts may be seasonal
+    }),
+    animationSettings({
+      presets: true,
+      timing: true,
+      behavior: true,
+    }),
     blockName,
   ],
 }

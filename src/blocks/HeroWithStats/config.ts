@@ -4,6 +4,8 @@ import { blockName } from '@/fields/blockName'
 import { linkGroup } from '@/fields/linkGroup'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { decorativePattern } from '@/fields/decorativePattern'
+import { visibilitySettings } from '@/fields/visibilitySettings'
+import { animationSettings } from '@/fields/animationSettings'
 
 export const HeroWithStats: Block = {
   slug: 'heroWithStats',
@@ -158,6 +160,16 @@ export const HeroWithStats: Block = {
       padding: true,
     }),
     decorativePattern({ enablePatterns: true }),
+    visibilitySettings({
+      deviceVisibility: true,
+      audienceTargeting: true,
+      seasonalDisplay: false,
+    }),
+    animationSettings({
+      presets: true,
+      timing: true,
+      behavior: true,
+    }),
     blockName,
   ],
 }

@@ -4,6 +4,8 @@ import { blockName } from '@/fields/blockName'
 import { appearanceOptions } from '@/fields/link'
 import { decorativePattern } from '@/fields/decorativePattern'
 import { defaultLexical } from '@/fields/defaultLexical'
+import { visibilitySettings } from '@/fields/visibilitySettings'
+import { animationSettings } from '@/fields/animationSettings'
 
 const bentoItemFields: Field[] = [
   {
@@ -188,6 +190,16 @@ export const BentoGrid: Block = {
     }),
     decorativePattern({
       enablePatterns: true,
+    }),
+    visibilitySettings({
+      deviceVisibility: true,
+      audienceTargeting: true,
+      seasonalDisplay: false,
+    }),
+    animationSettings({
+      presets: true,
+      timing: true,
+      behavior: true,
     }),
     blockName,
   ],

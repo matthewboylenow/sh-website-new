@@ -6,6 +6,7 @@ import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
 import { getTextColorClass, getProseColorClass, isDarkBackground } from '@/utilities/getTextColorClasses'
 import { DecorativePattern } from '@/components/DecorativePattern'
+import { AnimatedSection } from '@/components/AnimatedSection'
 
 export const TestimonialBlock: React.FC<TestimonialProps> = ({
   quote,
@@ -15,29 +16,40 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
   layout = 'card',
   appearance,
   decorPattern,
+  animation,
 }) => {
   const textColorClass = getTextColorClass(appearance)
   const proseColorClass = getProseColorClass(appearance)
   const isDarkBg = isDarkBackground(appearance)
 
+  // Helper to wrap content with animation
+  const wrapWithAnimation = (content: React.ReactElement) => {
+    if (animation?.preset && animation.preset !== 'none') {
+      return <AnimatedSection animation={animation}>{content}</AnimatedSection>
+    }
+    return content
+  }
+
+  // Decorative pattern component
+  const decorativePatternElement = decorPattern?.enabled && (
+    <DecorativePattern
+      type={decorPattern.typ || 'text'}
+      text={decorPattern.text || undefined}
+      customSvg={typeof (decorPattern as any)?.customSvg === 'object' ? (decorPattern as any).customSvg : undefined}
+      opacity={decorPattern.opacity || undefined}
+      size={decorPattern.sz || undefined}
+      repeatCount={decorPattern.repeatCount || undefined}
+      color={decorPattern.color || undefined}
+      position={decorPattern.pos || undefined}
+      rotation={decorPattern.rotation || undefined}
+    />
+  )
+
   // Card layout - boxed testimonial
   if (layout === 'card') {
-    return (
+    return wrapWithAnimation(
       <section className={cn(blockAppearanceToClasses(appearance), 'relative overflow-hidden')}>
-        {/* Decorative Pattern */}
-        {decorPattern?.enabled && (
-          <DecorativePattern
-            type={decorPattern.typ || 'text'}
-            text={decorPattern.text || undefined}
-          customSvg={typeof (decorPattern as any)?.customSvg === 'object' ? (decorPattern as any).customSvg : undefined}
-            opacity={decorPattern.opacity || undefined}
-            size={decorPattern.sz || undefined}
-            repeatCount={decorPattern.repeatCount || undefined}
-            color={decorPattern.color || undefined}
-            position={decorPattern.pos || undefined}
-            rotation={decorPattern.rotation || undefined}
-          />
-        )}
+        {decorativePatternElement}
 
         <div className={cn(getContainerClasses(appearance?.fullWidth), 'relative z-10')}>
           <div
@@ -104,22 +116,9 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
 
   // Inline layout - simple quote with attribution
   if (layout === 'inline') {
-    return (
+    return wrapWithAnimation(
       <section className={cn(blockAppearanceToClasses(appearance), 'relative overflow-hidden')}>
-        {/* Decorative Pattern */}
-        {decorPattern?.enabled && (
-          <DecorativePattern
-            type={decorPattern.typ || 'text'}
-            text={decorPattern.text || undefined}
-          customSvg={typeof (decorPattern as any)?.customSvg === 'object' ? (decorPattern as any).customSvg : undefined}
-            opacity={decorPattern.opacity || undefined}
-            size={decorPattern.sz || undefined}
-            repeatCount={decorPattern.repeatCount || undefined}
-            color={decorPattern.color || undefined}
-            position={decorPattern.pos || undefined}
-            rotation={decorPattern.rotation || undefined}
-          />
-        )}
+        {decorativePatternElement}
 
         <div className={cn(getContainerClasses(appearance?.fullWidth), 'relative z-10')}>
           <div
@@ -166,22 +165,9 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
   }
 
   // Featured layout - large, centered testimonial
-  return (
+  return wrapWithAnimation(
     <section className={cn(blockAppearanceToClasses(appearance), 'relative overflow-hidden')}>
-      {/* Decorative Pattern */}
-      {decorPattern?.enabled && (
-        <DecorativePattern
-          type={decorPattern.typ || 'text'}
-          text={decorPattern.text || undefined}
-          customSvg={typeof (decorPattern as any)?.customSvg === 'object' ? (decorPattern as any).customSvg : undefined}
-          opacity={decorPattern.opacity || undefined}
-          size={decorPattern.sz || undefined}
-          repeatCount={decorPattern.repeatCount || undefined}
-          color={decorPattern.color || undefined}
-          position={decorPattern.pos || undefined}
-          rotation={decorPattern.rotation || undefined}
-        />
-      )}
+      {decorativePatternElement}
 
       <div className={cn(getContainerClasses(appearance?.fullWidth), 'relative z-10')}>
         <div className="max-w-4xl mx-auto text-center">

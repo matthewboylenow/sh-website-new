@@ -2,6 +2,8 @@ import type { Block } from 'payload'
 import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { decorativePattern } from '@/fields/decorativePattern'
+import { visibilitySettings } from '@/fields/visibilitySettings'
+import { animationSettings } from '@/fields/animationSettings'
 
 export const VideoEmbed: Block = {
   slug: 'videoEmbed',
@@ -67,6 +69,16 @@ export const VideoEmbed: Block = {
       padding: true,
     }),
     decorativePattern({ enablePatterns: true }),
+    visibilitySettings({
+      deviceVisibility: true,
+      audienceTargeting: true,
+      seasonalDisplay: false,
+    }),
+    animationSettings({
+      presets: true,
+      timing: true,
+      behavior: true,
+    }),
     blockName,
   ],
 }

@@ -7,6 +7,7 @@ import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 import { DecorativePattern } from '@/components/DecorativePattern'
+import { AnimatedSection } from '@/components/AnimatedSection'
 
 export const StoryHighlightBlock: React.FC<StoryHighlightProps> = ({
   title,
@@ -18,11 +19,12 @@ export const StoryHighlightBlock: React.FC<StoryHighlightProps> = ({
   imagePosition = 'left',
   appearance,
   decorPattern,
+  animation,
 }) => {
   const textColorClass = getTextColorClass(appearance)
   const proseColorClass = getProseColorClass(appearance)
 
-  return (
+  const sectionContent = (
     <section className={cn(blockAppearanceToClasses(appearance), 'relative overflow-hidden')}>
       {/* Decorative Pattern */}
       {decorPattern?.enabled && (
@@ -112,4 +114,11 @@ export const StoryHighlightBlock: React.FC<StoryHighlightProps> = ({
       </div>
     </section>
   )
+
+  // Wrap with animation if settings exist
+  if (animation?.preset && animation.preset !== 'none') {
+    return <AnimatedSection animation={animation}>{sectionContent}</AnimatedSection>
+  }
+
+  return sectionContent
 }

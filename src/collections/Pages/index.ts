@@ -29,6 +29,7 @@ import { FormEmbed } from '../../blocks/FormEmbed/config'
 import { Spacer } from '../../blocks/Spacer/config'
 import { Divider } from '../../blocks/Divider/config'
 import { CustomCode } from '../../blocks/CustomCode/config'
+import { InsertPattern } from '../../blocks/InsertPattern/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -75,6 +76,7 @@ export const Pages: CollectionConfig<'pages'> = {
         req,
       }),
     useAsTitle: 'title',
+    description: 'Build pages with the block-based page builder. Click the ? button in the bottom-right corner for help.',
   },
   fields: [
     {
@@ -123,6 +125,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 Divider,
                 // Saint Helen blocks - Custom Code
                 CustomCode,
+                // Saint Helen blocks - Patterns
+                InsertPattern,
                 // Original template blocks (keep for compatibility)
                 CallToAction,
                 Content,

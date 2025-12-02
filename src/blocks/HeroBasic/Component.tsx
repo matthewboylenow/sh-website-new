@@ -10,6 +10,7 @@ import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorC
 import { MissionStatement } from './MissionStatement'
 import { WelcomeCard } from './WelcomeCard'
 import { DecorativePattern } from '@/components/DecorativePattern'
+import { AnimatedSection } from '@/components/AnimatedSection'
 
 export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
   eyebrow,
@@ -33,6 +34,7 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
   typography,
   appearance,
   decorPattern,
+  animation,
 }) => {
   const hasBackground = backgroundType && backgroundType !== 'none'
   const textColorClass = getTextColorClass(appearance)
@@ -58,7 +60,7 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
   // Dark gradient overlay for video/image (matte black bottom to transparent top)
   const gradientOverlayClasses = 'absolute inset-0 z-[2] bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent'
 
-  return (
+  const sectionContent = (
     <section
       className={cn(
         'relative overflow-hidden',
@@ -200,4 +202,11 @@ export const HeroBasicBlock: React.FC<HeroBasicProps> = ({
       </div>
     </section>
   )
+
+  // Wrap with animation if settings exist
+  if (animation?.preset && animation.preset !== 'none') {
+    return <AnimatedSection animation={animation}>{sectionContent}</AnimatedSection>
+  }
+
+  return sectionContent
 }

@@ -29,6 +29,15 @@ import { FormEmbedBlock } from '@/blocks/FormEmbed/Component'
 import { SpacerBlock } from '@/blocks/Spacer/Component'
 import { DividerBlock } from '@/blocks/Divider/Component'
 import { CustomCodeBlock } from '@/blocks/CustomCode/Component'
+import { InsertPatternBlock } from '@/blocks/InsertPattern/Component'
+
+// Visibility utilities
+import {
+  shouldRenderBlock,
+  getDeviceVisibilityClasses,
+  type VisibilityContext,
+} from '@/utilities/shouldRenderBlock'
+import { cn } from '@/utilities/ui'
 
 const blockComponents = {
   // Saint Helen blocks - Hero variants
@@ -59,6 +68,8 @@ const blockComponents = {
   divider: DividerBlock,
   // Saint Helen blocks - Custom Code
   customCode: CustomCodeBlock,
+  // Saint Helen blocks - Patterns (editor-only)
+  insertPattern: InsertPatternBlock,
   // Original template blocks
   archive: ArchiveBlock,
   content: ContentBlock,
@@ -67,10 +78,25 @@ const blockComponents = {
   mediaBlock: MediaBlock,
 }
 
-export const RenderBlocks: React.FC<{
+export interface RenderBlocksProps {
   blocks: Page['layout'][0][]
-}> = (props) => {
-  const { blocks } = props
+  /** Visibility context for audience/date filtering */
+  visibilityContext?: VisibilityContext
+}
+
+/**
+ * RenderBlocks Component
+ *
+ * Renders an array of blocks from the page layout, handling:
+ * - Block type mapping to components
+ * - Visibility filtering (audience, seasonal display)
+ * - Device visibility CSS classes
+ *
+ * @param blocks - Array of blocks from the page layout
+ * @param visibilityContext - Optional context for visibility filtering
+ */
+export const RenderBlocks: React.FC<RenderBlocksProps> = (props) => {
+  const { blocks, visibilityContext } = props
 
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
 
@@ -84,8 +110,19 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
+              // Check visibility settings if they exist on the block
+              const visibility = 'visibility' in block ? (block as any).visibility : undefined
+
+              // Skip rendering if block should be hidden based on audience/date
+              if (!shouldRenderBlock(visibility, visibilityContext)) {
+                return null
+              }
+
+              // Get device visibility CSS classes
+              const deviceClasses = getDeviceVisibilityClasses(visibility)
+
               return (
-                <div key={index}>
+                <div key={index} className={cn(deviceClasses)}>
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
                   <Block {...block} disableInnerContainer />
                 </div>

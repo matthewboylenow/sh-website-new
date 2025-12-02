@@ -9,11 +9,8 @@ import type { Block } from 'payload'
  * USAGE:
  * 1. Editor adds this block to the page
  * 2. Editor selects a pattern from the dropdown
- * 3. Editor clicks "Insert Pattern" (admin component)
- * 4. Pattern's layout blocks replace this block in the page
- *
- * NOTE: The actual "Insert Pattern" button requires a custom admin component
- * that can manipulate the parent form's layout array. This is marked with TODO.
+ * 3. Editor follows instructions to copy pattern blocks
+ * 4. Editor manually replaces this block with the pattern's blocks
  */
 export const InsertPattern: Block = {
   slug: 'insertPattern',
@@ -23,8 +20,6 @@ export const InsertPattern: Block = {
     plural: 'Insert Patterns',
   },
   fields: [
-    // Note: UI field for instructions removed to fix TypeScript compilation
-    // Description moved to pattern field below
     {
       name: 'pattern',
       type: 'relationship',
@@ -32,14 +27,17 @@ export const InsertPattern: Block = {
       required: true,
       label: 'Select Pattern',
       admin: {
-        description: '📐 Choose a pattern to insert. After selecting, manually copy the pattern\'s blocks to replace this block.',
+        description: 'Choose a pattern to insert into this page',
       },
     },
-    // Note: Insert button UI field removed to fix TypeScript compilation
-    // Automatic pattern insertion requires custom admin component (future enhancement)
+    {
+      name: 'instructions',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/admin/InsertPatternButton',
+        },
+      },
+    },
   ],
 }
-
-// TODO: Create custom admin component in src/components/admin/InsertPatternButton.tsx
-// TODO: Wire component into insertButton field above
-// TODO: Add InsertPattern block to Pages layout blocks array

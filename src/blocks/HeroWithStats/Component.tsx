@@ -7,6 +7,7 @@ import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 import { DecorativePattern } from '@/components/DecorativePattern'
+import { AnimatedSection } from '@/components/AnimatedSection'
 
 export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
   eyebrow,
@@ -22,6 +23,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
   minHeight = 'default',
   appearance,
   decorPattern,
+  animation,
 }) => {
   const hasBackground = backgroundType && backgroundType !== 'none'
   const textColorClass = getTextColorClass(appearance)
@@ -43,7 +45,7 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
     backgroundOverlay === 'dark' && 'bg-black/60',
   )
 
-  return (
+  const sectionContent = (
     <section
       className={cn(
         'relative overflow-hidden',
@@ -197,4 +199,11 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
       </div>
     </section>
   )
+
+  // Wrap with animation if settings exist
+  if (animation?.preset && animation.preset !== 'none') {
+    return <AnimatedSection animation={animation}>{sectionContent}</AnimatedSection>
+  }
+
+  return sectionContent
 }

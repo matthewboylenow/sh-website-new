@@ -7,6 +7,7 @@ import { cn } from '@/utilities/ui'
 import { blockAppearanceToClasses, getContainerClasses } from '@/utilities/blockAppearanceToClasses'
 import { getTextColorClass, getProseColorClass } from '@/utilities/getTextColorClasses'
 import { DecorativePattern } from '@/components/DecorativePattern'
+import { AnimatedSection } from '@/components/AnimatedSection'
 
 export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
   eyebrow,
@@ -17,6 +18,7 @@ export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
   links,
   appearance,
   decorPattern,
+  animation,
 }) => {
   const hasBackgroundImage = Boolean(backgroundImage)
   const textColorClass = getTextColorClass(appearance)
@@ -29,7 +31,7 @@ export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
     backgroundOverlay === 'dark' && 'bg-black/60',
   )
 
-  return (
+  const sectionContent = (
     <section
       className={cn(
         'relative overflow-hidden',
@@ -123,4 +125,11 @@ export const CTAFullWidthBlock: React.FC<CTAFullWidthProps> = ({
       </div>
     </section>
   )
+
+  // Wrap with animation if settings exist
+  if (animation?.preset && animation.preset !== 'none') {
+    return <AnimatedSection animation={animation}>{sectionContent}</AnimatedSection>
+  }
+
+  return sectionContent
 }

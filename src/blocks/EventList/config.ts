@@ -3,6 +3,8 @@ import { blockAppearance } from '@/fields/blockAppearance'
 import { blockName } from '@/fields/blockName'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { decorativePattern } from '@/fields/decorativePattern'
+import { visibilitySettings } from '@/fields/visibilitySettings'
+import { animationSettings } from '@/fields/animationSettings'
 
 export const EventList: Block = {
   slug: 'eventList',
@@ -206,6 +208,16 @@ export const EventList: Block = {
     },
     blockAppearance(),
     decorativePattern({ enablePatterns: true }),
+    visibilitySettings({
+      deviceVisibility: true,
+      audienceTargeting: true,
+      seasonalDisplay: false,
+    }),
+    animationSettings({
+      presets: true,
+      timing: true,
+      behavior: true,
+    }),
     blockName,
   ],
 }

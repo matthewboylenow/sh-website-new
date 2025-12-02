@@ -168,6 +168,8 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Build pages with the block-based page builder. Click the ? button in the bottom-right corner for help.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
@@ -238,6 +240,7 @@ export interface Page {
     | SpacerBlock
     | DividerBlock
     | CustomCodeBlock
+    | InsertPatternBlock
     | CallToActionBlock
     | ContentBlock
     | MediaBlock
@@ -931,6 +934,48 @@ export interface HeroWithStatsBlock {
      */
     rotation?: number | null;
   };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts (multiples of 100ms recommended)
+     */
+    delay?: number | null;
+    /**
+     * Animation duration (multiples of 100ms recommended)
+     */
+    duration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    once?: boolean | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'heroWithStats';
@@ -1263,6 +1308,48 @@ export interface ColumnsBlock {
      */
     rotation?: number | null;
   };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts (multiples of 100ms recommended)
+     */
+    delay?: number | null;
+    /**
+     * Animation duration (multiples of 100ms recommended)
+     */
+    duration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    once?: boolean | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'columns';
@@ -1519,6 +1606,56 @@ export interface AlertBannerBlock {
      * Rotation (degrees)
      */
     rotation?: number | null;
+  };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+    /**
+     * Optional: Show block starting from this date
+     */
+    startDate?: string | null;
+    /**
+     * Optional: Hide block after this date
+     */
+    endDate?: string | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts (multiples of 100ms recommended)
+     */
+    delay?: number | null;
+    /**
+     * Animation duration (multiples of 100ms recommended)
+     */
+    duration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    once?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -1855,6 +1992,48 @@ export interface BentoGridBlock {
      */
     rotation?: number | null;
   };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts (multiples of 100ms recommended)
+     */
+    delay?: number | null;
+    /**
+     * Animation duration (multiples of 100ms recommended)
+     */
+    duration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    once?: boolean | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'bentoGrid';
@@ -2010,6 +2189,48 @@ export interface EventListBlock {
      */
     rotation?: number | null;
   };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts (multiples of 100ms recommended)
+     */
+    delay?: number | null;
+    /**
+     * Animation duration (multiples of 100ms recommended)
+     */
+    duration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    once?: boolean | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'eventList';
@@ -2156,6 +2377,48 @@ export interface PostListBlock {
      */
     rotation?: number | null;
   };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts (multiples of 100ms recommended)
+     */
+    delay?: number | null;
+    /**
+     * Animation duration (multiples of 100ms recommended)
+     */
+    duration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    once?: boolean | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'postList';
@@ -2266,6 +2529,48 @@ export interface BulletinListBlock {
      * Rotation (degrees)
      */
     rotation?: number | null;
+  };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts (multiples of 100ms recommended)
+     */
+    delay?: number | null;
+    /**
+     * Animation duration (multiples of 100ms recommended)
+     */
+    duration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    once?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -2389,6 +2694,48 @@ export interface MediaListBlock {
      * Rotation (degrees)
      */
     rotation?: number | null;
+  };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts (multiples of 100ms recommended)
+     */
+    delay?: number | null;
+    /**
+     * Animation duration (multiples of 100ms recommended)
+     */
+    duration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    once?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -2661,6 +3008,48 @@ export interface StoryHighlightBlock {
      */
     rotation?: number | null;
   };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts (multiples of 100ms recommended)
+     */
+    delay?: number | null;
+    /**
+     * Animation duration (multiples of 100ms recommended)
+     */
+    duration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    once?: boolean | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'storyHighlight';
@@ -2783,6 +3172,48 @@ export interface FAQAccordionBlock {
      */
     rotation?: number | null;
   };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts (multiples of 100ms recommended)
+     */
+    delay?: number | null;
+    /**
+     * Animation duration (multiples of 100ms recommended)
+     */
+    duration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    once?: boolean | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'faqAccordion';
@@ -2899,6 +3330,48 @@ export interface VideoEmbedBlock {
      * Rotation (degrees)
      */
     rotation?: number | null;
+  };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts (multiples of 100ms recommended)
+     */
+    delay?: number | null;
+    /**
+     * Animation duration (multiples of 100ms recommended)
+     */
+    duration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    once?: boolean | null;
   };
   blockName?: string | null;
   id?: string | null;
@@ -3025,6 +3498,48 @@ export interface FormEmbedBlock {
      */
     rotation?: number | null;
   };
+  /**
+   * Control when and where this block appears
+   */
+  visibility?: {
+    /**
+     * Display on mobile devices
+     */
+    showOnMobile?: boolean | null;
+    /**
+     * Display on tablet devices
+     */
+    showOnTablet?: boolean | null;
+    /**
+     * Display on desktop screens
+     */
+    showOnDesktop?: boolean | null;
+    /**
+     * Target specific audiences (requires authentication system)
+     */
+    audience?: ('all' | 'visitors' | 'parishioners') | null;
+  };
+  /**
+   * Add entrance animations to this block
+   */
+  animation?: {
+    /**
+     * Choose an entrance animation for this block
+     */
+    preset?: ('none' | 'fadeIn' | 'fadeUp' | 'fadeInScale') | null;
+    /**
+     * Delay before animation starts (multiples of 100ms recommended)
+     */
+    delay?: number | null;
+    /**
+     * Animation duration (multiples of 100ms recommended)
+     */
+    duration?: number | null;
+    /**
+     * Only animate on first scroll into view (recommended)
+     */
+    once?: boolean | null;
+  };
   blockName?: string | null;
   id?: string | null;
   blockType: 'formEmbed';
@@ -3141,6 +3656,72 @@ export interface CustomCodeBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'customCode';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InsertPatternBlock".
+ */
+export interface InsertPatternBlock {
+  /**
+   * Choose a pattern to insert into this page
+   */
+  pattern: number | Pattern;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'insertPattern';
+}
+/**
+ * Reusable page layouts that can be inserted into pages
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "patterns".
+ */
+export interface Pattern {
+  id: number;
+  /**
+   * Descriptive name for this pattern (e.g., "Standard Ministry Page")
+   */
+  name: string;
+  /**
+   * What is this pattern for? When should editors use it?
+   */
+  description?: string | null;
+  /**
+   * Build a reusable layout using blocks (same as page content)
+   */
+  layout: (
+    | HeroBasicBlock
+    | HeroWithStatsBlock
+    | RichTextSectionBlock
+    | ColumnsBlock
+    | CTAFullWidthBlock
+    | AlertBannerBlock
+    | CardGridBlock
+    | BentoGridBlock
+    | EventListBlock
+    | PostListBlock
+    | BulletinListBlock
+    | MediaListBlock
+    | TestimonialBlock
+    | StoryHighlightBlock
+    | FAQAccordionBlock
+    | VideoEmbedBlock
+    | FormEmbedBlock
+    | SpacerBlock
+    | DividerBlock
+    | CustomCodeBlock
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+  )[];
+  /**
+   * Categorize this pattern to help editors find it
+   */
+  category?: ('ministry' | 'event' | 'about' | 'landing' | 'other') | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4180,59 +4761,6 @@ export interface SearchItem {
   createdAt: string;
 }
 /**
- * Reusable page layouts that can be inserted into pages
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "patterns".
- */
-export interface Pattern {
-  id: number;
-  /**
-   * Descriptive name for this pattern (e.g., "Standard Ministry Page")
-   */
-  name: string;
-  /**
-   * What is this pattern for? When should editors use it?
-   */
-  description?: string | null;
-  /**
-   * Build a reusable layout using blocks (same as page content)
-   */
-  layout: (
-    | HeroBasicBlock
-    | HeroWithStatsBlock
-    | RichTextSectionBlock
-    | ColumnsBlock
-    | CTAFullWidthBlock
-    | AlertBannerBlock
-    | CardGridBlock
-    | BentoGridBlock
-    | EventListBlock
-    | PostListBlock
-    | BulletinListBlock
-    | MediaListBlock
-    | TestimonialBlock
-    | StoryHighlightBlock
-    | FAQAccordionBlock
-    | VideoEmbedBlock
-    | FormEmbedBlock
-    | SpacerBlock
-    | DividerBlock
-    | CustomCodeBlock
-    | CallToActionBlock
-    | ContentBlock
-    | MediaBlock
-    | ArchiveBlock
-    | FormBlock
-  )[];
-  /**
-   * Categorize this pattern to help editors find it
-   */
-  category?: ('ministry' | 'event' | 'about' | 'landing' | 'other') | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -4587,6 +5115,7 @@ export interface PagesSelect<T extends boolean = true> {
         spacer?: T | SpacerBlockSelect<T>;
         divider?: T | DividerBlockSelect<T>;
         customCode?: T | CustomCodeBlockSelect<T>;
+        insertPattern?: T | InsertPatternBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
@@ -4768,6 +5297,22 @@ export interface HeroWithStatsBlockSelect<T extends boolean = true> {
         pos?: T;
         rotation?: T;
       };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -4889,6 +5434,22 @@ export interface ColumnsBlockSelect<T extends boolean = true> {
         pos?: T;
         rotation?: T;
       };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -4983,6 +5544,24 @@ export interface AlertBannerBlockSelect<T extends boolean = true> {
         color?: T;
         pos?: T;
         rotation?: T;
+      };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+        startDate?: T;
+        endDate?: T;
+      };
+  animation?:
+    | T
+    | {
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
       };
   blockName?: T;
   id?: T;
@@ -5104,6 +5683,22 @@ export interface BentoGridBlockSelect<T extends boolean = true> {
         pos?: T;
         rotation?: T;
       };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -5153,6 +5748,22 @@ export interface EventListBlockSelect<T extends boolean = true> {
         pos?: T;
         rotation?: T;
       };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -5201,6 +5812,22 @@ export interface PostListBlockSelect<T extends boolean = true> {
         pos?: T;
         rotation?: T;
       };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -5241,6 +5868,22 @@ export interface BulletinListBlockSelect<T extends boolean = true> {
         pos?: T;
         rotation?: T;
       };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -5280,6 +5923,22 @@ export interface MediaListBlockSelect<T extends boolean = true> {
         color?: T;
         pos?: T;
         rotation?: T;
+      };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
       };
   blockName?: T;
   id?: T;
@@ -5372,6 +6031,22 @@ export interface StoryHighlightBlockSelect<T extends boolean = true> {
         pos?: T;
         rotation?: T;
       };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -5419,6 +6094,22 @@ export interface FAQAccordionBlockSelect<T extends boolean = true> {
         pos?: T;
         rotation?: T;
       };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
+      };
   blockName?: T;
   id?: T;
 }
@@ -5455,6 +6146,22 @@ export interface VideoEmbedBlockSelect<T extends boolean = true> {
         color?: T;
         pos?: T;
         rotation?: T;
+      };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
       };
   blockName?: T;
   id?: T;
@@ -5494,6 +6201,22 @@ export interface FormEmbedBlockSelect<T extends boolean = true> {
         color?: T;
         pos?: T;
         rotation?: T;
+      };
+  visibility?:
+    | T
+    | {
+        showOnMobile?: T;
+        showOnTablet?: T;
+        showOnDesktop?: T;
+        audience?: T;
+      };
+  animation?:
+    | T
+    | {
+        preset?: T;
+        delay?: T;
+        duration?: T;
+        once?: T;
       };
   blockName?: T;
   id?: T;
@@ -5546,6 +6269,15 @@ export interface CustomCodeBlockSelect<T extends boolean = true> {
         customBgColor?: T;
         textColor?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InsertPatternBlock_select".
+ */
+export interface InsertPatternBlockSelect<T extends boolean = true> {
+  pattern?: T;
   id?: T;
   blockName?: T;
 }
