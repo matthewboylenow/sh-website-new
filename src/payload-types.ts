@@ -509,9 +509,9 @@ export interface HeroBasicBlock {
    */
   eyebrow?: string | null;
   /**
-   * Main hero heading (e.g., "We're glad you're here.")
+   * Optional: Main hero heading (e.g., "We're glad you're here.")
    */
-  title: string;
+  title?: string | null;
   /**
    * 1-2 sentences of welcoming text
    */
@@ -775,9 +775,9 @@ export interface HeroWithStatsBlock {
    */
   eyebrow?: string | null;
   /**
-   * Main hero heading
+   * Optional: Main hero heading
    */
-  title: string;
+  title?: string | null;
   /**
    * Brief description or introduction
    */
@@ -1364,9 +1364,9 @@ export interface CTAFullWidthBlock {
    */
   eyebrow?: string | null;
   /**
-   * Main heading for this call-to-action
+   * Optional: Main heading for this call-to-action
    */
-  title: string;
+  title?: string | null;
   /**
    * Supporting text for the CTA
    */
@@ -2905,7 +2905,10 @@ export interface TestimonialBlock {
  * via the `definition` "StoryHighlightBlock".
  */
 export interface StoryHighlightBlock {
-  title: string;
+  /**
+   * Optional: Heading for this story
+   */
+  title?: string | null;
   /**
    * Main content of the story
    */
