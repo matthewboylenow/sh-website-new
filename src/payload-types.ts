@@ -2453,7 +2453,10 @@ export interface BulletinListBlock {
    * Display bulletin highlights/summary if available
    */
   showHighlights?: boolean | null;
-  layout?: ('grid' | 'list' | 'compact') | null;
+  /**
+   * Cover Gallery uses bulletin cover images for a visual magazine-style display
+   */
+  layout?: ('grid' | 'covers' | 'list' | 'compact') | null;
   showViewAllLink?: boolean | null;
   viewAllUrl?: string | null;
   /**
@@ -4334,6 +4337,10 @@ export interface Bulletin {
    * PDF file of the bulletin
    */
   file: number | Media;
+  /**
+   * Cover image for the bulletin card (e.g., message series artwork). If not set, a default style will be used.
+   */
+  coverImage?: (number | null) | Media;
   /**
    * Optional brief summary or key highlights from this bulletin
    */
@@ -6631,6 +6638,7 @@ export interface BulletinsSelect<T extends boolean = true> {
   title?: T;
   date?: T;
   file?: T;
+  coverImage?: T;
   highlights?: T;
   liturgicalSeason?: T;
   isCurrent?: T;

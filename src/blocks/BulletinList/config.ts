@@ -64,10 +64,14 @@ export const BulletinList: Block = {
       label: 'Layout Style',
       defaultValue: 'grid',
       options: [
-        { label: 'Grid', value: 'grid' },
+        { label: 'Grid (Cards)', value: 'grid' },
+        { label: 'Cover Gallery (Image Cards)', value: 'covers' },
         { label: 'List', value: 'list' },
         { label: 'Compact', value: 'compact' },
       ],
+      admin: {
+        description: 'Cover Gallery uses bulletin cover images for a visual magazine-style display',
+      },
     },
     {
       name: 'showViewAllLink',

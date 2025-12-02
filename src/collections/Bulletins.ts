@@ -49,6 +49,14 @@ export const Bulletins: CollectionConfig = {
       },
     },
     {
+      name: 'coverImage',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        description: 'Cover image for the bulletin card (e.g., message series artwork). If not set, a default style will be used.',
+      },
+    },
+    {
       name: 'highlights',
       type: 'textarea',
       admin: {

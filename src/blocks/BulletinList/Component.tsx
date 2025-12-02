@@ -64,6 +64,13 @@ export const BulletinListBlock: React.FC<BulletinListBlockType> = async (props) 
     return '#'
   }
 
+  const getCoverImageUrl = (bulletin: any) => {
+    if (bulletin.coverImage && typeof bulletin.coverImage === 'object' && bulletin.coverImage.url) {
+      return bulletin.coverImage.url
+    }
+    return null
+  }
+
   const getLiturgicalSeasonColor = (season?: string) => {
     switch (season) {
       case 'advent':
@@ -206,6 +213,85 @@ export const BulletinListBlock: React.FC<BulletinListBlockType> = async (props) 
                 </a>
               </article>
             ))}
+          </div>
+        )}
+
+        {/* Bulletins Display - Cover Gallery */}
+        {layout === 'covers' && (
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {bulletins.docs.map((bulletin) => {
+              const coverUrl = getCoverImageUrl(bulletin)
+              const fileUrl = getFileUrl(bulletin)
+
+              return (
+                <a
+                  key={bulletin.id}
+                  href={fileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative block aspect-[3/4] overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                >
+                  {/* Background Image or Gradient Fallback */}
+                  {coverUrl ? (
+                    <div
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                      style={{ backgroundImage: `url(${coverUrl})` }}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-sh-primary via-sh-primary-soft to-sh-accent-gold transition-transform duration-500 group-hover:scale-105" />
+                  )}
+
+                  {/* Overlay gradient for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                  {/* Current badge */}
+                  {bulletin.isCurrent && (
+                    <div className="absolute left-4 top-4">
+                      <span className="rounded-full bg-green-500 px-3 py-1 text-xs font-semibold text-white shadow-lg">
+                        This Week
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Liturgical Season Badge */}
+                  {bulletin.liturgicalSeason && !bulletin.isCurrent && (
+                    <div className="absolute left-4 top-4">
+                      <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-sh-primary shadow-lg">
+                        {bulletin.liturgicalSeason.charAt(0).toUpperCase() + bulletin.liturgicalSeason.slice(1)}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Download icon - appears on hover */}
+                  <div className="absolute right-4 top-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-sh-primary shadow-lg">
+                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Content at bottom */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    {/* Date */}
+                    <time className="mb-2 block text-sm font-medium text-white/80">
+                      {formatDate(bulletin.date)}
+                    </time>
+
+                    {/* Visual divider */}
+                    <div className="mb-3 h-0.5 w-12 bg-sh-accent-gold" />
+
+                    {/* Download prompt - appears on hover */}
+                    <div className="flex items-center gap-2 text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
+                      <span className="text-sm font-medium">Download PDF</span>
+                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+              )
+            })}
           </div>
         )}
 
