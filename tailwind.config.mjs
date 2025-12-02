@@ -156,82 +156,109 @@ const config = {
           to: { height: '0' },
         },
       },
-      typography: () => ({
-        DEFAULT: {
-          css: {
-            '--tw-prose-body': 'hsl(var(--sh-color-text-main))',
-            '--tw-prose-headings': 'hsl(var(--sh-color-text-main))',
-            '--tw-prose-links': 'hsl(var(--sh-color-primary))',
-            '--tw-prose-bold': 'hsl(var(--sh-color-text-main))',
-            '--tw-prose-quotes': 'hsl(var(--sh-color-text-muted))',
-            color: 'hsl(var(--sh-color-text-main))',
-            fontSize: '1rem',
-            lineHeight: '1.6',
-            maxWidth: 'none',
-            h1: {
-              fontFamily: 'var(--font-heading), serif',
-              fontSize: 'clamp(2.1rem, 3.2vw, 2.75rem)',
-              fontWeight: '700',
-              lineHeight: '1.2',
-              marginTop: '0',
-              marginBottom: '1rem',
-            },
-            h2: {
-              fontFamily: 'var(--font-heading), serif',
-              fontSize: 'clamp(1.8rem, 2.7vw, 2.1rem)',
-              fontWeight: '700',
-              lineHeight: '1.25',
-              marginTop: '2rem',
-              marginBottom: '1rem',
-            },
-            h3: {
-              fontFamily: 'var(--font-heading), serif',
-              fontSize: '1.5rem',
-              fontWeight: '700',
-              lineHeight: '1.3',
-              marginTop: '1.5rem',
-              marginBottom: '0.75rem',
-            },
-            h4: {
-              fontFamily: 'var(--font-heading), serif',
-              fontSize: '1.25rem',
-              fontWeight: '700',
-              lineHeight: '1.3',
-              marginTop: '1.5rem',
-              marginBottom: '0.75rem',
-            },
-            p: {
-              marginTop: '0',
-              marginBottom: '1rem',
-            },
-            a: {
-              color: 'hsl(var(--sh-color-primary))',
-              textDecoration: 'underline',
-              '&:hover': {
-                color: 'hsl(var(--sh-color-primary-soft))',
-              },
-            },
-            strong: {
-              fontWeight: '600',
-            },
-            ul: {
-              marginTop: '1rem',
-              marginBottom: '1rem',
-            },
-            ol: {
-              marginTop: '1rem',
-              marginBottom: '1rem',
-            },
-            blockquote: {
-              borderLeftColor: 'hsl(var(--sh-color-primary))',
-              borderLeftWidth: '4px',
-              paddingLeft: '1.5rem',
-              fontStyle: 'italic',
-              color: 'hsl(var(--sh-color-text-muted))',
+      typography: () => {
+        // Shared heading styles to ensure consistency across all prose variants
+        const headingStyles = {
+          h1: {
+            fontFamily: 'var(--font-heading), serif',
+            fontSize: 'clamp(2.1rem, 3.2vw, 2.75rem)',
+            fontWeight: '700',
+            lineHeight: '1.2',
+            marginTop: '0',
+            marginBottom: '1rem',
+          },
+          h2: {
+            fontFamily: 'var(--font-heading), serif',
+            fontSize: 'clamp(1.8rem, 2.7vw, 2.1rem)',
+            fontWeight: '700',
+            lineHeight: '1.25',
+            marginTop: '2rem',
+            marginBottom: '1rem',
+          },
+          h3: {
+            fontFamily: 'var(--font-heading), serif',
+            fontSize: '1.5rem',
+            fontWeight: '700',
+            lineHeight: '1.3',
+            marginTop: '1.5rem',
+            marginBottom: '0.75rem',
+          },
+          h4: {
+            fontFamily: 'var(--font-heading), serif',
+            fontSize: '1.25rem',
+            fontWeight: '700',
+            lineHeight: '1.3',
+            marginTop: '1.5rem',
+            marginBottom: '0.75rem',
+          },
+        }
+
+        const sharedStyles = {
+          '--tw-prose-body': 'hsl(var(--sh-color-text-main))',
+          '--tw-prose-headings': 'hsl(var(--sh-color-text-main))',
+          '--tw-prose-links': 'hsl(var(--sh-color-primary))',
+          '--tw-prose-bold': 'hsl(var(--sh-color-text-main))',
+          '--tw-prose-quotes': 'hsl(var(--sh-color-text-muted))',
+          color: 'hsl(var(--sh-color-text-main))',
+          maxWidth: 'none',
+          ...headingStyles,
+          p: {
+            marginTop: '0',
+            marginBottom: '1rem',
+          },
+          a: {
+            color: 'hsl(var(--sh-color-primary))',
+            textDecoration: 'underline',
+            '&:hover': {
+              color: 'hsl(var(--sh-color-primary-soft))',
             },
           },
-        },
-      }),
+          strong: {
+            fontWeight: '600',
+          },
+          ul: {
+            marginTop: '1rem',
+            marginBottom: '1rem',
+          },
+          ol: {
+            marginTop: '1rem',
+            marginBottom: '1rem',
+          },
+          blockquote: {
+            borderLeftColor: 'hsl(var(--sh-color-primary))',
+            borderLeftWidth: '4px',
+            paddingLeft: '1.5rem',
+            fontStyle: 'italic',
+            color: 'hsl(var(--sh-color-text-muted))',
+          },
+        }
+
+        return {
+          DEFAULT: {
+            css: {
+              ...sharedStyles,
+              fontSize: '1rem',
+              lineHeight: '1.6',
+            },
+          },
+          // Ensure prose-md uses the same heading sizes
+          md: {
+            css: {
+              ...sharedStyles,
+              fontSize: '1rem',
+              lineHeight: '1.6',
+            },
+          },
+          // Ensure prose-lg uses the same heading sizes
+          lg: {
+            css: {
+              ...sharedStyles,
+              fontSize: '1.0625rem',
+              lineHeight: '1.6',
+            },
+          },
+        }
+      },
     },
   },
 }
