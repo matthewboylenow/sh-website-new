@@ -12,6 +12,12 @@ import {
   FixedToolbarFeature,
   InlineToolbarFeature,
   HeadingFeature,
+  AlignFeature,
+  HorizontalRuleFeature,
+  IndentFeature,
+  StrikethroughFeature,
+  InlineCodeFeature,
+  ChecklistFeature,
   type LinkFields,
 } from '@payloadcms/richtext-lexical'
 import {
@@ -22,27 +28,42 @@ import { CTAButtonFeature } from '@/fields/lexical/features/CTAButton/feature.se
 /**
  * Enhanced richText configuration for Saint Helen content areas.
  *
- * Standard Features:
- * - Basic formatting: Bold, Italic, Underline
- * - Lists: Bulleted and numbered
+ * Features:
+ * - Basic formatting: Bold, Italic, Underline, Strikethrough, Inline Code
+ * - Text alignment: Left, Center, Right, Justify
+ * - Lists: Bulleted, numbered, and checklists
+ * - Indentation control
  * - Blockquotes
+ * - Horizontal rules (dividers)
  * - Links: Internal (pages, posts) & External
- * - Text Color: Controlled palette (Brand, Muted, Accent)
+ * - Text Color & Background Color: Full palette with color picker
  * - CTA Buttons: Inline call-to-action buttons
  * - Toolbars: Fixed toolbar + inline formatting toolbar
  *
+ * This configuration applies globally to ALL rich text fields.
  * For fields requiring headings, use one of the heading variants below.
- * Previous comprehensive typography features backed up to defaultLexical.backup.ts
  */
 export const defaultLexical = lexicalEditor({
   features: [
     ParagraphFeature(),
+    // Text formatting
     BoldFeature(),
     ItalicFeature(),
     UnderlineFeature(),
+    StrikethroughFeature(),
+    InlineCodeFeature(),
+    // Alignment
+    AlignFeature(),
+    // Lists
     UnorderedListFeature(),
     OrderedListFeature(),
+    ChecklistFeature(),
+    // Indentation
+    IndentFeature(),
+    // Block elements
     BlockquoteFeature(),
+    HorizontalRuleFeature(),
+    // Links
     LinkFeature({
       enabledCollections: ['pages', 'posts'],
       fields: ({ defaultFields }) => {
@@ -71,15 +92,21 @@ export const defaultLexical = lexicalEditor({
         ]
       },
     }),
-    // Simplified Text Color with controlled brand palette
-    // Maps to CSS classes in frontend: text-brand, text-muted, text-accent
+    // Text Color with brand palette + color picker for custom colors
     TextColorFeature({
       colors: [
-        '#20336B', // Brand (Primary Blue) → text-brand
-        '#585858', // Muted (Gray) → text-muted
-        '#E0A63A', // Accent (Gold) → text-accent
+        '#20336B', // Brand (Primary Blue)
+        '#585858', // Muted (Gray)
+        '#E0A63A', // Accent (Gold)
+        '#2B4585', // Primary soft
+        '#2C9FAF', // Teal
+        '#111111', // Near black
+        '#FFFFFF', // White
+        '#000000', // Black
+        '#2E7D32', // Success green
+        '#C62828', // Danger red
       ],
-      colorPicker: false, // Disable custom colors for consistency
+      colorPicker: true, // Allow custom colors
     }),
     // CTA Button feature - allows inline call-to-action buttons
     CTAButtonFeature(),
