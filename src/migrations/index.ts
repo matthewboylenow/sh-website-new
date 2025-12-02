@@ -24,6 +24,8 @@ import * as migration_20251121_003446_add_block_customization_fields from './202
 import * as migration_20251125_000000_critical_fix_columns_and_patterns from './20251125_000000_critical_fix_columns_and_patterns';
 import * as migration_20251125_180000_fix_patterns_tables_and_version_columns from './20251125_180000_fix_patterns_tables_and_version_columns';
 import * as migration_20251202_000000_add_phase7_to_remaining_blocks from './20251202_000000_add_phase7_to_remaining_blocks';
+import * as migration_20251202_220000_create_patterns_block_tables from './20251202_220000_create_patterns_block_tables';
+import * as migration_20251202_220001_create_patterns_block_tables_part2 from './20251202_220001_create_patterns_block_tables_part2';
 
 export const migrations = [
   {
@@ -155,5 +157,15 @@ export const migrations = [
     up: migration_20251202_000000_add_phase7_to_remaining_blocks.up,
     down: migration_20251202_000000_add_phase7_to_remaining_blocks.down,
     name: '20251202_000000_add_phase7_to_remaining_blocks'
+  },
+  {
+    up: migration_20251202_220000_create_patterns_block_tables.up,
+    down: migration_20251202_220000_create_patterns_block_tables.down,
+    name: '20251202_220000_create_patterns_block_tables'
+  },
+  {
+    up: migration_20251202_220001_create_patterns_block_tables_part2.up,
+    down: migration_20251202_220001_create_patterns_block_tables_part2.down,
+    name: '20251202_220001_create_patterns_block_tables_part2'
   },
 ];
