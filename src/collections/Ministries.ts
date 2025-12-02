@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { authenticated } from '../access/authenticated'
 import { authenticatedOrPublished } from '../access/authenticatedOrPublished'
 import { slugField } from 'payload'
+import { quillRichText } from '@/fields/quillRichText'
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -45,14 +46,14 @@ export const Ministries: CollectionConfig = {
         description: 'Brief description (200 chars max) for cards and listings',
       },
     },
-    {
+    quillRichText({
       name: 'description',
-      type: 'richText',
+      label: 'Description',
       required: true,
       admin: {
         description: 'Full description of the ministry',
       },
-    },
+    }),
     {
       name: 'category',
       type: 'select',
@@ -109,13 +110,13 @@ export const Ministries: CollectionConfig = {
         description: 'e.g., "Meets every Tuesday at 7pm in the Parish Hall"',
       },
     },
-    {
+    quillRichText({
       name: 'howToJoin',
-      type: 'richText',
+      label: 'How to Join',
       admin: {
         description: 'Instructions on how to get involved',
       },
-    },
+    }),
     {
       name: 'requirements',
       type: 'textarea',

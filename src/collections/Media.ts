@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 
 import { anyone } from '../access/anyone'
 import { authenticated } from '../access/authenticated'
-import { defaultLexical } from '@/fields/defaultLexical'
+import { quillSimple } from '@/fields/quillRichText'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,11 +25,10 @@ export const Media: CollectionConfig = {
       type: 'text',
       //required: true,
     },
-    {
+    quillSimple({
       name: 'caption',
-      type: 'richText',
-      editor: defaultLexical,
-    },
+      label: 'Caption',
+    }),
   ],
   upload: {
     // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload

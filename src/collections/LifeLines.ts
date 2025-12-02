@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { authenticated } from '../access/authenticated'
 import { authenticatedOrPublished } from '../access/authenticatedOrPublished'
 import { slugField } from 'payload'
+import { quillRichText } from '@/fields/quillRichText'
 
 export const LifeLines: CollectionConfig = {
   slug: 'lifelines',
@@ -43,14 +44,14 @@ export const LifeLines: CollectionConfig = {
         description: 'Brief description (200 chars max) for cards and listings',
       },
     },
-    {
+    quillRichText({
       name: 'description',
-      type: 'richText',
+      label: 'Description',
       required: true,
       admin: {
         description: 'Full description of the group',
       },
-    },
+    }),
     {
       name: 'type',
       type: 'select',

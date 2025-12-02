@@ -4,6 +4,7 @@ import { blockName } from '@/fields/blockName'
 import { decorativePattern } from '@/fields/decorativePattern'
 import { visibilitySettings } from '@/fields/visibilitySettings'
 import { animationSettings } from '@/fields/animationSettings'
+import { quillSimple } from '@/fields/quillRichText'
 
 export const FormEmbed: Block = {
   slug: 'formEmbed',
@@ -21,14 +22,13 @@ export const FormEmbed: Block = {
         description: 'Optional: Title displayed above the form',
       },
     },
-    {
+    quillSimple({
       name: 'description',
-      type: 'richText',
       label: 'Description',
       admin: {
         description: 'Optional: Description or instructions above the form',
       },
-    },
+    }),
     {
       name: 'embedType',
       type: 'select',
