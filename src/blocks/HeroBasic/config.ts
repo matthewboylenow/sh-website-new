@@ -27,10 +27,9 @@ export const HeroBasic: Block = {
     {
       name: 'title',
       type: 'text',
-      required: true,
       label: 'Title',
       admin: {
-        description: 'Main hero heading (e.g., "We\'re glad you\'re here.")',
+        description: 'Optional: Main hero heading (e.g., "We\'re glad you\'re here.")',
       },
     },
     {

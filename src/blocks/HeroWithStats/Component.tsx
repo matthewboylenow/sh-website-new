@@ -122,7 +122,9 @@ export const HeroWithStatsBlock: React.FC<HeroWithStatsProps> = ({
           )}
 
           {/* Title */}
-          <h1 className={cn('text-hero font-heading font-bold mb-6', textColorClass)}>{title}</h1>
+          {title && (
+            <h1 className={cn('text-hero font-heading font-bold mb-6', textColorClass)}>{title}</h1>
+          )}
 
           {/* Subtitle */}
           {subtitle && (

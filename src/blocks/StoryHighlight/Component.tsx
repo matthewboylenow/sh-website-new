@@ -78,16 +78,18 @@ export const StoryHighlightBlock: React.FC<StoryHighlightProps> = ({
 
           {/* Content */}
           <div className={cn(imagePosition === 'right' && 'md:col-start-1 md:row-start-1')}>
-            <h2
-              className={cn(
-                'mb-4 font-heading text-h2 font-bold',
-                textColorClass,
-              )}
-            >
-              {title}
-            </h2>
+            {title && (
+              <h2
+                className={cn(
+                  'mb-4 font-heading text-h2 font-bold',
+                  textColorClass,
+                )}
+              >
+                {title}
+              </h2>
+            )}
 
-            <div className="mb-6">
+            <div className={cn(title ? 'mb-6' : 'mb-0')}>
               <RichText
                 data={body}
                 enableGutter={false}

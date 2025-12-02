@@ -26,10 +26,9 @@ export const HeroWithStats: Block = {
     {
       name: 'title',
       type: 'text',
-      required: true,
       label: 'Title',
       admin: {
-        description: 'Main hero heading',
+        description: 'Optional: Main hero heading',
       },
     },
     {

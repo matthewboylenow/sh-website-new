@@ -16,8 +16,10 @@ export const StoryHighlight: Block = {
     {
       name: 'title',
       type: 'text',
-      required: true,
       label: 'Story Title',
+      admin: {
+        description: 'Optional: Heading for this story',
+      },
     },
     {
       name: 'body',

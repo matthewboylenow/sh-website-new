@@ -31,10 +31,9 @@ export const CTAFullWidth: Block = {
     {
       name: 'title',
       type: 'text',
-      required: true,
       label: 'Title',
       admin: {
-        description: 'Main heading for this call-to-action',
+        description: 'Optional: Main heading for this call-to-action',
       },
     },
     {
