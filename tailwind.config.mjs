@@ -25,6 +25,12 @@ const config = {
     'bg-success/30',
     'border-warning',
     'bg-warning/30',
+    // Heading size classes - ensure they're never purged
+    'text-hero',
+    'text-h1',
+    'text-h2',
+    'text-h3',
+    'text-h4',
   ],
   theme: {
     container: {
