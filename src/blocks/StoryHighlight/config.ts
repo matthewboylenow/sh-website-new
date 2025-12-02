@@ -4,7 +4,6 @@ import { blockName } from '@/fields/blockName'
 import { decorativePattern } from '@/fields/decorativePattern'
 import { visibilitySettings } from '@/fields/visibilitySettings'
 import { animationSettings } from '@/fields/animationSettings'
-import { quillRichText } from '@/fields/quillRichText'
 
 export const StoryHighlight: Block = {
   slug: 'storyHighlight',
@@ -20,14 +19,15 @@ export const StoryHighlight: Block = {
       required: true,
       label: 'Story Title',
     },
-    quillRichText({
+    {
       name: 'body',
-      label: 'Story Content',
+      type: 'richText',
       required: true,
+      label: 'Story Content',
       admin: {
         description: 'Main content of the story',
       },
-    }),
+    },
     {
       name: 'image',
       type: 'upload',

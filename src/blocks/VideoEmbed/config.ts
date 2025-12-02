@@ -4,7 +4,6 @@ import { blockName } from '@/fields/blockName'
 import { decorativePattern } from '@/fields/decorativePattern'
 import { visibilitySettings } from '@/fields/visibilitySettings'
 import { animationSettings } from '@/fields/animationSettings'
-import { quillSimple } from '@/fields/quillRichText'
 
 export const VideoEmbed: Block = {
   slug: 'videoEmbed',
@@ -41,13 +40,14 @@ export const VideoEmbed: Block = {
         description: 'Optional: Custom thumbnail/poster image',
       },
     },
-    quillSimple({
+    {
       name: 'description',
+      type: 'richText',
       label: 'Description',
       admin: {
         description: 'Optional: Description shown below the video',
       },
-    }),
+    },
     {
       name: 'aspectRatio',
       type: 'select',

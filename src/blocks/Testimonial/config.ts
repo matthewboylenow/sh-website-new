@@ -4,7 +4,6 @@ import { blockName } from '@/fields/blockName'
 import { visibilitySettings } from '@/fields/visibilitySettings'
 import { animationSettings } from '@/fields/animationSettings'
 import { decorativePattern } from '@/fields/decorativePattern'
-import { quillSimple } from '@/fields/quillRichText'
 
 export const Testimonial: Block = {
   slug: 'testimonial',
@@ -14,14 +13,15 @@ export const Testimonial: Block = {
     plural: 'Testimonials',
   },
   fields: [
-    quillSimple({
+    {
       name: 'quote',
-      label: 'Quote',
+      type: 'richText',
       required: true,
+      label: 'Quote',
       admin: {
         description: 'The testimonial quote text',
       },
-    }),
+    },
     {
       name: 'name',
       type: 'text',

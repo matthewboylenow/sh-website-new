@@ -4,7 +4,6 @@ import { blockName } from '@/fields/blockName'
 import { decorativePattern } from '@/fields/decorativePattern'
 import { visibilitySettings } from '@/fields/visibilitySettings'
 import { animationSettings } from '@/fields/animationSettings'
-import { quillRichText } from '@/fields/quillRichText'
 
 export const FAQAccordion: Block = {
   slug: 'faqAccordion',
@@ -38,11 +37,12 @@ export const FAQAccordion: Block = {
           required: true,
           label: 'Question',
         },
-        quillRichText({
+        {
           name: 'answer',
-          label: 'Answer',
+          type: 'richText',
           required: true,
-        }),
+          label: 'Answer',
+        },
         {
           name: 'tags',
           type: 'array',

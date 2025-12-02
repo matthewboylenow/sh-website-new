@@ -15,40 +15,16 @@ import type { SerializedLexicalNode } from 'lexical'
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 
 import type {
+  BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
 } from '@/payload-types'
+import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { CTAButton } from './CTAButton'
 import type { CTAButtonAppearance } from './CTAButton'
 import { TextColorJSXConverter } from './textColorConverter'
 import { cn } from '@/utilities/ui'
-
-// Banner block type for Lexical rich text (if still using Lexical in some places)
-type BannerBlockProps = {
-  style?: 'info' | 'warning' | 'success' | 'error' | null
-  content?: DefaultTypedEditorState | null
-}
-
-// Simple Banner component for Lexical blocks
-const BannerBlock: React.FC<{ className?: string } & BannerBlockProps> = ({
-  className,
-  style = 'info',
-  content,
-}) => {
-  if (!content) return null
-  const styleClasses: Record<string, string> = {
-    info: 'bg-blue-50 border-blue-200 text-blue-800',
-    warning: 'bg-yellow-50 border-yellow-200 text-yellow-800',
-    success: 'bg-green-50 border-green-200 text-green-800',
-    error: 'bg-red-50 border-red-200 text-red-800',
-  }
-  return (
-    <div className={cn('border rounded-lg p-4 my-4', styleClasses[style || 'info'], className)}>
-      <ConvertRichText data={content} />
-    </div>
-  )
-}
 
 type SerializedCTAButtonNode = SerializedLexicalNode & {
   type: 'ctaButton'
@@ -90,10 +66,8 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     return null
   },
   blocks: {
-    banner: ({ node }: { node: SerializedBlockNode<BannerBlockProps> }) => (
-      <BannerBlock className="col-start-2 mb-4" {...node.fields} />
-    ),
-    mediaBlock: ({ node }: { node: SerializedBlockNode<MediaBlockProps> }) => (
+    banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
+    mediaBlock: ({ node }) => (
       <MediaBlock
         className="col-start-1 col-span-3"
         imgClassName="m-0"
@@ -103,62 +77,22 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
         disableInnerContainer={true}
       />
     ),
-    code: ({ node }: { node: SerializedBlockNode<CodeBlockProps> }) => (
-      <CodeBlock className="col-start-2" {...node.fields} />
-    ),
-    cta: ({ node }: { node: SerializedBlockNode<CTABlockProps> }) => (
-      <CallToActionBlock {...node.fields} />
-    ),
+    code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
+    cta: ({ node }) => <CallToActionBlock {...node.fields} />,
   },
 })
 
 type Props = {
-  data: DefaultTypedEditorState | string | null | undefined
+  data: DefaultTypedEditorState
   enableGutter?: boolean
   enableProse?: boolean
 } & React.HTMLAttributes<HTMLDivElement>
 
-/**
- * RichText Component
- *
- * Renders rich text content from either:
- * - HTML strings (from Quill editor)
- * - Lexical JSON (legacy format)
- *
- * Automatically detects the format and renders appropriately.
- */
 export default function RichText(props: Props) {
-  const { className, enableProse = true, enableGutter = true, data, ...rest } = props
-
-  // Handle null/undefined
-  if (!data) {
-    return null
-  }
-
-  // If data is a string, render as HTML
-  if (typeof data === 'string') {
-    return (
-      <div
-        className={cn(
-          'payload-richtext',
-          {
-            container: enableGutter,
-            'max-w-none': !enableGutter,
-            'mx-auto prose md:prose-md dark:prose-invert': enableProse,
-          },
-          className,
-        )}
-        dangerouslySetInnerHTML={{ __html: data }}
-        {...rest}
-      />
-    )
-  }
-
-  // Otherwise, render as Lexical JSON
+  const { className, enableProse = true, enableGutter = true, ...rest } = props
   return (
     <ConvertRichText
       converters={jsxConverters}
-      data={data}
       className={cn(
         'payload-richtext',
         {
@@ -172,6 +106,3 @@ export default function RichText(props: Props) {
     />
   )
 }
-
-// Named export for convenience
-export { RichText }

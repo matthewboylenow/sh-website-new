@@ -26,7 +26,6 @@ import * as migration_20251125_180000_fix_patterns_tables_and_version_columns fr
 import * as migration_20251202_000000_add_phase7_to_remaining_blocks from './20251202_000000_add_phase7_to_remaining_blocks';
 import * as migration_20251202_220000_create_patterns_block_tables from './20251202_220000_create_patterns_block_tables';
 import * as migration_20251202_220001_create_patterns_block_tables_part2 from './20251202_220001_create_patterns_block_tables_part2';
-import * as migration_20251202_230000_migrate_richtext_to_quill_html from './20251202_230000_migrate_richtext_to_quill_html';
 
 export const migrations = [
   {
@@ -168,10 +167,5 @@ export const migrations = [
     up: migration_20251202_220001_create_patterns_block_tables_part2.up,
     down: migration_20251202_220001_create_patterns_block_tables_part2.down,
     name: '20251202_220001_create_patterns_block_tables_part2'
-  },
-  {
-    up: migration_20251202_230000_migrate_richtext_to_quill_html.up,
-    down: migration_20251202_230000_migrate_richtext_to_quill_html.down,
-    name: '20251202_230000_migrate_richtext_to_quill_html'
   },
 ];

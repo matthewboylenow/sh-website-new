@@ -2,7 +2,6 @@ import type { CollectionConfig } from 'payload'
 import { authenticated } from '../access/authenticated'
 import { authenticatedOrPublished } from '../access/authenticatedOrPublished'
 import { slugField } from 'payload'
-import { quillRichText } from '@/fields/quillRichText'
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -50,11 +49,11 @@ export const Podcasts: CollectionConfig = {
         position: 'sidebar',
       },
     },
-    quillRichText({
+    {
       name: 'description',
-      label: 'Description',
+      type: 'richText',
       required: true,
-    }),
+    },
     {
       name: 'speaker',
       type: 'text',

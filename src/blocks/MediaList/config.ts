@@ -4,7 +4,6 @@ import { blockName } from '@/fields/blockName'
 import { decorativePattern } from '@/fields/decorativePattern'
 import { visibilitySettings } from '@/fields/visibilitySettings'
 import { animationSettings } from '@/fields/animationSettings'
-import { quillSubtitle } from '@/fields/quillRichText'
 
 export const MediaList: Block = {
   slug: 'mediaList',
@@ -22,13 +21,14 @@ export const MediaList: Block = {
         description: 'Optional: Heading for this media section',
       },
     },
-    quillSubtitle({
+    {
       name: 'subtitle',
+      type: 'richText',
       label: 'Subtitle',
       admin: {
         description: 'Optional: Description or introduction',
       },
-    }),
+    },
     {
       name: 'mediaType',
       type: 'select',

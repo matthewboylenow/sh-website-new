@@ -2,7 +2,6 @@ import type { CollectionConfig } from 'payload'
 import { authenticated } from '../access/authenticated'
 import { authenticatedOrPublished } from '../access/authenticatedOrPublished'
 import { slugField } from 'payload'
-import { quillRichText } from '@/fields/quillRichText'
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -57,11 +56,11 @@ export const Events: CollectionConfig = {
         description: 'Event end date and time (optional)',
       },
     },
-    quillRichText({
+    {
       name: 'description',
-      label: 'Description',
+      type: 'richText',
       required: true,
-    }),
+    },
     {
       name: 'location',
       type: 'text',

@@ -2,7 +2,6 @@ import type { CollectionConfig } from 'payload'
 import { authenticated } from '../access/authenticated'
 import { anyone } from '../access/anyone'
 import { slugField } from 'payload'
-import { quillRichText } from '@/fields/quillRichText'
 
 export const Staff: CollectionConfig = {
   slug: 'staff',
@@ -70,14 +69,14 @@ export const Staff: CollectionConfig = {
         description: 'Professional headshot or photo',
       },
     },
-    quillRichText({
+    {
       name: 'bio',
-      label: 'Biography',
+      type: 'richText',
       required: false,
       admin: {
         description: 'Biography or description of this person',
       },
-    }),
+    },
     {
       name: 'email',
       type: 'email',
