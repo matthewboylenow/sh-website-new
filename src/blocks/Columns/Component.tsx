@@ -56,7 +56,7 @@ export const ColumnsBlock: React.FC<ColumnsProps> = ({
 
       <div className={cn(getContainerClasses(appearance?.fullWidth), 'relative z-10')}>
         {sectionTitle && (
-          <h2 className={cn('mb-8 font-heading text-h2 font-bold', textColorClass)}>
+          <h2 className={cn('mb-4 font-heading text-h2 font-bold', textColorClass)}>
             {sectionTitle}
           </h2>
         )}
